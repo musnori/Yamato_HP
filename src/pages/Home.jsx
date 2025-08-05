@@ -10,12 +10,12 @@ const slides = [
   {
     img: "/flower2.jpg",
     title: "地域とともに歩む",
-    subtitle: "大和薬品株式会社",
+    subtitle: "Our Community",
   },
   {
     img: "/flower3.jpg",
     title: "未来を見据えて挑戦",
-    subtitle: "大和薬品株式会社",
+    subtitle: "Innovation for Tomorrow",
   },
 ];
 
@@ -60,11 +60,8 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-4 py-12">
         <h2 className="text-2xl font-bold text-green-700 border-b-2 border-green-300 inline-block mb-6">ごあいさつ</h2>
         <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-          大和薬品株式会社は、創業以来90年にわたり、医薬品・工業薬品の製造・販売を通じて地域社会の健康と産業発展に貢献してまいりました。<br />
-          これまで培ってきた専門知識とネットワークを活かし、お客様のニーズにきめ細やかに対応することで、多くの信頼をお寄せいただいております。<br />
-          今後も「顧客第一主義」の精神を堅持し、最新の技術導入や品質管理体制の強化を図ることで、安全・安心な製品とサービスをお届けしてまいります。<br />
-          さらに、持続可能な社会の実現に向けて、環境負荷低減や地域連携プロジェクトにも積極的に取り組み、次の100年へ向けた新たな挑戦を続けてまいります。<br />
-          何卒、変わらぬご支援とご愛顧を賜りますようお願い申し上げます。
+          大和薬品株式会社は、創業以来、医薬品・工業薬品を中心に地域社会に密着したサービスを展開してまいりました。<br />
+          今後も「顧客第一主義」を貫き、信頼される企業として発展し続けてまいります。
         </p>
       </section>
 
