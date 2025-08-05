@@ -1,20 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+const slides = [
+  {
+    img: "/flower-hill.jpg",
+    title: "創業90年の信頼と実績",
+    subtitle: "大和薬品株式会社",
+  },
+  {
+    img: "/flower2.jpg",
+    title: "地域とともに歩む",
+    subtitle: "Our Community",
+  },
+  {
+    img: "/flower3.jpg",
+    title: "未来を見据えて挑戦",
+    subtitle: "Innovation for Tomorrow",
+  },
+];
+
 export default function Home() {
+  const [current, setCurrent] = useState(0);
+
+  // 5秒ごとにスライド切り替え
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="bg-white text-gray-800 font-sans">
-      {/* ヒーローセクション */}
+      {/* 自作スライダー */}
       <section
-        className="h-[60vh] bg-cover bg-center flex items-center justify-center text-white"
-        style={{ backgroundImage: "url('/flower-hill.jpg')" }}
+        className="relative h-[60vh] overflow-hidden"
       >
-        <div className="bg-black bg-opacity-40 w-full h-full flex items-center justify-center">
-          <div className="text-center px-4">
-            <h1 className="text-4xl font-bold mb-2">創業90年の信頼と実績</h1>
-            <p className="text-lg">大和薬品株式会社</p>
+        {slides.map((s, i) => (
+          <div
+            key={i}
+            className={`
+              absolute inset-0 bg-cover bg-center flex items-center justify-center text-white
+              transition-opacity duration-1000 ease-in-out
+              ${i === current ? "opacity-100" : "opacity-0"}
+            `}
+            style={{ backgroundImage: `url('${s.img}')` }}
+          >
+            <div className="bg-black bg-opacity-40 w-full h-full flex items-center justify-center">
+              <div className="text-center px-4">
+                <h1 className="text-4xl font-bold mb-2">{s.title}</h1>
+                <p className="text-lg">{s.subtitle}</p>
+              </div>
+            </div>
           </div>
-        </div>
+        ))}
       </section>
 
       {/* ごあいさつ */}
