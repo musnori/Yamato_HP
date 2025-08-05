@@ -9,48 +9,57 @@ export default function Company() {
         <p className="text-sm text-gray-500 mt-1">Company Profile</p>
       </div>
 
-      {/* 基本情報 */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
-        <div>
-          <h2 className="text-green-700 font-semibold mb-2">会社名</h2>
-          <p>大和薬品株式会社</p>
-        </div>
-        <div>
-          <h2 className="text-green-700 font-semibold mb-2">代表者</h2>
-          <p>代表取締役社長：田路 裕之</p>
-          <p>代表取締役会長：田路 享三</p>
-        </div>
-        <div>
-          <h2 className="text-green-700 font-semibold mb-2">所在地</h2>
-          <p>〒670‑0935 兵庫県姫路市北条口1丁目59番地</p>
-        </div>
-        <div>
-          <h2 className="text-green-700 font-semibold mb-2">連絡先</h2>
-          <p>TEL：079‑281‑0671</p>
-          <p>FAX：079‑224‑1870</p>
-          <p>阿保倉庫：兵庫県姫路市阿保甲403番地（TEL: 079‑282‑0164）</p>
-        </div>
-        <div>
-          <h2 className="text-green-700 font-semibold mb-2">創業</h2>
-          <p>1933年（昭和8年）4月10日</p>
-        </div>
-        <div>
-          <h2 className="text-green-700 font-semibold mb-2">資本金 / 従業員</h2>
-          <p>資本金：1,000万円</p>
-          <p>従業員数：男子7名・女子4名</p>
-        </div>
-        <div className="sm:col-span-2">
-          <h2 className="text-green-700 font-semibold mb-2">許認可</h2>
-          <p>薬剤師：田路 享三、田路 裕之 / 登録販売者：田路 富士子</p>
-        </div>
+      {/* 基本情報をテーブルで表示 */}
+      <section>
+        <table className="min-w-full table-auto border-collapse">
+          <tbody>
+            <tr className="bg-gray-50">
+              <th className="px-4 py-2 text-left text-green-700 font-semibold">会社名</th>
+              <td className="px-4 py-2">大和薬品株式会社</td>
+            </tr>
+            <tr>
+              <th className="px-4 py-2 text-left text-green-700 font-semibold">代表者</th>
+              <td className="px-4 py-2">
+                <p>代表取締役社長：田路 裕之</p>
+                <p>代表取締役会長：田路 享三</p>
+              </td>
+            </tr>
+            <tr className="bg-gray-50">
+              <th className="px-4 py-2 text-left text-green-700 font-semibold">所在地</th>
+              <td className="px-4 py-2">〒670‑0935 兵庫県姫路市北条口1丁目59番地</td>
+            </tr>
+            <tr>
+              <th className="px-4 py-2 text-left text-green-700 font-semibold">連絡先</th>
+              <td className="px-4 py-2">
+                <p>TEL：079‑281‑0671</p>
+                <p>FAX：079‑224‑1870</p>
+                <p>阿保倉庫：兵庫県姫路市阿保甲403番地（TEL：079‑282‑0164）</p>
+              </td>
+            </tr>
+            <tr className="bg-gray-50">
+              <th className="px-4 py-2 text-left text-green-700 font-semibold">創業</th>
+              <td className="px-4 py-2">1933年（昭和8年）4月10日</td>
+            </tr>
+            <tr>
+              <th className="px-4 py-2 text-left text-green-700 font-semibold">資本金 / 従業員</th>
+              <td className="px-4 py-2">
+                <p>資本金：1,000万円</p>
+                <p>従業員数：男子7名・女子4名</p>
+              </td>
+            </tr>
+            <tr className="bg-gray-50">
+              <th className="px-4 py-2 text-left text-green-700 font-semibold">許認可</th>
+              <td className="px-4 py-2">薬剤師：田路 享三、田路 裕之 / 登録販売者：田路 富士子</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
 
       {/* 事業内容 */}
       <section className="text-sm">
         <h2 className="text-xl font-bold text-gray-800 border-b pb-2 mb-4">事業内容</h2>
         <p className="leading-relaxed text-gray-700">
-          化学薬品の販売（医薬品製造所、化学工場、上下水道、食品加工施設などへの供給）、
-          分析薬品、洗浄薬品、環境薬品の取扱い、貸ビル業、月極駐車場運営 など
+          化学薬品の販売（医薬品製造所、化学工場、上下水道、食品加工施設などへの供給）、分析薬品、洗浄薬品、環境薬品の取扱い、貸ビル業、月極駐車場運営 など
         </p>
       </section>
 
