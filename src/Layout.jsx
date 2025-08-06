@@ -7,9 +7,18 @@ export default function Layout() {
       {/* ナビゲーションバー */}
       <header className="bg-white border-b shadow-sm sticky top-0 z-50">
         <nav className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-          <Link to="/" className="text-green-800 font-bold text-lg">
-            大和薬品株式会社
+        {/* ロゴ＋サイト名 */}
+          <Link to="/" className="flex items-center space-x-2">
+            <img
+              src="/company-logo.png"
+              alt="大和薬品株式会社 ロゴ"
+              className="h-8 w-auto"
+            />
+            <span className="text-green-800 font-bold text-lg">
+              大和薬品株式会社
+            </span>
           </Link>
+        
 
           {/* ボタン風ナビゲーション */}
           <div className="space-x-2 hidden md:flex text-sm">

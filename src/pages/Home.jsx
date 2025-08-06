@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 const slides = [
   {
-    img: "/flower-hill.jpg",
+    img: "/asa.jpg",
     title: "創業90年の信頼と実績",
     subtitle: "大和薬品株式会社",
   },
   {
-    img: "/flower2.jpg",
+    img: "/yuu.jpg",
     title: "地域とともに歩む",
     subtitle: "大和薬品株式会社",
   },
@@ -22,7 +22,7 @@ const slides = [
 export default function Home() {
   const [current, setCurrent] = useState(0);
 
-  // 5秒ごとにスライド切り替え
+  // 3秒ごとにスライド切り替え
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
