@@ -3,17 +3,22 @@ import { Link } from "react-router-dom";
 
 const slides = [
   {
-    img: "/asa.jpg",
+    img: "/morninng.jpg",
     title: "創業90年の信頼と実績",
     subtitle: "大和薬品株式会社",
   },
   {
-    img: "/yuu.jpg",
+    img: "/lunch.jpg",
     title: "地域とともに歩む",
     subtitle: "大和薬品株式会社",
   },
   {
-    img: "/flower3.jpg",
+    img: "/yugata.jpg",
+    title: "未来を見据えて挑戦",
+    subtitle: "大和薬品株式会社",
+  },
+  {
+    img: "/night.jpg",
     title: "未来を見据えて挑戦",
     subtitle: "大和薬品株式会社",
   },

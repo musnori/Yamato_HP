@@ -26,7 +26,7 @@ export default function Layout() {
               alt="大和薬品株式会社 ロゴ"
               className="h-8 w-auto"
             />
-            <span className="text-green-800 font-bold text-lg">
+            <span className="text-green-800 font-bold text-lg font-kaisho">
               大和薬品株式会社
             </span>
           </Link>
