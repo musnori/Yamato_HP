@@ -1,13 +1,25 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
+
+function ScrollToTopOnRouteChange() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 export default function Layout() {
   return (
     <div className="flex flex-col min-h-screen font-sans">
+      <ScrollToTopOnRouteChange />
+
       {/* ナビゲーションバー */}
       <header className="bg-white border-b shadow-sm sticky top-0 z-50">
         <nav className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        {/* ロゴ＋サイト名 */}
+          {/* ロゴ＋サイト名 */}
           <Link to="/" className="flex items-center space-x-2">
             <img
               src="/company-logo.png"
@@ -18,7 +30,6 @@ export default function Layout() {
               大和薬品株式会社
             </span>
           </Link>
-        
 
           {/* ボタン風ナビゲーション */}
           <div className="space-x-2 hidden md:flex text-sm">

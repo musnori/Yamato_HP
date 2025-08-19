@@ -37,7 +37,7 @@ export default function Access() {
         <div className="w-full h-[500px]">
           <iframe
             title="本社マップ"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13100.431100700649!2d134.68534486822412!3d34.82838266599047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3554e00c018022b1%3A0x1eec2507211e2f52!2z44CSNjcwLTA5MzUg5YW15bqr55yM5aer6Lev5biC5YyX5p2h5Y-j77yR5LiB55uu77yV77yZIOWkp-WSjOODk-ODqw!5e0!3m2!1sja!2sjp!4v1755605702506!5m2!1sja!2sjp"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13100.431238785877!2d134.68534486601976!3d34.82838179797159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3554e00c018022b1%3A0xfc3278ab139d6de1!2z5aSn5ZKM6Jas5ZOB5qCq5byP5Lya56S-!5e0!3m2!1sja!2sjp!4v1755606818323!5m2!1sja!2sjp"
             className="w-full h-full border-0"
             allowFullScreen=""
             loading="lazy"
