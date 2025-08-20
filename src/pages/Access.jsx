@@ -34,7 +34,7 @@ export default function Access() {
             079-281-0671
           </a>
           <br />
-          FAX：079-281-0672
+          FAX：079-224-1870
         </address>
       </div>
 
