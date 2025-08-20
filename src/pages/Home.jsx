@@ -134,64 +134,75 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== お問い合わせ ＋ 社長ブログ ===== */}
-      <section className="bg-green-50 py-16">
-  <div className="max-w-6xl mx-auto px-4 grid gap-8 md:grid-cols-2">
-    {/* お問い合わせ */}
-    <div className="flex flex-col items-center bg-white rounded-lg shadow-lg p-6 border-t-4 border-brand-green-500">
-      <svg
-        className="w-8 h-8 text-brand-green-500 mb-3"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.06-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.06l-2.2 2.2z" />
-      </svg>
-      <h3 className="text-2xl font-semibold text-gray-800 mb-1">お問い合わせ</h3>
-      <p className="text-gray-600 mb-3 text-center leading-relaxed">
-        製品に関するご質問やご相談を<br className="md:hidden" />
-        お気軽にどうぞ
-      </p>
-      <p className="text-3xl font-bold text-brand-green-600 mb-4">079-281-0671</p>
-      <Link
-        to="/contact"
-        className="inline-block bg-brand-green-600 hover:bg-brand-green-700 text-white font-medium py-2 px-6 rounded transition"
-      >
-        フォームへ
-      </Link>
-    </div>
+      {/* ===== お問い合わせ／社長ブログ／外部リンク／コレクション（統一カード） ===== */}
+<section className="bg-green-50 py-16">
+  <div className="max-w-6xl mx-auto px-4">
+    <div className="grid gap-6 md:grid-cols-2">
+      {/* 1. お問い合わせ */}
+      <div className="flex flex-col justify-between bg-white rounded-xl shadow-lg p-6 border-t-4 border-brand-green-500 min-h-[220px]">
+        <div className="flex flex-col items-center text-center">
+          <svg className="w-8 h-8 text-brand-green-500 mb-3" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.06-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.06l-2.2 2.2z" />
+          </svg>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-1">お問い合わせ</h3>
+          <p className="text-gray-600 mb-3 leading-relaxed">
+            製品に関するご質問やご相談をお気軽にどうぞ
+          </p>
+          <p className="text-3xl font-bold text-brand-green-600">079-281-0671</p>
+        </div>
+        <Link
+          to="/contact"
+          className="mt-6 inline-flex justify-center items-center bg-brand-green-600 hover:bg-brand-green-700 text-white font-medium py-2 px-6 rounded transition"
+        >
+          フォームへ
+        </Link>
+      </div>
 
-    {/* 社長ブログ */}
-    <div className="flex flex-col items-center bg-white rounded-lg shadow-lg p-6 border-t-4 border-brand-green-500">
-      <svg
-        className="w-8 h-8 text-brand-green-500 mb-3"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
-        />
-      </svg>
-      <h3 className="text-2xl font-semibold text-gray-800 mb-1">社長ブログ</h3>
-      <p className="text-gray-600 mb-4 text-center leading-relaxed">
-        日々の気づきや現場の声を<br className="md:hidden" />
-        ブログで発信中！
-      </p>
+      {/* 2. 社長ブログ */}
+      <div className="flex flex-col justify-between bg-white rounded-xl shadow-lg p-6 border-t-4 border-brand-green-500 min-h-[220px]">
+        <div className="flex flex-col items-center text-center">
+          <svg className="w-8 h-8 text-brand-green-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+          </svg>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-1">社長ブログ</h3>
+          <p className="text-gray-600 mb-4 leading-relaxed">
+            日々の気づきや現場の声をブログで発信中！
+          </p>
+        </div>
+        <a
+          href="http://blog.yamato-chemi.co.jp/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex justify-center items-center text-brand-green-700 bg-green-100 hover:bg-green-200 font-medium py-2 px-6 rounded transition underline-offset-2"
+        >
+          ブログを見る →
+        </a>
+      </div>
+
+      {/* 3. 西兵庫化学薬品協同組合（外部） */}
       <a
-        href="http://blog.yamato-chemi.co.jp/"
+        href="https://nishihyogo-chemical-coop.com/"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block text-brand-green-600 font-medium underline"
+        className="flex flex-col justify-center items-center text-center rounded-xl shadow-lg p-6 border-t-4 min-h-[220px]
+                   bg-yellow-300 hover:bg-yellow-400 border-yellow-400 transition"
       >
-        ブログを見る →
+        <span className="text-lg font-semibold">西兵庫化学薬品協同組合</span>
+        <span className="mt-2 text-sm text-gray-700">外部サイトへ移動します</span>
       </a>
+
+      {/* 4. 懐かしコレクション（内部） */}
+      <Link
+        to="/collection"
+        className="flex flex-col justify-center items-center text-center rounded-xl shadow-lg p-6 border-t-4 min-h-[220px]
+                   bg-yellow-300 hover:bg-yellow-400 border-yellow-400 transition"
+      >
+        <span className="text-lg font-semibold">懐かしコレクション</span>
+        <span className="mt-2 text-sm text-gray-700">社内コレクションのご紹介</span>
+      </Link>
     </div>
   </div>
 </section>
-
 
   
 

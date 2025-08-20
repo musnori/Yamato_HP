@@ -5,6 +5,8 @@ import Products from "./pages/Products";
 import Access from "./pages/Access";
 import Company from "./pages/Company";
 import Contact from "./pages/Contact";
+import Collection from "./pages/Collection"; 
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
           <Route path="access" element={<Access />} />
           <Route path="company" element={<Company />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="collection" element={<Collection />} />
         </Route>
       </Routes>
     </Router>
