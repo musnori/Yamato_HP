@@ -4,6 +4,12 @@ import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import * as wanakana from "wanakana";
 
+// プール管理製品のリンク（外部）
+const poolBannerLink = "https://share.google/O2LMf2aOrlX2HRvy2";
+
+// ───────────────────────────────────────────
+// 1) 品目データ
+// ───────────────────────────────────────────
 const inorganicItems = [
   // 無機薬品
   "PAC(ポリ塩化アルミニウム）",
@@ -140,9 +146,9 @@ const inorganicItems = [
   "重ソウ工業用",
   "重ソウ食品添加物",
   "高度さらし粉",
-  ];
+];
 
-  const organicItems = [
+const organicItems = [
   // 有機薬品
   "アセトニトリル",
   "アセトン",
@@ -196,23 +202,23 @@ const inorganicItems = [
   "モノエチルアミン臭化水素酸塩",
   "ラッカーシンナー",
   "酢酸エチル",
-  "酢酸ブチル"
+  "酢酸ブチル",
 ];
 
 // ───────────────────────────────────────────
 // 2) 五十音マップ（ 濁点・半濁点込み ）と振り分け関数
 // ───────────────────────────────────────────
 const rowMap = {
-  "あ行": "あいうえお",
-  "か行": "かきくけこがぎぐげご",
-  "さ行": "さしすせそざじずぜぞ",
-  "た行": "たちつてとだぢづでど",
-  "な行": "なにぬねの",
-  "は行": "はひふへほばびぶべぼぱぴぷぺぽ",
-  "ま行": "まみむめも",
-  "や行": "やゆよ",
-  "ら行": "らりるれろ",
-  "わ行": "わをん"
+  あ行: "あいうえお",
+  か行: "かきくけこがぎぐげご",
+  さ行: "さしすせそざじずぜぞ",
+  た行: "たちつてとだぢづでど",
+  な行: "なにぬねの",
+  は行: "はひふへほばびぶべぼぱぴぷぺぽ",
+  ま行: "まみむめも",
+  や行: "やゆよ",
+  ら行: "らりるれろ",
+  わ行: "わをん",
 };
 function getRow(char) {
   for (const [row, chars] of Object.entries(rowMap)) {
@@ -230,10 +236,7 @@ function useGrouped(items, query) {
     const filtered = items.filter((item) => {
       const q = query.trim().toLowerCase();
       const hira = wanakana.toHiragana(item);
-      return (
-        item.toLowerCase().includes(q) ||
-        hira.includes(q)
-      );
+      return item.toLowerCase().includes(q) || hira.includes(q);
     });
     // 2) 読みでソート
     const sorted = filtered.sort((a, b) => {
@@ -260,19 +263,30 @@ export default function Products() {
 
   // 無機と有機をそれぞれグループ化
   const groupsInorganic = useGrouped(inorganicItems, query);
-  const groupsOrganic  = useGrouped(organicItems,  query);
+  const groupsOrganic = useGrouped(organicItems, query);
 
   // 表示順
   const order = [
-    "あ行","か行","さ行","た行","な行",
-    "は行","ま行","や行","ら行","わ行","その他"
+    "あ行",
+    "か行",
+    "さ行",
+    "た行",
+    "な行",
+    "は行",
+    "ま行",
+    "や行",
+    "ら行",
+    "わ行",
+    "その他",
   ];
 
   // グループキーを並べ替え
-  const rowsIn = Object.keys(groupsInorganic)
-    .sort((a, b) => order.indexOf(a) - order.indexOf(b));
-  const rowsOrg = Object.keys(groupsOrganic)
-    .sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  const rowsIn = Object.keys(groupsInorganic).sort(
+    (a, b) => order.indexOf(a) - order.indexOf(b)
+  );
+  const rowsOrg = Object.keys(groupsOrganic).sort(
+    (a, b) => order.indexOf(a) - order.indexOf(b)
+  );
 
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-10 font-sans">
@@ -285,6 +299,29 @@ export default function Products() {
           onChange={(e) => setQuery(e.target.value)}
           className="w-full md:w-1/2 p-2 border rounded focus:outline-none focus:ring focus:border-green-300"
         />
+      </div>
+
+      {/* ── プール管理製品バナー（テキストのみ） ── */}
+      <div className="relative">
+        <a
+          href={poolBannerLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full rounded-xl border border-green-700/60 bg-gradient-to-r from-green-600 to-green-700 text-white
+                     shadow-md hover:shadow-lg hover:scale-[1.01] transition transform"
+          aria-label="プール管理製品はこちら（外部サイトへ）"
+        >
+          <div className="px-6 py-5 flex items-center justify-center gap-3">
+           
+            <span className="text-xl font-bold tracking-wide">
+              プール管理製品はこちら →
+            </span>
+          </div>
+        </a>
+        {/* 補助テキスト */}
+        <p className="mt-2 text-sm text-gray-600">
+          ソース：四国化成工業株式会社（外部リンク）
+        </p>
       </div>
 
       {/* 無機薬品セクション */}
