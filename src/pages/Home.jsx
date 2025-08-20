@@ -179,35 +179,62 @@ export default function Home() {
         </a>
       </div>
 
-      {/* 3. 西兵庫化学薬品協同組合（外部） */}
-      <a
-        href="https://nishihyogo-chemical-coop.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex flex-col justify-center items-center text-center rounded-xl shadow-lg p-6 border-t-4 min-h-[220px]
-                   bg-yellow-300 hover:bg-yellow-400 border-yellow-400 transition"
-      >
-        <span className="text-lg font-semibold">西兵庫化学薬品協同組合</span>
-        <span className="mt-2 text-sm text-gray-700">外部サイトへ移動します</span>
-      </a>
+     {/* 3. 西兵庫化学薬品協同組合（外部） */}
+<a
+  href="https://nishihyogo-chemical-coop.com/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="relative flex flex-col rounded-xl shadow-lg min-h-[220px]
+             overflow-hidden group"
+  style={{
+    backgroundImage: "url('/images/coop-banner.png')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
+  {/* 透明感（読みやすさ用の白オーバーレイ） */}
+  <div className="absolute inset-0 bg-white/40 group-hover:bg-white/50 transition" />
 
-      {/* 4. 懐かしコレクション（内部） */}
-      <Link
-        to="/collection"
-        className="flex flex-col justify-center items-center text-center rounded-xl shadow-lg p-6 border-t-4 min-h-[220px]
-                   bg-yellow-300 hover:bg-yellow-400 border-yellow-400 transition"
-      >
-        <span className="text-lg font-semibold">懐かしコレクション</span>
-        <span className="mt-2 text-sm text-gray-700">社内コレクションのご紹介</span>
-      </Link>
+  {/* テキストを下に配置 */}
+  <div className="absolute bottom-4 left-0 right-0 px-6 text-center z-10">
+    <span className="block text-lg font-semibold text-black drop-shadow-[1px_1px_2px_rgba(255,255,255,0.7)]">
+      西兵庫化学薬品協同組合
+    </span>
+    <span className="mt-1 block text-sm text-black/80 drop-shadow-[1px_1px_2px_rgba(255,255,255,0.6)]">
+      公式サイトへ
+    </span>
+  </div>
+</a>
+
+
+
+{/* 4. 懐かしコレクション（内部） */}
+<Link
+  to="/collection"
+  className="flex flex-col justify-center items-center text-center rounded-xl shadow-lg p-6 min-h-[220px]
+             relative overflow-hidden group"
+  style={{
+    backgroundImage: "url('/images/banner.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
+  {/* 半透明の白オーバーレイ */}
+  <div className="absolute inset-0 bg-white bg-opacity-40 group-hover:bg-opacity-50 transition"></div>
+
+  {/* テキストを下に配置 */}
+  <div className="absolute bottom-4 left-0 right-0 px-6 text-center z-10">
+    <span className="block text-lg font-semibold text-black drop-shadow-[1px_1px_2px_rgba(255,255,255,0.7)]">
+      懐かしコレクション
+    </span>
+    <span className="mt-1 block text-sm text-black/80 drop-shadow-[1px_1px_2px_rgba(255,255,255,0.6)]">
+      社内コレクションのご紹介
+    </span>
+  </div>
+</Link>
     </div>
   </div>
 </section>
-
-  
-
-
-
    
     </div>
   );

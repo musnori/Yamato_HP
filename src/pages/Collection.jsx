@@ -19,7 +19,7 @@ export default function Collection() {
     },
     {
       src: "/Collection/collection3.png",
-      title: "ベッドの電気",
+      title: "スタンドライト",
       comment:
         "プリーツシェードがレトロ可愛いスタンドライト。昭和の雰囲気たっぷり。",
     },
