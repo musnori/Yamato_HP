@@ -138,25 +138,40 @@ export default function Home() {
 <section className="bg-green-50 py-16">
   <div className="max-w-6xl mx-auto px-4">
     <div className="grid gap-6 md:grid-cols-2">
-      {/* 1. お問い合わせ */}
-      <div className="flex flex-col justify-between bg-white rounded-xl shadow-lg p-6 border-t-4 border-brand-green-500 min-h-[220px]">
-        <div className="flex flex-col items-center text-center">
-          <svg className="w-8 h-8 text-brand-green-500 mb-3" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.06-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.06l-2.2 2.2z" />
-          </svg>
-          <h3 className="text-2xl font-semibold text-gray-800 mb-1">お問い合わせ</h3>
-          <p className="text-gray-600 mb-3 leading-relaxed">
-            製品に関するご質問やご相談をお気軽にどうぞ
-          </p>
-          <p className="text-3xl font-bold text-brand-green-600">079-281-0671</p>
-        </div>
-        <Link
-          to="/contact"
-          className="mt-6 inline-flex justify-center items-center bg-brand-green-600 hover:bg-brand-green-700 text-white font-medium py-2 px-6 rounded transition"
-        >
-          フォームへ
-        </Link>
-      </div>
+    {/* 1. お問い合わせ */}
+<div
+  className="flex flex-col justify-between bg-white rounded-xl shadow-lg p-6 border-t-4 border-brand-green-500 min-h-[220px]"
+>
+  <div className="flex flex-col items-center text-center">
+    <svg
+      className="w-8 h-8 text-brand-green-500 mb-3"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.06-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.06l-2.2 2.2z" />
+    </svg>
+    <h3 className="text-2xl font-semibold text-gray-800 mb-1">お問い合わせ</h3>
+    <p className="text-gray-600 mb-3 leading-relaxed">
+      製品に関するご質問やご相談をお気軽にどうぞ
+    </p>
+
+    {/* 電話番号をtelリンクに */}
+    <a
+      href="tel:0792810671"
+      className="text-3xl font-bold text-brand-green-600 hover:underline"
+    >
+      079-281-0671
+    </a>
+  </div>
+
+  <Link
+    to="/contact"
+    className="mt-6 inline-flex justify-center items-center bg-brand-green-600 hover:bg-brand-green-700 text-white font-medium py-2 px-6 rounded transition"
+  >
+    フォームへ
+  </Link>
+</div>
+
 
       {/* 2. 社長ブログ */}
       <div className="flex flex-col justify-between bg-white rounded-xl shadow-lg p-6 border-t-4 border-brand-green-500 min-h-[220px]">
