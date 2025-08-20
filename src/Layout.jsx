@@ -65,7 +65,7 @@ export default function Layout() {
           {/* ロゴ */}
           <Link to="/" className="flex items-center gap-2">
             <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto" />
-            <span className="text-green-800 font-bold text-lg font-kaisho">
+            <span className="text-green-800 font-bold text-2xl font-kaisho">
               大和薬品株式会社
             </span>
           </Link>

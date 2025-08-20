@@ -19,7 +19,7 @@ const slides = [
   },
   {
     img: "/night.jpg",
-    title: "未来を見据えて挑戦",
+    title: "確かな品質と安心を",
     subtitle: "大和薬品株式会社",
   },
 ];
