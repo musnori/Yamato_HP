@@ -7,6 +7,38 @@ function ScrollToTopOnRouteChange() {
   return null;
 }
 
+/* ▼ 追加：PAGE TOP ボタン */
+function PageTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 240);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const toTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+  return (
+    <button
+      type="button"
+      onClick={toTop}
+      aria-label="ページの先頭に戻る"
+      className={[
+        "fixed right-4 bottom-5 z-50 transition-all duration-300",
+        visible ? "opacity-100 translate-y-0" : "opacity-0 pointer-events-none translate-y-3",
+        // 見た目
+        "flex items-center gap-2 px-4 py-2 rounded-md bg-green-700 text-white",
+        "shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-white/60"
+      ].join(" ")}
+    >
+      <span className="text-base leading-none">↑</span>
+      <span className="text-sm leading-none tracking-wide">PAGE TOP</span>
+    </button>
+  );
+}
+
 export default function Layout() {
   const [open, setOpen] = useState(false);
 
@@ -90,7 +122,6 @@ export default function Layout() {
       </header>
 
       {/* モバイルドロワー */}
-      {/* 背景の薄暗オーバーレイ */}
       {open && (
         <button
           aria-label="閉じる"
@@ -98,8 +129,6 @@ export default function Layout() {
           className="fixed inset-0 z-40 bg-black/40 md:hidden"
         />
       )}
-
-      {/* 右からドロワー本体 */}
       <aside
         className={`fixed right-0 top-0 z-50 h-full w-72 bg-white shadow-2xl border-l md:hidden
                     transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"}`}
@@ -142,6 +171,9 @@ export default function Layout() {
       <main className="flex-1">
         <Outlet />
       </main>
+
+      {/* ▼ ここで呼び出し */}
+      <PageTopButton />
 
       {/* フッター */}
       <footer className="bg-gray-800 text-white text-center text-xs py-4 mt-10">
