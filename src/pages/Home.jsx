@@ -228,7 +228,7 @@ export default function Home() {
       懐かしコレクション
     </span>
     <span className="mt-1 block text-sm text-black/80 drop-shadow-[1px_1px_2px_rgba(255,255,255,0.6)]">
-      社内コレクションのご紹介
+      とうじコレクションのご紹介
     </span>
   </div>
 </Link>
