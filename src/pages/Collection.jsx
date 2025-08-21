@@ -64,7 +64,7 @@ export default function Collection() {
   },
   {
     src: "/Collection/collection14.jpg",
-    comment: "SANKYO製パチンコ台『スーパーコンビ』。カラフルな盤面とメカ感が昭和の娯楽を象徴。",
+    comment: "SANKYO製パチンコ一発台の名機『スーパーコンビ2』。カラフルな盤面とメカ感が昭和の娯楽を象徴。",
   },
   {
     src: "/Collection/collection15.jpg",
@@ -80,7 +80,7 @@ export default function Collection() {
   },
   {
       src: "/Collection/collection18.jpg",
-      comment: "NECのビデオカセットL-125s。チェック柄パッケージが時代を感じさせる映像記録メディア。",
+      comment: "NECのベータマックスビデオカセットL-125s。チェック柄パッケージが時代を感じさせる映像記録メディア。",
     },
     {
       src: "/Collection/collection19.jpg",
@@ -133,6 +133,14 @@ export default function Collection() {
 {
   src: "/Collection/collection31.jpg",
   comment: "ミラーマンのソフビ人形。緑のマーキングが特徴的な古いバージョン。",
+},
+{
+  src: "/Collection/collection33.jpg",
+  comment: "コカ・コーラ 1リットル瓶。厚みのあるリターナブルガラスが象徴的な大型ボトル。",
+},
+{
+  src: "/Collection/collection32.jpg",
+  comment: "花柄の魔法瓶ポット。メタルの注ぎ口とライトブルーの胴がレトロ可愛い（取説付き）。",
 },
 
   ];
