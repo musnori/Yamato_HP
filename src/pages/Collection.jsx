@@ -32,7 +32,7 @@ export default function Collection() {
      // 👇 ここから新規追加
   {
     src: "/Collection/collection6.jpg",
-    comment: "ミラーやウインカー付きの電動自転車風モデル。昭和の遊び心を感じさせる一台。",
+    comment: "スピードメーター、シフト変速機、隠ライト、ウインカー等、スーパーカーブームの時に発売された、昭和ごころを感じさせる一台。",
   },
   {
     src: "/Collection/collection7.jpg",
@@ -52,7 +52,7 @@ export default function Collection() {
   },
   {
     src: "/Collection/collection11.jpg",
-    comment: "100円で占える昭和のレトロな星座占い機。駄菓子屋や温泉街で人気だった一品。",
+    comment: "100円で占える昭和のレトロな星座占い機。喫茶店で人気だった一品。",
   },
     {
     src: "/Collection/collection12.jpg",
@@ -128,11 +128,11 @@ export default function Collection() {
 },
 {
   src: "/Collection/collection30.jpg",
-  comment: "おまけのミニカー消しゴム。色とりどりで、駄菓子屋文化を象徴する懐かしの玩具。",
+  comment: "スーパーカー消しゴム。色とりどりで、駄菓子屋文化を象徴する懐かしの玩具。",
 },
 {
   src: "/Collection/collection31.jpg",
-  comment: "ウルトラマンソフビ人形。緑のマーキングが特徴的な古いバージョン。",
+  comment: "ミラーマンのソフビ人形。緑のマーキングが特徴的な古いバージョン。",
 },
 
   ];
