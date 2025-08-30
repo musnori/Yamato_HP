@@ -15,12 +15,13 @@ export default function Access() {
     <div className="max-w-5xl mx-auto px-6 py-10 space-y-8">
       {/* タイトル */}
       <div className="border-b pb-2">
-        <h1 className="text-3xl font-bold text-green-800">アクセスマップ</h1>
+        <h1 className="text-3xl font-bold text-green-800">アクセス</h1>
       </div>
 
       {/* ───────────── 本社 ───────────── */}
 <div className="grid gap-6 md:grid-cols-2">
   {/* 本社所在地 */}
+  
   <div className="bg-white shadow rounded-lg p-6">
     <h2 className="text-xl font-semibold mb-3">本社所在地</h2>
     <address className="not-italic text-gray-700 leading-relaxed text-sm">

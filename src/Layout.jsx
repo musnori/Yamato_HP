@@ -50,7 +50,7 @@ export default function Layout() {
   const nav = [
     { label: "ホーム", path: "/" },
     { label: "主な取扱品目", path: "/products" },
-    { label: "アクセスマップ", path: "/access" },
+    { label: "アクセス", path: "/access" },
     { label: "会社概要", path: "/company" },
     { label: "お問い合わせ", path: "/contact" },
   ];
@@ -70,26 +70,30 @@ export default function Layout() {
             </span>
           </Link>
 
-          {/* デスクトップ用ナビ */}
-          <div className="hidden md:flex items-center gap-2">
-            {nav.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={({ isActive }) =>
-                  [
-                    "px-4 py-2 rounded-full text-sm font-medium transition-all",
-                    "border shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-green-600/30",
-                    isActive
-                      ? "bg-gradient-to-b from-green-600 to-green-700 text-white border-green-700 scale-[1.02]"
-                      : "bg-white text-green-800 border-green-700 hover:bg-green-50",
-                  ].join(" ")
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
-          </div>
+          {/* デスクトップ用ナビ（枠なし・ホバーで下線） */}
+<div className="hidden md:flex items-center gap-6">
+  {nav.map((item) => (
+    <NavLink
+      key={item.path}
+      to={item.path}
+      className={({ isActive }) =>
+        [
+          // 基本はテキストリンク
+          "text-sm font-medium text-green-800",
+          // ホバー時に下線
+          "hover:underline underline-offset-4 decoration-2",
+          // フォーカス可視リング
+          "focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600/30 rounded",
+          // 現在ページは強調（下線＋少し濃い色）
+          isActive ? "text-green-700 font-bold underline decoration-2 underline-offset-4" : ""
+        ].join(" ")
+      }
+    >
+      {item.label}
+    </NavLink>
+  ))}
+</div>
+
 
           {/* モバイル：ハンバーガー */}
           <button
