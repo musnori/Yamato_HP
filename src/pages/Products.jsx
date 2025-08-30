@@ -255,41 +255,18 @@ function useGrouped(items, query) {
   }, [items, query]);
 }
 
-// ───────────────────────────────────────────
-// 4) コンポーネント本体
-// ───────────────────────────────────────────
+// ── 4) 本体 ──
 export default function Products() {
   const [query, setQuery] = useState("");
-
-  // 無機と有機をそれぞれグループ化
   const groupsInorganic = useGrouped(inorganicItems, query);
-  const groupsOrganic = useGrouped(organicItems, query);
+  const groupsOrganic   = useGrouped(organicItems, query);
 
-  // 表示順
-  const order = [
-    "あ行",
-    "か行",
-    "さ行",
-    "た行",
-    "な行",
-    "は行",
-    "ま行",
-    "や行",
-    "ら行",
-    "わ行",
-    "その他",
-  ];
-
-  // グループキーを並べ替え
-  const rowsIn = Object.keys(groupsInorganic).sort(
-    (a, b) => order.indexOf(a) - order.indexOf(b)
-  );
-  const rowsOrg = Object.keys(groupsOrganic).sort(
-    (a, b) => order.indexOf(a) - order.indexOf(b)
-  );
+  const order = ["あ行","か行","さ行","た行","な行","は行","ま行","や行","ら行","わ行","その他"];
+  const rowsIn  = Object.keys(groupsInorganic).sort((a,b)=>order.indexOf(a)-order.indexOf(b));
+  const rowsOrg = Object.keys(groupsOrganic).sort((a,b)=>order.indexOf(a)-order.indexOf(b));
 
   return (
-    <div className="max-w-7xl mx-auto p-6 space-y-10 font-sans">
+    <div className="max-w-7xl mx-auto px-4 py-8 md:py-10 space-y-10">
       {/* 検索ボックス */}
       <div>
         <input
@@ -297,55 +274,50 @@ export default function Products() {
           placeholder="品目を検索…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full md:w-1/2 p-2 border rounded focus:outline-none focus:ring focus:border-green-300"
+          className="w-full md:w-[42rem] rounded-md border border-slate-300/80 bg-white px-3.5 py-2 text-sm
+                     placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-slate-200/70"
         />
       </div>
 
-      {/* ── プール管理製品バナー（テキストのみ） ── */}
-      <div className="relative">
+      {/* バナー（色味抑えめ） */}
+      <div>
         <a
           href={poolBannerLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full rounded-xl border border-green-700/60 bg-gradient-to-r from-green-600 to-green-700 text-white
-                     shadow-md hover:shadow-lg hover:scale-[1.01] transition transform"
-          aria-label="プール管理製品はこちら（外部サイトへ）"
+          className="block rounded-lg border border-slate-300 bg-gradient-to-r from-slate-900 to-slate-800
+                     text-white px-6 py-4 text-center tracking-wide hover:brightness-105 transition"
         >
-          <div className="px-6 py-5 flex items-center justify-center gap-3">
-           
-            <span className="text-xl font-bold tracking-wide">
-              プール管理製品はこちら →
-            </span>
-          </div>
+          プール管理製品はこちら →
         </a>
-        {/* 補助テキスト */}
-        <p className="mt-2 text-sm text-gray-600">
-          ソース：四国化成工業株式会社（外部リンク）
-        </p>
+        <p className="mt-2 text-xs text-slate-500">ソース：四国化成工業株式会社（外部リンク）</p>
       </div>
 
-      {/* 無機薬品セクション */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-bold text-green-700">無機薬品</h2>
-        {rowsIn.length === 0 && (
-          <p className="text-gray-500">該当する品目がありません。</p>
-        )}
+      {/* 無機薬品 */}
+      <section className="space-y-3">
+        <h2 className="text-base md:text-lg font-semibold text-slate-900">無機薬品</h2>
+        {rowsIn.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
+
         {rowsIn.map((row) => (
           <Disclosure key={`in-${row}`} defaultOpen={false}>
             {({ open }) => (
-              <div className="border rounded">
-                <Disclosure.Button className="flex w-full justify-between bg-green-100 px-4 py-2 text-left text-green-800 font-semibold hover:bg-green-200">
-                  <span>{row}</span>
+              <div className="rounded-lg border border-slate-200 bg-white">
+                <Disclosure.Button
+                  className="flex w-full items-center justify-between px-4 py-3 text-left
+                             text-slate-800 hover:bg-slate-50"
+                >
+                  <span className="font-medium">{row}</span>
                   <ChevronUpIcon
-                    className={`${open ? "rotate-180" : ""} h-5 w-5 text-green-800 transition-transform`}
+                    className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`}
                   />
                 </Disclosure.Button>
-                <Disclosure.Panel className="p-4 bg-white">
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <Disclosure.Panel className="px-4 pb-4">
+                  <ul className="grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {groupsInorganic[row].map((item) => (
                       <li
                         key={item}
-                        className="bg-green-50 p-3 border rounded shadow-sm hover:shadow-md transition text-sm"
+                        className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm
+                                   hover:bg-slate-50"
                       >
                         {item}
                       </li>
@@ -358,28 +330,31 @@ export default function Products() {
         ))}
       </section>
 
-      {/* 有機薬品セクション */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-bold text-blue-700">有機薬品</h2>
-        {rowsOrg.length === 0 && (
-          <p className="text-gray-500">該当する品目がありません。</p>
-        )}
+      {/* 有機薬品 */}
+      <section className="space-y-3">
+        <h2 className="text-base md:text-lg font-semibold text-slate-900">有機薬品</h2>
+        {rowsOrg.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
+
         {rowsOrg.map((row) => (
           <Disclosure key={`org-${row}`} defaultOpen={false}>
             {({ open }) => (
-              <div className="border rounded">
-                <Disclosure.Button className="flex w-full justify-between bg-blue-100 px-4 py-2 text-left text-blue-800 font-semibold hover:bg-blue-200">
-                  <span>{row}</span>
+              <div className="rounded-lg border border-slate-200 bg-white">
+                <Disclosure.Button
+                  className="flex w-full items-center justify-between px-4 py-3 text-left
+                             text-slate-800 hover:bg-slate-50"
+                >
+                  <span className="font-medium">{row}</span>
                   <ChevronUpIcon
-                    className={`${open ? "rotate-180" : ""} h-5 w-5 text-blue-800 transition-transform`}
+                    className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`}
                   />
                 </Disclosure.Button>
-                <Disclosure.Panel className="p-4 bg-white">
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <Disclosure.Panel className="px-4 pb-4">
+                  <ul className="grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {groupsOrganic[row].map((item) => (
                       <li
                         key={item}
-                        className="bg-blue-50 p-3 border rounded shadow-sm hover:shadow-md transition text-sm"
+                        className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm
+                                   hover:bg-slate-50"
                       >
                         {item}
                       </li>

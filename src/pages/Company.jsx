@@ -41,25 +41,7 @@ export default function Company() {
           </h1>
           <p className="text-gray-600 mt-2">Company Profile</p>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {/* ファクトカード */}
-            <div className="rounded-xl border bg-white/90 p-4">
-              <p className="text-xs text-gray-500">創業</p>
-              <p className="text-lg font-semibold text-gray-900">1933年（昭和8年）</p>
-            </div>
-            <div className="rounded-xl border bg-white/90 p-4">
-              <p className="text-xs text-gray-500">資本金</p>
-              <p className="text-lg font-semibold text-gray-900">1,000万円</p>
-            </div>
-            <div className="rounded-xl border bg-white/90 p-4">
-              <p className="text-xs text-gray-500">所在地</p>
-              <p className="text-lg font-semibold text-gray-900">兵庫県姫路市</p>
-            </div>
-            <a href="tel:0792810671" className="rounded-xl border bg-green-50 p-4 hover:bg-green-100 transition">
-              <p className="text-xs text-gray-600">お電話</p>
-              <p className="text-lg font-semibold text-green-700">079-281-0671</p>
-            </a>
-          </div>
+
         </div>
       </section>
 
@@ -87,7 +69,7 @@ export default function Company() {
                 <dt className="col-span-12 sm:col-span-3 text-gray-500">所在地</dt>
                 <dd className="col-span-12 sm:col-span-9">
                   <p className="text-gray-900 font-medium">
-                    〒670-0935 兵庫県姫路市北条口1丁目59番地
+                    〒670-0935 　兵庫県姫路市北条口1丁目59番地
                   </p>
                 </dd>
               </div>
@@ -104,10 +86,13 @@ export default function Company() {
                 <dd className="col-span-12 sm:col-span-9 text-gray-900">1933年（昭和8年）4月10日</dd>
               </div>
               <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">資本金 / 従業員</dt>
+                <dt className="col-span-12 sm:col-span-3 text-gray-500">資本金</dt>
+                <dd className="col-span-12 sm:col-span-9 text-gray-900">1,000万円</dd>
+              </div>
+              <div className="grid grid-cols-12 gap-4 p-5">
+                <dt className="col-span-12 sm:col-span-3 text-gray-500">従業員</dt>
                 <dd className="col-span-12 sm:col-span-9 text-gray-900">
-                  <p>資本金：1,000万円</p>
-                  <p>従業員数：男子7名・女子4名</p>
+                  <p>男子7名・女子4名</p>
                 </dd>
               </div>
               <div className="grid grid-cols-12 gap-4 p-5">
