@@ -4,15 +4,10 @@ export default function Access() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   // 阿保倉庫：スライダー用
-  const aboImages = [
-    "/warehouses/abo1.jpg", // ← 1枚目
-    "/warehouses/abo2.jpg", // ← 2枚目
-  ];
+  const aboImages = ["/warehouses/abo1.jpg", "/warehouses/abo2.jpg"];
   const [aboIndex, setAboIndex] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => {
-      setAboIndex((prev) => (prev + 1) % aboImages.length);
-    }, 4000); // 4秒ごとに切替
+    const t = setInterval(() => setAboIndex((p) => (p + 1) % aboImages.length), 4000);
     return () => clearInterval(t);
   }, []);
 
@@ -23,32 +18,33 @@ export default function Access() {
         <h1 className="text-3xl font-bold text-green-800">アクセスマップ</h1>
       </div>
 
-      {/* 本社所在地 */}
-      <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-xl font-semibold mb-3">本社所在地</h2>
-        <address className="not-italic text-gray-700 leading-relaxed text-sm">
-          〒670-0935<br />
-          兵庫県姫路市北条口1丁目59番地<br />
-          TEL：
-          <a href="tel:0792810671" className="text-green-600 hover:underline">
-            079-281-0671
-          </a>
-          <br />
-          FAX：079-224-1870
-        </address>
-      </div>
+      {/* ───────────── 本社 ───────────── */}
+<div className="grid gap-6 md:grid-cols-2">
+  {/* 本社所在地 */}
+  <div className="bg-white shadow rounded-lg p-6">
+    <h2 className="text-xl font-semibold mb-3">本社所在地</h2>
+    <address className="not-italic text-gray-700 leading-relaxed text-sm">
+      〒670-0935<br />
+      兵庫県姫路市北条口1丁目59番地<br />
+      TEL：
+      <a href="tel:0792810671" className="text-green-600 hover:underline">
+        079-281-0671
+      </a><br />
+      FAX：079-224-1870
+    </address>
+  </div>
 
-      {/* アクセス方法 */}
-      <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-xl font-semibold mb-3">アクセス方法</h2>
-        <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-          <li>JR「姫路駅」より徒歩6分</li>
-        </ul>
-      </div>
+  {/* アクセス方法（本社） */}
+  <div className="bg-white shadow rounded-lg p-6">
+    <h2 className="text-xl font-semibold mb-3">アクセス方法（本社）</h2>
+    <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
+      <li>JR「姫路駅」より徒歩6分</li>
+    </ul>
+  </div>
+</div>
 
-      {/* Googleマップ - 本社 */}
       <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-xl font-semibold mb-3">本社マップ</h2>
+        <h2 className="text-xl font-semibold mb-3">本社（マップ）</h2>
         <div className="w-full h-[500px]">
           <iframe
             title="本社マップ"
@@ -57,15 +53,24 @@ export default function Access() {
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+          />
         </div>
       </div>
 
-      {/* 阿保倉庫 */}
+      {/* ───────────── 阿保倉庫 ───────────── */}
+      <div className="bg-white shadow rounded-lg p-6">
+        <h2 className="text-xl font-semibold mb-3">阿保倉庫 所在地</h2>
+        <address className="not-italic text-gray-700 leading-relaxed text-sm">
+          〒670-0972（目安）<br />
+          兵庫県姫路市阿保甲403番地<br />
+          TEL：<a href="tel:0792820164" className="text-green-600 hover:underline">079-282-0164</a>
+        </address>
+      </div>
+
+
       <div className="bg-white shadow rounded-lg p-6 space-y-4">
         <div className="flex items-center justify-between flex-wrap gap-3">
-          <h2 className="text-xl font-semibold">阿保倉庫</h2>
-          {/* 電話番号（ボタン風） */}
+          <h2 className="text-xl font-semibold">阿保倉庫（マップ）</h2>
           <a
             href="tel:0792820164"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-green-700 text-white hover:bg-green-800 transition"
@@ -77,56 +82,43 @@ export default function Access() {
           </a>
         </div>
 
-        {/* 写真スライダー */}
+        {/* スライダー */}
         <div className="relative w-full overflow-hidden rounded-xl border">
-          {/* 画像レイヤー */}
           {aboImages.map((src, i) => (
             <img
               key={src}
               src={src}
               alt={`阿保倉庫 写真 ${i + 1}`}
-              className={`w-full h-[380px] object-cover transition-opacity duration-700 ease-in-out ${
+              className={`w-full h-[300px] md:h-[380px] object-cover transition-opacity duration-700 ease-in-out ${
                 i === aboIndex ? "opacity-100" : "opacity-0 absolute inset-0"
               }`}
               loading="lazy"
             />
           ))}
-
-          {/* グラデーションの下部オーバーレイ（オシャレ目のキャプション） */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/50 to-transparent"></div>
-
-          {/* ドットインジケータ */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent" />
           <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
             {aboImages.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setAboIndex(i)}
-                className={`h-2 w-2 rounded-full transition ${
-                  i === aboIndex ? "bg-white" : "bg-white/50 hover:bg-white/80"
-                }`}
+                className={`h-2 w-2 rounded-full transition ${i === aboIndex ? "bg-white" : "bg-white/50 hover:bg-white/80"}`}
                 aria-label={`slide ${i + 1}`}
               />
             ))}
           </div>
-
-          {/* 前後ボタン */}
           <button
             onClick={() => setAboIndex((aboIndex - 1 + aboImages.length) % aboImages.length)}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-9 h-9 flex items-center justify-center"
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-9 h-9 grid place-items-center"
             aria-label="prev"
-          >
-            ‹
-          </button>
+          >‹</button>
           <button
             onClick={() => setAboIndex((aboIndex + 1) % aboImages.length)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-9 h-9 flex items-center justify-center"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-9 h-9 grid place-items-center"
             aria-label="next"
-          >
-            ›
-          </button>
+          >›</button>
         </div>
 
-        {/* マップ */}
+        {/* 阿保 倉庫マップ */}
         <div className="w-full h-[420px]">
           <iframe
             title="阿保倉庫 マップ"
@@ -135,13 +127,23 @@ export default function Access() {
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+          />
         </div>
       </div>
 
-      {/* 飾東倉庫 */}
+      {/* ───────────── 飾東倉庫 ───────────── */}
       <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-xl font-semibold mb-3">飾東倉庫</h2>
+        <h2 className="text-xl font-semibold mb-3">飾東倉庫 所在地</h2>
+        <address className="not-italic text-gray-700 leading-relaxed text-sm">
+          〒671-0218<br />
+          兵庫県姫路市飾東町庄１９１−１<br />
+        </address>
+      </div>
+
+
+
+      <div className="bg-white shadow rounded-lg p-6">
+        <h2 className="text-xl font-semibold mb-3">飾東倉庫（マップ）</h2>
         <div className="w-full h-[500px]">
           <iframe
             title="飾東倉庫 マップ"
@@ -150,7 +152,7 @@ export default function Access() {
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+          />
         </div>
       </div>
     </div>
