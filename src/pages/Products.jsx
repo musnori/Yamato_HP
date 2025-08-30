@@ -3,13 +3,15 @@ import React, { useState, useMemo } from "react";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import * as wanakana from "wanakana";
+import { useNavigate } from "react-router-dom";
 
+/* =========================
+   A) 既存：製品（五十音で探す）
+========================= */
 // プール管理製品のリンク（外部）
 const poolBannerLink = "https://share.google/O2LMf2aOrlX2HRvy2";
 
-/* =========================
-   1) データ
-========================= */
+// 無機・有機（※既存の配列はそのまま流用/追記OK）
 const inorganicItems = [
   "PAC(ポリ塩化アルミニウム）","しゅう酸","りん酸塩類","りん酸７５％","りん酸８５％","アンモニア水",
   "カチオン界面活性剤","カリミョウバン（粉末）","カリミョウバン（粒状）","カリ石鹸","ギ酸ソーダ","ギ酸７６％",
@@ -47,9 +49,7 @@ const organicItems = [
   "メチレンクロライド","モノエチルアミン臭化水素酸塩","ラッカーシンナー","酢酸エチル","酢酸ブチル",
 ];
 
-/* =========================
-   2) 五十音マップ & 先頭かな推定
-========================= */
+/* 五十音グループ化補助 */
 const rowMap = {
   あ行: "あいうえお",
   か行: "かきくけこがぎぐげご",
@@ -66,7 +66,6 @@ function getRow(char) {
   for (const [row, chars] of Object.entries(rowMap)) if (chars.includes(char)) return row;
   return "その他";
 }
-
 const prefixMap = {
   酢酸: "さ", 塩化: "え", 塩酸: "え", 硫酸: "り", 硝酸: "し", 次亜塩素酸: "じ", 次亜: "じ",
   過酸化: "か", 過マンガン酸: "か", 炭酸: "た", 亜塩素酸: "あ", 亜硝酸: "あ", 無水: "む",
@@ -83,10 +82,6 @@ function headKana(item) {
   const m = hira.match(/[ぁ-ん]/);
   return m ? m[0] : null;
 }
-
-/* =========================
-   3) 検索/グループ化
-========================= */
 function useGrouped(items, query) {
   return useMemo(() => {
     const filtered = items.filter((item) => {
@@ -107,101 +102,260 @@ function useGrouped(items, query) {
 }
 
 /* =========================
-   4) 本体
+   B) 追加：用途で探す（カテゴリ）
+========================= */
+const USE_CASES = [
+  {
+    id: "water",                // ← /products#water からも来られる
+    title: "水処理用薬品",
+    lead: "浄水・排水処理、プール管理など",
+    chemicals: [
+      "次亜塩素酸ナトリウム","次亜塩素酸カルシウム","高度サラシ粉",
+      "PAC（ポリ塩化アルミニウム）","硫酸","苛性ソーダ",
+      "トリクロロイソシアヌル酸","高分子凝集剤","塩化カルシウム",
+      "消石灰","ポリロックON","ネオクロール類","DPD錠剤"
+    ],
+    links: [{ name: "四国化成工業HP", url: "https://www.shikoku.co.jp/" }],
+  },
+  {
+    id: "cleaning",
+    title: "クリーニング関係薬剤",
+    lead: "漂白・除菌・スケール除去・有機溶剤など",
+    chemicals: ["次亜塩素酸ナトリウム","過酸化水素","メタ珪酸ソーダ","フッ酸","リグロイン"],
+  },
+  {
+    id: "reagents",             // ← /products#reagents と対応
+    title: "研究用試薬",
+    lead: "大学・研究機関向け試薬は各社カタログへ",
+    vendors: [
+      { name: "ナカライテスク", url: "https://www.nacalai.co.jp/" },
+      { name: "林純薬工業", url: "https://www.hayashipurechem.co.jp/" },
+      { name: "キシダ化学", url: "https://www.kishida.co.jp/" },
+      { name: "富士フイルム和光純薬", url: "https://labchem.wako-chem.co.jp/" },
+      { name: "関東化学", url: "https://www.kanto.co.jp/" },
+      { name: "東京化成工業", url: "https://www.tcichemicals.com/" },
+    ],
+  },
+  {
+    id: "industrial",          // ← /products#industrial と対応
+    title: "食品添加物・工業系",
+    lead: "食品工場・厨房／製造現場の衛生・品質用途",
+    chemicals: [
+      "次亜塩素酸ナトリウム","次亜塩素酸カルシウム","消石灰","ハイドサルファイト",
+      "クエン酸","リンゴ酸","コハク酸","塩化カルシウム","塩酸","硫酸",
+      "苛性ソーダ","酢酸ソーダ","硫酸アンモニウム","アルコール製剤"
+    ],
+  },
+];
+
+/* =========================
+   C) 画面本体
 ========================= */
 export default function Products() {
+  // 1) 上段タブ（カテゴリ / 用途）
+  const [mode, setMode] = useState("category"); // "category" | "usecase"
+
+  // 2) カテゴリ側の検索
   const [query, setQuery] = useState("");
   const groupsInorganic = useGrouped(inorganicItems, query);
   const groupsOrganic = useGrouped(organicItems, query);
-
   const order = ["あ行","か行","さ行","た行","な行","は行","ま行","や行","ら行","わ行","その他"];
   const rowsIn  = Object.keys(groupsInorganic).sort((a,b)=>order.indexOf(a)-order.indexOf(b));
   const rowsOrg = Object.keys(groupsOrganic).sort((a,b)=>order.indexOf(a)-order.indexOf(b));
 
+  // 3) 問い合わせ導線
+  const navigate = useNavigate();
+  const ask = (subject) => {
+    const qs = new URLSearchParams({ subject: `用途相談：${subject}`, category: "chemicals" }).toString();
+    navigate(`/contact?${qs}`);
+  };
+
+  // 4) URLのハッシュ(#water など)が来たら自動で「用途で探す」タブを開き、スクロール
+  React.useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      if (USE_CASES.some(u => u.id === id)) {
+        setMode("usecase");
+        // 少し待ってからスクロール
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 50);
+      }
+    }
+  }, []);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 md:py-10 space-y-10">
-      {/* 検索 */}
-      <div>
-        <input
-          type="text"
-          placeholder="品目を検索…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="w-full md:w-[42rem] rounded-md border border-slate-300/80 bg-white px-3.5 py-2 text-sm
-                     placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-slate-200/70"
-        />
-      </div>
-
-      {/* バナー */}
-      <div>
-        <a
-          href={poolBannerLink}
-          target="_blank" rel="noopener noreferrer"
-          className="block rounded-lg border border-slate-300 bg-gradient-to-r from-slate-900 to-slate-800
-                     text-white px-6 py-4 text-center tracking-wide hover:brightness-105 transition"
+      {/* 上段タブ */}
+      <div className="inline-flex rounded-xl border bg-white p-1">
+        <button
+          className={`px-4 py-2 rounded-lg text-sm ${mode==='category' ? 'bg-green-700 text-white' : 'hover:bg-neutral-50 text-green-800'}`}
+          onClick={() => setMode("category")}
         >
-          プール管理製品はこちら →
-        </a>
-        <p className="mt-2 text-xs text-slate-500">ソース：四国化成工業株式会社（外部リンク）</p>
+          カテゴリで見る
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg text-sm ${mode==='usecase' ? 'bg-green-700 text-white' : 'hover:bg-neutral-50 text-green-800'}`}
+          onClick={() => setMode("usecase")}
+        >
+          用途で探す
+        </button>
       </div>
 
-      {/* ==== ここからPCで左右2カラム（lg以上） ==== */}
-      <div className="grid gap-10 lg:grid-cols-2 items-start">
-        {/* 無機薬品（左） */}
-        <section className="space-y-3">
-          <h2 className="text-base md:text-lg font-semibold text-slate-900">無機薬品</h2>
-          {rowsIn.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
-          {rowsIn.map((row) => (
-            <Disclosure key={`in-${row}`} defaultOpen={false}>
-              {({ open }) => (
-                <div className="rounded-lg border border-slate-200 bg-white">
-                  <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 text-left text-slate-800 hover:bg-slate-50">
-                    <span className="font-medium">{row}</span>
-                    <ChevronUpIcon className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`} />
-                  </Disclosure.Button>
-                  <Disclosure.Panel className="px-4 pb-4">
-                    <ul className="grid gap-2 sm:grid-cols-2">
-                      {groupsInorganic[row].map((item) => (
-                        <li key={item} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </Disclosure.Panel>
-                </div>
-              )}
-            </Disclosure>
-          ))}
-        </section>
+      {mode === "category" ? (
+        <>
+          {/* 検索 */}
+          <div>
+            <input
+              type="text"
+              placeholder="品目を検索…（例：次亜、酢酸、IPA など）"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="w-full md:w-[42rem] rounded-md border border-slate-300/80 bg-white px-3.5 py-2 text-sm
+                        placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-slate-200/70"
+            />
+          </div>
 
-        {/* 有機薬品（右） */}
-        <section className="space-y-3">
-          <h2 className="text-base md:text-lg font-semibold text-slate-900">有機薬品</h2>
-          {rowsOrg.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
-          {rowsOrg.map((row) => (
-            <Disclosure key={`org-${row}`} defaultOpen={false}>
-              {({ open }) => (
-                <div className="rounded-lg border border-slate-200 bg-white">
-                  <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 text-left text-slate-800 hover:bg-slate-50">
-                    <span className="font-medium">{row}</span>
-                    <ChevronUpIcon className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`} />
-                  </Disclosure.Button>
-                  <Disclosure.Panel className="px-4 pb-4">
-                    <ul className="grid gap-2 sm:grid-cols-2">
-                      {groupsOrganic[row].map((item) => (
-                        <li key={item} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </Disclosure.Panel>
+          {/* バナー（プール管理） */}
+          <div>
+            <a
+              href={poolBannerLink}
+              target="_blank" rel="noopener noreferrer"
+              className="block rounded-lg border border-slate-300 bg-gradient-to-r from-slate-900 to-slate-800
+                        text-white px-6 py-4 text-center tracking-wide hover:brightness-105 transition"
+            >
+              プール管理製品はこちら →
+            </a>
+            <p className="mt-2 text-xs text-slate-500">ソース：四国化成工業株式会社（外部リンク）</p>
+          </div>
+
+          {/* 2カラム：無機/有機 */}
+          <div className="grid gap-10 lg:grid-cols-2 items-start">
+            {/* 無機薬品（左） */}
+            <section className="space-y-3" id="water">
+              <h2 className="text-base md:text-lg font-semibold text-slate-900">無機薬品</h2>
+              {rowsIn.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
+              {rowsIn.map((row) => (
+                <Disclosure key={`in-${row}`} defaultOpen={false}>
+                  {({ open }) => (
+                    <div className="rounded-lg border border-slate-200 bg-white">
+                      <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 text-left text-slate-800 hover:bg-slate-50">
+                        <span className="font-medium">{row}</span>
+                        <ChevronUpIcon className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`} />
+                      </Disclosure.Button>
+                      <Disclosure.Panel className="px-4 pb-4">
+                        <ul className="grid gap-2 sm:grid-cols-2">
+                          {groupsInorganic[row].map((item) => (
+                            <li key={item} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </Disclosure.Panel>
+                    </div>
+                  )}
+                </Disclosure>
+              ))}
+            </section>
+
+            {/* 有機薬品（右） */}
+            <section className="space-y-3" id="reagents">
+              <h2 className="text-base md:text-lg font-semibold text-slate-900">有機薬品</h2>
+              {rowsOrg.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
+              {rowsOrg.map((row) => (
+                <Disclosure key={`org-${row}`} defaultOpen={false}>
+                  {({ open }) => (
+                    <div className="rounded-lg border border-slate-200 bg-white">
+                      <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 text-left text-slate-800 hover:bg-slate-50">
+                        <span className="font-medium">{row}</span>
+                        <ChevronUpIcon className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`} />
+                      </Disclosure.Button>
+                      <Disclosure.Panel className="px-4 pb-4">
+                        <ul className="grid gap-2 sm:grid-cols-2">
+                          {groupsOrganic[row].map((item) => (
+                            <li key={item} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </Disclosure.Panel>
+                    </div>
+                  )}
+                </Disclosure>
+              ))}
+            </section>
+          </div>
+        </>
+      ) : (
+        /* =========================
+           用途で探すタブ
+        ======================== */
+        <div className="grid gap-6 md:grid-cols-2">
+          {USE_CASES.map((u) => (
+            <section key={u.id} id={u.id} className="rounded-2xl border bg-white p-6 shadow-sm hover:shadow transition">
+              <div className="flex items-baseline justify-between gap-4 flex-wrap">
+                <div>
+                  <h3 className="text-lg font-semibold text-green-700">{u.title}</h3>
+                  <p className="text-sm text-neutral-600 mt-1">{u.lead}</p>
                 </div>
+                <button
+                  onClick={() => ask(u.title)}
+                  className="rounded-xl bg-green-700 text-white px-3 py-2 text-sm hover:bg-green-800"
+                >
+                  この用途で問い合わせ
+                </button>
+              </div>
+
+              {/* 代表的な薬品名（チップ） */}
+              {u.chemicals?.length ? (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {u.chemicals.map((c) => (
+                    <button
+                      key={c}
+                      onClick={() => ask(`${u.title} / ${c}`)}
+                      className="rounded-full border px-3 py-1 text-sm hover:bg-neutral-50"
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+
+              {/* ベンダー/外部リンク */}
+              {u.vendors?.length || u.links?.length ? (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {(u.vendors || u.links).map((l) => (
+                    <a
+                      key={l.name || l.label}
+                      href={l.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center rounded-xl border px-3 py-2 text-sm hover:bg-neutral-50"
+                    >
+                      {(l.name || l.label)} 公式HP
+                    </a>
+                  ))}
+                </div>
+              ) : null}
+
+              {/* 参考：/products#industrial 目印だけ置く */}
+              {u.id === "industrial" && (
+                <p className="mt-4 text-xs text-neutral-500">
+                  ※「工業用・医薬品関連」はお客様の用途に応じて最適品をご提案します。まずは用途をご記入ください。
+                </p>
               )}
-            </Disclosure>
+            </section>
           ))}
-        </section>
-      </div>
-      {/* ==== /2カラム ==== */}
+        </div>
+      )}
+
+      {/* 下部の注意書き（用途タブ時のみ） */}
+      {mode === "usecase" && (
+        <div className="mt-4 rounded-xl border bg-green-50 text-green-900 px-4 py-3 text-sm">
+          「薬品名が分からない」でもOK。用途や困りごとだけ書いて送ってください。
+        </div>
+      )}
     </div>
   );
 }
