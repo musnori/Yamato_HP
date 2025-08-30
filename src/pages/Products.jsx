@@ -227,6 +227,59 @@ function getRow(char) {
   return "その他";
 }
 
+/** 先頭の“かな”を拾う。無ければ代表的な漢字プレフィックスで推定 */
+const prefixMap = {
+  // よく出る化学系の先頭語 → 読みの最初のかな
+  "酢酸": "さ",
+  "塩化": "え",
+  "塩酸": "え",
+  "硫酸": "り",
+  "硝酸": "し",
+  "次亜塩素酸": "じ",
+  "次亜": "じ",
+  "過酸化": "か",
+  "過マンガン酸": "か",
+  "炭酸": "た",
+  "亜塩素酸": "あ",
+  "亜硝酸": "あ",
+  "無水": "む",
+  "水酸化": "す",
+  "水": "す",         
+  "液体": "え",
+  "希硫酸": "き",
+  "濃硫酸": "の",
+  "精製": "せ",
+  "珪酸": "け",
+  "発煙": "は",
+  "二酸化": "に",
+  "尿素": "に",
+  "活性炭": "か",
+  "白線": "は",
+  "乳": "に",
+  "希": "き",
+  "濃": "の",
+  "業": "ぎ",
+  "消": "し",
+  "蒸": "じ",
+};
+
+function headKana(item) {
+  // かなを優先して抽出（漢字は飛ばす）
+  const hira = wanakana.toHiragana(item);
+  for (const ch of hira) {
+    if (wanakana.isHiragana(ch)) return ch; // 最初に見つかった“かな”
+  }
+  // 代表的な漢字先頭での推定
+  for (const [key, kana] of Object.entries(prefixMap)) {
+    if (item.startsWith(key) || hira.startsWith(wanakana.toHiragana(key))) {
+      return kana[0];
+    }
+  }
+  // かっこ内など後方にかながあれば拾う
+  const m = hira.match(/[ぁ-ん]/);
+  return m ? m[0] : null;
+}
+
 // ───────────────────────────────────────────
 // 3) 指定配列を検索・ソート・五十音グループ化するヘルパー
 // ───────────────────────────────────────────
@@ -238,22 +291,25 @@ function useGrouped(items, query) {
       const hira = wanakana.toHiragana(item);
       return item.toLowerCase().includes(q) || hira.includes(q);
     });
+
     // 2) 読みでソート
     const sorted = filtered.sort((a, b) => {
       const ra = wanakana.toHiragana(a);
       const rb = wanakana.toHiragana(b);
       return ra.localeCompare(rb, "ja");
     });
-    // 3) グループ化
+
+    // 3) グループ化（← ここを修正）
     return sorted.reduce((acc, item) => {
-      const hira = wanakana.toHiragana(item);
-      const row = getRow(hira.charAt(0));
+      const head = headKana(item);
+      const row = head ? getRow(head) : "その他";
       if (!acc[row]) acc[row] = [];
       acc[row].push(item);
       return acc;
     }, {});
   }, [items, query]);
 }
+
 
 // ── 4) 本体 ──
 export default function Products() {

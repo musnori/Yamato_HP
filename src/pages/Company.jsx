@@ -184,15 +184,6 @@ export default function Company() {
             </Link>
           </div>
 
-          {/* 会社ポリシー */}
-          <div className="rounded-2xl border bg-white p-6">
-            <h3 className="text-lg font-bold text-gray-900">ポリシー</h3>
-            <ul className="mt-2 space-y-2 text-sm text-gray-700">
-              <li>・品質と安全の最優先</li>
-              <li>・法令遵守と適正管理</li>
-              <li>・地域とともに持続的成長</li>
-            </ul>
-          </div>
         </aside>
       </div>
     </div>

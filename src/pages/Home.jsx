@@ -233,81 +233,88 @@ export default function Home() {
       </section>
 
       {/* =======================
-          連絡カード群（高さを4枚で揃える）
-      ======================== */}
-      <section className="bg-green-50 py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          {/* ← ここを変更：items-stretch + auto-rows-fr で行内の高さを揃える */}
-          <div className="grid gap-6 md:grid-cols-2 items-stretch auto-rows-fr">
-            {/* お問い合わせカード */}
-            <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-brand-green-500 h-full flex flex-col">
-              <div className="flex flex-col items-center text-center grow">
-                <svg className="w-8 h-8 text-brand-green-500 mb-3" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.06-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.06l-2.2 2.2z" />
-                </svg>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-1">お問い合わせ</h3>
-                <p className="text-gray-600 mb-3 leading-relaxed">製品に関するご質問やご相談をお気軽にどうぞ</p>
-                <a href="tel:0792810671" className="text-3xl font-bold text-brand-green-600 hover:underline">
-                  079-281-0671
-                </a>
-              </div>
-              <Link
-                to="/contact"
-                className="mt-6 inline-flex justify-center items-center bg-brand-green-600 hover:bg-brand-green-700 text-white font-medium py-2 px-6 rounded transition"
-              >
-                フォームへ
-              </Link>
-            </div>
-
-            {/* 社長ブログ */}
-            <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-brand-green-500 h-full flex flex-col">
-              <div className="flex flex-col items-center text-center grow">
-                <svg className="w-8 h-8 text-brand-green-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-                </svg>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-1">社長ブログ</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">日々の気づきや現場の声をブログで発信中！</p>
-              </div>
-              <a
-                href="http://blog.yamato-chemi.co.jp/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex justify-center items-center text-brand-green-700 bg-green-100 hover:bg-green-200 font-medium py-2 px-6 rounded transition underline-offset-2"
-              >
-                ブログを見る →
-              </a>
-            </div>
-
-            {/* 西兵庫化学薬品協同組合 */}
-            <a
-              href="https://nishihyogo-chemical-coop.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative rounded-xl shadow-lg overflow-hidden group h-full flex"
-              style={{ backgroundImage: "url('/images/coop-banner.png')", backgroundSize: "cover", backgroundPosition: "center" }}
-            >
-              <div className="absolute inset-0 bg-white/40 group-hover:bg-white/50 transition" />
-              <div className="relative z-10 mt-auto w-full px-6 pb-4 text-center">
-                <span className="block text-lg font-semibold text-black drop-shadow-[1px_1px_2px_rgba(255,255,255,0.7)]">西兵庫化学薬品協同組合</span>
-                <span className="mt-1 block text-sm text-black/80 drop-shadow-[1px_1px_2px_rgba(255,255,255,0.6)]">公式サイトへ</span>
-              </div>
-            </a>
-
-            {/* 懐かしコレクション */}
-            <Link
-              to="/collection"
-              className="relative rounded-xl shadow-lg overflow-hidden group h-full flex"
-              style={{ backgroundImage: "url('/images/banner.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
-            >
-              <div className="absolute inset-0 bg-white/40 group-hover:bg-white/50 transition" />
-              <div className="relative z-10 mt-auto w-full px-6 pb-4 text-center">
-                <span className="block text-lg font-semibold text-black drop-shadow-[1px_1px_2px_rgba(255,255,255,0.7)]">懐かしコレクション</span>
-                <span className="mt-1 block text-sm text-black/80 drop-shadow-[1px_1px_2px_rgba(255,255,255,0.6)]">とうじコレクションのご紹介</span>
-              </div>
-            </Link>
-          </div>
+    連絡カード群（高さを半分に揃える）
+======================== */}
+<section className="bg-green-50 py-10">
+  <div className="max-w-6xl mx-auto px-4">
+    <div className="grid gap-6 md:grid-cols-2 items-stretch auto-rows-fr">
+      
+      {/* --- お問い合わせ --- */}
+      <div className="bg-white rounded-xl shadow-lg border-t-4 border-brand-green-500 flex flex-col p-4 h-full">
+        <div className="grow flex flex-col items-center text-center">
+          <svg className="w-6 h-6 text-brand-green-500 mb-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.06-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.06l-2.2 2.2z" />
+          </svg>
+          <h3 className="text-lg font-semibold text-gray-800 mb-1">お問い合わせ</h3>
+          <p className="text-gray-600 text-sm mb-2 leading-relaxed">
+            製品に関するご質問やご相談をお気軽にどうぞ
+          </p>
+          <a href="tel:0792810671" className="text-xl font-bold text-brand-green-600 hover:underline">
+            079-281-0671
+          </a>
         </div>
-      </section>
+        <Link
+          to="/contact"
+          className="mt-4 inline-flex justify-center items-center bg-brand-green-600 hover:bg-brand-green-700 text-white font-medium py-2 px-4 rounded text-sm transition"
+        >
+          フォームへ
+        </Link>
+      </div>
+
+      {/* --- 社長ブログ --- */}
+      <div className="bg-white rounded-xl shadow-lg border-t-4 border-brand-green-500 flex flex-col p-4 h-full">
+        <div className="grow flex flex-col items-center text-center">
+          <svg className="w-6 h-6 text-brand-green-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+          </svg>
+          <h3 className="text-lg font-semibold text-gray-800 mb-1">社長ブログ</h3>
+          <p className="text-gray-600 text-sm mb-3 leading-relaxed">
+            日々の気づきや現場の声をブログで発信中！
+          </p>
+        </div>
+        <a
+          href="http://blog.yamato-chemi.co.jp/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex justify-center items-center text-brand-green-700 bg-green-100 hover:bg-green-200 font-medium py-2 px-4 rounded text-sm transition underline-offset-2"
+        >
+          ブログを見る →
+        </a>
+      </div>
+
+      {/* --- 西兵庫化学薬品協同組合（全面写真背景） --- */}
+      <a
+        href="https://nishihyogo-chemical-coop.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative rounded-xl shadow-lg overflow-hidden group h-full flex flex-col justify-end p-4 text-center text-white"
+        style={{ backgroundImage: "url('/images/coop-banner.png')", backgroundSize: "cover", backgroundPosition: "center" }}
+      >
+        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
+        <div className="relative z-10">
+          <h3 className="text-lg font-semibold">西兵庫化学薬品協同組合</h3>
+          <p className="text-sm">公式サイトへ</p>
+        </div>
+      </a>
+
+      {/* --- 懐かしコレクション（全面写真背景） --- */}
+      <Link
+        to="/collection"
+        className="relative rounded-xl shadow-lg overflow-hidden group h-full flex flex-col justify-end p-4 text-center text-white"
+        style={{ backgroundImage: "url('/images/banner.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
+      >
+        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
+        <div className="relative z-10">
+          <h3 className="text-lg font-semibold">懐かしコレクション</h3>
+          <p className="text-sm">とうじコレクションのご紹介</p>
+        </div>
+      </Link>
+    </div>
+  </div>
+</section>
+
+
+
     </div>
   );
 }
