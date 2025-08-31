@@ -142,6 +142,75 @@ export default function Collection() {
   src: "/Collection/collection32.jpg",
   comment: "花柄の魔法瓶ポット。メタルの注ぎ口とライトブルーの胴がレトロ可愛い（取説付き）。",
 },
+{
+  src: "/Collection/collection34.jpg",
+  comment: "折りたたみ式の食品カバー。レトロ柄メッシュが可愛いキッチン雑貨。",
+},
+{
+  src: "/Collection/collection35.jpg",
+  comment: "Nikon F3 + SB-7 ストロボのセット。プロも愛した名機の存在感。",
+},
+{
+  src: "/Collection/collection36.jpg",
+  comment: "『Dunk』1986年10月号。80年代アイドル文化が詰まった一冊。",
+},
+{
+  src: "/Collection/collection37.jpg",
+  comment: "別冊『近代映画』伊豆の踊子 特集号。青春映画を象徴する名作。",
+},
+{
+  src: "/Collection/collection38.jpg",
+  comment: "『BOMB!』5月号。大判アップの表紙が時代の空気を伝える。",
+},
+{
+  src: "/Collection/collection39.jpg",
+  comment: "『YOUNG SONG』11月号。アイドルと音楽の情報が満載のサウンド誌。",
+},
+{
+  src: "/Collection/collection40.jpg",
+  comment: "『YOUNG SONG』1月号 大型号。井上陽水特集の力強い表紙が印象的。",
+},
+{
+  src: "/Collection/collection41.jpg",
+  comment: "別冊『近代映画』吉永小百合 特別号。永遠の清純派スター大特集。",
+},
+{
+  src: "/Collection/collection42.jpg",
+  comment: "『週刊大衆』4/5号。グラビアと時事が同居する昭和の週刊誌カルチャー。",
+},
+{
+  src: "/Collection/collection43.jpg",
+  comment: "『近代映画』臨時増刊 美しい暦 9月号。花野と若者の表紙がさわやか。",
+},
+{
+  src: "/Collection/collection44.jpg",
+  comment: "任天堂ゲーム＆ウォッチ『ミッキーマウス』。シンプルながら夢中になったLCDゲーム機。",
+},
+{
+  src: "/Collection/collection45.jpg",
+  comment: "コカ・コーラ壁掛けクロック＆ポスター『I feel Coke』。昭和の広告カルチャーを象徴。",
+},
+{
+  src: "/Collection/collection46.jpg",
+  comment: "SONY製ベータビデオデッキとブラウン管テレビ。重量感のあるデザインが時代を物語る。",
+},
+{
+  src: "/Collection/collection47.jpg",
+  comment: "SEILORSの巾着袋。原宿ファッションを彩った青春アイテム。",
+},
+{
+  src: "/Collection/collection48.jpg",
+  comment: "昆虫かご。カブトムシやクワガタ採集の夏の定番アイテム。",
+},
+{
+  src: "/Collection/collection49.jpg",
+  comment: "キャラクター柄のお箸セット。アニメやヒーローがプリントされた昭和の学用品。",
+},
+{
+  src: "/Collection/collection50.jpg",
+  comment: "『巨人の星』お弁当箱。人気野球漫画とタイアップした学校ランチの定番。",
+},
+
 
   ];
 
