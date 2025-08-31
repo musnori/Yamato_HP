@@ -17,13 +17,13 @@ const ITEMS: Strength[] = [
   {
     title: "当社の強み",
     desc: "90年以上の実績、迅速な納品体制、品質管理、サポート。",
-    img: "/hero/lab.jpg",
+    img: "/hero/lift.jpg",
     to: "/#strengths",
   },
   {
     title: "サステナビリティ",
     desc: "環境負荷低減・安全対策・地域連携への取り組み。",
-    img: "/hero/earth.jpg",
+    img: "/hero/lab.jpg",
     to: "/sustainability",
   },
 ];
