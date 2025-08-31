@@ -6,6 +6,7 @@ import Access from "./pages/Access";
 import Company from "./pages/Company";
 import Contact from "./pages/Contact";
 import Collection from "./pages/Collection"; 
+import Stock from "./pages/Stock";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="company" element={<Company />} />
           <Route path="contact" element={<Contact />} />
           <Route path="collection" element={<Collection />} />
+          <Route path="stock" element={<Stock />} />
         </Route>
       </Routes>
     </Router>

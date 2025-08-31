@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import * as wanakana from "wanakana";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 /* =========================
    A) 既存：製品（五十音で探す）
@@ -73,6 +73,7 @@ const prefixMap = {
   発煙: "は", 二酸化: "に", 尿素: "に", 活性炭: "か", 白線: "は",  "乳": "に", "希": "き", "濃": "の",
   "業": "ぎ", "消": "し", "蒸": "じ",
 };
+
 function headKana(item) {
   const hira = wanakana.toHiragana(item);
   for (const ch of hira) if (wanakana.isHiragana(ch)) return ch;
@@ -100,6 +101,26 @@ function useGrouped(items, query) {
     }, {});
   }, [items, query]);
 }
+
+/* =========================
+   在庫ページ（/stock）セクションID対応
+========================= */
+const STOCK_ID_MAP = {
+  "次亜塩素酸ソーダ": "naocl",
+  "次亜塩素酸ソーダ１２％": "naocl",
+  "次亜塩素酸ソーダ６％": "naocl",
+  "塩酸３５％": "hcl",
+  "塩酸": "hcl",
+  "苛性ソーダ（液体）": "naoh",
+  "苛性ソーダ２４％": "naoh",
+  "苛性ソーダ４８％": "naoh",
+  "PAC(ポリ塩化アルミニウム）": "pac",
+  "PAC（ポリ塩化アルミニウム）": "pac",
+  "濃硫酸９８％": "h2so4",
+  "精製濃硫酸": "h2so4",
+  "塩化カルシウム": "cacl2",
+  "消石灰": "cao",
+};
 
 /* =========================
    B) 追加：用途で探す（カテゴリ）
@@ -163,6 +184,7 @@ export default function Products() {
   const rowsIn  = Object.keys(groupsInorganic).sort((a,b)=>order.indexOf(a)-order.indexOf(b));
   const rowsOrg = Object.keys(groupsOrganic).sort((a,b)=>order.indexOf(a)-order.indexOf(b));
 
+  
   // 3) 問い合わせ導線
   const navigate = useNavigate();
   const ask = (subject) => {
@@ -176,7 +198,6 @@ export default function Products() {
       const id = location.hash.replace("#", "");
       if (USE_CASES.some(u => u.id === id)) {
         setMode("usecase");
-        // 少し待ってからスクロール
         setTimeout(() => {
           const el = document.getElementById(id);
           if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -246,11 +267,20 @@ export default function Products() {
                       </Disclosure.Button>
                       <Disclosure.Panel className="px-4 pb-4">
                         <ul className="grid gap-2 sm:grid-cols-2">
-                          {groupsInorganic[row].map((item) => (
-                            <li key={item} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
-                              {item}
-                            </li>
-                          ))}
+                          {groupsInorganic[row].map((item) => {
+                            const sid = STOCK_ID_MAP[item];
+                            return (
+                              <li key={item} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
+                                {sid ? (
+                                  <Link to={`/stock#${sid}`} className="text-green-700 hover:underline">
+                                    {item}（在庫紹介へ）
+                                  </Link>
+                                ) : (
+                                  item
+                                )}
+                              </li>
+                            );
+                          })}
                         </ul>
                       </Disclosure.Panel>
                     </div>
@@ -273,11 +303,20 @@ export default function Products() {
                       </Disclosure.Button>
                       <Disclosure.Panel className="px-4 pb-4">
                         <ul className="grid gap-2 sm:grid-cols-2">
-                          {groupsOrganic[row].map((item) => (
-                            <li key={item} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
-                              {item}
-                            </li>
-                          ))}
+                          {groupsOrganic[row].map((item) => {
+                            const sid = STOCK_ID_MAP[item];
+                            return (
+                              <li key={item} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
+                                {sid ? (
+                                  <Link to={`/stock#${sid}`} className="text-green-700 hover:underline">
+                                    {item}（在庫紹介へ）
+                                  </Link>
+                                ) : (
+                                  item
+                                )}
+                              </li>
+                            );
+                          })}
                         </ul>
                       </Disclosure.Panel>
                     </div>
@@ -322,8 +361,8 @@ export default function Products() {
                 </div>
               ) : null}
 
-              {/* ベンダー/外部リンク */}
-              {u.vendors?.length || u.links?.length ? (
+              {/* ベンダー/外部リンク or vendors */}
+              {(u.vendors?.length || u.links?.length) ? (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {(u.vendors || u.links).map((l) => (
                     <a
@@ -339,7 +378,6 @@ export default function Products() {
                 </div>
               ) : null}
 
-              {/* 参考：/products#industrial 目印だけ置く */}
               {u.id === "industrial" && (
                 <p className="mt-4 text-xs text-neutral-500">
                   ※「工業用・医薬品関連」はお客様の用途に応じて最適品をご提案します。まずは用途をご記入ください。
