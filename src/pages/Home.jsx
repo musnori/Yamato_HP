@@ -93,8 +93,8 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-3">
             {[
               { title: "企業情報", desc: "会社概要・沿革・拠点・許認可などの基本情報。", img: "/hero/company.jpg", to: "/company" },
-              { title: "当社の強み", desc: "90年以上の実績、迅速な納品体制、品質管理、サポート。", img: "/hero/lab.jpg", to: "#strengths" },
-              { title: "サステナビリティ", desc: "環境負荷低減・安全対策・地域連携への取り組み。", img: "/hero/earth.jpg", to: "/sustainability" },
+              { title: "当社の強み", desc: "90年以上の実績、迅速な納品体制、品質管理、サポート。", img: "/hero/lift.jpg", to: "#strengths" },
+              { title: "サステナビリティ", desc: "環境負荷低減・安全対策・地域連携への取り組み。", img: "/hero/lab.jpg", to: "/sustainability" },
             ].map((s) => (
               <a
                 key={s.title}

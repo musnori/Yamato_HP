@@ -1,31 +1,15 @@
 import React from "react";
+// 画像をモジュールとして読み込む（Vite）
+import imgCompany from "@/assets/hero/company.jpg";
+import imgStrength from "@/assets/hero/lift.jpg";
+import imgSustain from "@/assets/hero/lab.jpg";
 
-type Strength = {
-  title: string;
-  desc: string;
-  img: string;
-  to?: string;
-};
+type Strength = { title: string; desc: string; img: string; to?: string };
 
 const ITEMS: Strength[] = [
-  {
-    title: "企業情報",
-    desc: "会社概要・沿革・拠点・許認可などの基本情報。",
-    img: "/hero/company.jpg",
-    to: "/company",
-  },
-  {
-    title: "当社の強み",
-    desc: "90年以上の実績、迅速な納品体制、品質管理、サポート。",
-    img: "/hero/lift.jpg",
-    to: "/#strengths",
-  },
-  {
-    title: "サステナビリティ",
-    desc: "環境負荷低減・安全対策・地域連携への取り組み。",
-    img: "/hero/lab.jpg",
-    to: "/sustainability",
-  },
+  { title: "企業情報", desc: "会社概要・沿革・拠点・許認可などの基本情報。", img: imgCompany, to: "/company" },
+  { title: "当社の強み", desc: "90年以上の実績、迅速な納品体制、品質管理、サポート。", img: imgStrength, to: "/#strengths" },
+  { title: "サステナビリティ", desc: "環境負荷低減・安全対策・地域連携への取り組み。", img: imgSustain, to: "/sustainability" },
 ];
 
 export default function StrengthsShowcase() {
@@ -38,7 +22,7 @@ export default function StrengthsShowcase() {
               <div
                 className="relative h-[260px] rounded-2xl overflow-hidden group"
                 style={{
-                  backgroundImage: `url('${s.img}')`,
+                  backgroundImage: `url(${s.img})`,   // ← importしたURLをそのまま
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}

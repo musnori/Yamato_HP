@@ -7,6 +7,7 @@ import Company from "./pages/Company";
 import Contact from "./pages/Contact";
 import Collection from "./pages/Collection"; 
 import Stock from "./pages/Stock";
+import Sustainability from "./pages/Sustainability";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="collection" element={<Collection />} />
           <Route path="stock" element={<Stock />} />
+          <Route path="sustainability" element={<Sustainability />} />
         </Route>
       </Routes>
     </Router>
