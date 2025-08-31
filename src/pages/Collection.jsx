@@ -88,11 +88,11 @@ export default function Collection() {
     },
     {
       src: "/Collection/collection20.jpg",
-      comment: "赤いラジカセ。ツインスピーカー仕様で、昭和の若者文化を象徴する存在。",
+      comment: "赤いダブルラジカセ。ダビングが簡単に出来て重宝したことを思い出します。",
     },
     {
       src: "/Collection/collection21.jpg",
-      comment: "公衆電話（赤電話）。ダイヤル式でコインを入れて利用した懐かしの通信手段。",
+      comment: "公衆電話（赤電話）。ダイヤル式で１０円玉を入れて利用したが、１０円玉が無くなり途中で会話が途切れました。",
     },
     {
       src: "/Collection/collection22.jpg",
@@ -120,7 +120,7 @@ export default function Collection() {
 },
 {
   src: "/Collection/collection28.jpg",
-  comment: "グリーンキャップに付けられた大量のバッジ。南海ホークス関連グッズも確認できる。",
+  comment: "ソフトバンクホークスの前身、南海ホークスのキャップに付けられた大量のバッジ。",
 },
 {
   src: "/Collection/collection29.jpg",
@@ -128,7 +128,7 @@ export default function Collection() {
 },
 {
   src: "/Collection/collection30.jpg",
-  comment: "スーパーカー消しゴム。色とりどりで、駄菓子屋文化を象徴する懐かしの玩具。",
+  comment: "スーパーカー消しゴム。ボールペンを使ってレースしてました。",
 },
 {
   src: "/Collection/collection31.jpg",
@@ -148,7 +148,7 @@ export default function Collection() {
 },
 {
   src: "/Collection/collection35.jpg",
-  comment: "Nikon F3 + SB-7 ストロボのセット。プロも愛した名機の存在感。",
+  comment: "Nikon F3 + SB-7 ストロボのセット。プロも愛した名機の存在感。後付モータードライブも装着。",
 },
 {
   src: "/Collection/collection36.jpg",
@@ -160,7 +160,7 @@ export default function Collection() {
 },
 {
   src: "/Collection/collection38.jpg",
-  comment: "『BOMB!』5月号。大判アップの表紙が時代の空気を伝える。",
+  comment: "『BOMB!』5月号。大判アップの表紙が時代の空気を伝える。表紙は西村知美。",
 },
 {
   src: "/Collection/collection39.jpg",
@@ -188,7 +188,7 @@ export default function Collection() {
 },
 {
   src: "/Collection/collection45.jpg",
-  comment: "コカ・コーラ壁掛けクロック＆ポスター『I feel Coke』。昭和の広告カルチャーを象徴。",
+  comment: "コカ・コーラ壁掛けクロック＆ポスター『I feel Coke』。昭和の広告カルチャーを象徴。女優は昭和のCM女王　松本孝美。",
 },
 {
   src: "/Collection/collection46.jpg",
@@ -227,7 +227,7 @@ export default function Collection() {
       <header className="mb-8">
         <h1 className="text-3xl font-bold text-green-800">懐かしコレクション</h1>
         <p className="text-gray-600 mt-2">
-          昭和レトロからレアアイテムまで。とうじ個人のコレクションの一部をご紹介します。
+          昭和レトロからレアアイテムまで。とうじ個人のコレクションの一部をご紹介します。（一部AIを使って紹介しています。）
         </p>
       </header>
 
