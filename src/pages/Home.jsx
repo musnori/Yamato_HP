@@ -175,6 +175,87 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* =======================
+    古い薬品の回収・処分
+======================= */}
+<section className="bg-white py-14">
+  <div className="max-w-6xl mx-auto px-4 grid gap-8 md:grid-cols-2 items-center">
+    {/* 写真コラージュ */}
+    <div className="grid grid-cols-2 gap-3">
+      <div className="rounded-xl overflow-hidden shadow-sm">
+        <img src="/images/haiki1.jpg" alt="保管期限切れの薬品" className="w-full h-56 object-cover md:h-64" />
+      </div>
+      <div className="rounded-xl overflow-hidden shadow-sm translate-y-6 md:translate-y-12">
+  <img
+    src="/images/haiki2.jpg"
+    alt="容器に入った古い薬品"
+    className="w-full h-56 object-cover md:h-64"
+/>
+</div>
+
+    </div>
+
+    {/* 文章＋CTA */}
+    <div>
+      <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">
+        古くなって処分に困った薬品の<span className="text-brand-green-700">回収・処分</span>を承ります
+      </h2>
+      <p className="mt-3 text-gray-600 leading-relaxed">
+        ラベル不明・長期保管・固結／沈殿・在庫整理など、まずは現状をお知らせください。安全・法令順守での処理方法をご提案します。
+      </p>
+
+      <ul className="mt-4 space-y-2 text-gray-700">
+        <li className="flex items-start gap-2">
+          <span className="mt-1 inline-block h-2 w-2 rounded-full bg-brand-green-600" />
+          回収の可否・概算費用を<span className="font-semibold">写真ベース</span>でご案内可能
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="mt-1 inline-block h-2 w-2 rounded-full bg-brand-green-600" />
+          SDS（安全データシート）や品名が不明でも相談OK
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="mt-1 inline-block h-2 w-2 rounded-full bg-brand-green-600" />
+          事前現地確認やマニフェスト手配も対応
+        </li>
+      </ul>
+
+      <div className="mt-6 flex flex-wrap gap-4">
+  {/* フォーム：緑塗り（標準色） */}
+  <Link
+    to={`/contact?subject=${encodeURIComponent("薬品の回収・処分の相談")}`}
+    className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold shadow
+               bg-green-600 hover:bg-green-700 focus:outline-none
+               focus:ring-4 focus:ring-green-300 text-white"
+  >
+    お問い合わせフォーム
+  </Link>
+
+  {/* 電話：白地＋枠（標準色） */}
+  <a
+    href="tel:0792810671"
+    className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold
+               border border-green-700 text-green-700 hover:bg-green-50
+               focus:outline-none focus:ring-4 focus:ring-green-200 bg-white"
+  >
+    お電話：079-281-0671
+  </a>
+</div>
+
+
+
+
+      <p className="mt-3 text-xs text-gray-500">
+        ※ 取扱いが危険な薬品は、触れずに現状のまま写真のみお送りください。こちらから手順をご案内します。
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
       {/* ===== 大和薬品の強み ===== */}
       <section id="strengths" className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
