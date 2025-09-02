@@ -208,15 +208,11 @@ export default function Home() {
       <ul className="mt-4 space-y-2 text-gray-700">
         <li className="flex items-start gap-2">
           <span className="mt-1 inline-block h-2 w-2 rounded-full bg-brand-green-600" />
-          回収の可否・概算費用を<span className="font-semibold">写真ベース</span>でご案内可能
+          ラベル不明の薬品も可能
         </li>
         <li className="flex items-start gap-2">
           <span className="mt-1 inline-block h-2 w-2 rounded-full bg-brand-green-600" />
-          SDS（安全データシート）や品名が不明でも相談OK
-        </li>
-        <li className="flex items-start gap-2">
-          <span className="mt-1 inline-block h-2 w-2 rounded-full bg-brand-green-600" />
-          事前現地確認やマニフェスト手配も対応
+          事前現地確認やマニフェスト発行も可能
         </li>
       </ul>
 
