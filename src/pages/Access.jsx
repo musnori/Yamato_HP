@@ -15,21 +15,21 @@ export default function Access() {
   return (
     <div className="bg-slate-50">
       <section className="border-b bg-white">
-        <div className="layout-container py-10">
-          <p className="section-title">ACCESS</p>
+        <div className="max-w-6xl mx-auto px-6 py-10">
+          <p className="text-sm font-semibold text-green-700 tracking-[0.3em]">ACCESS</p>
           <h1 className="mt-3 text-3xl md:text-4xl font-extrabold text-gray-900">アクセス</h1>
           <p className="mt-2 text-gray-600 max-w-3xl">
-            本社・倉庫の所在地とアクセス方法をご案内します。ご来社前にご連絡ください。
+            本社・倉庫の所在地とアクセス方法をご案内します。ご来社前にお気軽にお電話ください。
           </p>
         </div>
       </section>
 
-      <div className="layout-container py-10 space-y-8">
+      <div className="max-w-6xl mx-auto px-6 py-10 space-y-8">
 
       {/* ───────────── 本社 ───────────── */}
       <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
         <div className="space-y-6">
-          <div className="card p-6">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="text-xl font-semibold mb-3">本社所在地</h2>
             <address className="not-italic text-gray-700 leading-relaxed text-sm">
               〒670-0935<br />
@@ -41,14 +41,19 @@ export default function Access() {
               FAX：079-224-1870
             </address>
             <div className="mt-4 flex flex-wrap gap-3">
-              <a href="tel:0792810671" className="btn-primary">
+              <a
+                href="tel:0792810671"
+                className="inline-flex items-center gap-2 rounded-full bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800"
+              >
                 電話で問い合わせる
               </a>
-              <span className="tag">JR「姫路駅」より徒歩6分</span>
+              <span className="inline-flex items-center rounded-full border border-green-200 bg-green-50 px-4 py-2 text-xs text-green-800">
+                JR「姫路駅」より徒歩6分
+              </span>
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="text-xl font-semibold mb-3">アクセス方法（本社）</h2>
             <ul className="text-gray-700 text-sm space-y-2">
               <li className="flex items-start gap-2">
@@ -60,13 +65,10 @@ export default function Access() {
                 お車でお越しの際は近隣駐車場をご利用ください
               </li>
             </ul>
-            <div className="mt-4">
-              <Link to="/contact" className="btn-outline">来社前に連絡する</Link>
-            </div>
           </div>
         </div>
 
-        <div className="card p-6">
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="text-xl font-semibold mb-3">本社（マップ）</h2>
           <div className="w-full h-[420px] overflow-hidden rounded-xl border border-slate-200">
             <iframe
@@ -82,7 +84,7 @@ export default function Access() {
       </div>
 
       {/* ───────────── 阿保倉庫 ───────────── */}
-      <div className="card p-6">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="text-xl font-semibold mb-3">阿保倉庫 所在地</h2>
         <address className="not-italic text-gray-700 leading-relaxed text-sm">
           〒670-0972（目安）<br />
@@ -92,12 +94,12 @@ export default function Access() {
       </div>
 
 
-      <div className="card p-6 space-y-4">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-4 shadow-sm">
         <div className="flex items-center justify-between flex-wrap gap-3">
           <h2 className="text-xl font-semibold">阿保倉庫（マップ）</h2>
           <a
             href="tel:0792820164"
-            className="btn-primary"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-800 transition"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.06-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.06l-2.2 2.2z" />
@@ -156,7 +158,7 @@ export default function Access() {
       </div>
 
       {/* ───────────── 飾東倉庫 ───────────── */}
-      <div className="card p-6">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="text-xl font-semibold mb-3">飾東倉庫 所在地</h2>
         <address className="not-italic text-gray-700 leading-relaxed text-sm">
           〒671-0218<br />
@@ -164,7 +166,7 @@ export default function Access() {
         </address>
       </div>
 
-      <div className="card p-6">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="text-xl font-semibold mb-3">飾東倉庫（マップ）</h2>
         <div className="w-full h-[420px] overflow-hidden rounded-2xl border border-slate-200">
           <iframe

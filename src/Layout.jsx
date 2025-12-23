@@ -69,10 +69,10 @@ export default function Layout() {
       <ScrollToTopOnRouteChange />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-slate-200">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-green-100">
         <div className="hidden md:block bg-green-900 text-white text-xs">
-          <div className="layout-container py-2 flex items-center justify-between">
-            <p className="tracking-wide">化学薬品・試薬・工業薬品の調達を支える</p>
+          <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+            <p className="tracking-wide">化学品・医薬品の供給で地域を支える</p>
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">
                 <span className="inline-block w-2 h-2 rounded-full bg-green-300" />
@@ -84,7 +84,7 @@ export default function Layout() {
             </div>
           </div>
         </div>
-        <nav className="layout-container py-4 flex items-center justify-between gap-4">
+        <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           {/* ロゴ */}
           <Link to="/" className="flex items-center gap-2">
             <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto" />
@@ -111,24 +111,11 @@ export default function Layout() {
                 {item.label}
               </NavLink>
             ))}
-            <button
-              type="button"
-              onClick={() => {
-                setSearchValue("");
-                setSearchOpen(true);
-              }}
-              className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white w-10 h-10 text-slate-600 hover:bg-slate-50 transition"
-              aria-label="製品を検索"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
-              </svg>
-            </button>
             <Link
               to="/contact"
-              className="btn-primary"
+              className="inline-flex items-center gap-2 rounded-full bg-green-700 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 transition"
             >
-              見積・相談する
+              お問い合わせ
               <span aria-hidden>›</span>
             </Link>
           </div>
@@ -212,19 +199,8 @@ export default function Layout() {
             onClick={() => setOpen(false)}
             className="mt-3 block w-full text-center px-4 py-3 rounded-lg font-semibold bg-green-700 text-white hover:bg-green-800"
           >
-            見積・相談する
+            お問い合わせ
           </Link>
-          <button
-            type="button"
-            onClick={() => {
-              setSearchValue("");
-              setSearchOpen(true);
-              setOpen(false);
-            }}
-            className="w-full text-center px-4 py-3 rounded-lg font-semibold border border-slate-200 text-slate-700 hover:bg-slate-50"
-          >
-            製品を検索
-          </button>
         </nav>
       </aside>
 

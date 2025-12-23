@@ -156,56 +156,102 @@ export default function Products() {
     navigate(`/contact?${qs}`);
   };
 
-  const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
-      const matchesQuery = query
-        ? product.name.toLowerCase().includes(query.toLowerCase()) ||
-          product.description.toLowerCase().includes(query.toLowerCase())
-        : true;
-      const matchesCategory = category === "all" ? true : product.category === category;
-      const matchesUse = useCase === "all" ? true : product.uses.includes(useCase);
-      const matchesForm = form === "all" ? true : product.form === form;
-      return matchesQuery && matchesCategory && matchesUse && matchesForm;
-    });
-  }, [query, category, useCase, form]);
-
-  const updateFilters = (next) => {
-    setSearchParams((prev) => {
-      const params = new URLSearchParams(prev);
-      Object.entries(next).forEach(([key, value]) => {
-        if (!value || value === "all" || value === "") {
-          params.delete(key);
-        } else {
-          params.set(key, value);
-        }
-      });
-      return params;
-    });
-  };
+  // 4) URLのハッシュ(#water など)が来たら自動で「用途で探す」タブを開き、スクロール
+  React.useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      if (USE_CASES.some(u => u.id === id)) {
+        setMode("usecase");
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 50);
+      }
+    }
+  }, []);
 
   return (
     <div className="bg-slate-50">
       <section className="relative overflow-hidden border-b bg-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_#e2f7e7,_transparent_55%)]" />
-        <div className="relative layout-container py-10 md:py-14">
-          <p className="section-title">PRODUCTS</p>
+        <div className="relative max-w-7xl mx-auto px-4 py-10 md:py-14">
+          <p className="text-sm font-semibold text-green-700 tracking-[0.3em]">PRODUCTS</p>
           <h1 className="mt-3 text-3xl md:text-4xl font-extrabold text-gray-900">取扱製品</h1>
           <p className="mt-3 text-gray-600 max-w-3xl leading-relaxed">
-            用途・カテゴリ・形状で製品を探せます。名称が分からなくてもご相談いただけます。
+            用途に応じた薬品を幅広く取り扱っています。カテゴリ検索と用途別検索のどちらでも探せます。
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link to="/contact?subject=取扱製品について" className="btn-primary">
-              見積・相談する
+            <Link
+              to="/contact?subject=取扱製品について"
+              className="inline-flex items-center gap-2 rounded-full bg-green-700 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800"
+            >
+              製品について相談する
               <span aria-hidden>›</span>
             </Link>
             <a
               href={poolBannerLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary"
+              className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100"
             >
               プール管理製品
             </a>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 py-8 md:py-10 space-y-10">
+        {/* 上段タブ */}
+        <div className="inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm">
+          <button
+            className={`px-5 py-2 rounded-full text-sm font-semibold transition ${mode==='category' ? 'bg-green-700 text-white shadow' : 'hover:bg-neutral-50 text-slate-700'}`}
+            onClick={() => setMode("category")}
+          >
+            カテゴリで見る
+          </button>
+          <button
+            className={`px-5 py-2 rounded-full text-sm font-semibold transition ${mode==='usecase' ? 'bg-green-700 text-white shadow' : 'hover:bg-neutral-50 text-slate-700'}`}
+            onClick={() => setMode("usecase")}
+          >
+            用途で探す
+          </button>
+        </div>
+
+      {mode === "category" ? (
+        <>
+          {/* 検索 */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+            <label className="text-sm font-semibold text-slate-700">品目検索</label>
+            <div className="mt-3 flex items-center gap-3 rounded-full border border-slate-200 bg-slate-50 px-4 py-2">
+              <svg className="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
+              </svg>
+              <input
+                type="text"
+                placeholder="品目を検索…（例：次亜、酢酸、IPA など）"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="w-full bg-transparent text-sm focus:outline-none"
+              />
+            </div>
+          </div>
+
+          {/* バナー（プール管理） */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-sm font-semibold text-slate-700">プール管理製品</p>
+                <p className="text-xs text-slate-500 mt-1">ソース：四国化成工業株式会社（外部リンク）</p>
+              </div>
+              <a
+                href={poolBannerLink}
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+              >
+                こちらから見る
+                <span aria-hidden>›</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -364,7 +410,7 @@ export default function Products() {
           <div className="grid gap-10 lg:grid-cols-2 items-start">
             <section className="space-y-3" id="water">
               <div className="flex items-center justify-between">
-                <h3 className="text-base md:text-lg font-semibold text-slate-900">無機薬品</h3>
+                <h2 className="text-base md:text-lg font-semibold text-slate-900">無機薬品</h2>
                 <span className="text-xs text-slate-500">五十音順</span>
               </div>
               {rowsIn.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
@@ -402,7 +448,7 @@ export default function Products() {
 
             <section className="space-y-3" id="reagents">
               <div className="flex items-center justify-between">
-                <h3 className="text-base md:text-lg font-semibold text-slate-900">有機薬品</h3>
+                <h2 className="text-base md:text-lg font-semibold text-slate-900">有機薬品</h2>
                 <span className="text-xs text-slate-500">五十音順</span>
               </div>
               {rowsOrg.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
@@ -438,13 +484,75 @@ export default function Products() {
               ))}
             </section>
           </div>
-        </section>
-      </div>
+        </>
+      ) : (
+        /* =========================
+           用途で探すタブ
+        ======================== */
+        <div className="grid gap-6 md:grid-cols-2">
+          {USE_CASES.map((u) => (
+            <section key={u.id} id={u.id} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-lg transition">
+              <div className="flex items-baseline justify-between gap-4 flex-wrap">
+                <div>
+                  <h3 className="text-lg font-semibold text-green-700">{u.title}</h3>
+                  <p className="text-sm text-neutral-600 mt-1">{u.lead}</p>
+                </div>
+                <button
+                  onClick={() => ask(u.title)}
+                  className="rounded-full bg-green-700 text-white px-4 py-2 text-sm font-semibold hover:bg-green-800"
+                >
+                  この用途で問い合わせ
+                </button>
+              </div>
 
-      <div className="fixed bottom-4 left-0 right-0 px-4 md:hidden">
-        <Link to="/contact" className="btn-primary w-full text-base py-3 shadow-lg">
-          見積・相談する
-        </Link>
+              {/* 代表的な薬品名（チップ） */}
+              {u.chemicals?.length ? (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {u.chemicals.map((c) => (
+                    <button
+                      key={c}
+                      onClick={() => ask(`${u.title} / ${c}`)}
+                      className="rounded-full border border-slate-200 px-3 py-1 text-sm text-slate-700 hover:bg-slate-50"
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+
+              {/* ベンダー/外部リンク or vendors */}
+              {(u.vendors?.length || u.links?.length) ? (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {(u.vendors || u.links).map((l) => (
+                    <a
+                      key={l.name || l.label}
+                      href={l.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                    >
+                      {(l.name || l.label)} 公式HP
+                    </a>
+                  ))}
+                </div>
+              ) : null}
+
+              {u.id === "industrial" && (
+                <p className="mt-4 text-xs text-neutral-500">
+                  ※「工業用・医薬品関連」はお客様の用途に応じて最適品をご提案します。まずは用途をご記入ください。
+                </p>
+              )}
+            </section>
+          ))}
+        </div>
+      )}
+
+      {/* 下部の注意書き（用途タブ時のみ） */}
+      {mode === "usecase" && (
+        <div className="mt-4 rounded-2xl border border-green-200 bg-green-50 text-green-900 px-4 py-3 text-sm">
+          「薬品名が分からない」でもOK。用途や困りごとだけ書いて送ってください。
+        </div>
+      )}
       </div>
     </div>
   );
