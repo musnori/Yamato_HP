@@ -32,11 +32,10 @@ export default function Company() {
 
   return (
     <div className="bg-slate-50">
-      {/* ===== ヒーロー ===== */}
       <section className="relative overflow-hidden border-b bg-white">
-        <div className="absolute inset-0 bg-[url('/morninng.jpg')] bg-cover bg-center opacity-15" />
-        <div className="relative max-w-6xl mx-auto px-6 py-14">
-          <p className="text-sm font-semibold text-green-700 tracking-[0.3em]">COMPANY</p>
+        <div className="absolute inset-0 bg-[url('/morninng.jpg')] bg-cover bg-center opacity-10" />
+        <div className="relative layout-container py-14">
+          <p className="section-title">COMPANY</p>
           <h1 className="mt-3 text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
             会社概要
           </h1>
@@ -46,67 +45,77 @@ export default function Company() {
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-6 py-12 grid gap-10 lg:grid-cols-3">
-        {/* ===== 左：基本情報 ===== */}
+      <div className="layout-container py-12 grid gap-10 lg:grid-cols-3">
         <section className="lg:col-span-2 space-y-10">
-          {/* 基本情報（定義リスト） */}
-          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="card">
             <div className="border-b border-slate-200 p-5">
-              <h2 className="text-xl font-bold text-gray-900">基本情報</h2>
+              <h2 className="text-xl font-bold text-gray-900">会社概要</h2>
             </div>
-            <dl className="divide-y">
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">会社名</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900 font-medium">大和薬品株式会社</dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">代表者</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">
-                  <p>代表取締役社長：田路 裕之</p>
-                  <p>代表取締役会長：田路 享三</p>
-                </dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">所在地</dt>
-                <dd className="col-span-12 sm:col-span-9">
-                  <p className="text-gray-900 font-medium">
-                    〒670-0935 　兵庫県姫路市北条口1丁目59番地
-                  </p>
-                </dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">連絡先</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">
-                  <p>TEL：<a className="underline decoration-dotted underline-offset-2" href="tel:0792810671">079-281-0671</a></p>
-                  <p>FAX：079-224-1870</p>
-                  <p>阿保倉庫：兵庫県姫路市阿保甲403番地（TEL：079-282-0164）</p>
-                </dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">創業</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">1933年（昭和8年）4月10日</dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">資本金</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">1,000万円</dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">従業員</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">
-                  <p>男子7名・女子4名</p>
-                </dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">許認可</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">
-                  薬剤師：田路 享三、田路 裕之 / 登録販売者：田路 富士子
-                </dd>
-              </div>
-            </dl>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-sm">
+                <tbody className="divide-y divide-slate-200">
+                  {[
+                    ["会社名", "大和薬品株式会社"],
+                    ["代表者", "代表取締役社長：田路 裕之 / 代表取締役会長：田路 享三"],
+                    ["所在地", "〒670-0935 兵庫県姫路市北条口1丁目59番地"],
+                    ["連絡先", "TEL：079-281-0671 / FAX：079-224-1870"],
+                    ["創業", "1933年（昭和8年）4月10日"],
+                    ["資本金", "1,000万円"],
+                    ["従業員", "男子7名・女子4名"],
+                    ["許認可", "薬剤師：田路 享三、田路 裕之 / 登録販売者：田路 富士子"],
+                  ].map(([label, value]) => (
+                    <tr key={label} className="text-left">
+                      <th className="w-36 px-5 py-4 text-slate-500 font-semibold">{label}</th>
+                      <td className="px-5 py-4 text-slate-900">{value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
-          {/* 事業内容（タグ） */}
-          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="card p-6">
+            <p className="section-title">STRENGTHS</p>
+            <h2 className="mt-2 text-2xl font-bold text-slate-900">大和薬品の強み</h2>
+            <div className="mt-5 grid gap-4 md:grid-cols-3">
+              {[
+                { title: "90年以上の実績", text: "地域の医薬・化学品供給に長年携わる信頼。", icon: "🏢" },
+                { title: "迅速な納品体制", text: "用途に合わせた在庫と配送でスピーディーに対応。", icon: "🚚" },
+                { title: "用途別の提案", text: "現場の課題に合わせて最適品を提案。", icon: "🧪" },
+              ].map((item) => (
+                <div key={item.title} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <div className="text-xl">{item.icon}</div>
+                  <p className="mt-2 font-semibold text-slate-900">{item.title}</p>
+                  <p className="mt-2 text-sm text-slate-600">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="card p-6">
+            <p className="section-title">FLOW</p>
+            <h2 className="mt-2 text-2xl font-bold text-slate-900">取引の流れ</h2>
+            <ol className="mt-4 grid gap-3 sm:grid-cols-2">
+              {["お問い合わせ", "用途・条件のヒアリング", "見積・提案", "納品・サポート"].map((step, index) => (
+                <li key={step} className="flex items-start gap-3 rounded-xl border border-slate-200 p-4 bg-white">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-green-600 text-white text-xs font-bold">
+                    {index + 1}
+                  </span>
+                  <span className="text-sm text-slate-700">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="card p-6">
+            <p className="section-title">QUALITY & SAFETY</p>
+            <h2 className="mt-2 text-2xl font-bold text-slate-900">品質・安全への取り組み</h2>
+            <p className="mt-3 text-sm text-slate-600">
+              法令順守を徹底し、保管・輸送・提供の各工程で安全管理を実施しています。必要に応じて安全データの確認や取り扱いの説明も行います。
+            </p>
+          </div>
+
+          <div className="card">
             <div className="border-b border-slate-200 p-5">
               <h2 className="text-xl font-bold text-gray-900">事業内容</h2>
               <p className="text-sm text-gray-500 mt-1">
@@ -124,8 +133,7 @@ export default function Company() {
             </div>
           </div>
 
-          {/* 沿革（縦タイムライン） */}
-          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="card">
             <div className="border-b border-slate-200 p-5">
               <h2 className="text-xl font-bold text-gray-900">沿革</h2>
             </div>
@@ -144,10 +152,8 @@ export default function Company() {
           </div>
         </section>
 
-        {/* ===== 右：サイド情報 ===== */}
         <aside className="space-y-6 lg:sticky lg:top-6 self-start">
-          {/* お問い合わせカード */}
-          <div className="rounded-3xl border border-green-200 bg-gradient-to-br from-green-50 to-white p-6 shadow-sm">
+          <div className="card p-6 bg-gradient-to-br from-green-50 to-white border border-green-200">
             <h3 className="text-lg font-bold text-gray-900">お問い合わせ</h3>
             <p className="text-sm text-gray-600 mt-1">
               製品・お取引に関するご相談はお気軽にどうぞ。
@@ -155,36 +161,30 @@ export default function Company() {
             <a href="tel:0792810671" className="mt-4 block text-2xl font-extrabold text-green-700">
               079-281-0671
             </a>
-            <Link
-              to="/contact"
-              className="mt-3 inline-flex items-center px-4 py-2 rounded-full bg-green-600 hover:bg-green-700 text-white font-medium"
-            >
-              フォームから問い合わせる
+            <Link to="/contact" className="mt-3 btn-primary">
+              見積・相談する
             </Link>
           </div>
 
-          {/* アクセス（地図は差し替え可） */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="card p-6">
             <h3 className="text-lg font-bold text-gray-900">アクセス</h3>
             <p className="text-sm text-gray-600 mt-1">
               〒670-0935 兵庫県姫路市北条口1丁目59番地
             </p>
             <div className="mt-4 aspect-[4/3] w-full overflow-hidden rounded-xl border border-slate-200">
-
               <iframe
-            title="本社マップ"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13100.431238785877!2d134.68534486601976!3d34.82838179797159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3554e00c018022b1%3A0xfc3278ab139d6de1!2z5aSn5ZKM6Jas5ZOB5qCq5byP5Lya56S-!5e0!3m2!1sja!2sjp!4v1755606818323!5m2!1sja!2sjp"
-            className="w-full h-full border-0"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+                title="本社マップ"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13100.431238785877!2d134.68534486601976!3d34.82838179797159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3554e00c018022b1%3A0xfc3278ab139d6de1!2z5aSn5ZKM6Jas5ZOB5qCq5byP5Lya56S-!5e0!3m2!1sja!2sjp!4v1755606818323!5m2!1sja!2sjp"
+                className="w-full h-full border-0"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
             <Link to="/access" className="mt-3 inline-flex text-sm text-green-700 underline underline-offset-4">
               詳しいアクセスを見る
             </Link>
           </div>
-
         </aside>
       </div>
     </div>
