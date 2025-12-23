@@ -34,14 +34,14 @@ const CARDS: ProductCard[] = [
 ];
 
 const accentClass = {
-  yellow: "bg-yellow-400/90",
-  orange: "bg-orange-500/90",
-  green: "bg-green-600/90",
+  yellow: "bg-emerald-600/90",
+  orange: "bg-lime-600/90",
+  green: "bg-green-700/90",
 };
 
 export default function ProductsShowcase() {
   return (
-    <section className="bg-[#EDF5FF] py-14">
+    <section className="bg-green-50 py-14">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 text-center">
           製品情報
@@ -67,7 +67,7 @@ export default function ProductsShowcase() {
         </div>
 
         <div className="text-center mt-8">
-          <Link to="/products" className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow">
+          <Link to="/products" className="inline-flex items-center px-6 py-3 rounded-lg bg-green-700 hover:bg-green-800 text-white font-semibold shadow">
             すべての製品を見る
           </Link>
         </div>

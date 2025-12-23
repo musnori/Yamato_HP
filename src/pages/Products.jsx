@@ -1,9 +1,10 @@
 // src/pages/Products.jsx
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import * as wanakana from "wanakana";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
+import { PRODUCTS, PRODUCT_CATEGORIES, PRODUCT_FORMS, PRODUCT_USES } from "../data/products";
 
 /* =========================
    A) 既存：製品（五十音で探す）
@@ -123,61 +124,24 @@ const STOCK_ID_MAP = {
 };
 
 /* =========================
-   B) 追加：用途で探す（カテゴリ）
-========================= */
-const USE_CASES = [
-  {
-    id: "water",                // ← /products#water からも来られる
-    title: "水処理用薬品",
-    lead: "浄水・排水処理、プール管理など",
-    chemicals: [
-      "次亜塩素酸ナトリウム","次亜塩素酸カルシウム","高度サラシ粉",
-      "PAC（ポリ塩化アルミニウム）","硫酸","苛性ソーダ",
-      "トリクロロイソシアヌル酸","高分子凝集剤","塩化カルシウム",
-      "消石灰","ポリロックON","ネオクロール類","DPD錠剤"
-    ],
-    links: [{ name: "四国化成工業HP", url: "https://www.shikoku.co.jp/" }],
-  },
-  {
-    id: "cleaning",
-    title: "クリーニング関係薬剤",
-    lead: "漂白・除菌・スケール除去・有機溶剤など",
-    chemicals: ["次亜塩素酸ナトリウム","過酸化水素","メタ珪酸ソーダ","フッ酸","リグロイン"],
-  },
-  {
-    id: "reagents",             // ← /products#reagents と対応
-    title: "研究用試薬",
-    lead: "大学・研究機関向け試薬は各社カタログへ",
-    vendors: [
-      { name: "ナカライテスク", url: "https://www.nacalai.co.jp/" },
-      { name: "林純薬工業", url: "https://www.hayashipurechem.co.jp/" },
-      { name: "キシダ化学", url: "https://www.kishida.co.jp/" },
-      { name: "富士フイルム和光純薬", url: "https://labchem.wako-chem.co.jp/" },
-      { name: "関東化学", url: "https://www.kanto.co.jp/" },
-      { name: "東京化成工業", url: "https://www.tcichemicals.com/" },
-    ],
-  },
-  {
-    id: "industrial",          // ← /products#industrial と対応
-    title: "食品添加物・工業系",
-    lead: "食品工場・厨房／製造現場の衛生・品質用途",
-    chemicals: [
-      "次亜塩素酸ナトリウム","次亜塩素酸カルシウム","消石灰","ハイドサルファイト",
-      "クエン酸","リンゴ酸","コハク酸","塩化カルシウム","塩酸","硫酸",
-      "苛性ソーダ","酢酸ソーダ","硫酸アンモニウム","アルコール製剤"
-    ],
-  },
-];
-
-/* =========================
-   C) 画面本体
+   B) 画面本体
 ========================= */
 export default function Products() {
-  // 1) 上段タブ（カテゴリ / 用途）
-  const [mode, setMode] = useState("category"); // "category" | "usecase"
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [openDetail, setOpenDetail] = useState(null);
 
-  // 2) カテゴリ側の検索
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(searchParams.get("q") || "");
+  const [category, setCategory] = useState(searchParams.get("cat") || "all");
+  const [useCase, setUseCase] = useState(searchParams.get("use") || "all");
+  const [form, setForm] = useState(searchParams.get("form") || "all");
+
+  useEffect(() => {
+    setQuery(searchParams.get("q") || "");
+    setCategory(searchParams.get("cat") || "all");
+    setUseCase(searchParams.get("use") || "all");
+    setForm(searchParams.get("form") || "all");
+  }, [searchParams]);
+
   const groupsInorganic = useGrouped(inorganicItems, query);
   const groupsOrganic = useGrouped(organicItems, query);
   const order = ["あ行","か行","さ行","た行","な行","は行","ま行","や行","ら行","わ行","その他"];
@@ -289,10 +253,161 @@ export default function Products() {
               </a>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* 2カラム：無機/有機 */}
+      <div className="layout-container py-8 md:py-10 space-y-10">
+        <div className="card p-6">
+          <div className="grid gap-4 lg:grid-cols-[2fr_1fr_1fr_1fr_auto] items-end">
+            <div>
+              <label className="text-sm font-semibold text-slate-700">キーワード検索</label>
+              <input
+                type="text"
+                placeholder="製品名・用途・カテゴリ（例：次亜、洗浄）"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  updateFilters({ q: e.target.value });
+                }}
+                className="input-field mt-2"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-semibold text-slate-700">カテゴリ</label>
+              <select
+                className="select-field mt-2"
+                value={category}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                  updateFilters({ cat: e.target.value });
+                }}
+              >
+                <option value="all">すべて</option>
+                {PRODUCT_CATEGORIES.map((cat) => (
+                  <option key={cat.id} value={cat.id}>{cat.label}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="text-sm font-semibold text-slate-700">用途</label>
+              <select
+                className="select-field mt-2"
+                value={useCase}
+                onChange={(e) => {
+                  setUseCase(e.target.value);
+                  updateFilters({ use: e.target.value });
+                }}
+              >
+                <option value="all">すべて</option>
+                {PRODUCT_USES.map((use) => (
+                  <option key={use.id} value={use.id}>{use.label}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="text-sm font-semibold text-slate-700">形状</label>
+              <select
+                className="select-field mt-2"
+                value={form}
+                onChange={(e) => {
+                  setForm(e.target.value);
+                  updateFilters({ form: e.target.value });
+                }}
+              >
+                <option value="all">すべて</option>
+                {PRODUCT_FORMS.map((shape) => (
+                  <option key={shape.id} value={shape.id}>{shape.label}</option>
+                ))}
+              </select>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setQuery("");
+                setCategory("all");
+                setUseCase("all");
+                setForm("all");
+                setSearchParams({});
+              }}
+              className="btn-outline h-10 mt-6"
+            >
+              条件をクリア
+            </button>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-600">
+            <span className="tag">日本語部分一致で検索</span>
+            <span className="tag">カテゴリ直リンク対応</span>
+          </div>
+        </div>
+
+        <section>
+          <div className="flex items-center justify-between flex-wrap gap-3">
+            <h2 className="text-xl font-bold text-slate-900">おすすめ製品</h2>
+            <p className="text-sm text-slate-500">表示件数：{filteredProducts.length}件</p>
+          </div>
+          {filteredProducts.length === 0 && (
+            <p className="mt-4 text-slate-500">該当する製品がありません。条件を変更してください。</p>
+          )}
+          <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {filteredProducts.map((product) => (
+              <div key={product.id} className="card p-5 flex flex-col">
+                <div className="flex flex-wrap gap-2 text-xs text-slate-600">
+                  <span className="tag">{PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.label}</span>
+                  {product.tags.map((tag) => (
+                    <span key={tag} className="inline-flex items-center rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900">{product.name}</h3>
+                <p className="mt-2 text-sm text-slate-600">{product.description}</p>
+                <div className="mt-4 flex gap-3">
+                  <button
+                    type="button"
+                    className="btn-outline"
+                    onClick={() => setOpenDetail(openDetail === product.id ? null : product.id)}
+                  >
+                    詳細
+                  </button>
+                  <button type="button" className="btn-primary" onClick={() => ask(product.name)}>
+                    見積・相談する
+                  </button>
+                </div>
+                {openDetail === product.id && (
+                  <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
+                    <p className="font-semibold text-slate-900">概要</p>
+                    <p className="mt-1">{product.detail.overview}</p>
+                    <p className="mt-3 font-semibold text-slate-900">用途例</p>
+                    <ul className="mt-1 list-disc list-inside space-y-1">
+                      {product.detail.uses.map((use) => (
+                        <li key={use}>{use}</li>
+                      ))}
+                    </ul>
+                    <p className="mt-3 font-semibold text-slate-900">仕様</p>
+                    <div className="mt-2 grid gap-2">
+                      {product.detail.specs.map(([label, value]) => (
+                        <div key={label} className="flex justify-between text-xs text-slate-600">
+                          <span>{label}</span>
+                          <span className="font-semibold text-slate-800">{value}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="mt-3 text-xs text-slate-500">{product.detail.notes}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-green-200 bg-green-50 text-green-900 px-4 py-3 text-sm">
+          「薬品名が分からない」でもOK。用途や困りごとだけ書いて送ってください。
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-lg font-semibold text-slate-900">全品目一覧（五十音）</h2>
           <div className="grid gap-10 lg:grid-cols-2 items-start">
-            {/* 無機薬品（左） */}
             <section className="space-y-3" id="water">
               <div className="flex items-center justify-between">
                 <h2 className="text-base md:text-lg font-semibold text-slate-900">無機薬品</h2>
@@ -331,7 +446,6 @@ export default function Products() {
               ))}
             </section>
 
-            {/* 有機薬品（右） */}
             <section className="space-y-3" id="reagents">
               <div className="flex items-center justify-between">
                 <h2 className="text-base md:text-lg font-semibold text-slate-900">有機薬品</h2>

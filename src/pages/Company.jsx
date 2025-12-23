@@ -46,63 +46,13 @@ export default function Company() {
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-6 py-12 grid gap-10 lg:grid-cols-3">
-        {/* ===== 左：基本情報 ===== */}
+      <div className="layout-container py-12 grid gap-10 lg:grid-cols-3">
         <section className="lg:col-span-2 space-y-10">
           {/* 基本情報（定義リスト） */}
           <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
             <div className="border-b border-slate-200 p-5">
               <h2 className="text-xl font-bold text-gray-900">基本情報</h2>
             </div>
-            <dl className="divide-y">
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">会社名</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900 font-medium">大和薬品株式会社</dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">代表者</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">
-                  <p>代表取締役社長：田路 裕之</p>
-                  <p>代表取締役会長：田路 享三</p>
-                </dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">所在地</dt>
-                <dd className="col-span-12 sm:col-span-9">
-                  <p className="text-gray-900 font-medium">
-                    〒670-0935 　兵庫県姫路市北条口1丁目59番地
-                  </p>
-                </dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">連絡先</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">
-                  <p>TEL：<a className="underline decoration-dotted underline-offset-2" href="tel:0792810671">079-281-0671</a></p>
-                  <p>FAX：079-224-1870</p>
-                  <p>阿保倉庫：兵庫県姫路市阿保甲403番地（TEL：079-282-0164）</p>
-                </dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">創業</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">1933年（昭和8年）4月10日</dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">資本金</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">1,000万円</dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">従業員</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">
-                  <p>男子7名・女子4名</p>
-                </dd>
-              </div>
-              <div className="grid grid-cols-12 gap-4 p-5">
-                <dt className="col-span-12 sm:col-span-3 text-gray-500">許認可</dt>
-                <dd className="col-span-12 sm:col-span-9 text-gray-900">
-                  薬剤師：田路 享三、田路 裕之 / 登録販売者：田路 富士子
-                </dd>
-              </div>
-            </dl>
           </div>
 
           {/* 事業内容（タグ） */}
@@ -131,10 +81,10 @@ export default function Company() {
             </div>
             <ol className="relative p-6">
               {history.map((h, i) => (
-                <li key={i} className="pl-6 pb-6 last:pb-0 relative">
-                  <span className="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-green-600" />
+                <li key={i} className="pl-7 pb-6 last:pb-0 relative">
+                  <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-green-600" />
                   {i !== history.length - 1 && (
-                    <span className="absolute left-[5px] top-4 bottom-0 w-px bg-gray-200" />
+                    <span className="absolute left-[6px] top-5 bottom-0 w-px bg-gray-200" />
                   )}
                   <p className="text-sm text-gray-500">{h.date}</p>
                   <p className="text-gray-900 font-medium leading-relaxed">{h.text}</p>
@@ -144,7 +94,6 @@ export default function Company() {
           </div>
         </section>
 
-        {/* ===== 右：サイド情報 ===== */}
         <aside className="space-y-6 lg:sticky lg:top-6 self-start">
           {/* お問い合わせカード */}
           <div className="rounded-3xl border border-green-200 bg-gradient-to-br from-green-50 to-white p-6 shadow-sm">
@@ -172,19 +121,18 @@ export default function Company() {
             <div className="mt-4 aspect-[4/3] w-full overflow-hidden rounded-xl border border-slate-200">
 
               <iframe
-            title="本社マップ"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13100.431238785877!2d134.68534486601976!3d34.82838179797159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3554e00c018022b1%3A0xfc3278ab139d6de1!2z5aSn5ZKM6Jas5ZOB5qCq5byP5Lya56S-!5e0!3m2!1sja!2sjp!4v1755606818323!5m2!1sja!2sjp"
-            className="w-full h-full border-0"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+                title="本社マップ"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13100.431238785877!2d134.68534486601976!3d34.82838179797159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3554e00c018022b1%3A0xfc3278ab139d6de1!2z5aSn5ZKM6Jas5ZOB5qCq5byP5Lya56S-!5e0!3m2!1sja!2sjp!4v1755606818323!5m2!1sja!2sjp"
+                className="w-full h-full border-0"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
             <Link to="/access" className="mt-3 inline-flex text-sm text-green-700 underline underline-offset-4">
               詳しいアクセスを見る
             </Link>
           </div>
-
         </aside>
       </div>
     </div>

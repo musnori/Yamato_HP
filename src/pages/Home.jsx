@@ -1,40 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-/** =======================
- *  ヒーロー用スライド
- *  ======================= */
-const slides = [
-  {
-    img: "/morninng.jpg",
-    title: "創業90年、信頼の化学品サプライヤー",
-    subtitle:
-      "学校・プール・工場など幅広いシーンで、安心・安全な薬品を迅速にお届けします",
-  },
-  {
-    img: "/lunch.jpg",
-    title: "地域とともに歩む",
-    subtitle: "必要なときに、必要な品質を",
-  },
-  {
-    img: "/yugata.jpg",
-    title: "未来を見据えて挑戦",
-    subtitle: "環境と安全に配慮した供給体制",
-  },
-  {
-    img: "/night.jpg",
-    title: "確かな品質と安心を",
-    subtitle: "徹底した品質管理とサポート",
-  },
-];
-
 export default function Home() {
-  const [current, setCurrent] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setCurrent((p) => (p + 1) % slides.length), 5000);
-    return () => clearInterval(t);
-  }, []);
-
   return (
     <div className="bg-white text-gray-800 font-sans">
       {/* =======================
@@ -126,11 +93,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =======================
-          3カラム導線
-      ======================== */}
-      <section className="py-14">
-        <div className="max-w-6xl mx-auto px-4">
+      <section className="section">
+        <div className="layout-container">
           <div className="grid gap-6 md:grid-cols-3">
             {[
               { title: "企業情報", desc: "会社概要・沿革・拠点・許認可などの基本情報。", img: "/hero/company.jpg", to: "/company" },
@@ -177,25 +141,19 @@ export default function Home() {
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
               {
-                logo: "/icons/sehin1.png",
-                title: "水処理用薬品",
-                desc: "プール・温浴施設・工場排水の衛生を守る定番ラインナップ。",
-                to: "/products#water",
-                accent: "bg-yellow-400/90",
+                title: "製品を探す",
+                desc: "カテゴリ・用途・キーワードから最適な薬品を検索。",
+                to: "/products",
               },
               {
-                logo: "/icons/sehin2.png",
-                title: "試薬・研究用",
-                desc: "教育・研究・検査の現場へ。用途別に選びやすくご提案。",
-                to: "/products#reagents",
-                accent: "bg-orange-500/90",
+                title: "見積・相談する",
+                desc: "用途が不明でもOK。必要事項だけで相談できます。",
+                to: "/contact",
               },
               {
-                logo: "/icons/sehin3.png",
-                title: "工業用・医薬品関連",
-                desc: "製造現場を支える工業薬品と、法令順守の医薬品関連供給。",
-                to: "/products#industrial",
-                accent: "bg-green-600/90",
+                title: "会社情報を見る",
+                desc: "会社概要・強み・対応エリアを確認できます。",
+                to: "/company",
               },
             ].map((c) => (
               <div key={c.title} className="rounded-3xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition">
@@ -214,102 +172,16 @@ export default function Home() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
-          </div>
-
-          <div className="text-center mt-8">
-            <Link to="/products" className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow">
-              すべての製品を見る
-            </Link>
           </div>
         </div>
       </section>
 
-
       {/* =======================
     古い薬品の回収・処分
-======================= */}
-<section className="bg-white py-16">
-  <div className="max-w-6xl mx-auto px-4 grid gap-10 md:grid-cols-2 items-center">
-    {/* 写真コラージュ */}
-    <div className="grid grid-cols-2 gap-3">
-      <div className="rounded-2xl overflow-hidden shadow-sm">
-        <img src="/images/haiki1.jpg" alt="保管期限切れの薬品" className="w-full h-56 object-cover md:h-72" />
-      </div>
-      <div className="rounded-2xl overflow-hidden shadow-sm translate-y-6 md:translate-y-12">
-        <img
-          src="/images/haiki2.jpg"
-          alt="容器に入った古い薬品"
-          className="w-full h-56 object-cover md:h-72"
-        />
-      </div>
-    </div>
-
-    {/* 文章＋CTA */}
-    <div className="bg-slate-50 border border-slate-100 rounded-2xl p-8 shadow-sm">
-      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
-        回収・処分サービス
-      </span>
-      <h2 className="mt-4 text-2xl md:text-3xl font-extrabold text-gray-900">
-        古くなって処分に困った薬品の<span className="text-green-700">回収・処分</span>を承ります
-      </h2>
-      <p className="mt-3 text-gray-600 leading-relaxed">
-        ラベル不明・長期保管・固結／沈殿・在庫整理など、まずは現状をお知らせください。安全・法令順守での処理方法をご提案します。
-      </p>
-
-      <ul className="mt-4 space-y-2 text-gray-700">
-        <li className="flex items-start gap-2">
-          <span className="mt-1 inline-block h-2 w-2 rounded-full bg-green-600" />
-          ラベル不明の薬品も可能
-        </li>
-        <li className="flex items-start gap-2">
-          <span className="mt-1 inline-block h-2 w-2 rounded-full bg-green-600" />
-          事前現地確認やマニフェスト発行も可能
-        </li>
-      </ul>
-
-      <div className="mt-6 flex flex-wrap gap-4">
-        <Link
-          to={`/contact?subject=${encodeURIComponent("薬品の回収・処分の相談")}`}
-          className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold shadow
-                     bg-green-600 hover:bg-green-700 focus:outline-none
-                     focus:ring-4 focus:ring-green-300 text-white"
-        >
-          お問い合わせフォーム
-        </Link>
-
-        <a
-          href="tel:0792810671"
-          className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold
-                     border border-green-700 text-green-700 hover:bg-green-50
-                     focus:outline-none focus:ring-4 focus:ring-green-200 bg-white"
-        >
-          お電話：079-281-0671
-        </a>
-      </div>
-
-      <p className="mt-3 text-xs text-gray-500">
-        ※ 取扱いが危険な薬品は、触れずに現状のまま写真のみお送りください。こちらから手順をご案内します。
-      </p>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-      {/* ===== 大和薬品の強み ===== */}
-      <section id="strengths" className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="mb-10">
-            <p className="text-sm font-semibold text-slate-500 tracking-[0.3em]">STRENGTHS</p>
-            <h2 className="mt-2 text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">大和薬品の強み</h2>
-            <p className="mt-3 text-gray-500">90年以上の実績に裏づけられた“選ばれる理由”。品質・スピード・サポートの3軸で、お客様の現場を支えます。</p>
           </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: "/icons/strength1.png", title: "90年以上の実績", desc: "全国の学校・企業から信頼されてきた導入の歴史。", tone: "from-blue-600 to-blue-400" },
               { icon: "/icons/strength2.png", title: "迅速な納品体制", desc: "在庫を常に確保し、柔軟な配送ルートでスピーディーにお届け。", tone: "from-sky-600 to-sky-400" },
@@ -359,91 +231,18 @@ export default function Home() {
 
       {/* =======================
     連絡カード群（高さを半分に揃える）
-======================== */}
-<section className="bg-green-50 py-12">
-  <div className="max-w-6xl mx-auto px-4">
-    <div className="mb-6">
-      <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">お知らせ・関連リンク</h2>
-      <p className="mt-2 text-gray-600">お問い合わせや関連サイトへの導線をまとめています。</p>
-    </div>
-    <div className="grid gap-6 md:grid-cols-2 items-stretch auto-rows-fr">
-      
-      {/* --- お問い合わせ --- */}
-      <div className="bg-white rounded-xl shadow-lg border-t-4 border-green-500 flex flex-col p-4 h-full">
-        <div className="grow flex flex-col items-center text-center">
-          <svg className="w-6 h-6 text-green-600 mb-2" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.06-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.06l-2.2 2.2z" />
-          </svg>
-          <h3 className="text-lg font-semibold text-gray-800 mb-1">お問い合わせ</h3>
-          <p className="text-gray-600 text-sm mb-2 leading-relaxed">
-            製品に関するご質問やご相談をお気軽にどうぞ
-          </p>
-          <a href="tel:0792810671" className="text-xl font-bold text-green-700 hover:underline">
-            079-281-0671
-          </a>
         </div>
-        <Link
-          to="/contact"
-          className="mt-4 inline-flex justify-center items-center bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded text-sm transition"
-        >
-          フォームへ
-        </Link>
-      </div>
+      </section>
 
-      {/* --- 社長ブログ --- */}
-      <div className="bg-white rounded-xl shadow-lg border-t-4 border-green-500 flex flex-col p-4 h-full">
-        <div className="grow flex flex-col items-center text-center">
-          <svg className="w-6 h-6 text-green-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-          </svg>
-          <h3 className="text-lg font-semibold text-gray-800 mb-1">社長ブログ</h3>
-          <p className="text-gray-600 text-sm mb-3 leading-relaxed">
-            日々の気づきや現場の声をブログで発信中！
-          </p>
+      <section className="section bg-gradient-to-r from-green-900 via-green-800 to-green-900">
+        <div className="layout-container text-center text-white">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-3">薬品の調達でお困りですか？</h2>
+          <p className="text-white/80 mb-6">用途やご希望に合わせた最適な薬品をご提案いたします。</p>
+          <Link to="/contact" className="btn-primary bg-white text-green-800 hover:bg-slate-100">
+            見積・相談する
+          </Link>
         </div>
-        <a
-          href="http://blog.yamato-chemi.co.jp/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex justify-center items-center text-green-700 bg-green-100 hover:bg-green-200 font-medium py-2 px-4 rounded text-sm transition underline-offset-2"
-        >
-          ブログを見る →
-        </a>
-      </div>
-
-      {/* --- 西兵庫化学薬品協同組合（全面写真背景） --- */}
-      <a
-        href="https://nishihyogo-chemical-coop.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="relative rounded-xl shadow-lg overflow-hidden group h-full flex flex-col justify-end p-4 text-center text-white"
-        style={{ backgroundImage: "url('/images/coop-banner.png')", backgroundSize: "cover", backgroundPosition: "center" }}
-      >
-        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
-        <div className="relative z-10">
-          <h3 className="text-lg font-semibold">西兵庫化学薬品協同組合</h3>
-          <p className="text-sm">公式サイトへ</p>
-        </div>
-      </a>
-
-      {/* --- 懐かしコレクション（全面写真背景） --- */}
-      <Link
-        to="/collection"
-        className="relative rounded-xl shadow-lg overflow-hidden group h-full flex flex-col justify-end p-4 text-center text-white"
-        style={{ backgroundImage: "url('/images/banner.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
-      >
-        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
-        <div className="relative z-10">
-          <h3 className="text-lg font-semibold">懐かしコレクション</h3>
-          <p className="text-sm">とうじコレクションのご紹介</p>
-        </div>
-      </Link>
-    </div>
-  </div>
-</section>
-
-
-
+      </section>
     </div>
   );
 }

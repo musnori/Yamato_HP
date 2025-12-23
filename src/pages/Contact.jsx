@@ -1,34 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-const PREFS = [
-  "選択してください","北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県",
-];
-
-const TOPICS = [
-  "選択してください",
-  "お見積りについて",
-  "取扱製品について",
-  "採用について",
-  "その他のお問い合わせ",
-];
+const TOPICS = ["お見積りについて", "取扱製品について", "回収・処分について", "その他"];
 
 export default function Contact() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const subject = searchParams.get("subject") || "";
   const [form, setForm] = useState({
     company: "",
     name: "",
     email: "",
     tel: "",
-    pref: "選択してください",
-    address2: "",
     topic: "選択してください",
-    message: "",
+    message: subject ? `相談内容：${subject}\n` : "",
+    productName: "",
+    productUse: "",
+    quantity: "",
+    timeline: "",
+    consent: false,
   });
+  const [touched, setTouched] = useState({});
 
-  const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const onChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm({ ...form, [name]: type === "checkbox" ? checked : value });
+  };
+
+  const errors = useMemo(() => {
+    const next = {};
+    if (!form.company && !form.name) {
+      next.name = "会社名または氏名を入力してください。";
+    }
+    if (!form.email) {
+      next.email = "メールアドレスを入力してください。";
+    } else if (!/\\S+@\\S+\\.\\S+/.test(form.email)) {
+      next.email = "メールアドレスの形式が正しくありません。";
+    }
+    if (!form.message) {
+      next.message = "お問い合わせ内容を入力してください。";
+    }
+    if (!form.consent) {
+      next.consent = "内容をご確認の上チェックを入れてください。";
+    }
+    return next;
+  }, [form]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("内容を送信しました（デモ）\n実装時はメール送信やAPI連携を追加してください。");
+    setTouched({
+      name: true,
+      email: true,
+      message: true,
+      consent: true,
+    });
+    if (Object.keys(errors).length > 0) return;
+    navigate("/contact/thanks");
   };
 
   return (
@@ -183,10 +210,7 @@ function Input({ className = "", ...props }) {
   return (
     <input
       {...props}
-      className={
-        "w-full rounded-md border border-gray-300 px-3 py-2 shadow-inner focus:outline-none focus:ring-2 focus:ring-green-600/30 " +
-        className
-      }
+      className={`input-field ${className}`}
     />
   );
 }
@@ -195,10 +219,7 @@ function Textarea({ className = "", ...props }) {
   return (
     <textarea
       {...props}
-      className={
-        "w-full rounded-md border border-gray-300 px-3 py-2 shadow-inner resize-y focus:outline-none focus:ring-2 focus:ring-green-600/30 " +
-        className
-      }
+      className={`textarea-field resize-y ${className}`}
     />
   );
 }
@@ -207,10 +228,7 @@ function Select({ options, className = "", ...props }) {
   return (
     <select
       {...props}
-      className={
-        "w-full rounded-md border border-gray-300 px-3 py-2 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-green-600/30 " +
-        className
-      }
+      className={`select-field ${className}`}
     >
       {options.map((opt) => (
         <option key={opt} value={opt}>
@@ -219,4 +237,8 @@ function Select({ options, className = "", ...props }) {
       ))}
     </select>
   );
+}
+
+function ErrorText({ children }) {
+  return <p className="mt-2 text-xs text-red-600">{children}</p>;
 }
