@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useLocation, NavLink } from "react-router-dom";
+import { Link, Outlet, useLocation, NavLink, useNavigate } from "react-router-dom";
 
 function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation();
@@ -40,29 +40,39 @@ function PageTopButton() {
 
 export default function Layout() {
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
   // メニュー開閉時は背面スクロールを止める
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-  }, [open]);
+    document.body.style.overflow = open || searchOpen ? "hidden" : "";
+  }, [open, searchOpen]);
 
   const nav = [
-    { label: "ホーム", path: "/" },
-    { label: "主な取扱品目", path: "/products" },
-    { label: "アクセス", path: "/access" },
+    { label: "製品", path: "/products" },
     { label: "会社概要", path: "/company" },
+    { label: "アクセス", path: "/access" },
     { label: "お問い合わせ", path: "/contact" },
   ];
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+    if (!searchValue.trim()) return;
+    const qs = new URLSearchParams({ q: searchValue.trim() }).toString();
+    navigate(`/products?${qs}`);
+    setSearchOpen(false);
+  };
 
   return (
     <div className="flex flex-col min-h-screen font-sans">
       <ScrollToTopOnRouteChange />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-green-100">
+      <header className="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-slate-200">
         <div className="hidden md:block bg-green-900 text-white text-xs">
-          <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
-            <p className="tracking-wide">化学品・医薬品の供給で地域を支える</p>
+          <div className="layout-container py-2 flex items-center justify-between">
+            <p className="tracking-wide">化学薬品・試薬・工業薬品の調達を支える</p>
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">
                 <span className="inline-block w-2 h-2 rounded-full bg-green-300" />
@@ -74,7 +84,7 @@ export default function Layout() {
             </div>
           </div>
         </div>
-        <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <nav className="layout-container py-4 flex items-center justify-between gap-4">
           {/* ロゴ */}
           <Link to="/" className="flex items-center gap-2">
             <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto" />
@@ -101,11 +111,24 @@ export default function Layout() {
                 {item.label}
               </NavLink>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                setSearchValue("");
+                setSearchOpen(true);
+              }}
+              className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white w-10 h-10 text-slate-600 hover:bg-slate-50 transition"
+              aria-label="製品を検索"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
+              </svg>
+            </button>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-green-700 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 transition"
+              className="btn-primary"
             >
-              お問い合わせ
+              見積・相談する
               <span aria-hidden>›</span>
             </Link>
           </div>
@@ -189,8 +212,19 @@ export default function Layout() {
             onClick={() => setOpen(false)}
             className="mt-3 block w-full text-center px-4 py-3 rounded-lg font-semibold bg-green-700 text-white hover:bg-green-800"
           >
-            お問い合わせ
+            見積・相談する
           </Link>
+          <button
+            type="button"
+            onClick={() => {
+              setSearchValue("");
+              setSearchOpen(true);
+              setOpen(false);
+            }}
+            className="w-full text-center px-4 py-3 rounded-lg font-semibold border border-slate-200 text-slate-700 hover:bg-slate-50"
+          >
+            製品を検索
+          </button>
         </nav>
       </aside>
 
@@ -203,9 +237,96 @@ export default function Layout() {
       <PageTopButton />
 
       {/* フッター */}
-      <footer className="bg-gray-800 text-white text-center text-xs py-4 mt-10">
-        <p>© 大和薬品株式会社. All Rights Reserved.</p>
+      <footer className="bg-slate-900 text-slate-200 text-sm mt-10">
+        <div className="layout-container py-10 grid gap-8 md:grid-cols-[1.2fr_1fr_1fr]">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto" />
+              <span className="font-semibold text-white">大和薬品株式会社</span>
+            </div>
+            <p className="text-slate-300 text-sm">
+              〒670-0935 兵庫県姫路市北条口1丁目59番地<br />
+              TEL：<a href="tel:0792810671" className="hover:underline">079-281-0671</a><br />
+              受付時間 9:00〜17:00
+            </p>
+          </div>
+          <div>
+            <p className="text-white font-semibold mb-3">製品カテゴリ</p>
+            <ul className="space-y-2 text-sm">
+              <li><Link className="hover:underline" to="/products?cat=water">水処理用薬品</Link></li>
+              <li><Link className="hover:underline" to="/products?cat=reagents">試薬・研究用</Link></li>
+              <li><Link className="hover:underline" to="/products?cat=industrial">工業用・医薬品関連</Link></li>
+              <li><Link className="hover:underline" to="/products?cat=cleaning">クリーニング関係</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <p className="text-white font-semibold">お問い合わせ</p>
+            <p className="text-slate-300 text-sm">見積・相談はフォームから承っています。</p>
+            <Link to="/contact" className="btn-primary w-fit">見積・相談する</Link>
+            <Link to="/privacy" className="block text-sm text-slate-300 hover:underline">プライバシーポリシー</Link>
+          </div>
+        </div>
+        <div className="border-t border-slate-800 py-4 text-center text-xs text-slate-400">
+          © 大和薬品株式会社. All Rights Reserved.
+        </div>
       </footer>
+
+      {searchOpen && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center px-4">
+          <button
+            type="button"
+            aria-label="閉じる"
+            onClick={() => setSearchOpen(false)}
+            className="absolute inset-0 bg-black/40"
+          />
+          <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-sm font-semibold text-green-700">製品検索</p>
+                <h2 className="text-xl font-bold text-slate-900">キーワードで探す</h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSearchOpen(false)}
+                className="text-slate-500 hover:text-slate-700"
+                aria-label="閉じる"
+              >
+                ✕
+              </button>
+            </div>
+            <form onSubmit={submitSearch} className="mt-4 space-y-4">
+              <input
+                type="text"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                placeholder="製品名・用途・カテゴリ（例：次亜塩素酸、洗浄）"
+                className="input-field"
+                autoFocus
+              />
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { label: "水処理", cat: "water" },
+                  { label: "試薬", cat: "reagents" },
+                  { label: "工業用", cat: "industrial" },
+                  { label: "クリーニング", cat: "cleaning" },
+                ].map((item) => (
+                  <Link
+                    key={item.cat}
+                    to={`/products?cat=${item.cat}`}
+                    onClick={() => setSearchOpen(false)}
+                    className="tag"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+              <button type="submit" className="btn-primary w-full">
+                この条件で探す
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
