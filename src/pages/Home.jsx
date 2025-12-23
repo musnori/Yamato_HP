@@ -164,10 +164,10 @@ export default function Home() {
       {/* =======================
           製品情報
       ======================== */}
-      <section className="bg-[#EDF5FF] py-16">
+      <section className="bg-green-50 py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center">
-            <p className="text-sm font-semibold text-blue-700 tracking-[0.3em]">PRODUCTS</p>
+            <p className="text-sm font-semibold text-green-700 tracking-[0.3em]">PRODUCTS</p>
             <h2 className="mt-2 text-3xl md:text-4xl font-extrabold text-gray-900">製品情報</h2>
             <p className="mt-3 text-gray-600">
               学校・工場・医療機関など用途に合わせて最適な薬品を提案します。
@@ -181,14 +181,14 @@ export default function Home() {
                 title: "水処理用薬品",
                 desc: "プール・温浴施設・工場排水の衛生を守る定番ラインナップ。",
                 to: "/products#water",
-                accent: "bg-blue-50 text-blue-700 border-blue-100",
+                accent: "bg-emerald-50 text-emerald-700 border-emerald-100",
               },
               {
                 logo: "/icons/sehin2.png",
                 title: "試薬・研究用",
                 desc: "教育・研究・検査の現場へ。用途別に選びやすくご提案。",
                 to: "/products#reagents",
-                accent: "bg-amber-50 text-amber-700 border-amber-100",
+                accent: "bg-lime-50 text-lime-700 border-lime-100",
               },
               {
                 logo: "/icons/sehin3.png",
@@ -222,7 +222,7 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-8">
-            <Link to="/products" className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow">
+            <Link to="/products" className="inline-flex items-center px-6 py-3 rounded-lg bg-green-700 hover:bg-green-800 text-white font-semibold shadow">
               すべての製品を見る
             </Link>
           </div>
@@ -307,17 +307,17 @@ export default function Home() {
       <section id="strengths" className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="mb-10">
-            <p className="text-sm font-semibold text-slate-500 tracking-[0.3em]">STRENGTHS</p>
+            <p className="text-sm font-semibold text-green-700 tracking-[0.3em]">STRENGTHS</p>
             <h2 className="mt-2 text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">大和薬品の強み</h2>
             <p className="mt-3 text-gray-500">90年以上の実績に裏づけられた“選ばれる理由”。品質・スピード・サポートの3軸で、お客様の現場を支えます。</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             {[
-              { icon: "/icons/strength1.png", title: "90年以上の実績", desc: "全国の学校・企業から信頼されてきた導入の歴史。", tone: "from-blue-600 to-blue-400" },
-              { icon: "/icons/strength2.png", title: "迅速な納品体制", desc: "在庫を常に確保し、柔軟な配送ルートでスピーディーにお届け。", tone: "from-sky-600 to-sky-400" },
-              { icon: "/icons/strength3.png", title: "信頼の品質管理", desc: "法令に基づいた徹底管理と、細やかな検査体制を実施。", tone: "from-indigo-600 to-indigo-400" },
-              { icon: "/icons/strength4.png", title: "幅広いサポート", desc: "導入後も安心してご利用いただけるよう、使い方から安全対策まで丁寧に支援。", tone: "from-cyan-600 to-cyan-400" },
+              { icon: "/icons/strength1.png", title: "90年以上の実績", desc: "全国の学校・企業から信頼されてきた導入の歴史。", tone: "from-green-700 to-emerald-500" },
+              { icon: "/icons/strength2.png", title: "迅速な納品体制", desc: "在庫を常に確保し、柔軟な配送ルートでスピーディーにお届け。", tone: "from-emerald-600 to-lime-500" },
+              { icon: "/icons/strength3.png", title: "信頼の品質管理", desc: "法令に基づいた徹底管理と、細やかな検査体制を実施。", tone: "from-green-700 to-green-500" },
+              { icon: "/icons/strength4.png", title: "幅広いサポート", desc: "導入後も安心してご利用いただけるよう、使い方から安全対策まで丁寧に支援。", tone: "from-teal-600 to-emerald-500" },
             ].map((s, i) => (
               <div
                 key={s.title}
@@ -326,13 +326,13 @@ export default function Home() {
                 <span className={`absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b ${s.tone}`} aria-hidden />
                 <div className="absolute inset-0 pointer-events-none opacity-[0.04] bg-[radial-gradient(circle_at_1px_1px,#000_1px,transparent_0)] [background-size:12px_12px]" />
                 <div className="relative p-7 md:p-8 flex items-start gap-5">
-                  <div className="shrink-0 grid place-items-center w-16 h-16 rounded-2xl bg-blue-50 ring-1 ring-blue-100 group-hover:scale-[1.03] group-hover:rotate-[1deg] transition">
+                  <div className="shrink-0 grid place-items-center w-16 h-16 rounded-2xl bg-green-50 ring-1 ring-green-100 group-hover:scale-[1.03] group-hover:rotate-[1deg] transition">
                     <img src={s.icon} alt={`${s.title}アイコン`} className="w-10 h-10 object-contain" loading="lazy" />
                   </div>
 
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center justify-center text-xs font-bold text-white px-2.5 py-1 rounded-full bg-gradient-to-r from-blue-600 to-blue-400">
+                      <span className={`inline-flex items-center justify-center text-xs font-bold text-white px-2.5 py-1 rounded-full bg-gradient-to-r ${s.tone}`}>
                         0{i + 1}
                       </span>
                       <h3 className="text-xl md:text-[22px] font-extrabold text-gray-900 tracking-tight">{s.title}</h3>
@@ -350,7 +350,7 @@ export default function Home() {
       {/* =======================
           問い合わせCTA
       ======================== */}
-      <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-16">
+      <section className="bg-gradient-to-r from-green-900 via-green-800 to-green-900 py-16">
         <div className="max-w-6xl mx-auto px-4 text-center text-white">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-3">薬品の調達でお困りですか？</h2>
           <p className="text-white/80 mb-6">用途やご希望に合わせた最適な薬品をご提案いたします。まずはお気軽にご相談ください。</p>
@@ -372,11 +372,13 @@ export default function Home() {
     <div className="grid gap-6 md:grid-cols-2 items-stretch auto-rows-fr">
       
       {/* --- お問い合わせ --- */}
-      <div className="bg-white rounded-xl shadow-lg border-t-4 border-green-500 flex flex-col p-4 h-full">
+      <div className="bg-white rounded-3xl shadow-sm border border-slate-200 flex flex-col p-6 h-full">
         <div className="grow flex flex-col items-center text-center">
-          <svg className="w-6 h-6 text-green-600 mb-2" fill="currentColor" viewBox="0 0 24 24">
+          <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-green-50 text-green-700 mb-3">
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.06-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.06l-2.2 2.2z" />
-          </svg>
+            </svg>
+          </span>
           <h3 className="text-lg font-semibold text-gray-800 mb-1">お問い合わせ</h3>
           <p className="text-gray-600 text-sm mb-2 leading-relaxed">
             製品に関するご質問やご相談をお気軽にどうぞ
@@ -387,18 +389,20 @@ export default function Home() {
         </div>
         <Link
           to="/contact"
-          className="mt-4 inline-flex justify-center items-center bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded text-sm transition"
+          className="mt-5 inline-flex justify-center items-center bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-4 rounded-full text-sm transition"
         >
           フォームへ
         </Link>
       </div>
 
       {/* --- 社長ブログ --- */}
-      <div className="bg-white rounded-xl shadow-lg border-t-4 border-green-500 flex flex-col p-4 h-full">
+      <div className="bg-white rounded-3xl shadow-sm border border-slate-200 flex flex-col p-6 h-full">
         <div className="grow flex flex-col items-center text-center">
-          <svg className="w-6 h-6 text-green-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-green-50 text-green-700 mb-3">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-          </svg>
+            </svg>
+          </span>
           <h3 className="text-lg font-semibold text-gray-800 mb-1">社長ブログ</h3>
           <p className="text-gray-600 text-sm mb-3 leading-relaxed">
             日々の気づきや現場の声をブログで発信中！
@@ -408,7 +412,7 @@ export default function Home() {
           href="http://blog.yamato-chemi.co.jp/"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 inline-flex justify-center items-center text-green-700 bg-green-100 hover:bg-green-200 font-medium py-2 px-4 rounded text-sm transition underline-offset-2"
+          className="mt-5 inline-flex justify-center items-center text-green-700 bg-green-50 border border-green-200 hover:bg-green-100 font-medium py-2.5 px-4 rounded-full text-sm transition underline-offset-2"
         >
           ブログを見る →
         </a>
