@@ -33,9 +33,7 @@ export default function Home() {
 
   return (
     <div className="bg-white text-gray-800 font-sans">
-      {/* =======================
-          HERO
-      ======================== */}
+
       <section className="relative h-[70vh] min-h-[420px] overflow-hidden">
         {slides.map((s, i) => (
           <div
@@ -92,9 +90,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =======================
-          GREETING
-      ======================== */}
+
       <section className="bg-green-50 py-16">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center px-4">
           <div className="relative overflow-hidden rounded-2xl shadow-xl">
@@ -141,9 +137,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =======================
-          QUICK LINKS
-      ======================== */}
+
       <section className="section">
         <div className="layout-container">
           <div className="grid gap-6 md:grid-cols-3">
@@ -195,9 +189,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =======================
-          PRODUCTS
-      ======================== */}
+
       <section className="bg-[#EDF5FF] py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center">
@@ -208,7 +200,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* ✅ FIX: Linkの閉じタグ崩れを解消（カードはdivで返す） */}
+
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
               {
@@ -263,9 +255,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =======================
-          STRENGTHS
-      ======================== */}
+
       <section id="strengths" className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center">
@@ -338,9 +328,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =======================
-          CONTACT CTA
-      ======================== */}
+
       <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-16">
         <div className="max-w-6xl mx-auto px-4 text-center text-white">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-3">薬品の調達でお困りですか？</h2>
