@@ -52,6 +52,7 @@ export default function Layout() {
   const nav = [
     { label: "製品", path: "/products" },
     { label: "会社概要", path: "/company" },
+    { label: "関連情報", path: "/community" },
     { label: "アクセス", path: "/access" },
     { label: "お問い合わせ", path: "/contact" },
   ];
@@ -238,7 +239,7 @@ export default function Layout() {
 
       {/* フッター */}
       <footer className="bg-slate-900 text-slate-200 text-sm mt-10">
-        <div className="layout-container py-10 grid gap-8 md:grid-cols-[1.2fr_1fr_1fr]">
+        <div className="layout-container py-10 grid gap-8 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto" />
@@ -257,6 +258,14 @@ export default function Layout() {
               <li><Link className="hover:underline" to="/products?cat=reagents">試薬・研究用</Link></li>
               <li><Link className="hover:underline" to="/products?cat=industrial">工業用・医薬品関連</Link></li>
               <li><Link className="hover:underline" to="/products?cat=cleaning">クリーニング関係</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-white font-semibold mb-3">関連コンテンツ</p>
+            <ul className="space-y-2 text-sm">
+              <li><Link className="hover:underline" to="/president-blog">社長ブログ</Link></li>
+              <li><Link className="hover:underline" to="/association">西兵庫化学薬品協同組合</Link></li>
+              <li><Link className="hover:underline" to="/collection">懐かしコレクション</Link></li>
             </ul>
           </div>
           <div className="space-y-3">
