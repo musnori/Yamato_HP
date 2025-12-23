@@ -131,10 +131,10 @@ export default function Company() {
             </div>
             <ol className="relative p-6">
               {history.map((h, i) => (
-                <li key={i} className="pl-6 pb-6 last:pb-0 relative">
-                  <span className="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-green-600" />
+                <li key={i} className="pl-7 pb-6 last:pb-0 relative">
+                  <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-green-600" />
                   {i !== history.length - 1 && (
-                    <span className="absolute left-[5px] top-4 bottom-0 w-px bg-gray-200" />
+                    <span className="absolute left-[6px] top-5 bottom-0 w-px bg-gray-200" />
                   )}
                   <p className="text-sm text-gray-500">{h.date}</p>
                   <p className="text-gray-900 font-medium leading-relaxed">{h.text}</p>
