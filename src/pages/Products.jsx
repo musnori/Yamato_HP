@@ -253,10 +253,7 @@ export default function Products() {
               </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      <div className="layout-container py-8 md:py-10 space-y-10">
+          <div className="layout-container py-8 md:py-10 space-y-10">
         <div className="card p-6">
           <div className="grid gap-4 lg:grid-cols-[2fr_1fr_1fr_1fr_auto] items-end">
             <div>
@@ -484,6 +481,8 @@ export default function Products() {
               ))}
             </section>
           </div>
+        </section>
+      </div>
         </>
       ) : (
         /* =========================
