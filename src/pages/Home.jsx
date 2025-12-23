@@ -141,87 +141,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =======================
-          お知らせ
-      ======================== */}
-      <section className="section bg-slate-50">
-        <div className="layout-container">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <p className="section-title">NEWS</p>
-              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900">お知らせ</h2>
-              <p className="mt-2 text-gray-600">最新情報は更新時に掲載します。</p>
-            </div>
-            <Link to="/contact" className="btn-primary">見積・相談する</Link>
-          </div>
-          <div className="mt-6 card p-6">
-            <p className="text-sm text-slate-600">現在、掲載できるお知らせはありません。</p>
-          </div>
-        </div>
-      </section>
 
-      <section className="section bg-white">
-        <div className="layout-container">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <p className="section-title">COMMUNITY</p>
-              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900">関連コンテンツ</h2>
-              <p className="mt-2 text-gray-600">
-                社長ブログや地域連携、懐かしコレクションなどをまとめてご覧いただけます。
-              </p>
-            </div>
-          </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <div className="bg-white rounded-xl shadow-lg border-t-4 border-green-500 flex flex-col p-4 h-full">
-              <div className="grow flex flex-col items-center text-center">
-                <svg className="w-6 h-6 text-green-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-                </svg>
-                <h3 className="text-lg font-semibold text-gray-800 mb-1">社長ブログ</h3>
-                <p className="text-gray-600 text-sm mb-3 leading-relaxed">
-                  日々の気づきや現場の声をブログで発信中！
-                </p>
-              </div>
-              <a
-                href="http://blog.yamato-chemi.co.jp/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex justify-center items-center text-green-700 bg-green-100 hover:bg-green-200 font-medium py-2 px-4 rounded text-sm transition underline-offset-2"
-              >
-                ブログを見る →
-              </a>
-            </div>
-
-            <a
-              href="https://nishihyogo-chemical-coop.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative rounded-xl shadow-lg overflow-hidden group h-full flex flex-col justify-end p-4 text-center text-white"
-              style={{ backgroundImage: "url('/images/coop-banner.png')", backgroundSize: "cover", backgroundPosition: "center" }}
-            >
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
-              <div className="relative z-10">
-                <h3 className="text-lg font-semibold">西兵庫化学薬品協同組合</h3>
-                <p className="text-sm">公式サイトへ</p>
-              </div>
-            </a>
-
-            <Link
-              to="/collection"
-              className="relative rounded-xl shadow-lg overflow-hidden group h-full flex flex-col justify-end p-4 text-center text-white"
-              style={{ backgroundImage: "url('/images/banner.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
-            >
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
-              <div className="relative z-10">
-                <h3 className="text-lg font-semibold">懐かしコレクション</h3>
-                <p className="text-sm">とうじコレクションのご紹介</p>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-slate-50">
+<section className="section bg-slate-50">
         <div className="layout-container">
           <div className="bg-white border border-slate-100 rounded-2xl p-8 shadow-sm">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
@@ -260,6 +181,26 @@ export default function Home() {
                 お問い合わせフォームへ
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* =======================
+          お知らせ
+      ======================== */}
+      <section className="section bg-slate-50">
+        <div className="layout-container">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <p className="section-title">NEWS</p>
+              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900">お知らせ</h2>
+              <p className="mt-2 text-gray-600">最新情報は更新時に掲載します。</p>
+            </div>
+            <Link to="/contact" className="btn-primary">見積・相談する</Link>
+          </div>
+          <div className="mt-6 card p-6">
+            <p className="text-sm text-slate-600">現在、掲載できるお知らせはありません。</p>
           </div>
         </div>
       </section>

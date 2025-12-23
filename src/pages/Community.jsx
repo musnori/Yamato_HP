@@ -5,21 +5,27 @@ export default function Community() {
   const items = [
     {
       title: "社長ブログ",
-      description: "代表メッセージや日々の気づきをまとめた読み物です。",
-      to: "/president-blog",
+      description: "代表メッセージや日々の気づきをブログで発信しています。",
+      to: "http://blog.yamato-chemi.co.jp/",
       tag: "BLOG",
+      bg: "/images/president-blog-bg.png", // 元の画像に合わせて変更
+      external: true,
     },
     {
       title: "西兵庫化学薬品協同組合",
       description: "地域の化学薬品供給を支える連携についてご紹介します。",
-      to: "/association",
+      to: "https://nishihyogo-chemical-coop.com/",
       tag: "ASSOCIATION",
+      bg: "/images/coop-bg.png", // 元の画像に合わせて変更
+      external: true,
     },
     {
       title: "懐かしコレクション",
       description: "昭和レトロのコレクションを写真とともに掲載しています。",
       to: "/collection",
       tag: "ARCHIVE",
+      bg: "/images/banner.jpg",
+      external: false,
     },
   ];
 
@@ -41,16 +47,47 @@ export default function Community() {
 
       <section className="section">
         <div className="layout-container grid gap-6 md:grid-cols-3">
-          {items.map((item) => (
-            <Link key={item.title} to={item.to} className="card p-6 hover:-translate-y-1 transition">
-              <span className="tag">{item.tag}</span>
-              <h2 className="mt-3 text-xl font-bold text-slate-900">{item.title}</h2>
-              <p className="mt-2 text-sm text-slate-600">{item.description}</p>
-              <div className="mt-4 text-sm font-semibold text-green-700">
-                詳しく見る →
+          {items.map((item) => {
+            const Card = (
+              <div
+                className="relative rounded-xl shadow-lg overflow-hidden group h-64 flex flex-col justify-end p-5 text-white transition hover:-translate-y-1"
+                style={{
+                  backgroundImage: `url('${item.bg}')`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
+                <div className="relative z-10">
+                  <span className="inline-block mb-2 text-xs font-bold tracking-widest text-green-300">
+                    {item.tag}
+                  </span>
+                  <h2 className="text-xl font-bold">{item.title}</h2>
+                  <p className="mt-1 text-sm text-white/90 leading-relaxed">
+                    {item.description}
+                  </p>
+                  <div className="mt-3 text-sm font-semibold text-green-200">
+                    詳しく見る →
+                  </div>
+                </div>
               </div>
-            </Link>
-          ))}
+            );
+
+            return item.external ? (
+              <a
+                key={item.title}
+                href={item.to}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {Card}
+              </a>
+            ) : (
+              <Link key={item.title} to={item.to}>
+                {Card}
+              </Link>
+            );
+          })}
         </div>
       </section>
     </div>
