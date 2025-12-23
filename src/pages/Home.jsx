@@ -181,34 +181,37 @@ export default function Home() {
                 title: "水処理用薬品",
                 desc: "プール・温浴施設・工場排水の衛生を守る定番ラインナップ。",
                 to: "/products#water",
-                accent: "bg-yellow-400/90",
+                accent: "bg-blue-50 text-blue-700 border-blue-100",
               },
               {
                 logo: "/icons/sehin2.png",
                 title: "試薬・研究用",
                 desc: "教育・研究・検査の現場へ。用途別に選びやすくご提案。",
                 to: "/products#reagents",
-                accent: "bg-orange-500/90",
+                accent: "bg-amber-50 text-amber-700 border-amber-100",
               },
               {
                 logo: "/icons/sehin3.png",
                 title: "工業用・医薬品関連",
                 desc: "製造現場を支える工業薬品と、法令順守の医薬品関連供給。",
                 to: "/products#industrial",
-                accent: "bg-green-600/90",
+                accent: "bg-green-50 text-green-700 border-green-100",
               },
             ].map((c) => (
-              <div key={c.title} className="rounded-3xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition">
-                <div className="h-44 grid place-items-center p-6 bg-gradient-to-br from-white to-slate-50">
-                  <img src={c.logo} alt={c.title} className="max-h-24 object-contain drop-shadow" loading="lazy" />
+              <div key={c.title} className="rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition">
+                <div className="h-40 grid place-items-center p-6 bg-gradient-to-br from-white to-slate-50">
+                  <img src={c.logo} alt={c.title} className="max-h-20 object-contain drop-shadow" loading="lazy" />
                 </div>
-                <div className={`${c.accent} text-white p-6`}>
-                  <h3 className="text-xl font-bold">{c.title}</h3>
-                  <p className="mt-3 leading-relaxed">{c.desc}</p>
+                <div className="px-6 pb-6">
+                  <span className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold ${c.accent}`}>
+                    取扱い分野
+                  </span>
+                  <h3 className="mt-3 text-xl font-bold text-gray-900">{c.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{c.desc}</p>
                   <div className="mt-5">
                     <Link
                       to={c.to}
-                      className="inline-flex items-center justify-center w-full md:w-auto rounded-full bg-white/95 hover:bg-white text-gray-900 font-semibold px-6 py-3 transition"
+                      className="inline-flex items-center justify-center w-full md:w-auto rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-gray-900 font-semibold px-6 py-3 transition"
                     >
                       くわしく見る <span className="ml-2">›</span>
                     </Link>
