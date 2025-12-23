@@ -49,7 +49,6 @@ export default function Home() {
               },
             ].map((item) => (
               <Link key={item.title} to={item.to} className="card-elevated p-6 hover:-translate-y-1 transition">
-                <span className="tag">3クリック以内の導線</span>
                 <h3 className="mt-3 text-xl font-bold text-slate-900">{item.title}</h3>
                 <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
                 <div className="mt-4 text-sm font-semibold text-green-700">
@@ -157,6 +156,110 @@ export default function Home() {
           </div>
           <div className="mt-6 card p-6">
             <p className="text-sm text-slate-600">現在、掲載できるお知らせはありません。</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <div className="layout-container">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <p className="section-title">COMMUNITY</p>
+              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900">関連コンテンツ</h2>
+              <p className="mt-2 text-gray-600">
+                社長ブログや地域連携、懐かしコレクションなどをまとめてご覧いただけます。
+              </p>
+            </div>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="bg-white rounded-xl shadow-lg border-t-4 border-green-500 flex flex-col p-4 h-full">
+              <div className="grow flex flex-col items-center text-center">
+                <svg className="w-6 h-6 text-green-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                </svg>
+                <h3 className="text-lg font-semibold text-gray-800 mb-1">社長ブログ</h3>
+                <p className="text-gray-600 text-sm mb-3 leading-relaxed">
+                  日々の気づきや現場の声をブログで発信中！
+                </p>
+              </div>
+              <a
+                href="http://blog.yamato-chemi.co.jp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex justify-center items-center text-green-700 bg-green-100 hover:bg-green-200 font-medium py-2 px-4 rounded text-sm transition underline-offset-2"
+              >
+                ブログを見る →
+              </a>
+            </div>
+
+            <a
+              href="https://nishihyogo-chemical-coop.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative rounded-xl shadow-lg overflow-hidden group h-full flex flex-col justify-end p-4 text-center text-white"
+              style={{ backgroundImage: "url('/images/coop-banner.png')", backgroundSize: "cover", backgroundPosition: "center" }}
+            >
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
+              <div className="relative z-10">
+                <h3 className="text-lg font-semibold">西兵庫化学薬品協同組合</h3>
+                <p className="text-sm">公式サイトへ</p>
+              </div>
+            </a>
+
+            <Link
+              to="/collection"
+              className="relative rounded-xl shadow-lg overflow-hidden group h-full flex flex-col justify-end p-4 text-center text-white"
+              style={{ backgroundImage: "url('/images/banner.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
+            >
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
+              <div className="relative z-10">
+                <h3 className="text-lg font-semibold">懐かしコレクション</h3>
+                <p className="text-sm">とうじコレクションのご紹介</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-slate-50">
+        <div className="layout-container">
+          <div className="bg-white border border-slate-100 rounded-2xl p-8 shadow-sm">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+              回収・処分サービス
+            </span>
+            <h2 className="mt-4 text-2xl md:text-3xl font-extrabold text-gray-900">
+              古くなって処分に困った薬品の<span className="text-green-700">回収・処分</span>を承ります
+            </h2>
+            <p className="mt-3 text-gray-600 leading-relaxed">
+              ラベル不明・長期保管・固結／沈殿・在庫整理など、まずは現状をお知らせください。安全・法令順守での処理方法をご提案します。
+            </p>
+
+            <ul className="mt-4 space-y-2 text-gray-700">
+              {[
+                "ラベル不明の薬品も可能",
+                "事前現地確認やマニフェスト発行も可能",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <span className="mt-1 inline-block h-2 w-2 rounded-full bg-green-600" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 flex flex-wrap gap-4">
+              <Link
+                to={`/contact?subject=${encodeURIComponent("薬品の回収・処分の相談")}`}
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold shadow bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 text-white"
+              >
+                回収・処分について相談する
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold border border-slate-200 text-slate-700 hover:bg-slate-50"
+              >
+                お問い合わせフォームへ
+              </Link>
+            </div>
           </div>
         </div>
       </section>
