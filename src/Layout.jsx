@@ -28,9 +28,8 @@ function PageTopButton() {
       className={[
         "fixed right-4 bottom-5 z-50 transition-all duration-300",
         visible ? "opacity-100 translate-y-0" : "opacity-0 pointer-events-none translate-y-3",
-        // 見た目
-        "flex items-center gap-2 px-4 py-2 rounded-md bg-green-700 text-white",
-        "shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-white/60"
+        "flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white",
+        "shadow-lg shadow-green-900/20 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-white/60"
       ].join(" ")}
     >
       <span className="text-base leading-none">↑</span>
@@ -60,8 +59,22 @@ export default function Layout() {
       <ScrollToTopOnRouteChange />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/70 backdrop-blur border-b">
-        <nav className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-green-100">
+        <div className="hidden md:block bg-green-900 text-white text-xs">
+          <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+            <p className="tracking-wide">化学品・医薬品の供給で地域を支える</p>
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1">
+                <span className="inline-block w-2 h-2 rounded-full bg-green-300" />
+                受付時間 9:00〜17:00
+              </span>
+              <a href="tel:0792810671" className="font-semibold hover:underline">
+                TEL 079-281-0671
+              </a>
+            </div>
+          </div>
+        </div>
+        <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           {/* ロゴ */}
           <Link to="/" className="flex items-center gap-2">
             <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto" />
@@ -71,28 +84,31 @@ export default function Layout() {
           </Link>
 
           {/* デスクトップ用ナビ（枠なし・ホバーで下線） */}
-<div className="hidden md:flex items-center gap-6">
-  {nav.map((item) => (
-    <NavLink
-      key={item.path}
-      to={item.path}
-      className={({ isActive }) =>
-        [
-          // 基本はテキストリンク
-          "text-sm font-medium text-green-800",
-          // ホバー時に下線
-          "hover:underline underline-offset-4 decoration-2",
-          // フォーカス可視リング
-          "focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600/30 rounded",
-          // 現在ページは強調（下線＋少し濃い色）
-          isActive ? "text-green-700 font-bold underline decoration-2 underline-offset-4" : ""
-        ].join(" ")
-      }
-    >
-      {item.label}
-    </NavLink>
-  ))}
-</div>
+          <div className="hidden md:flex items-center gap-8">
+            {nav.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  [
+                    "text-sm font-semibold text-slate-700 tracking-wide",
+                    "hover:text-green-800 hover:underline underline-offset-4 decoration-2",
+                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600/30 rounded",
+                    isActive ? "text-green-800 underline decoration-2 underline-offset-4" : ""
+                  ].join(" ")
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-full bg-green-700 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 transition"
+            >
+              お問い合わせ
+              <span aria-hidden>›</span>
+            </Link>
+          </div>
 
 
           {/* モバイル：ハンバーガー */}
@@ -168,6 +184,13 @@ export default function Layout() {
               {item.label}
             </NavLink>
           ))}
+          <Link
+            to="/contact"
+            onClick={() => setOpen(false)}
+            className="mt-3 block w-full text-center px-4 py-3 rounded-lg font-semibold bg-green-700 text-white hover:bg-green-800"
+          >
+            お問い合わせ
+          </Link>
         </nav>
       </aside>
 

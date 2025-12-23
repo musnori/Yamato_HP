@@ -31,17 +31,18 @@ export default function Company() {
   ];
 
   return (
-    <div className="bg-white">
+    <div className="bg-slate-50">
       {/* ===== ヒーロー ===== */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/morninng.jpg')] bg-cover bg-center opacity-20" />
+      <section className="relative overflow-hidden border-b bg-white">
+        <div className="absolute inset-0 bg-[url('/morninng.jpg')] bg-cover bg-center opacity-15" />
         <div className="relative max-w-6xl mx-auto px-6 py-14">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+          <p className="text-sm font-semibold text-green-700 tracking-[0.3em]">COMPANY</p>
+          <h1 className="mt-3 text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
             会社概要
           </h1>
-          <p className="text-gray-600 mt-2">Company Profile</p>
-
-
+          <p className="text-gray-600 mt-3 max-w-2xl">
+            創業90年を超える経験と信頼を礎に、地域の医薬・化学品の供給を支えています。
+          </p>
         </div>
       </section>
 
@@ -49,8 +50,8 @@ export default function Company() {
         {/* ===== 左：基本情報 ===== */}
         <section className="lg:col-span-2 space-y-10">
           {/* 基本情報（定義リスト） */}
-          <div className="rounded-2xl border bg-white">
-            <div className="border-b p-5">
+          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
+            <div className="border-b border-slate-200 p-5">
               <h2 className="text-xl font-bold text-gray-900">基本情報</h2>
             </div>
             <dl className="divide-y">
@@ -105,8 +106,8 @@ export default function Company() {
           </div>
 
           {/* 事業内容（タグ） */}
-          <div className="rounded-2xl border bg-white">
-            <div className="border-b p-5">
+          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
+            <div className="border-b border-slate-200 p-5">
               <h2 className="text-xl font-bold text-gray-900">事業内容</h2>
               <p className="text-sm text-gray-500 mt-1">
                 化学薬品・医薬品の販売、分析・洗浄・環境関連薬品の供給／貸ビル業、月極駐車場 など
@@ -124,8 +125,8 @@ export default function Company() {
           </div>
 
           {/* 沿革（縦タイムライン） */}
-          <div className="rounded-2xl border bg-white">
-            <div className="border-b p-5">
+          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
+            <div className="border-b border-slate-200 p-5">
               <h2 className="text-xl font-bold text-gray-900">沿革</h2>
             </div>
             <ol className="relative p-6">
@@ -146,7 +147,7 @@ export default function Company() {
         {/* ===== 右：サイド情報 ===== */}
         <aside className="space-y-6 lg:sticky lg:top-6 self-start">
           {/* お問い合わせカード */}
-          <div className="rounded-2xl border bg-green-50 p-6">
+          <div className="rounded-3xl border border-green-200 bg-gradient-to-br from-green-50 to-white p-6 shadow-sm">
             <h3 className="text-lg font-bold text-gray-900">お問い合わせ</h3>
             <p className="text-sm text-gray-600 mt-1">
               製品・お取引に関するご相談はお気軽にどうぞ。
@@ -156,19 +157,19 @@ export default function Company() {
             </a>
             <Link
               to="/contact"
-              className="mt-3 inline-flex items-center px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white font-medium"
+              className="mt-3 inline-flex items-center px-4 py-2 rounded-full bg-green-600 hover:bg-green-700 text-white font-medium"
             >
               フォームから問い合わせる
             </Link>
           </div>
 
           {/* アクセス（地図は差し替え可） */}
-          <div className="rounded-2xl border bg-white p-6">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
             <h3 className="text-lg font-bold text-gray-900">アクセス</h3>
             <p className="text-sm text-gray-600 mt-1">
               〒670-0935 兵庫県姫路市北条口1丁目59番地
             </p>
-            <div className="mt-4 aspect-[4/3] w-full overflow-hidden rounded-lg border">
+            <div className="mt-4 aspect-[4/3] w-full overflow-hidden rounded-xl border border-slate-200">
 
               <iframe
             title="本社マップ"
