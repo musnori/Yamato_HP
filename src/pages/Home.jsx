@@ -161,6 +161,34 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section bg-white">
+        <div className="layout-container">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <p className="section-title">COMMUNITY</p>
+              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900">関連コンテンツ</h2>
+              <p className="mt-2 text-gray-600">
+                社長ブログや地域連携、懐かしコレクションなどをまとめてご覧いただけます。
+              </p>
+            </div>
+            <Link to="/community" className="btn-outline">すべて見る</Link>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {[
+              { title: "社長ブログ", desc: "代表メッセージや取り組みを発信しています。", to: "/president-blog" },
+              { title: "西兵庫化学薬品協同組合", desc: "地域連携の活動内容をご紹介します。", to: "/association" },
+              { title: "懐かしコレクション", desc: "昭和レトロのコレクションを掲載中。", to: "/collection" },
+            ].map((item) => (
+              <Link key={item.title} to={item.to} className="card p-5 hover:shadow-md transition">
+                <h3 className="text-lg font-semibold text-slate-900">{item.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
+                <div className="mt-4 text-sm font-semibold text-green-700">このページを見る →</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section bg-gradient-to-r from-green-900 via-green-800 to-green-900">
         <div className="layout-container text-center text-white">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-3">薬品の調達でお困りですか？</h2>
