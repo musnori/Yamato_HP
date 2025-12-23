@@ -207,70 +207,112 @@ export default function Products() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 md:py-10 space-y-10">
-      {/* 上段タブ */}
-      <div className="inline-flex rounded-xl border bg-white p-1">
-        <button
-          className={`px-4 py-2 rounded-lg text-sm ${mode==='category' ? 'bg-green-700 text-white' : 'hover:bg-neutral-50 text-green-800'}`}
-          onClick={() => setMode("category")}
-        >
-          カテゴリで見る
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg text-sm ${mode==='usecase' ? 'bg-green-700 text-white' : 'hover:bg-neutral-50 text-green-800'}`}
-          onClick={() => setMode("usecase")}
-        >
-          用途で探す
-        </button>
-      </div>
+    <div className="bg-slate-50">
+      <section className="relative overflow-hidden border-b bg-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_#e2f7e7,_transparent_55%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 py-10 md:py-14">
+          <p className="text-sm font-semibold text-green-700 tracking-[0.3em]">PRODUCTS</p>
+          <h1 className="mt-3 text-3xl md:text-4xl font-extrabold text-gray-900">取扱製品</h1>
+          <p className="mt-3 text-gray-600 max-w-3xl leading-relaxed">
+            用途に応じた薬品を幅広く取り扱っています。カテゴリ検索と用途別検索のどちらでも探せます。
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              to="/contact?subject=取扱製品について"
+              className="inline-flex items-center gap-2 rounded-full bg-green-700 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800"
+            >
+              製品について相談する
+              <span aria-hidden>›</span>
+            </Link>
+            <a
+              href={poolBannerLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100"
+            >
+              プール管理製品
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 py-8 md:py-10 space-y-10">
+        {/* 上段タブ */}
+        <div className="inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm">
+          <button
+            className={`px-5 py-2 rounded-full text-sm font-semibold transition ${mode==='category' ? 'bg-green-700 text-white shadow' : 'hover:bg-neutral-50 text-slate-700'}`}
+            onClick={() => setMode("category")}
+          >
+            カテゴリで見る
+          </button>
+          <button
+            className={`px-5 py-2 rounded-full text-sm font-semibold transition ${mode==='usecase' ? 'bg-green-700 text-white shadow' : 'hover:bg-neutral-50 text-slate-700'}`}
+            onClick={() => setMode("usecase")}
+          >
+            用途で探す
+          </button>
+        </div>
 
       {mode === "category" ? (
         <>
           {/* 検索 */}
-          <div>
-            <input
-              type="text"
-              placeholder="品目を検索…（例：次亜、酢酸、IPA など）"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full md:w-[42rem] rounded-md border border-slate-300/80 bg-white px-3.5 py-2 text-sm
-                        placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-slate-200/70"
-            />
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+            <label className="text-sm font-semibold text-slate-700">品目検索</label>
+            <div className="mt-3 flex items-center gap-3 rounded-full border border-slate-200 bg-slate-50 px-4 py-2">
+              <svg className="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
+              </svg>
+              <input
+                type="text"
+                placeholder="品目を検索…（例：次亜、酢酸、IPA など）"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="w-full bg-transparent text-sm focus:outline-none"
+              />
+            </div>
           </div>
 
           {/* バナー（プール管理） */}
-          <div>
-            <a
-              href={poolBannerLink}
-              target="_blank" rel="noopener noreferrer"
-              className="block rounded-lg border border-slate-300 bg-gradient-to-r from-slate-900 to-slate-800
-                        text-white px-6 py-4 text-center tracking-wide hover:brightness-105 transition"
-            >
-              プール管理製品はこちら →
-            </a>
-            <p className="mt-2 text-xs text-slate-500">ソース：四国化成工業株式会社（外部リンク）</p>
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-sm font-semibold text-slate-700">プール管理製品</p>
+                <p className="text-xs text-slate-500 mt-1">ソース：四国化成工業株式会社（外部リンク）</p>
+              </div>
+              <a
+                href={poolBannerLink}
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+              >
+                こちらから見る
+                <span aria-hidden>›</span>
+              </a>
+            </div>
           </div>
 
           {/* 2カラム：無機/有機 */}
           <div className="grid gap-10 lg:grid-cols-2 items-start">
             {/* 無機薬品（左） */}
             <section className="space-y-3" id="water">
-              <h2 className="text-base md:text-lg font-semibold text-slate-900">無機薬品</h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-base md:text-lg font-semibold text-slate-900">無機薬品</h2>
+                <span className="text-xs text-slate-500">五十音順</span>
+              </div>
               {rowsIn.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
               {rowsIn.map((row) => (
                 <Disclosure key={`in-${row}`} defaultOpen={false}>
                   {({ open }) => (
-                    <div className="rounded-lg border border-slate-200 bg-white">
-                      <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 text-left text-slate-800 hover:bg-slate-50">
-                        <span className="font-medium">{row}</span>
+                    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+                      <Disclosure.Button className="flex w-full items-center justify-between px-5 py-3 text-left text-slate-800 hover:bg-slate-50 rounded-2xl">
+                        <span className="font-semibold">{row}</span>
                         <ChevronUpIcon className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`} />
                       </Disclosure.Button>
-                      <Disclosure.Panel className="px-4 pb-4">
+                      <Disclosure.Panel className="px-5 pb-5">
                         <ul className="grid gap-2 sm:grid-cols-2">
                           {groupsInorganic[row].map((item) => {
                             const sid = STOCK_ID_MAP[item];
                             return (
-                              <li key={item} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
+                              <li key={item} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
                                 {sid ? (
                                   <Link to={`/stock#${sid}`} className="text-green-700 hover:underline">
                                     {item}（在庫紹介へ）
@@ -291,22 +333,25 @@ export default function Products() {
 
             {/* 有機薬品（右） */}
             <section className="space-y-3" id="reagents">
-              <h2 className="text-base md:text-lg font-semibold text-slate-900">有機薬品</h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-base md:text-lg font-semibold text-slate-900">有機薬品</h2>
+                <span className="text-xs text-slate-500">五十音順</span>
+              </div>
               {rowsOrg.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
               {rowsOrg.map((row) => (
                 <Disclosure key={`org-${row}`} defaultOpen={false}>
                   {({ open }) => (
-                    <div className="rounded-lg border border-slate-200 bg-white">
-                      <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 text-left text-slate-800 hover:bg-slate-50">
-                        <span className="font-medium">{row}</span>
+                    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+                      <Disclosure.Button className="flex w-full items-center justify-between px-5 py-3 text-left text-slate-800 hover:bg-slate-50 rounded-2xl">
+                        <span className="font-semibold">{row}</span>
                         <ChevronUpIcon className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`} />
                       </Disclosure.Button>
-                      <Disclosure.Panel className="px-4 pb-4">
+                      <Disclosure.Panel className="px-5 pb-5">
                         <ul className="grid gap-2 sm:grid-cols-2">
                           {groupsOrganic[row].map((item) => {
                             const sid = STOCK_ID_MAP[item];
                             return (
-                              <li key={item} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
+                              <li key={item} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
                                 {sid ? (
                                   <Link to={`/stock#${sid}`} className="text-green-700 hover:underline">
                                     {item}（在庫紹介へ）
@@ -332,7 +377,7 @@ export default function Products() {
         ======================== */
         <div className="grid gap-6 md:grid-cols-2">
           {USE_CASES.map((u) => (
-            <section key={u.id} id={u.id} className="rounded-2xl border bg-white p-6 shadow-sm hover:shadow transition">
+            <section key={u.id} id={u.id} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-lg transition">
               <div className="flex items-baseline justify-between gap-4 flex-wrap">
                 <div>
                   <h3 className="text-lg font-semibold text-green-700">{u.title}</h3>
@@ -340,7 +385,7 @@ export default function Products() {
                 </div>
                 <button
                   onClick={() => ask(u.title)}
-                  className="rounded-xl bg-green-700 text-white px-3 py-2 text-sm hover:bg-green-800"
+                  className="rounded-full bg-green-700 text-white px-4 py-2 text-sm font-semibold hover:bg-green-800"
                 >
                   この用途で問い合わせ
                 </button>
@@ -353,7 +398,7 @@ export default function Products() {
                     <button
                       key={c}
                       onClick={() => ask(`${u.title} / ${c}`)}
-                      className="rounded-full border px-3 py-1 text-sm hover:bg-neutral-50"
+                      className="rounded-full border border-slate-200 px-3 py-1 text-sm text-slate-700 hover:bg-slate-50"
                     >
                       {c}
                     </button>
@@ -370,7 +415,7 @@ export default function Products() {
                       href={l.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center rounded-xl border px-3 py-2 text-sm hover:bg-neutral-50"
+                      className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
                     >
                       {(l.name || l.label)} 公式HP
                     </a>
@@ -390,10 +435,11 @@ export default function Products() {
 
       {/* 下部の注意書き（用途タブ時のみ） */}
       {mode === "usecase" && (
-        <div className="mt-4 rounded-xl border bg-green-50 text-green-900 px-4 py-3 text-sm">
+        <div className="mt-4 rounded-2xl border border-green-200 bg-green-50 text-green-900 px-4 py-3 text-sm">
           「薬品名が分からない」でもOK。用途や困りごとだけ書いて送ってください。
         </div>
       )}
+      </div>
     </div>
   );
 }
