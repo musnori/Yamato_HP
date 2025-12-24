@@ -36,7 +36,7 @@ export default function Home() {
               variant="secondary"
               className="bg-white/10 border-white/30 text-white hover:bg-white/20"
             />
-            <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" />
+            <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" variant="outlineLight" />
             <PrimaryCTA to="/contact?subject=相談したい" label="相談する" variant="outlineLight" />
           </div>
         </div>
