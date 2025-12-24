@@ -5,6 +5,9 @@ import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import * as wanakana from "wanakana";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { PRODUCTS, PRODUCT_CATEGORIES, PRODUCT_FORMS, PRODUCT_USES } from "../data/products";
+import Card from "../components/Card";
+import PrimaryCTA from "../components/PrimaryCTA";
+import Section from "../components/Section";
 
 /* =========================
    A) 既存：製品（五十音で探す）
@@ -191,27 +194,49 @@ export default function Products() {
           <p className="section-title">PRODUCTS</p>
           <h1 className="mt-3 text-3xl md:text-4xl font-extrabold text-gray-900">取扱製品</h1>
           <p className="mt-3 text-gray-600 max-w-3xl leading-relaxed">
-            用途・カテゴリ・形状で製品を探せます。名称が分からなくてもご相談いただけます。
+            探す → 比較 → すぐ見積まで、迷わず進める製品ページです。名称が分からなくてもご相談いただけます。
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link to="/contact?subject=取扱製品について" className="btn-primary">
-              見積・相談する
-              <span aria-hidden>›</span>
-            </Link>
-            <a
+            <PrimaryCTA to="/contact?subject=取扱製品について" label="見積依頼" />
+            <PrimaryCTA to="/contact?subject=製品の相談" label="相談する" variant="outline" />
+            <PrimaryCTA
               href={poolBannerLink}
+              label="プール管理製品"
+              variant="secondary"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary"
-            >
-              プール管理製品
-            </a>
+            />
           </div>
         </div>
       </section>
 
-      <div className="layout-container py-8 md:py-10 space-y-10">
-        <div className="card p-6">
+      <Section
+        eyebrow="HOW TO"
+        title="探す → 比較 → すぐ見積"
+        description="検索して候補を比較し、そのまま見積相談へ進めます。"
+        className="bg-white"
+      >
+        <div className="grid gap-4 md:grid-cols-3">
+          {[
+            { title: "探す", text: "キーワードや用途で絞り込み。" },
+            { title: "比較する", text: "用途・規格・説明を確認。" },
+            { title: "見積する", text: "気になる製品からそのまま相談。" },
+          ].map((item) => (
+            <Card key={item.title} className="p-5">
+              <p className="text-sm font-semibold text-green-700">{item.title}</p>
+              <p className="mt-2 text-sm text-slate-600">{item.text}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        id="search"
+        eyebrow="SEARCH"
+        title="製品を探す"
+        description="キーワード・カテゴリ・用途・形状から絞り込み。必要ならその場で見積へ。"
+      >
+        <Card className="p-6">
           <div className="grid gap-4 lg:grid-cols-[2fr_1fr_1fr_1fr_auto] items-end">
             <div>
               <label className="text-sm font-semibold text-slate-700">キーワード検索</label>
@@ -292,160 +317,156 @@ export default function Products() {
           <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-600">
             <span className="tag">日本語部分一致で検索</span>
             <span className="tag">カテゴリ直リンク対応</span>
+            <span className="tag">比較後すぐ見積</span>
           </div>
-        </div>
+        </Card>
+      </Section>
 
-        <section>
-          <div className="flex items-center justify-between flex-wrap gap-3">
-            <h2 className="text-xl font-bold text-slate-900">おすすめ製品</h2>
-            <p className="text-sm text-slate-500">表示件数：{filteredProducts.length}件</p>
-          </div>
-          {filteredProducts.length === 0 && (
-            <p className="mt-4 text-slate-500">該当する製品がありません。条件を変更してください。</p>
-          )}
-          <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {filteredProducts.map((product) => (
-              <div key={product.id} className="card p-5 flex flex-col">
-                <div className="flex flex-wrap gap-2 text-xs text-slate-600">
-                  <span className="tag">{PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.label}</span>
-                  {product.tags.map((tag) => (
-                    <span key={tag} className="inline-flex items-center rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600">
-                      {tag}
-                    </span>
-                  ))}
+      <Section
+        eyebrow="COMPARE"
+        title="おすすめ製品"
+        description={`表示件数：${filteredProducts.length}件`}
+      >
+        {filteredProducts.length === 0 && (
+          <p className="mt-4 text-slate-500">該当する製品がありません。条件を変更してください。</p>
+        )}
+        <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {filteredProducts.map((product) => (
+            <Card key={product.id} className="p-5 flex flex-col">
+              <div className="flex flex-wrap gap-2 text-xs text-slate-600">
+                <span className="tag">{PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.label}</span>
+                {product.tags.map((tag) => (
+                  <span key={tag} className="inline-flex items-center rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-slate-900">{product.name}</h3>
+              <p className="mt-2 text-sm text-slate-600">{product.description}</p>
+              <div className="mt-4 flex gap-3">
+                <button
+                  type="button"
+                  className="btn-outline"
+                  onClick={() => setOpenDetail(openDetail === product.id ? null : product.id)}
+                >
+                  詳細
+                </button>
+                <button type="button" className="btn-primary" onClick={() => ask(product.name)}>
+                  見積・相談する
+                </button>
+              </div>
+              {openDetail === product.id && (
+                <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
+                  <p className="font-semibold text-slate-900">概要</p>
+                  <p className="mt-1">{product.detail.overview}</p>
+                  <p className="mt-3 font-semibold text-slate-900">用途例</p>
+                  <ul className="mt-1 list-disc list-inside space-y-1">
+                    {product.detail.uses.map((use) => (
+                      <li key={use}>{use}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-3 font-semibold text-slate-900">仕様</p>
+                  <div className="mt-2 grid gap-2">
+                    {product.detail.specs.map(([label, value]) => (
+                      <div key={label} className="flex justify-between text-xs text-slate-600">
+                        <span>{label}</span>
+                        <span className="font-semibold text-slate-800">{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="mt-3 text-xs text-slate-500">{product.detail.notes}</p>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-slate-900">{product.name}</h3>
-                <p className="mt-2 text-sm text-slate-600">{product.description}</p>
-                <div className="mt-4 flex gap-3">
-                  <button
-                    type="button"
-                    className="btn-outline"
-                    onClick={() => setOpenDetail(openDetail === product.id ? null : product.id)}
-                  >
-                    詳細
-                  </button>
-                  <button type="button" className="btn-primary" onClick={() => ask(product.name)}>
-                    見積・相談する
-                  </button>
-                </div>
-                {openDetail === product.id && (
-                  <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
-                    <p className="font-semibold text-slate-900">概要</p>
-                    <p className="mt-1">{product.detail.overview}</p>
-                    <p className="mt-3 font-semibold text-slate-900">用途例</p>
-                    <ul className="mt-1 list-disc list-inside space-y-1">
-                      {product.detail.uses.map((use) => (
-                        <li key={use}>{use}</li>
-                      ))}
-                    </ul>
-                    <p className="mt-3 font-semibold text-slate-900">仕様</p>
-                    <div className="mt-2 grid gap-2">
-                      {product.detail.specs.map(([label, value]) => (
-                        <div key={label} className="flex justify-between text-xs text-slate-600">
-                          <span>{label}</span>
-                          <span className="font-semibold text-slate-800">{value}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <p className="mt-3 text-xs text-slate-500">{product.detail.notes}</p>
+              )}
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="pt-0">
+        <div className="rounded-2xl border border-green-200 bg-green-50 text-green-900 px-4 py-3 text-sm">
+          「薬品名が分からない」でもOK。用途や困りごとだけ書いて送ってください。
+        </div>
+      </Section>
+
+      <Section eyebrow="ALL ITEMS" title="全品目一覧（五十音）">
+        <div className="grid gap-10 lg:grid-cols-2 items-start">
+          <section className="space-y-3" id="water">
+            <div className="flex items-center justify-between">
+              <h3 className="text-base md:text-lg font-semibold text-slate-900">無機薬品</h3>
+              <span className="text-xs text-slate-500">五十音順</span>
+            </div>
+            {rowsIn.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
+            {rowsIn.map((row) => (
+              <Disclosure key={`in-${row}`} defaultOpen={false}>
+                {({ open }) => (
+                  <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+                    <Disclosure.Button className="flex w-full items-center justify-between px-5 py-3 text-left text-slate-800 hover:bg-slate-50 rounded-2xl">
+                      <span className="font-semibold">{row}</span>
+                      <ChevronUpIcon className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`} />
+                    </Disclosure.Button>
+                    <Disclosure.Panel className="px-5 pb-5">
+                      <ul className="grid gap-2 sm:grid-cols-2">
+                        {groupsInorganic[row].map((item) => {
+                          const sid = STOCK_ID_MAP[item];
+                          return (
+                            <li key={item} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
+                              {sid ? (
+                                <Link to={`/stock#${sid}`} className="text-green-700 hover:underline">
+                                  {item}（在庫紹介へ）
+                                </Link>
+                              ) : (
+                                item
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </Disclosure.Panel>
                   </div>
                 )}
-              </div>
+              </Disclosure>
             ))}
-          </div>
-        </section>
+          </section>
 
-        <section className="rounded-2xl border border-green-200 bg-green-50 text-green-900 px-4 py-3 text-sm">
-          「薬品名が分からない」でもOK。用途や困りごとだけ書いて送ってください。
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">全品目一覧（五十音）</h2>
-          <div className="grid gap-10 lg:grid-cols-2 items-start">
-            <section className="space-y-3" id="water">
-              <div className="flex items-center justify-between">
-                <h3 className="text-base md:text-lg font-semibold text-slate-900">無機薬品</h3>
-                <span className="text-xs text-slate-500">五十音順</span>
-              </div>
-              {rowsIn.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
-              {rowsIn.map((row) => (
-                <Disclosure key={`in-${row}`} defaultOpen={false}>
-                  {({ open }) => (
-                    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
-                      <Disclosure.Button className="flex w-full items-center justify-between px-5 py-3 text-left text-slate-800 hover:bg-slate-50 rounded-2xl">
-                        <span className="font-semibold">{row}</span>
-                        <ChevronUpIcon className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`} />
-                      </Disclosure.Button>
-                      <Disclosure.Panel className="px-5 pb-5">
-                        <ul className="grid gap-2 sm:grid-cols-2">
-                          {groupsInorganic[row].map((item) => {
-                            const sid = STOCK_ID_MAP[item];
-                            return (
-                              <li key={item} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
-                                {sid ? (
-                                  <Link to={`/stock#${sid}`} className="text-green-700 hover:underline">
-                                    {item}（在庫紹介へ）
-                                  </Link>
-                                ) : (
-                                  item
-                                )}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </Disclosure.Panel>
-                    </div>
-                  )}
-                </Disclosure>
-              ))}
-            </section>
-
-            <section className="space-y-3" id="reagents">
-              <div className="flex items-center justify-between">
-                <h3 className="text-base md:text-lg font-semibold text-slate-900">有機薬品</h3>
-                <span className="text-xs text-slate-500">五十音順</span>
-              </div>
-              {rowsOrg.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
-              {rowsOrg.map((row) => (
-                <Disclosure key={`org-${row}`} defaultOpen={false}>
-                  {({ open }) => (
-                    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
-                      <Disclosure.Button className="flex w-full items-center justify-between px-5 py-3 text-left text-slate-800 hover:bg-slate-50 rounded-2xl">
-                        <span className="font-semibold">{row}</span>
-                        <ChevronUpIcon className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`} />
-                      </Disclosure.Button>
-                      <Disclosure.Panel className="px-5 pb-5">
-                        <ul className="grid gap-2 sm:grid-cols-2">
-                          {groupsOrganic[row].map((item) => {
-                            const sid = STOCK_ID_MAP[item];
-                            return (
-                              <li key={item} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
-                                {sid ? (
-                                  <Link to={`/stock#${sid}`} className="text-green-700 hover:underline">
-                                    {item}（在庫紹介へ）
-                                  </Link>
-                                ) : (
-                                  item
-                                )}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </Disclosure.Panel>
-                    </div>
-                  )}
-                </Disclosure>
-              ))}
-            </section>
-          </div>
-        </section>
-      </div>
-
-      <div className="fixed bottom-4 left-0 right-0 px-4 md:hidden">
-        <Link to="/contact" className="btn-primary w-full text-base py-3 shadow-lg">
-          見積・相談する
-        </Link>
-      </div>
+          <section className="space-y-3" id="reagents">
+            <div className="flex items-center justify-between">
+              <h3 className="text-base md:text-lg font-semibold text-slate-900">有機薬品</h3>
+              <span className="text-xs text-slate-500">五十音順</span>
+            </div>
+            {rowsOrg.length === 0 && <p className="text-slate-500">該当する品目がありません。</p>}
+            {rowsOrg.map((row) => (
+              <Disclosure key={`org-${row}`} defaultOpen={false}>
+                {({ open }) => (
+                  <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+                    <Disclosure.Button className="flex w-full items-center justify-between px-5 py-3 text-left text-slate-800 hover:bg-slate-50 rounded-2xl">
+                      <span className="font-semibold">{row}</span>
+                      <ChevronUpIcon className={`${open ? "rotate-180" : ""} h-5 w-5 text-slate-500 transition-transform`} />
+                    </Disclosure.Button>
+                    <Disclosure.Panel className="px-5 pb-5">
+                      <ul className="grid gap-2 sm:grid-cols-2">
+                        {groupsOrganic[row].map((item) => {
+                          const sid = STOCK_ID_MAP[item];
+                          return (
+                            <li key={item} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50">
+                              {sid ? (
+                                <Link to={`/stock#${sid}`} className="text-green-700 hover:underline">
+                                  {item}（在庫紹介へ）
+                                </Link>
+                              ) : (
+                                item
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </Disclosure.Panel>
+                  </div>
+                )}
+              </Disclosure>
+            ))}
+          </section>
+        </div>
+      </Section>
     </div>
   );
 }
