@@ -13,6 +13,7 @@ import Community from "./pages/Community";
 import Stock from "./pages/Stock";
 import Sustainability from "./pages/Sustainability";
 import Privacy from "./pages/Privacy";
+import Services from "./pages/Services";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="products" element={<Products />} />
+          <Route path="services" element={<Services />} />
           <Route path="access" element={<Access />} />
           <Route path="company" element={<Company />} />
           <Route path="contact" element={<Contact />} />
