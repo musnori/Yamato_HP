@@ -5,6 +5,15 @@ import PrimaryCTA from "../components/PrimaryCTA";
 import Section from "../components/Section";
 
 export default function Home() {
+  const greetingText = [
+    "昭和8年（1933年）創業以来、地域に根ざした化学品供給の専門商社として歩んでまいりました。",
+    "試薬・化学工業薬品・医薬品関連など、学校・工場・研究機関・プール施設といった多様な現場に対応しています。",
+    "在庫を活かした即応体制に加え、自社便・メーカー直送を組み合わせることで迅速な納品を実現します。",
+    "これからも安心してお取引いただけるよう、丁寧な提案と安定供給に努めてまいります。",
+  ];
+
+  const greetingImage = "/images/haiki1.jpg";
+
   return (
     <div className="bg-white text-gray-800 font-sans">
       <section className="relative overflow-hidden bg-slate-900 text-white">
@@ -36,17 +45,28 @@ export default function Home() {
       <Section
         eyebrow="GREETING"
         title="ごあいさつ"
-        description="創業以来、医薬品や工業薬品の供給を通じて地域に貢献してまいりました。"
+        description="歴史・取扱領域・供給体制を簡潔にご紹介します。"
       >
-        <Card className="p-6 md:p-8">
-          <p className="text-sm text-slate-700 leading-relaxed">
-            当社は創業以来、医薬品や工業薬品の供給を手がけ、様々な分野で信頼を積み重ねてまいりました。
-            地域社会に貢献し、顧客第一主義を貫いてまいります。
-          </p>
-          <div className="mt-4 text-sm font-semibold text-slate-900">
-            代表取締役社長　田路 裕之
-          </div>
-        </Card>
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] items-stretch">
+          <Card className="p-6 md:p-8 h-full flex flex-col">
+            <div className="space-y-4 text-sm text-slate-700 leading-relaxed">
+              {greetingText.map((text) => (
+                <p key={text}>{text}</p>
+              ))}
+            </div>
+            <div className="mt-6 text-sm font-semibold text-slate-900">
+              代表取締役社長　田路 裕之
+            </div>
+          </Card>
+          <Card className="p-0 overflow-hidden h-full">
+            <img
+              src={greetingImage}
+              alt="大和薬品株式会社の倉庫"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </Card>
+        </div>
       </Section>
 
       <Section
