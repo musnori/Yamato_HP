@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, NavLink, useNavigate } from "react-router-dom";
+import PrimaryCTA from "./components/PrimaryCTA";
+import StickyMobileCTA from "./components/StickyMobileCTA";
 
 function ScrollToTopOnRouteChange() {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        const y = target.getBoundingClientRect().top + window.scrollY - 96;
+        window.scrollTo({ top: y, behavior: "smooth" });
+        return;
+      }
+    }
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -26,7 +38,7 @@ function PageTopButton() {
       onClick={toTop}
       aria-label="ページの先頭に戻る"
       className={[
-        "fixed right-4 bottom-5 z-50 transition-all duration-300",
+        "fixed right-4 bottom-24 md:bottom-5 z-50 transition-all duration-300",
         visible ? "opacity-100 translate-y-0" : "opacity-0 pointer-events-none translate-y-3",
         "flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white",
         "shadow-lg shadow-green-900/20 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-white/60"
@@ -51,8 +63,9 @@ export default function Layout() {
 
   const nav = [
     { label: "製品", path: "/products" },
-    { label: "会社概要", path: "/company" },
-    { label: "関連情報", path: "/community" },
+    { label: "用途・サービス", path: "/products#search" },
+    { label: "会社", path: "/company" },
+    { label: "地域活動", path: "/community" },
     { label: "アクセス", path: "/access" },
     { label: "お問い合わせ", path: "/contact" },
   ];
@@ -95,7 +108,7 @@ export default function Layout() {
           </Link>
 
           {/* デスクトップ用ナビ（枠なし・ホバーで下線） */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {nav.map((item) => (
               <NavLink
                 key={item.path}
@@ -125,13 +138,10 @@ export default function Layout() {
                 <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
               </svg>
             </button>
-            <Link
-              to="/contact"
-              className="btn-primary"
-            >
-              見積・相談する
-              <span aria-hidden>›</span>
-            </Link>
+            <div className="flex items-center gap-2">
+              <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" />
+              <PrimaryCTA to="/contact?subject=相談したい" label="相談する" variant="outline" />
+            </div>
           </div>
 
 
@@ -208,13 +218,22 @@ export default function Layout() {
               {item.label}
             </NavLink>
           ))}
-          <Link
-            to="/contact"
-            onClick={() => setOpen(false)}
-            className="mt-3 block w-full text-center px-4 py-3 rounded-lg font-semibold bg-green-700 text-white hover:bg-green-800"
-          >
-            見積・相談する
-          </Link>
+          <div className="mt-3 grid gap-2">
+            <Link
+              to="/contact?subject=見積依頼"
+              onClick={() => setOpen(false)}
+              className="block w-full text-center px-4 py-3 rounded-lg font-semibold bg-green-700 text-white hover:bg-green-800"
+            >
+              見積依頼
+            </Link>
+            <Link
+              to="/contact?subject=相談したい"
+              onClick={() => setOpen(false)}
+              className="block w-full text-center px-4 py-3 rounded-lg font-semibold border border-green-700 text-green-800 hover:bg-green-50"
+            >
+              相談する
+            </Link>
+          </div>
           <button
             type="button"
             onClick={() => {
@@ -230,7 +249,7 @@ export default function Layout() {
       </aside>
 
       {/* ページ内容 */}
-      <main className="flex-1">
+      <main className="flex-1 pb-24 md:pb-0">
         <Outlet />
       </main>
 
@@ -261,17 +280,23 @@ export default function Layout() {
             </ul>
           </div>
           <div>
-            <p className="text-white font-semibold mb-3">関連コンテンツ</p>
+            <p className="text-white font-semibold mb-3">サイトマップ</p>
             <ul className="space-y-2 text-sm">
+              <li><Link className="hover:underline" to="/products">製品</Link></li>
+              <li><Link className="hover:underline" to="/company">会社概要</Link></li>
+              <li><Link className="hover:underline" to="/community">地域活動</Link></li>
+              <li><Link className="hover:underline" to="/access">アクセス</Link></li>
+              <li><Link className="hover:underline" to="/contact">お問い合わせ</Link></li>
               <li><Link className="hover:underline" to="/president-blog">社長ブログ</Link></li>
-              <li><Link className="hover:underline" to="/association">西兵庫化学薬品協同組合</Link></li>
-              <li><Link className="hover:underline" to="/collection">懐かしコレクション</Link></li>
             </ul>
           </div>
           <div className="space-y-3">
             <p className="text-white font-semibold">お問い合わせ</p>
             <p className="text-slate-300 text-sm">見積・相談はフォームから承っています。</p>
-            <Link to="/contact" className="btn-primary w-fit">見積・相談する</Link>
+            <div className="flex flex-wrap gap-2">
+              <Link to="/contact?subject=見積依頼" className="btn-primary w-fit">見積依頼</Link>
+              <Link to="/contact?subject=相談したい" className="btn-outline w-fit">相談する</Link>
+            </div>
             <Link to="/privacy" className="block text-sm text-slate-300 hover:underline">プライバシーポリシー</Link>
           </div>
         </div>
@@ -279,6 +304,8 @@ export default function Layout() {
           © 大和薬品株式会社. All Rights Reserved.
         </div>
       </footer>
+
+      <StickyMobileCTA />
 
       {searchOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center px-4">

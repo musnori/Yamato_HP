@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Card from "../components/Card";
+import PrimaryCTA from "../components/PrimaryCTA";
+import Section from "../components/Section";
 
 export default function Community() {
   const items = [
@@ -8,7 +11,7 @@ export default function Community() {
       description: "代表メッセージや日々の気づきをブログで発信しています。",
       to: "http://blog.yamato-chemi.co.jp/",
       tag: "BLOG",
-      bg: "/images/president-blog-bg.png", // 元の画像に合わせて変更
+      date: "随時更新",
       external: true,
     },
     {
@@ -16,7 +19,7 @@ export default function Community() {
       description: "地域の化学薬品供給を支える連携についてご紹介します。",
       to: "https://nishihyogo-chemical-coop.com/",
       tag: "ASSOCIATION",
-      bg: "/images/coop-bg.png", // 元の画像に合わせて変更
+      date: "地域連携",
       external: true,
     },
     {
@@ -24,7 +27,7 @@ export default function Community() {
       description: "昭和レトロのコレクションを写真とともに掲載しています。",
       to: "/collection",
       tag: "ARCHIVE",
-      bg: "/images/banner.jpg",
+      date: "文化活動",
       external: false,
     },
   ];
@@ -36,41 +39,34 @@ export default function Community() {
         <div className="relative layout-container py-14">
           <p className="section-title">COMMUNITY</p>
           <h1 className="mt-3 text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
-            関連コンテンツ
+            地域活動・関連コンテンツ
           </h1>
           <p className="text-gray-600 mt-3 max-w-2xl">
             社長ブログや地域連携の取り組み、懐かしコレクションなど、
             大和薬品の周辺ストーリーをまとめています。
           </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <PrimaryCTA to="/contact?subject=地域活動について相談" label="相談する" />
+            <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" variant="outline" />
+          </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="layout-container grid gap-6 md:grid-cols-3">
+      <Section
+        eyebrow="ACTIVITY"
+        title="活動一覧"
+        description="活動内容をカードで整理し、信頼につながる情報へアクセスできます。"
+      >
+        <div className="grid gap-6 md:grid-cols-3">
           {items.map((item) => {
-            const Card = (
-              <div
-                className="relative rounded-xl shadow-lg overflow-hidden group h-64 flex flex-col justify-end p-5 text-white transition hover:-translate-y-1"
-                style={{
-                  backgroundImage: `url('${item.bg}')`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
-                <div className="relative z-10">
-                  <span className="inline-block mb-2 text-xs font-bold tracking-widest text-green-300">
-                    {item.tag}
-                  </span>
-                  <h2 className="text-xl font-bold">{item.title}</h2>
-                  <p className="mt-1 text-sm text-white/90 leading-relaxed">
-                    {item.description}
-                  </p>
-                  <div className="mt-3 text-sm font-semibold text-green-200">
-                    詳しく見る →
-                  </div>
-                </div>
-              </div>
+            const content = (
+              <Card className="p-6 h-full transition hover:-translate-y-1">
+                <span className="tag">{item.tag}</span>
+                <h2 className="mt-4 text-xl font-bold text-slate-900">{item.title}</h2>
+                <p className="mt-2 text-sm text-slate-600">{item.description}</p>
+                <p className="mt-4 text-xs text-slate-500">更新: {item.date}</p>
+                <div className="mt-4 text-sm font-semibold text-green-700">詳しく見る →</div>
+              </Card>
             );
 
             return item.external ? (
@@ -80,16 +76,26 @@ export default function Community() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {Card}
+                {content}
               </a>
             ) : (
               <Link key={item.title} to={item.to}>
-                {Card}
+                {content}
               </Link>
             );
           })}
         </div>
-      </section>
+      </Section>
+
+      <Section className="bg-white">
+        <div className="rounded-2xl border border-slate-200 bg-green-50 p-6 text-center">
+          <p className="text-sm text-green-800">地域活動や会社の取り組みに関するご質問もお気軽に。</p>
+          <div className="mt-4 flex flex-wrap justify-center gap-3">
+            <PrimaryCTA to="/contact?subject=地域活動について相談" label="相談する" />
+            <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" variant="outline" />
+          </div>
+        </div>
+      </Section>
     </div>
   );
 }

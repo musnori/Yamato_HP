@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Card from "../components/Card";
+import PrimaryCTA from "../components/PrimaryCTA";
+import Section from "../components/Section";
 
 export default function Company() {
   // 沿革データ（年 → 出来事）
@@ -42,12 +45,60 @@ export default function Company() {
           <p className="text-gray-600 mt-3 max-w-2xl">
             創業90年を超える経験と信頼を礎に、地域の医薬・化学品の供給を支えています。
           </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" />
+            <PrimaryCTA to="/contact?subject=相談したい" label="相談する" variant="outline" />
+          </div>
         </div>
       </section>
 
       <div className="layout-container py-12 grid gap-10 lg:grid-cols-3">
         <section className="lg:col-span-2 space-y-10">
-          <div className="card">
+          <Section
+            eyebrow="VALUE"
+            title="何をしている会社か"
+            description="用途に合わせた薬品選定・調達・納品までを一貫して支援します。"
+            className="pt-0"
+            withContainer={false}
+          >
+            <div className="grid gap-4 md:grid-cols-3">
+              {[
+                { title: "相談から選定", text: "用途・現場条件を伺い最適品をご提案。", icon: "🧩" },
+                { title: "調達・納品", text: "在庫と配送体制でスピーディーに供給。", icon: "🚚" },
+                { title: "安全と法令", text: "保管・取扱いも含めて安心を担保。", icon: "🧪" },
+              ].map((item) => (
+                <Card key={item.title} className="p-4 bg-white">
+                  <div className="text-xl">{item.icon}</div>
+                  <p className="mt-2 font-semibold text-slate-900">{item.title}</p>
+                  <p className="mt-2 text-sm text-slate-600">{item.text}</p>
+                </Card>
+              ))}
+            </div>
+          </Section>
+
+          <Section
+            eyebrow="TRUST"
+            title="安心材料"
+            description="90年以上の実績と専門スタッフ体制で、地域の薬品供給を支えています。"
+            className="pt-0"
+            withContainer={false}
+          >
+            <div className="grid gap-4 md:grid-cols-3">
+              {[
+                { title: "90年以上の実績", text: "地域の医薬・化学品供給に長年携わる信頼。", icon: "🏢" },
+                { title: "迅速な納品体制", text: "用途に合わせた在庫と配送でスピーディーに対応。", icon: "🚚" },
+                { title: "用途別の提案", text: "現場の課題に合わせて最適品を提案。", icon: "🧪" },
+              ].map((item) => (
+                <Card key={item.title} className="p-4 bg-slate-50">
+                  <div className="text-xl">{item.icon}</div>
+                  <p className="mt-2 font-semibold text-slate-900">{item.title}</p>
+                  <p className="mt-2 text-sm text-slate-600">{item.text}</p>
+                </Card>
+              ))}
+            </div>
+          </Section>
+
+          <Card>
             <div className="border-b border-slate-200 p-5">
               <h2 className="text-xl font-bold text-gray-900">会社概要</h2>
             </div>
@@ -72,27 +123,9 @@ export default function Company() {
                 </tbody>
               </table>
             </div>
-          </div>
+          </Card>
 
-          <div className="card p-6">
-            <p className="section-title">STRENGTHS</p>
-            <h2 className="mt-2 text-2xl font-bold text-slate-900">大和薬品の強み</h2>
-            <div className="mt-5 grid gap-4 md:grid-cols-3">
-              {[
-                { title: "90年以上の実績", text: "地域の医薬・化学品供給に長年携わる信頼。", icon: "🏢" },
-                { title: "迅速な納品体制", text: "用途に合わせた在庫と配送でスピーディーに対応。", icon: "🚚" },
-                { title: "用途別の提案", text: "現場の課題に合わせて最適品を提案。", icon: "🧪" },
-              ].map((item) => (
-                <div key={item.title} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                  <div className="text-xl">{item.icon}</div>
-                  <p className="mt-2 font-semibold text-slate-900">{item.title}</p>
-                  <p className="mt-2 text-sm text-slate-600">{item.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="card p-6">
+          <Card className="p-6">
             <p className="section-title">FLOW</p>
             <h2 className="mt-2 text-2xl font-bold text-slate-900">取引の流れ</h2>
             <ol className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -105,17 +138,17 @@ export default function Company() {
                 </li>
               ))}
             </ol>
-          </div>
+          </Card>
 
-          <div className="card p-6">
+          <Card className="p-6">
             <p className="section-title">QUALITY & SAFETY</p>
             <h2 className="mt-2 text-2xl font-bold text-slate-900">品質・安全への取り組み</h2>
             <p className="mt-3 text-sm text-slate-600">
               法令順守を徹底し、保管・輸送・提供の各工程で安全管理を実施しています。必要に応じて安全データの確認や取り扱いの説明も行います。
             </p>
-          </div>
+          </Card>
 
-          <div className="card">
+          <Card>
             <div className="border-b border-slate-200 p-5">
               <h2 className="text-xl font-bold text-gray-900">事業内容</h2>
               <p className="text-sm text-gray-500 mt-1">
@@ -131,9 +164,9 @@ export default function Company() {
                 ))}
               </ul>
             </div>
-          </div>
+          </Card>
 
-          <div className="card">
+          <Card>
             <div className="border-b border-slate-200 p-5">
               <h2 className="text-xl font-bold text-gray-900">沿革</h2>
             </div>
@@ -149,11 +182,11 @@ export default function Company() {
                 </li>
               ))}
             </ol>
-          </div>
+          </Card>
         </section>
 
         <aside className="space-y-6 lg:sticky lg:top-6 self-start">
-          <div className="card p-6 bg-gradient-to-br from-green-50 to-white border border-green-200">
+          <Card className="p-6 bg-gradient-to-br from-green-50 to-white border border-green-200">
             <h3 className="text-lg font-bold text-gray-900">お問い合わせ</h3>
             <p className="text-sm text-gray-600 mt-1">
               製品・お取引に関するご相談はお気軽にどうぞ。
@@ -161,12 +194,13 @@ export default function Company() {
             <a href="tel:0792810671" className="mt-4 block text-2xl font-extrabold text-green-700">
               079-281-0671
             </a>
-            <Link to="/contact" className="mt-3 btn-primary">
-              見積・相談する
-            </Link>
-          </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" />
+              <PrimaryCTA to="/contact?subject=相談したい" label="相談する" variant="outline" />
+            </div>
+          </Card>
 
-          <div className="card p-6">
+          <Card className="p-6">
             <h3 className="text-lg font-bold text-gray-900">アクセス</h3>
             <p className="text-sm text-gray-600 mt-1">
               〒670-0935 兵庫県姫路市北条口1丁目59番地
@@ -184,7 +218,7 @@ export default function Company() {
             <Link to="/access" className="mt-3 inline-flex text-sm text-green-700 underline underline-offset-4">
               詳しいアクセスを見る
             </Link>
-          </div>
+          </Card>
         </aside>
       </div>
     </div>
