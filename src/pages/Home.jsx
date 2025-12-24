@@ -34,38 +34,75 @@ export default function Home() {
       </section>
 
       <Section
+        eyebrow="GREETING"
+        title="ごあいさつ"
+        description="創業以来、医薬品や工業薬品の供給を通じて地域に貢献してまいりました。"
+      >
+        <Card className="p-6 md:p-8">
+          <p className="text-sm text-slate-700 leading-relaxed">
+            当社は創業以来、医薬品や工業薬品の供給を手がけ、様々な分野で信頼を積み重ねてまいりました。
+            地域社会に貢献し、顧客第一主義を貫いてまいります。
+          </p>
+          <div className="mt-4 text-sm font-semibold text-slate-900">
+            代表取締役社長　田路 裕之
+          </div>
+        </Card>
+      </Section>
+
+      <Section
         eyebrow="NEEDS"
         title="よくあるご相談"
         description="「急ぎ」「選定が不安」などの悩みからすぐに見積・相談へ進めます。"
       >
-        <div className="grid gap-5 md:grid-cols-3 items-stretch">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4 items-stretch">
           {[
             {
               title: "急ぎで必要",
               desc: "納期や在庫状況を最短で確認します。",
               to: "/contact?subject=急ぎで薬品が必要",
+              type: "link",
             },
             {
               title: "何を選べばいいか不安",
               desc: "用途や現場条件だけでも相談OK。",
               to: "/contact?subject=用途が未定の相談",
+              type: "link",
             },
             {
               title: "安全・取扱いの相談",
               desc: "法令や保管方法も含めてご案内します。",
               to: "/contact?subject=安全・取扱いの相談",
+              type: "link",
             },
-          ].map((item) => (
-            <Link key={item.title} to={item.to} className="h-full">
-              <Card className="p-6 h-full flex flex-col hover:-translate-y-1 transition">
-                <h3 className="text-lg font-bold text-slate-900">{item.title}</h3>
-                <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
-                <div className="mt-auto text-sm font-semibold text-green-700">
-                  相談する →
-                </div>
-              </Card>
-            </Link>
-          ))}
+            {
+              title: "回収・処分してほしい",
+              desc: "古い薬品、ラベル不明、在庫整理など。回収・処分の相談に対応します。",
+              to: "#disposal",
+              type: "anchor",
+            },
+          ].map((item) =>
+            item.type === "anchor" ? (
+              <a key={item.title} href={item.to} className="h-full">
+                <Card className="p-6 h-full flex flex-col hover:-translate-y-1 transition">
+                  <h3 className="text-lg font-bold text-slate-900">{item.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
+                  <div className="mt-auto text-sm font-semibold text-green-700">
+                    詳しく見る →
+                  </div>
+                </Card>
+              </a>
+            ) : (
+              <Link key={item.title} to={item.to} className="h-full">
+                <Card className="p-6 h-full flex flex-col hover:-translate-y-1 transition">
+                  <h3 className="text-lg font-bold text-slate-900">{item.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
+                  <div className="mt-auto text-sm font-semibold text-green-700">
+                    相談する →
+                  </div>
+                </Card>
+              </Link>
+            )
+          )}
         </div>
       </Section>
 
@@ -102,22 +139,20 @@ export default function Home() {
         title="安心して相談できる理由"
         description="BtoB取引に必要な情報を整理し、見積・相談までの流れが分かるようにしています。"
       >
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr] items-start">
-          <Card className="p-6">
-            <div className="grid gap-4 md:grid-cols-3">
-              {[
-                { title: "対応エリア", text: "兵庫県中心に周辺エリアへ柔軟対応。" },
-                { title: "納品フロー", text: "相談 → 提案 → 手配 → 納品を最短で。" },
-                { title: "専門スタッフ", text: "用途に合わせた薬品選定を支援。" },
-              ].map((item) => (
-                <div key={item.title} className="rounded-xl border border-slate-200 p-4 bg-slate-50">
-                  <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-                  <p className="mt-2 text-sm text-slate-600">{item.text}</p>
-                </div>
-              ))}
-            </div>
-          </Card>
-          <Card className="p-6 space-y-4">
+        <div className="grid gap-6 lg:grid-cols-2 items-stretch">
+          <div className="flex h-full flex-col gap-4">
+            {[
+              { title: "対応エリア", text: "兵庫県中心に周辺エリアへ柔軟対応。" },
+              { title: "納品フロー", text: "相談 → 提案 → 手配 → 納品を最短で。" },
+              { title: "専門スタッフ", text: "用途に合わせた薬品選定を支援。" },
+            ].map((item) => (
+              <Card key={item.title} className="p-5 h-full">
+                <p className="text-sm font-semibold text-slate-900">{item.title}</p>
+                <p className="mt-2 text-sm text-slate-600">{item.text}</p>
+              </Card>
+            ))}
+          </div>
+          <Card className="p-6 h-full flex flex-col">
             <div>
               <p className="section-title">FLOW</p>
               <h3 className="mt-2 text-xl font-bold text-gray-900">取引の流れ</h3>
@@ -137,7 +172,7 @@ export default function Home() {
                 ))}
               </ol>
             </div>
-            <div className="rounded-xl bg-green-50 border border-green-100 p-4 text-sm text-slate-700">
+            <div className="mt-auto rounded-xl bg-green-50 border border-green-100 p-4 text-sm text-slate-700">
               <p className="font-semibold text-green-700">用途が不明でもOK</p>
               <p className="mt-1">「何に使うか」だけ教えていただければ最適品を提案します。</p>
             </div>
@@ -146,34 +181,13 @@ export default function Home() {
       </Section>
 
 
-      <Section
-        eyebrow="SERVICES"
-        title="大和薬品の提供サービス"
-        description="薬品の選定から回収・処分まで、用途に合わせた支援を行います。"
-        className="bg-slate-50"
-      >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {[
-            { title: "薬品の販売・提案", desc: "用途や現場条件に合わせて最適品をご提案。" },
-            { title: "見積・調達サポート", desc: "納期・規格・コストの相談を迅速に対応。" },
-            { title: "安全・取扱い相談", desc: "保管や法令対応など安心運用を支援。" },
-            { title: "回収・処分サービス", desc: "処分に困る薬品の回収・処理をご提案。" },
-          ].map((item) => (
-            <Card key={item.title} className="p-5">
-              <h3 className="text-base font-semibold text-slate-900">{item.title}</h3>
-              <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
-
-      <Section className="bg-slate-50 pt-0">
+      <Section id="disposal" className="bg-slate-50">
         <Card className="p-8 border-slate-100">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
             回収・処分サービス
           </span>
           <h2 className="mt-4 text-2xl md:text-3xl font-extrabold text-gray-900">
-            古くなって処分に困った薬品の<span className="text-green-700">回収・処分</span>を承ります
+            回収・処分のご相談
           </h2>
           <p className="mt-3 text-gray-600 leading-relaxed">
             ラベル不明・長期保管・固結／沈殿・在庫整理など、まずは現状をお知らせください。安全・法令順守での処理方法をご提案します。
