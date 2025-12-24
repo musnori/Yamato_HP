@@ -27,7 +27,7 @@ export default function Home() {
             化学薬品・試薬・工業薬品の見積・相談を最短で。
           </h1>
           <p className="mt-4 max-w-2xl text-white/85 text-lg leading-relaxed">
-            大和薬品株式会社は、学校・工場・研究機関などの用途に合わせて薬品をご提案。何を選べば良いか分からない場合も、相談から整理できます。
+            大和薬品株式会社は、学校・工場・研究機関などの用途に合わせて薬品をご提案。
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <PrimaryCTA
@@ -45,7 +45,6 @@ export default function Home() {
       <Section
         eyebrow="GREETING"
         title="ごあいさつ"
-        description="歴史・取扱領域・供給体制を簡潔にご紹介します。"
       >
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] items-stretch">
           <Card className="p-6 md:p-8 h-full flex flex-col">
@@ -72,7 +71,6 @@ export default function Home() {
       <Section
         eyebrow="NEEDS"
         title="よくあるご相談"
-        description="「急ぎ」「選定が不安」などの悩みからすぐに見積・相談へ進めます。"
       >
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4 items-stretch">
           {[
@@ -132,7 +130,6 @@ export default function Home() {
       <Section
         eyebrow="PRODUCT CATEGORY"
         title="取扱カテゴリ"
-        description="気になるカテゴリからすぐに探せます。用途が未定でも相談可能です。"
         className="bg-slate-50"
         actions={<PrimaryCTA to="/products" label="すべての製品を見る" variant="outline" />}
       >
@@ -157,7 +154,7 @@ export default function Home() {
       <Section
         eyebrow="TRUST"
         title="安心して相談できる理由"
-        description="BtoB取引に必要な情報を整理し、見積・相談までの流れが分かるようにしています。"
+
       >
         <div className="grid gap-6 lg:grid-cols-2 items-stretch">
           <div className="flex h-full flex-col gap-4">
