@@ -12,6 +12,7 @@ export default function Community() {
       to: "http://blog.yamato-chemi.co.jp/",
       tag: "BLOG",
       date: "随時更新",
+      bg: "/images/president-blog-bg.png",
       external: true,
     },
     {
@@ -20,6 +21,7 @@ export default function Community() {
       to: "https://nishihyogo-chemical-coop.com/",
       tag: "ASSOCIATION",
       date: "地域連携",
+      bg: "/images/coop-bg.png",
       external: true,
     },
     {
@@ -28,6 +30,7 @@ export default function Community() {
       to: "/collection",
       tag: "ARCHIVE",
       date: "文化活動",
+      bg: "/images/banner.jpg",
       external: false,
     },
   ];
@@ -60,12 +63,22 @@ export default function Community() {
         <div className="grid gap-6 md:grid-cols-3">
           {items.map((item) => {
             const content = (
-              <Card className="p-6 h-full transition hover:-translate-y-1">
-                <span className="tag">{item.tag}</span>
-                <h2 className="mt-4 text-xl font-bold text-slate-900">{item.title}</h2>
-                <p className="mt-2 text-sm text-slate-600">{item.description}</p>
-                <p className="mt-4 text-xs text-slate-500">更新: {item.date}</p>
-                <div className="mt-4 text-sm font-semibold text-green-700">詳しく見る →</div>
+              <Card className="relative overflow-hidden h-full transition hover:-translate-y-1">
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url('${item.bg}')` }}
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-slate-900/55" aria-hidden="true" />
+                <div className="relative z-10 flex h-full flex-col p-6 text-white">
+                  <span className="inline-flex w-fit rounded-full bg-white/15 px-3 py-1 text-xs font-semibold tracking-wider text-white">
+                    {item.tag}
+                  </span>
+                  <h2 className="mt-4 text-xl font-bold">{item.title}</h2>
+                  <p className="mt-2 text-sm text-white/85">{item.description}</p>
+                  <p className="mt-4 text-xs text-white/70">更新: {item.date}</p>
+                  <div className="mt-auto pt-4 text-sm font-semibold text-white">詳しく見る →</div>
+                </div>
               </Card>
             );
 

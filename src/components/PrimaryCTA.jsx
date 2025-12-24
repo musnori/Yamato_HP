@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const variantStyles = {
   primary: "btn-primary",
   outline: "btn-outline",
+  outlineLight: "btn-outline border-white/60 bg-transparent text-white hover:bg-white/10",
   secondary: "btn-secondary",
 };
 

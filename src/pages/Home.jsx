@@ -28,7 +28,7 @@ export default function Home() {
               className="bg-white/10 border-white/30 text-white hover:bg-white/20"
             />
             <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" />
-            <PrimaryCTA to="/contact?subject=相談したい" label="相談する" variant="outline" className="border-white/50 text-white hover:bg-white/10" />
+            <PrimaryCTA to="/contact?subject=相談したい" label="相談する" variant="outlineLight" />
           </div>
         </div>
       </section>
@@ -38,7 +38,7 @@ export default function Home() {
         title="よくあるご相談"
         description="「急ぎ」「選定が不安」などの悩みからすぐに見積・相談へ進めます。"
       >
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-3 items-stretch">
           {[
             {
               title: "急ぎで必要",
@@ -56,11 +56,11 @@ export default function Home() {
               to: "/contact?subject=安全・取扱いの相談",
             },
           ].map((item) => (
-            <Link key={item.title} to={item.to}>
-              <Card className="p-6 hover:-translate-y-1 transition">
+            <Link key={item.title} to={item.to} className="h-full">
+              <Card className="p-6 h-full flex flex-col hover:-translate-y-1 transition">
                 <h3 className="text-lg font-bold text-slate-900">{item.title}</h3>
                 <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
-                <div className="mt-4 text-sm font-semibold text-green-700">
+                <div className="mt-auto text-sm font-semibold text-green-700">
                   相談する →
                 </div>
               </Card>
@@ -146,7 +146,28 @@ export default function Home() {
       </Section>
 
 
-      <Section className="bg-slate-50">
+      <Section
+        eyebrow="SERVICES"
+        title="大和薬品の提供サービス"
+        description="薬品の選定から回収・処分まで、用途に合わせた支援を行います。"
+        className="bg-slate-50"
+      >
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            { title: "薬品の販売・提案", desc: "用途や現場条件に合わせて最適品をご提案。" },
+            { title: "見積・調達サポート", desc: "納期・規格・コストの相談を迅速に対応。" },
+            { title: "安全・取扱い相談", desc: "保管や法令対応など安心運用を支援。" },
+            { title: "回収・処分サービス", desc: "処分に困る薬品の回収・処理をご提案。" },
+          ].map((item) => (
+            <Card key={item.title} className="p-5">
+              <h3 className="text-base font-semibold text-slate-900">{item.title}</h3>
+              <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="bg-slate-50 pt-0">
         <Card className="p-8 border-slate-100">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
             回収・処分サービス
@@ -202,7 +223,7 @@ export default function Home() {
           <p className="text-white/80 mb-6">用途やご希望に合わせた最適な薬品をご提案いたします。</p>
           <div className="flex flex-wrap justify-center gap-3">
             <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" className="bg-white text-green-800 hover:bg-slate-100" />
-            <PrimaryCTA to="/contact?subject=相談したい" label="相談する" variant="outline" className="border-white/60 text-white hover:bg-white/10" />
+            <PrimaryCTA to="/contact?subject=相談したい" label="相談する" variant="outlineLight" />
           </div>
         </div>
       </section>
