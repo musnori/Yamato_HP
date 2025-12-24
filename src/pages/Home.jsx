@@ -12,7 +12,7 @@ export default function Home() {
     "これからも安心してお取引いただけるよう、丁寧な提案と安定供給に努めてまいります。",
   ];
 
-  const greetingImage = "/images/haiki1.jpg";
+  const greetingImage = "/images/souko1.jpg";
 
   return (
     <div className="bg-white text-gray-800 font-sans">
