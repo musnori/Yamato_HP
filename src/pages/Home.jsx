@@ -198,41 +198,6 @@ export default function Home() {
       </Section>
 
 
-      <Section id="disposal" className="bg-slate-50">
-        <Card className="p-8 border-slate-100">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
-            回収・処分サービス
-          </span>
-          <h2 className="mt-4 text-2xl md:text-3xl font-extrabold text-gray-900">
-            回収・処分のご相談
-          </h2>
-          <p className="mt-3 text-gray-600 leading-relaxed">
-            ラベル不明・長期保管・固結／沈殿・在庫整理など、まずは現状をお知らせください。安全・法令順守での処理方法をご提案します。
-          </p>
-
-          <ul className="mt-4 space-y-2 text-gray-700">
-            {[
-              "ラベル不明の薬品も可能",
-              "事前現地確認やマニフェスト発行も可能",
-            ].map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-green-600" />
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-6 flex flex-wrap gap-4">
-            <PrimaryCTA
-              to={`/contact?subject=${encodeURIComponent("薬品の回収・処分の相談")}`}
-              label="回収・処分について相談する"
-            />
-            <PrimaryCTA to="/contact" label="お問い合わせフォームへ" variant="outline" />
-          </div>
-        </Card>
-      </Section>
-
-
       {/* =======================
           お知らせ
       ======================== */}
