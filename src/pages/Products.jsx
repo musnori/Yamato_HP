@@ -531,18 +531,107 @@ export default function Products() {
         description="検索して候補を比較し、そのまま見積相談へ進めます。"
         className="bg-white"
       >
-        <div className="grid gap-4 md:grid-cols-3">
-          {[
-            { title: "探す", text: "キーワードや用途で絞り込み。" },
-            { title: "比較する", text: "用途・規格・説明を確認。" },
-            { title: "見積する", text: "気になる製品からそのまま相談。" },
-          ].map((item) => (
-            <Card key={item.title} className="p-5">
-              <p className="text-sm font-semibold text-green-700">{item.title}</p>
-              <p className="mt-2 text-sm text-slate-600">{item.text}</p>
-            </Card>
-          ))}
-        </div>
+        {filteredProducts.length === 0 ? (
+          <div className="rounded-2xl border border-slate-200 bg-white p-6">
+            <p className="text-slate-600">該当する製品がありません。条件を変えてみてください。</p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <button type="button" className="btn-primary" onClick={() => ask("条件に合う製品")}>
+                見積・相談する
+              </button>
+              <PrimaryCTA to="/contact" label="お問い合わせフォームへ" variant="outline" />
+            </div>
+          </div>
+        ) : null}
+
+        {filteredProducts.length > 0 && (
+          <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {filteredProducts.map((product) => (
+              <Card key={product.id} className="p-5 flex flex-col">
+                <div className="flex flex-wrap gap-2 text-xs text-slate-600">
+                  <span className="tag">{PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.label}</span>
+                  {product.tags.map((tag) => (
+                    <span key={tag} className="inline-flex items-center rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900">{product.name}</h3>
+                <p className="mt-2 text-sm text-slate-600">{product.description}</p>
+                <div className="mt-4 flex gap-3">
+                  <button
+                    type="button"
+                    className="btn-outline"
+                    onClick={() => setOpenDetail(openDetail === product.id ? null : product.id)}
+                  >
+                    詳細
+                  </button>
+                  <button type="button" className="btn-primary" onClick={() => ask(product.name)}>
+                    見積・相談する
+                  </button>
+                </div>
+                {openDetail === product.id && (
+                  <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
+                    <p className="font-semibold text-slate-900">概要</p>
+                    <p className="mt-1">{product.detail.overview}</p>
+                    <p className="mt-3 font-semibold text-slate-900">用途例</p>
+                    <ul className="mt-1 list-disc list-inside space-y-1">
+                      {product.detail.uses.map((use) => (
+                        <li key={use}>{use}</li>
+                      ))}
+                    </ul>
+                    <p className="mt-3 font-semibold text-slate-900">仕様</p>
+                    <div className="mt-2 grid gap-2">
+                      {product.detail.specs.map(([label, value]) => (
+                        <div key={label} className="flex justify-between text-xs text-slate-600">
+                          <span>{label}</span>
+                          <span className="font-semibold text-slate-800">{value}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="mt-3 text-xs text-slate-500">{product.detail.notes}</p>
+                  </div>
+                )}
+              </Card>
+            ))}
+          </div>
+        )}
+
+        {filteredProducts.length === 0 && (
+          <div className="mt-10">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-slate-900">おすすめ製品</h3>
+              <span className="text-xs text-slate-500">まずはこちらから</span>
+            </div>
+            <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {recommendedProducts.map((product) => (
+                <Card key={product.id} className="p-5 flex flex-col">
+                  <div className="flex flex-wrap gap-2 text-xs text-slate-600">
+                    <span className="tag">{PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.label}</span>
+                    {product.tags.map((tag) => (
+                      <span key={tag} className="inline-flex items-center rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold text-slate-900">{product.name}</h3>
+                  <p className="mt-2 text-sm text-slate-600">{product.description}</p>
+                  <div className="mt-4 flex gap-3">
+                    <button type="button" className="btn-outline" onClick={() => ask(product.name)}>
+                      見積・相談する
+                    </button>
+                    <button
+                      type="button"
+                      className="btn-primary"
+                      onClick={() => setOpenDetail(openDetail === product.id ? null : product.id)}
+                    >
+                      詳細を見る
+                    </button>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
       </Section>
 
       <Section className="pt-0">
