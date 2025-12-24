@@ -63,7 +63,7 @@ export default function Layout() {
 
   const nav = [
     { label: "製品", path: "/products" },
-    { label: "用途・サービス", path: "/products#search" },
+    { label: "サービス", path: "/services" },
     { label: "会社", path: "/company" },
     { label: "地域活動", path: "/community" },
     { label: "アクセス", path: "/access" },
@@ -283,6 +283,7 @@ export default function Layout() {
             <p className="text-white font-semibold mb-3">サイトマップ</p>
             <ul className="space-y-2 text-sm">
               <li><Link className="hover:underline" to="/products">製品</Link></li>
+              <li><Link className="hover:underline" to="/services">サービス</Link></li>
               <li><Link className="hover:underline" to="/company">会社概要</Link></li>
               <li><Link className="hover:underline" to="/community">地域活動</Link></li>
               <li><Link className="hover:underline" to="/access">アクセス</Link></li>
