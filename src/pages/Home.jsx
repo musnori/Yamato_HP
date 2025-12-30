@@ -95,8 +95,8 @@ export default function Home() {
             {
               title: "回収・処分してほしい",
               desc: "古い薬品、ラベル不明、在庫整理など。回収・処分の相談に対応します。",
-              to: "#disposal",
-              type: "anchor",
+              to: "/services",
+              type: "link",
             },
           ].map((item) =>
             item.type === "anchor" ? (
