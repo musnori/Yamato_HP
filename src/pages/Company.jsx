@@ -54,50 +54,6 @@ export default function Company() {
 
       <div className="layout-container py-12 grid gap-10 lg:grid-cols-3">
         <section className="lg:col-span-2 space-y-10">
-          <Section
-            eyebrow="VALUE"
-            title="何をしている会社か"
-            description="用途に合わせた薬品選定・調達・納品までを一貫して支援します。"
-            className="pt-0"
-            withContainer={false}
-          >
-            <div className="grid gap-4 md:grid-cols-3">
-              {[
-                { title: "相談から選定", text: "用途・現場条件を伺い最適品をご提案。", icon: "🧩" },
-                { title: "調達・納品", text: "在庫と配送体制でスピーディーに供給。", icon: "🚚" },
-                { title: "安全と法令", text: "保管・取扱いも含めて安心を担保。", icon: "🧪" },
-              ].map((item) => (
-                <Card key={item.title} className="p-4 bg-white">
-                  <div className="text-xl">{item.icon}</div>
-                  <p className="mt-2 font-semibold text-slate-900">{item.title}</p>
-                  <p className="mt-2 text-sm text-slate-600">{item.text}</p>
-                </Card>
-              ))}
-            </div>
-          </Section>
-
-          <Section
-            eyebrow="TRUST"
-            title="安心材料"
-            description="90年以上の実績と専門スタッフ体制で、地域の薬品供給を支えています。"
-            className="pt-0"
-            withContainer={false}
-          >
-            <div className="grid gap-4 md:grid-cols-3">
-              {[
-                { title: "90年以上の実績", text: "地域の医薬・化学品供給に長年携わる信頼。", icon: "🏢" },
-                { title: "迅速な納品体制", text: "用途に合わせた在庫と配送でスピーディーに対応。", icon: "🚚" },
-                { title: "用途別の提案", text: "現場の課題に合わせて最適品を提案。", icon: "🧪" },
-              ].map((item) => (
-                <Card key={item.title} className="p-4 bg-slate-50">
-                  <div className="text-xl">{item.icon}</div>
-                  <p className="mt-2 font-semibold text-slate-900">{item.title}</p>
-                  <p className="mt-2 text-sm text-slate-600">{item.text}</p>
-                </Card>
-              ))}
-            </div>
-          </Section>
-
           <Card>
             <div className="border-b border-slate-200 p-5">
               <h2 className="text-xl font-bold text-gray-900">会社概要</h2>
@@ -125,20 +81,7 @@ export default function Company() {
             </div>
           </Card>
 
-          <Card className="p-6">
-            <p className="section-title">FLOW</p>
-            <h2 className="mt-2 text-2xl font-bold text-slate-900">取引の流れ</h2>
-            <ol className="mt-4 grid gap-3 sm:grid-cols-2">
-              {["お問い合わせ", "用途・条件のヒアリング", "見積・提案", "納品・サポート"].map((step, index) => (
-                <li key={step} className="flex items-start gap-3 rounded-xl border border-slate-200 p-4 bg-white">
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-green-600 text-white text-xs font-bold">
-                    {index + 1}
-                  </span>
-                  <span className="text-sm text-slate-700">{step}</span>
-                </li>
-              ))}
-            </ol>
-          </Card>
+          
 
           <Card className="p-6">
             <p className="section-title">QUALITY & SAFETY</p>
