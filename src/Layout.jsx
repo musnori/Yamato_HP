@@ -61,11 +61,12 @@ export default function Layout() {
     document.body.style.overflow = open || searchOpen ? "hidden" : "";
   }, [open, searchOpen]);
 
+  // ▼▼▼ 修正: 「地域活動」を削除しました ▼▼▼
   const nav = [
     { label: "製品", path: "/products" },
     { label: "サービス", path: "/services" },
     { label: "会社", path: "/company" },
-    { label: "地域活動", path: "/community" },
+    // { label: "地域活動", path: "/community" }, // 削除
     { label: "アクセス", path: "/access" },
     { label: "お問い合わせ", path: "/contact" },
   ];
@@ -288,7 +289,7 @@ export default function Layout() {
               <li><Link className="hover:underline" to="/community">地域活動</Link></li>
               <li><Link className="hover:underline" to="/access">アクセス</Link></li>
               <li><Link className="hover:underline" to="/contact">お問い合わせ</Link></li>
-              <li><Link className="hover:underline" to="/president-blog">社長ブログ</Link></li>
+              {/* 社長ブログなどは Community 内に移動しましたが、フッターには残してもOKです */}
             </ul>
           </div>
           <div className="space-y-3">
