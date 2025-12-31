@@ -3,19 +3,23 @@ import { Link } from "react-router-dom";
 import Card from "../components/Card";
 import PrimaryCTA from "../components/PrimaryCTA";
 import Section from "../components/Section";
-import Community from "./Community";
 
-// アイコン
+// アイコン (Communityで使用していたものも含めて一括インポート)
 import { 
   MapPin, 
   Truck, 
   Users, 
   Lightbulb, 
   ArrowRight, 
-  CheckCircle2 
+  CheckCircle2,
+  BookOpenText, // 追加
+  Building2,    // 追加
+  Camera,       // 追加
+  ExternalLink  // 追加
 } from "lucide-react";
 
 export default function Home() {
+  // --- データ定義 ---
   const greetingText = [
     "昭和8年（1933年）創業以来、地域に根ざした化学品供給の専門商社として歩んでまいりました。",
     "試薬・化学工業薬品・医薬品関連など、学校・工場・研究機関・プール施設といった多様な現場に対応しています。",
@@ -27,6 +31,43 @@ export default function Home() {
 
   const heroImages = ["/morninng.jpg", "/yugata.jpg", "/night.jpg"];
   const [heroIndex, setHeroIndex] = useState(0);
+
+  // 地域活動のデータ (Community.jsxから移動)
+  const communityItems = [
+    {
+      title: "社長ブログ",
+      description: "代表メッセージや日々の気づき、業界への想いをブログ形式で発信しています。",
+      to: "https://yamato-chemi-blog.hatenablog.com/",
+      tag: "BLOG",
+      tagColor: "bg-emerald-100 text-emerald-700",
+      date: "随時更新",
+      bg: "/images/president-blog-bg.png",
+      icon: BookOpenText,
+      external: true,
+    },
+    {
+      title: "西兵庫化学薬品協同組合",
+      description: "地域の化学薬品供給を支える連携ネットワーク。組合の活動内容をご紹介します。",
+      to: "https://nishihyogo-chemical-coop.com/",
+      tag: "ASSOCIATION",
+      tagColor: "bg-blue-100 text-blue-700",
+      date: "地域連携",
+      bg: "/images/coop-bg.png",
+      icon: Building2,
+      external: true,
+    },
+    {
+      title: "懐かしコレクション",
+      description: "昭和レトロな看板や道具など、創業当時からの貴重なコレクションを公開中。",
+      to: "/collection",
+      tag: "ARCHIVE",
+      tagColor: "bg-amber-100 text-amber-700",
+      date: "文化活動",
+      bg: "/images/banner.jpg",
+      icon: Camera,
+      external: false,
+    },
+  ];
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -41,7 +82,7 @@ export default function Home() {
       {/* =======================
           Hero Section
       ======================== */}
-      <section className="relative overflow-hidden bg-slate-900 text-white h-[500px] flex items-center">
+      <section className="relative overflow-hidden bg-slate-900 text-white h-[400px] flex items-center">
         <div className="absolute inset-0 z-0">
           {heroImages.map((src, i) => (
             <div
@@ -54,47 +95,49 @@ export default function Home() {
           ))}
         </div>
 
-        {/* 背景オーバーレイ：白透明 */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/20 to-transparent z-10" />
+        {/* 背景オーバーレイ */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent z-10" />
         
-        <div className="relative z-20 layout-container py-12 md:py-16">
-          <p className="text-sm font-semibold tracking-[0.3em] text-slate-900 mb-3 animate-fade-in-up drop-shadow-sm">
+        <div className="relative z-20 layout-container py-8 md:py-12">
+          <p className="text-xs font-bold tracking-[0.3em] text-emerald-800 mb-2 animate-fade-in-up drop-shadow-sm">
             Yamato Pharmaceutical
           </p>
           
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-balance leading-tight tracking-tight text-slate-900 drop-shadow-md">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-balance leading-tight tracking-tight text-slate-900 drop-shadow-sm">
             化学薬品・試薬・工業薬品の<br />
-            見積・相談を<span className="text-slate-900 drop-shadow-sm">最短</span>で。
+            見積・相談を<span className="text-emerald-700">最短</span>で。
           </h1>
           
-          <p className="mt-4 max-w-2xl text-slate-900 text-base md:text-lg leading-relaxed font-medium drop-shadow-sm">
+          <p className="mt-3 max-w-2xl text-slate-900 text-sm md:text-base leading-relaxed font-bold drop-shadow-sm opacity-90">
             大和薬品株式会社は、学校・工場・研究機関などの<br className="hidden md:block"/>
             多様な現場ニーズに合わせて最適な薬品をご提案します。
           </p>
           
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-6 flex flex-wrap gap-3">
             <PrimaryCTA
               to="/products"
               label="製品を探す"
               variant="secondary"
-              className="bg-emerald-600 border-transparent text-white hover:bg-emerald-700 shadow-lg shadow-emerald-900/20"
+              size="sm"
+              className="bg-emerald-700 border-transparent text-white hover:bg-emerald-800 shadow-md"
             />
             <PrimaryCTA 
               to="/contact?subject=見積依頼" 
               label="見積依頼" 
               variant="outline" 
-              className="border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white"
+              size="sm"
+              className="border-slate-800 text-slate-900 hover:bg-slate-800 hover:text-white"
             />
           </div>
 
-          <div className="absolute bottom-6 right-6 md:right-auto md:left-8 flex gap-3">
+          <div className="absolute bottom-4 right-4 md:right-auto md:left-8 flex gap-2">
             {heroImages.map((_, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => setHeroIndex(i)}
-                className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                  i === heroIndex ? "bg-slate-900 w-8" : "bg-slate-400/40 hover:bg-slate-600/70"
+                className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
+                  i === heroIndex ? "bg-slate-900 w-6" : "bg-slate-500/50 hover:bg-slate-700"
                 }`}
                 aria-label={`スライド${i + 1}`}
               />
@@ -106,32 +149,31 @@ export default function Home() {
       {/* =======================
           GREETING
       ======================== */}
-      <Section eyebrow="GREETING" title="ごあいさつ" className="bg-slate-50 py-8 md:py-12">
-        <div className="grid gap-6 lg:grid-cols-2 items-center">
-          <div className="order-2 lg:order-1 space-y-4">
-             <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100">
-                <div className="space-y-3 text-sm leading-7 text-slate-600 font-medium">
+      <Section eyebrow="GREETING" title="ごあいさつ" className="bg-slate-50 py-6 md:py-10">
+        <div className="grid gap-4 lg:grid-cols-2 items-center">
+          <div className="order-2 lg:order-1 space-y-3">
+             <div className="bg-white p-5 md:p-6 rounded-xl shadow-sm border border-slate-100">
+                <div className="space-y-2 text-xs md:text-sm leading-6 text-slate-700 font-medium">
                   {greetingText.map((text, i) => (
                     <p key={i}>{text}</p>
                   ))}
                 </div>
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
                   <div>
-                    <p className="text-xs text-slate-400 mb-1">REPRESENTATIVE</p>
-                    <p className="text-base font-bold text-slate-800">代表取締役社長　田路 裕之</p>
+                    <p className="text-[10px] text-slate-400 mb-0.5">REPRESENTATIVE</p>
+                    <p className="text-sm font-bold text-slate-800">代表取締役社長　田路 裕之</p>
                   </div>
                 </div>
              </div>
           </div>
-          <div className="order-1 lg:order-2 h-full min-h-[250px] md:min-h-[300px]">
-            <div className="relative h-full rounded-2xl overflow-hidden shadow-lg">
+          <div className="order-1 lg:order-2 h-full min-h-[200px] md:min-h-[250px]">
+            <div className="relative h-full rounded-xl overflow-hidden shadow-md">
               <img
                 src={greetingImage}
                 alt="大和薬品株式会社の倉庫"
                 className="h-full w-full object-cover hover:scale-105 transition-transform duration-700"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
             </div>
           </div>
         </div>
@@ -140,11 +182,11 @@ export default function Home() {
       {/* =======================
           TRUST & FLOW
       ======================== */}
-      <Section eyebrow="TRUST & FLOW" title="安心して相談できる理由" className="bg-white py-8 md:py-12">
-        <div className="grid gap-8 lg:grid-cols-2 items-start">
+      <Section eyebrow="TRUST & FLOW" title="安心して相談できる理由" className="bg-white py-6 md:py-10">
+        <div className="grid gap-6 lg:grid-cols-2 items-start">
           
           {/* 左側：TRUST */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             {[
               { 
                 icon: MapPin, 
@@ -164,16 +206,16 @@ export default function Home() {
             ].map((item, idx) => (
               <div 
                 key={idx} 
-                className="group relative bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4"
+                className="group relative bg-white rounded-xl p-4 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4"
               >
-                <div className="shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                  <item.icon size={20} strokeWidth={2} />
+                <div className="shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                  <item.icon size={18} strokeWidth={2} />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-slate-800 mb-1 flex items-center gap-2">
+                  <h3 className="text-sm font-bold text-slate-800 mb-0.5 flex items-center gap-2">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     {item.text}
                   </p>
                 </div>
@@ -182,42 +224,42 @@ export default function Home() {
           </div>
 
           {/* 右側：FLOW */}
-          <div className="bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-100 relative">
-            <div className="absolute top-0 right-0 bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-3xl">
+          <div className="bg-slate-50 rounded-2xl p-5 md:p-6 border border-slate-100 relative">
+            <div className="absolute top-0 right-0 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-3 py-1 rounded-bl-lg rounded-tr-2xl">
               FLOW
             </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-6">取引の流れ</h3>
+            <h3 className="text-base font-bold text-slate-900 mb-4">取引の流れ</h3>
             
             <div className="relative pl-2">
-              <div className="absolute left-[15px] top-2 bottom-10 w-0.5 bg-slate-200"></div>
-              <div className="space-y-6">
+              <div className="absolute left-[11px] top-2 bottom-8 w-0.5 bg-slate-200"></div>
+              <div className="space-y-4">
                 {[
                   "用途・製品の相談",
                   "見積・提案",
                   "受注・手配",
                   "納品・アフターサポート",
                 ].map((step, index) => (
-                  <div key={step} className="relative flex items-center gap-4">
-                    <div className="relative z-10 flex items-center justify-center w-8 h-8 rounded-full bg-white border-2 border-emerald-500 text-emerald-600 font-bold text-sm shadow-sm">
+                  <div key={step} className="relative flex items-center gap-3">
+                    <div className="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white border-2 border-emerald-500 text-emerald-600 font-bold text-xs shadow-sm">
                       {index + 1}
                     </div>
-                    <div className="text-slate-700 font-medium text-sm md:text-base">
+                    <div className="text-slate-700 font-medium text-xs md:text-sm">
                       {step}
                     </div>
                     {index < 3 && (
-                      <div className="absolute left-[13px] top-8 text-slate-300">
-                        <ArrowRight size={14} className="rotate-90" />
+                      <div className="absolute left-[10px] top-6 text-slate-300">
+                        <ArrowRight size={10} className="rotate-90" />
                       </div>
                     )}
                   </div>
                 ))}
               </div>
             </div>
-            <div className="mt-6 bg-emerald-50/80 border border-emerald-100 rounded-xl p-4 flex items-start gap-3">
-              <Lightbulb className="text-emerald-500 shrink-0 mt-0.5" size={20} />
+            <div className="mt-4 bg-emerald-50/80 border border-emerald-100 rounded-lg p-3 flex items-start gap-3">
+              <Lightbulb className="text-emerald-500 shrink-0 mt-0.5" size={16} />
               <div>
-                <p className="font-bold text-emerald-800 text-sm">用途が不明でもOK</p>
-                <p className="mt-0.5 text-xs md:text-sm text-emerald-700/80 leading-relaxed">
+                <p className="font-bold text-emerald-800 text-xs">用途が不明でもOK</p>
+                <p className="mt-0.5 text-[10px] md:text-xs text-emerald-700/80 leading-relaxed">
                   「何に使うか」だけ教えていただければ、最適な製品をご提案します。
                 </p>
               </div>
@@ -229,8 +271,8 @@ export default function Home() {
       {/* =======================
           NEEDS
       ======================== */}
-      <Section eyebrow="NEEDS" title="よくあるご相談" className="bg-slate-50 py-8 md:py-12">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 items-stretch">
+      <Section eyebrow="NEEDS" title="よくあるご相談" className="bg-slate-50 py-6 md:py-10">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4 items-stretch">
           {[
             {
               title: "急ぎで必要",
@@ -254,14 +296,14 @@ export default function Home() {
             },
           ].map((item) => (
             <Link key={item.title} to={item.to} className="h-full group">
-              <Card className="p-5 h-full flex flex-col border-none shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <div className="flex items-center justify-between mb-3">
-                  <CheckCircle2 size={20} className="text-emerald-500/50 group-hover:text-emerald-500 transition-colors" />
+              <Card className="p-4 h-full flex flex-col border-none shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div className="flex items-center justify-between mb-2">
+                  <CheckCircle2 size={18} className="text-emerald-500/50 group-hover:text-emerald-500 transition-colors" />
                 </div>
-                <h3 className="text-base font-bold text-slate-800">{item.title}</h3>
-                <p className="mt-1 text-sm text-slate-500 group-hover:text-slate-600 transition-colors leading-snug">{item.desc}</p>
-                <div className="mt-auto pt-3 text-xs font-bold text-emerald-600 flex items-center gap-1 group-hover:gap-2 transition-all">
-                  相談する <ArrowRight size={14} />
+                <h3 className="text-sm font-bold text-slate-800">{item.title}</h3>
+                <p className="mt-1 text-xs text-slate-500 group-hover:text-slate-600 transition-colors leading-snug">{item.desc}</p>
+                <div className="mt-auto pt-2 text-[10px] font-bold text-emerald-600 flex items-center gap-1 group-hover:gap-2 transition-all">
+                  相談する <ArrowRight size={12} />
                 </div>
               </Card>
             </Link>
@@ -275,10 +317,10 @@ export default function Home() {
       <Section
         eyebrow="PRODUCT CATEGORY"
         title="取扱カテゴリ"
-        className="bg-white py-8 md:py-12"
-        actions={<PrimaryCTA to="/products" label="すべての製品を見る" variant="outline" size="sm" />}
+        className="bg-white py-6 md:py-10"
+        actions={<PrimaryCTA to="/products" label="すべての製品を見る" variant="outline" size="sm" className="text-xs px-3 py-1.5" />}
       >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {[
             { title: "水処理用薬品", desc: "浄水・排水・プール管理", to: "/products?cat=water" },
             { title: "試薬・研究用", desc: "研究・検査・教育現場", to: "/products?cat=reagents" },
@@ -286,9 +328,9 @@ export default function Home() {
             { title: "クリーニング関係", desc: "洗浄・除菌・漂白用途", to: "/products?cat=cleaning" },
           ].map((c) => (
             <Link key={c.title} to={c.to} className="group">
-              <div className="h-full bg-slate-50 rounded-xl p-5 hover:bg-emerald-50 hover:shadow-md transition-all duration-300 border border-slate-100 hover:border-emerald-100">
-                <h3 className="text-base font-bold text-slate-800 group-hover:text-emerald-900 transition-colors">{c.title}</h3>
-                <p className="mt-1 text-xs md:text-sm text-slate-500 group-hover:text-emerald-700/80 transition-colors">{c.desc}</p>
+              <div className="h-full bg-slate-50 rounded-xl p-4 hover:bg-emerald-50 hover:shadow-md transition-all duration-300 border border-slate-100 hover:border-emerald-100">
+                <h3 className="text-sm font-bold text-slate-800 group-hover:text-emerald-900 transition-colors">{c.title}</h3>
+                <p className="mt-1 text-xs text-slate-500 group-hover:text-emerald-700/80 transition-colors">{c.desc}</p>
               </div>
             </Link>
           ))}
@@ -296,11 +338,77 @@ export default function Home() {
       </Section>
 
       {/* =======================
-          COMMUNITY (地域活動)
+          COMMUNITY (Home.jsxに統合)
       ======================== */}
-      <div className="border-t border-slate-100">
-        <Community isEmbedded={true} />
-      </div>
+      <Section
+        eyebrow="ACTIVITY"
+        title="地域活動・関連コンテンツ"
+        description="それぞれのカードをクリックすると詳細ページへ移動します。"
+        className="bg-slate-50 border-t border-slate-100 py-6 md:py-10"
+      >
+        <div className="grid gap-4 md:grid-cols-3">
+          {communityItems.map((item) => {
+            // カードの中身
+            const CardContent = (
+              <div className="group h-full flex flex-col bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                {/* 画像エリア */}
+                <div className="relative h-32 md:h-40 overflow-hidden bg-slate-100">
+                  {item.bg ? (
+                    <img 
+                      src={item.bg} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                  ) : null}
+                  <div className={`absolute inset-0 flex items-center justify-center bg-slate-100 text-slate-300 ${item.bg ? 'hidden' : 'flex'}`}>
+                    <item.icon size={32} />
+                  </div>
+                  
+                  {/* タグ */}
+                  <div className="absolute top-3 left-3">
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wide shadow-sm ${item.tagColor}`}>
+                      {item.tag}
+                    </span>
+                  </div>
+                </div>
+
+                {/* テキストエリア */}
+                <div className="flex-1 p-4 flex flex-col">
+                  <div className="flex items-start justify-between mb-2">
+                    <h2 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors flex items-center gap-1.5">
+                      <item.icon size={16} className="text-slate-400 group-hover:text-emerald-500" />
+                      {item.title}
+                    </h2>
+                    {item.external && <ExternalLink size={14} className="text-slate-300 group-hover:text-emerald-500" />}
+                  </div>
+                  
+                  <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                    {item.description}
+                  </p>
+                  
+                  <div className="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between text-[10px]">
+                    <span className="text-slate-400 font-mono">{item.date}</span>
+                    <span className="font-bold text-emerald-600 flex items-center gap-1 group-hover:gap-2 transition-all">
+                      VIEW MORE <ArrowRight size={12} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+
+            // リンクの出し分け
+            return item.external ? (
+              <a key={item.title} href={item.to} target="_blank" rel="noopener noreferrer" className="block h-full">{CardContent}</a>
+            ) : (
+              <Link key={item.title} to={item.to} className="block h-full">{CardContent}</Link>
+            );
+          })}
+        </div>
+      </Section>
 
       {/* =======================
           NEWS (お知らせ)
@@ -308,51 +416,44 @@ export default function Home() {
       <Section
         eyebrow="NEWS"
         title="お知らせ"
-        className="bg-white pt-0 md:pt-0 pb-12 md:pb-16" 
-        actions={<PrimaryCTA to="/news" label="一覧を見る" variant="outline" size="sm" />}
+        className="bg-white pt-0 md:pt-0 pb-8 md:pb-12" 
+        actions={<PrimaryCTA to="/news" label="一覧" variant="outline" size="sm" className="text-xs px-3 py-1.5" />}
       >
-        <div className="bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+        <div className="bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
           {[
              { date: "2025.12.30", cat: "お知らせ", title: "Webサイトをリニューアルいたしました。" },
              { date: "2025.12.15", cat: "営業日", title: "年末年始の営業についてのお知らせ" },
              { date: "2025.11.20", cat: "製品情報", title: "水処理用凝集剤の新規在庫が入荷しました" },
           ].map((news, i) => (
-            <Link key={i} to="/news" className="flex flex-col md:flex-row md:items-center gap-2 md:gap-5 p-4 md:p-5 hover:bg-white transition-colors group border-b border-slate-200 last:border-0">
-               <div className="flex items-center gap-3 shrink-0">
-                 <span className="text-sm font-mono text-slate-500">{news.date}</span>
+            <Link key={i} to="/news" className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 p-3 md:p-4 hover:bg-white transition-colors group border-b border-slate-200 last:border-0">
+               <div className="flex items-center gap-2 shrink-0">
+                 <span className="text-xs font-mono text-slate-500">{news.date}</span>
                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-600 group-hover:bg-emerald-100 group-hover:text-emerald-700 transition-colors">
                    {news.cat}
                  </span>
                </div>
-               <p className="text-sm font-medium text-slate-800 group-hover:text-emerald-800 transition-colors line-clamp-1">
+               <p className="text-xs md:text-sm font-medium text-slate-800 group-hover:text-emerald-800 transition-colors line-clamp-1">
                  {news.title}
                </p>
-               <ArrowRight className="ml-auto text-slate-300 group-hover:text-emerald-500 opacity-0 group-hover:opacity-100 transition-all" size={16} />
+               <ArrowRight className="ml-auto text-slate-300 group-hover:text-emerald-500 opacity-0 group-hover:opacity-100 transition-all" size={14} />
             </Link>
           ))}
         </div>
       </Section>
 
       {/* Footer CTA */}
-      <section className="py-12 md:py-16 bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 text-white text-center">
+      <section className="py-10 md:py-12 bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 text-white text-center">
         <div className="layout-container max-w-3xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">薬品の調達でお困りですか？</h2>
-          <p className="text-emerald-100 text-base md:text-lg mb-8 leading-relaxed">
+          <h2 className="text-xl md:text-2xl font-bold mb-3">薬品の調達でお困りですか？</h2>
+          <p className="text-emerald-100 text-sm md:text-base mb-6 leading-relaxed">
             「すぐに欲しい」「どれが良いかわからない」など、<br className="hidden md:inline" />
             お客様の課題に合わせて柔軟に対応いたします。
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            {/* ▼▼▼ 修正: 背景をエメラルド、文字を白に変更 ▼▼▼ */}
+          <div className="flex justify-center">
             <PrimaryCTA 
-              to="/contact?subject=見積依頼" 
-              label="無料で見積依頼する" 
-              className="bg-emerald-600 text-white hover:bg-emerald-700 px-8 py-3 text-base shadow-xl border-transparent" 
-            />
-            <PrimaryCTA 
-              to="/contact?subject=相談したい" 
-              label="まずは相談する" 
-              variant="outlineLight"
-              className="px-8 py-3 text-base"
+              to="/contact" 
+              label="問い合わせる" 
+              className="bg-emerald-600 !text-white hover:bg-emerald-700 px-8 py-3 text-base shadow-xl border-transparent" 
             />
           </div>
         </div>
