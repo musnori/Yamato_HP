@@ -59,10 +59,10 @@ export default function Services() {
 
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             
-            {/* 左：画像レイアウト（ずらし配置） */}
+            {/* 左：画像レイアウト */}
             <div className="relative">
-              <div className="grid grid-cols-2 gap-4 items-start">
-                <div className="translate-y-8">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
                   <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-100">
                     <img
                       src="/images/haiki1.jpg"
@@ -174,7 +174,8 @@ export default function Services() {
               
               <Card className="h-full p-6 border-slate-100 hover:border-emerald-200 hover:shadow-lg transition-all duration-300">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-4xl font-black text-slate-100 group-hover:text-emerald-50 transition-colors">
+                  {/* ▼▼▼ 修正: 文字色を text-slate-100 から text-emerald-200 に変更して視認性を向上 ▼▼▼ */}
+                  <span className="text-4xl font-black text-emerald-200 group-hover:text-emerald-600 transition-colors">
                     {item.step}
                   </span>
                   <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">

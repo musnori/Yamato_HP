@@ -117,9 +117,9 @@ export default function Home() {
             <PrimaryCTA
               to="/products"
               label="製品を探す"
-              variant="secondary"
+              variant="outline"
               size="sm"
-              className="bg-emerald-700 border-transparent text-white hover:bg-emerald-800 shadow-md"
+              className="border-slate-800 text-slate-900 hover:bg-slate-800 hover:text-white"
             />
             <PrimaryCTA 
               to="/contact?subject=見積依頼" 

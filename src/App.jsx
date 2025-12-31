@@ -10,7 +10,6 @@ import ContactThanks from "./pages/ContactThanks";
 import Collection from "./pages/Collection";
 import PresidentBlog from "./pages/PresidentBlog";
 import Association from "./pages/Association";
-import Community from "./pages/Community";
 import Stock from "./pages/Stock";
 import Sustainability from "./pages/Sustainability";
 import Privacy from "./pages/Privacy";
@@ -32,7 +31,6 @@ function App() {
           <Route path="collection" element={<Collection />} />
           <Route path="president-blog" element={<PresidentBlog />} />
           <Route path="association" element={<Association />} />
-          <Route path="community" element={<Community />} />
           <Route path="stock" element={<Stock />} />
           <Route path="sustainability" element={<Sustainability />} />
           <Route path="privacy" element={<Privacy />} />
