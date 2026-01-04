@@ -32,6 +32,8 @@ export default function Contact() {
     consent: false,
   });
   const [touched, setTouched] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   const onChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -57,7 +59,7 @@ export default function Contact() {
     return next;
   }, [form]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setTouched({
       name: true,
@@ -66,7 +68,32 @@ export default function Contact() {
       consent: true,
     });
     if (Object.keys(errors).length > 0) return;
-    navigate("/contact/thanks");
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'メール送信に失敗しました');
+      }
+
+      navigate("/contact/thanks");
+    } catch (error) {
+      console.error('送信エラー:', error);
+      setSubmitError(error.message || 'メール送信に失敗しました。しばらくしてから再度お試しください。');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -292,12 +319,31 @@ export default function Contact() {
                   </p>
                 )}
 
-                <button 
-                  type="submit" 
-                  className="w-full md:w-auto min-w-[240px] px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-900/20 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 text-lg"
+                {submitError && (
+                  <div className="text-sm font-bold text-red-600 bg-red-50 py-3 px-4 rounded-lg border border-red-200">
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle size={16} />
+                      <span>{submitError}</span>
+                    </div>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full md:w-auto min-w-[240px] px-8 py-4 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-lg shadow-emerald-900/20 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 text-lg"
                 >
-                  <Send size={20} />
-                  送信する
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                      送信中...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={20} />
+                      送信する
+                    </>
+                  )}
                 </button>
                 <p className="text-xs text-slate-400">
                   お客様の情報はプライバシーポリシーに基づき厳重に管理いたします。
