@@ -258,8 +258,8 @@ export default function Layout() {
       <PageTopButton />
 
       {/* フッター */}
-      <footer className="bg-slate-900 text-slate-200 text-sm mt-10">
-        <div className="layout-container py-10 grid gap-8 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
+      <footer className="bg-slate-900 text-slate-200 text-sm mt-8">
+        <div className="layout-container py-8 grid gap-6 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto" />
@@ -302,7 +302,7 @@ export default function Layout() {
             <Link to="/privacy" className="block text-sm text-slate-300 hover:underline">プライバシーポリシー</Link>
           </div>
         </div>
-        <div className="border-t border-slate-800 py-4 text-center text-xs text-slate-400">
+        <div className="border-t border-slate-800 py-3 text-center text-xs text-slate-400">
           © 大和薬品株式会社. All Rights Reserved.
         </div>
       </footer>

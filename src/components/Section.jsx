@@ -15,7 +15,7 @@ export default function Section({
     <>
       {/* Header Area */}
       {(title || description || eyebrow || actions) && (
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-12">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-8">
           
           {/* Titles */}
           <div className="flex-1">
@@ -25,7 +25,7 @@ export default function Section({
               </p>
             )}
             {title && (
-              <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
                 {title}
               </h2>
             )}
@@ -55,9 +55,9 @@ export default function Section({
   );
 
   return (
-    <section 
-      id={id} 
-      className={`py-12 md:py-20 ${className}`.trim()} // 上下の余白を広げてモダンに
+    <section
+      id={id}
+      className={`py-6 md:py-10 ${className}`.trim()}
     >
       {withContainer ? (
         // layout-container の代わりに max-w 等を直接指定して安全性を確保（プロジェクト設定に依存しないよう）
