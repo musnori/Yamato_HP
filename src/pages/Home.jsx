@@ -82,7 +82,7 @@ export default function Home() {
       {/* =======================
           Hero Section
       ======================== */}
-      <section className="relative overflow-hidden bg-slate-900 text-white h-[400px] flex items-center">
+      <section className="relative overflow-hidden bg-slate-900 text-white h-[280px] md:h-[350px] flex items-center">
         <div className="absolute inset-0 z-0">
           {heroImages.map((src, i) => (
             <div
@@ -98,22 +98,22 @@ export default function Home() {
         {/* 背景オーバーレイ */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent z-10" />
         
-        <div className="relative z-20 layout-container py-8 md:py-12">
-          <p className="text-xs font-bold tracking-[0.3em] text-emerald-800 mb-2 animate-fade-in-up drop-shadow-sm">
+        <div className="relative z-20 layout-container py-6 md:py-8">
+          <p className="text-xs font-bold tracking-[0.3em] text-emerald-800 mb-1.5 animate-fade-in-up drop-shadow-sm">
             Yamato Pharmaceutical
           </p>
-          
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-balance leading-tight tracking-tight text-slate-900 drop-shadow-sm">
+
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-balance leading-tight tracking-tight text-slate-900 drop-shadow-sm">
             化学薬品・試薬・工業薬品の<br />
             見積・相談を<span className="text-emerald-700">最短</span>で。
           </h1>
-          
-          <p className="mt-3 max-w-2xl text-slate-900 text-sm md:text-base leading-relaxed font-bold drop-shadow-sm opacity-90">
+
+          <p className="mt-2 max-w-2xl text-slate-900 text-sm leading-relaxed font-semibold drop-shadow-sm opacity-90">
             大和薬品株式会社は、学校・工場・研究機関などの<br className="hidden md:block"/>
             多様な現場ニーズに合わせて最適な薬品をご提案します。
           </p>
           
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-4 flex flex-wrap gap-2">
             <PrimaryCTA
               to="/products"
               label="製品を探す"
@@ -121,10 +121,10 @@ export default function Home() {
               size="sm"
               className="border-slate-800 text-slate-900 hover:bg-slate-800 hover:text-white"
             />
-            <PrimaryCTA 
-              to="/contact?subject=見積依頼" 
-              label="見積依頼" 
-              variant="outline" 
+            <PrimaryCTA
+              to="/contact?subject=見積依頼"
+              label="見積依頼"
+              variant="outline"
               size="sm"
               className="border-slate-800 text-slate-900 hover:bg-slate-800 hover:text-white"
             />
@@ -149,11 +149,11 @@ export default function Home() {
       {/* =======================
           GREETING
       ======================== */}
-      <Section eyebrow="GREETING" title="ごあいさつ" className="bg-slate-50 py-6 md:py-10">
+      <Section eyebrow="GREETING" title="ごあいさつ" className="bg-slate-50">
         <div className="grid gap-4 lg:grid-cols-2 items-center">
-          <div className="order-2 lg:order-1 space-y-3">
-             <div className="bg-white p-5 md:p-6 rounded-xl shadow-sm border border-slate-100">
-                <div className="space-y-2 text-xs md:text-sm leading-6 text-slate-700 font-medium">
+          <div className="order-2 lg:order-1">
+             <div className="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-slate-100">
+                <div className="space-y-2 text-xs md:text-sm leading-relaxed text-slate-700 font-medium">
                   {greetingText.map((text, i) => (
                     <p key={i}>{text}</p>
                   ))}
@@ -166,7 +166,7 @@ export default function Home() {
                 </div>
              </div>
           </div>
-          <div className="order-1 lg:order-2 h-full min-h-[200px] md:min-h-[250px]">
+          <div className="order-1 lg:order-2 h-full min-h-[180px] md:min-h-[200px]">
             <div className="relative h-full rounded-xl overflow-hidden shadow-md">
               <img
                 src={greetingImage}
@@ -182,7 +182,7 @@ export default function Home() {
       {/* =======================
           TRUST & FLOW
       ======================== */}
-      <Section eyebrow="TRUST & FLOW" title="安心して相談できる理由" className="bg-white py-6 md:py-10">
+      <Section eyebrow="TRUST & FLOW" title="安心して相談できる理由" className="bg-white">
         <div className="grid gap-6 lg:grid-cols-2 items-start">
           
           {/* 左側：TRUST */}
@@ -271,7 +271,7 @@ export default function Home() {
       {/* =======================
           NEEDS
       ======================== */}
-      <Section eyebrow="NEEDS" title="よくあるご相談" className="bg-slate-50 py-6 md:py-10">
+      <Section eyebrow="NEEDS" title="よくあるご相談" className="bg-slate-50">
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4 items-stretch">
           {[
             {
@@ -317,7 +317,7 @@ export default function Home() {
       <Section
         eyebrow="PRODUCT CATEGORY"
         title="取扱カテゴリ"
-        className="bg-white py-6 md:py-10"
+        className="bg-white"
         actions={<PrimaryCTA to="/products" label="すべての製品を見る" variant="outline" size="sm" className="text-xs px-3 py-1.5" />}
       >
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
@@ -344,7 +344,7 @@ export default function Home() {
         eyebrow="ACTIVITY"
         title="地域活動・関連コンテンツ"
         description="それぞれのカードをクリックすると詳細ページへ移動します。"
-        className="bg-slate-50 border-t border-slate-100 py-6 md:py-10"
+        className="bg-slate-50 border-t border-slate-100"
       >
         <div className="grid gap-4 md:grid-cols-3">
           {communityItems.map((item) => {
@@ -352,7 +352,7 @@ export default function Home() {
             const CardContent = (
               <div className="group h-full flex flex-col bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
                 {/* 画像エリア */}
-                <div className="relative h-32 md:h-40 overflow-hidden bg-slate-100">
+                <div className="relative h-28 md:h-32 overflow-hidden bg-slate-100">
                   {item.bg ? (
                     <img 
                       src={item.bg} 
@@ -416,7 +416,7 @@ export default function Home() {
       <Section
         eyebrow="NEWS"
         title="お知らせ"
-        className="bg-white pt-0 md:pt-0 pb-8 md:pb-12" 
+        className="bg-white"
         actions={<PrimaryCTA to="/news" label="一覧" variant="outline" size="sm" className="text-xs px-3 py-1.5" />}
       >
         <div className="bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
@@ -442,18 +442,18 @@ export default function Home() {
       </Section>
 
       {/* Footer CTA */}
-      <section className="py-10 md:py-12 bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 text-white text-center">
+      <section className="py-8 md:py-10 bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 text-white text-center">
         <div className="layout-container max-w-3xl mx-auto">
-          <h2 className="text-xl md:text-2xl font-bold mb-3">薬品の調達でお困りですか？</h2>
-          <p className="text-emerald-100 text-sm md:text-base mb-6 leading-relaxed">
+          <h2 className="text-lg md:text-xl font-bold mb-2">薬品の調達でお困りですか？</h2>
+          <p className="text-emerald-100 text-sm mb-5 leading-relaxed">
             「すぐに欲しい」「どれが良いかわからない」など、<br className="hidden md:inline" />
             お客様の課題に合わせて柔軟に対応いたします。
           </p>
           <div className="flex justify-center">
-            <PrimaryCTA 
-              to="/contact" 
-              label="問い合わせる" 
-              className="bg-emerald-600 !text-white hover:bg-emerald-700 px-8 py-3 text-base shadow-xl border-transparent" 
+            <PrimaryCTA
+              to="/contact"
+              label="問い合わせる"
+              className="bg-emerald-600 !text-white hover:bg-emerald-700 px-6 py-2.5 text-sm shadow-xl border-transparent"
             />
           </div>
         </div>
