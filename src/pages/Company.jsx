@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../components/Card";
 import PrimaryCTA from "../components/PrimaryCTA";
+import SEOHead from "../components/SEOHead";
+import { BreadcrumbSchema } from "../components/StructuredData";
 // アイコン (lucide-react)
 import { 
   Building2, 
@@ -46,7 +48,11 @@ export default function Company() {
   ];
 
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <>
+      <SEOHead pageKey="company" />
+      <BreadcrumbSchema items={[{ name: "ホーム", url: "/" }, { name: "会社概要" }]} />
+
+      <div className="bg-slate-50 min-h-screen">
       {/* =======================
           Header Section
       ======================== */}
@@ -226,5 +232,6 @@ export default function Company() {
         </aside>
       </div>
     </div>
+    </>
   );
 }

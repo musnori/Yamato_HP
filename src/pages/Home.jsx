@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Card from "../components/Card";
 import PrimaryCTA from "../components/PrimaryCTA";
 import Section from "../components/Section";
+import SEOHead from "../components/SEOHead";
+import { LocalBusinessSchema, BreadcrumbSchema } from "../components/StructuredData";
 
 // アイコン (Communityで使用していたものも含めて一括インポート)
 import { 
@@ -77,7 +79,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-slate-50 text-slate-800 font-sans">
+    <>
+      <SEOHead pageKey="home" />
+      <LocalBusinessSchema />
+      <BreadcrumbSchema items={[{ name: "ホーム" }]} />
+
+      <div className="bg-slate-50 text-slate-800 font-sans">
       
       {/* =======================
           Hero Section
@@ -173,6 +180,7 @@ export default function Home() {
                 alt="大和薬品株式会社の倉庫"
                 className="h-full w-full object-cover hover:scale-105 transition-transform duration-700"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -354,10 +362,12 @@ export default function Home() {
                 {/* 画像エリア */}
                 <div className="relative h-28 md:h-32 overflow-hidden bg-slate-100">
                   {item.bg ? (
-                    <img 
-                      src={item.bg} 
-                      alt={item.title} 
+                    <img
+                      src={item.bg}
+                      alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
                       onError={(e) => {
                         e.target.style.display = 'none';
                         e.target.nextSibling.style.display = 'flex';
@@ -459,5 +469,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   );
 }

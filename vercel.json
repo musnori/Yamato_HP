@@ -1,5 +1,38 @@
 {
   "redirects": [
+    {
+      "source": "/:path((?!.*\\.).*)*",
+      "has": [
+        {
+          "type": "host",
+          "value": "yamato-hp.vercel.app"
+        }
+      ],
+      "destination": "https://yamato-chemi.co.jp/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "yamato-hp.vercel.app"
+        }
+      ],
+      "destination": "https://yamato-chemi.co.jp/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.yamato-chemi.co.jp"
+        }
+      ],
+      "destination": "https://yamato-chemi.co.jp/:path*",
+      "permanent": true
+    },
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/company.html", "destination": "/company", "permanent": true },
     { "source": "/products.html", "destination": "/products", "permanent": true },
@@ -10,5 +43,6 @@
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  ],
+  "trailingSlash": false
 }

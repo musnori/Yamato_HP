@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
+import { BreadcrumbSchema } from "../components/StructuredData";
 // アイコン (lucide-react)
 import { 
   Phone, 
@@ -97,7 +99,11 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen font-sans text-slate-800">
+    <>
+      <SEOHead pageKey="contact" />
+      <BreadcrumbSchema items={[{ name: "ホーム", url: "/" }, { name: "お問い合わせ" }]} />
+
+      <div className="bg-slate-50 min-h-screen font-sans text-slate-800">
        {/* =======================
            Header Section
        ======================== */}
@@ -354,6 +360,7 @@ export default function Contact() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
