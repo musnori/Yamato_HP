@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PrimaryCTA from "../components/PrimaryCTA";
+import SEOHead from "../components/SEOHead";
+import { BreadcrumbSchema } from "../components/StructuredData";
 // アイコン (lucide-react)
 import { 
   MapPin, 
@@ -29,7 +31,11 @@ export default function Access() {
   ];
 
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <>
+      <SEOHead pageKey="access" />
+      <BreadcrumbSchema items={[{ name: "ホーム", url: "/" }, { name: "アクセス" }]} />
+
+      <div className="bg-slate-50 min-h-screen">
       {/* =======================
           Header Section
       ======================== */}
@@ -262,6 +268,7 @@ export default function Access() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

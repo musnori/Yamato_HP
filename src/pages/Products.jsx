@@ -6,6 +6,8 @@ import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { PRODUCTS, PRODUCT_CATEGORIES, PRODUCT_FORMS, PRODUCT_USES } from "../data/products";
 import PrimaryCTA from "../components/PrimaryCTA";
 import Section from "../components/Section";
+import SEOHead from "../components/SEOHead";
+import { BreadcrumbSchema } from "../components/StructuredData";
 
 // アイコン (lucide-react)
 import { 
@@ -234,7 +236,11 @@ export default function Products() {
   const recommendedProducts = PRODUCTS.slice(0, 6);
 
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <>
+      <SEOHead pageKey="products" />
+      <BreadcrumbSchema items={[{ name: "ホーム", url: "/" }, { name: "取扱製品" }]} />
+
+      <div className="bg-slate-50 min-h-screen">
       {/* =======================
           HERO
       ======================== */}
@@ -602,5 +608,6 @@ export default function Products() {
         </div>
       </Section>
     </div>
+    </>
   );
 }
