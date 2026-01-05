@@ -249,11 +249,11 @@ export default function Products() {
         <div className="relative layout-container py-10 md:py-12 lg:py-14 text-center">
           <p className="text-sm font-bold tracking-widest text-emerald-600 mb-2">PRODUCT SEARCH</p>
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-            製品を検索
+            取扱製品｜化学薬品・工業薬品・試薬
           </h1>
           <p className="mt-4 text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            薬品名、用途、形状から最適な製品をお探しいただけます。<br className="hidden md:inline" />
-            見つからない場合も、お気軽に「見積・相談」よりお問い合わせください。
+            兵庫県姫路市から関西エリアへ、化学薬品・工業薬品・試薬・有機溶剤を供給。<br className="hidden md:inline" />
+            薬品名、用途、形状から最適な製品をお探しいただけます。見つからない場合も、お気軽にお問い合わせください。
           </p>
         </div>
       </section>

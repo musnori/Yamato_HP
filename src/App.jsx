@@ -14,6 +14,7 @@ import Stock from "./pages/Stock";
 import Sustainability from "./pages/Sustainability";
 import Privacy from "./pages/Privacy";
 import Services from "./pages/Services";
+import Hyogo from "./pages/Hyogo";
 // Blog は削除済みならインポート不要
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="stock" element={<Stock />} />
           <Route path="sustainability" element={<Sustainability />} />
           <Route path="privacy" element={<Privacy />} />
+          <Route path="hyogo" element={<Hyogo />} />
 
           {/* ▼▼▼ ここに追加！古いURL (.html) 対策 ▼▼▼ */}
           {/* これを書くと、Google検索から来た人が正しいページに転送されます */}
