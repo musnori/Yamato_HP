@@ -89,7 +89,7 @@ export default function Home() {
       {/* =======================
           Hero Section
       ======================== */}
-      <section className="relative overflow-hidden bg-slate-900 text-white h-[280px] md:h-[350px] flex items-center">
+      <section className="relative overflow-hidden bg-slate-900 text-white h-[280px] md:h-[350px] lg:h-[380px] flex items-center">
         <div className="absolute inset-0 z-0">
           {heroImages.map((src, i) => (
             <div
@@ -173,7 +173,7 @@ export default function Home() {
                 </div>
              </div>
           </div>
-          <div className="order-1 lg:order-2 h-full min-h-[180px] md:min-h-[200px]">
+          <div className="order-1 lg:order-2 h-full min-h-[180px] md:min-h-[200px] lg:max-h-[320px]">
             <div className="relative h-full rounded-xl overflow-hidden shadow-md">
               <img
                 src={greetingImage}
@@ -452,10 +452,10 @@ export default function Home() {
       </Section>
 
       {/* Footer CTA */}
-      <section className="py-8 md:py-10 bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 text-white text-center">
+      <section className="py-8 md:py-10 lg:py-12 bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 text-white text-center">
         <div className="layout-container max-w-3xl mx-auto">
-          <h2 className="text-lg md:text-xl font-bold mb-2">薬品の調達でお困りですか？</h2>
-          <p className="text-emerald-100 text-sm mb-5 leading-relaxed">
+          <h2 className="text-lg md:text-xl lg:text-2xl font-bold mb-2">薬品の調達でお困りですか？</h2>
+          <p className="text-emerald-100 text-sm lg:text-base mb-5 leading-relaxed">
             「すぐに欲しい」「どれが良いかわからない」など、<br className="hidden md:inline" />
             お客様の課題に合わせて柔軟に対応いたします。
           </p>

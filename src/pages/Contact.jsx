@@ -110,7 +110,7 @@ export default function Contact() {
       <section className="bg-white border-b border-slate-200">
         <div className="relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
-          <div className="relative max-w-4xl mx-auto px-4 py-12 md:py-16 text-center">
+          <div className="relative max-w-4xl mx-auto px-4 py-10 md:py-12 lg:py-14 text-center">
             <p className="text-emerald-600 font-bold tracking-widest text-sm mb-2">CONTACT</p>
             <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
               見積・相談フォーム

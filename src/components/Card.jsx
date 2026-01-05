@@ -3,9 +3,10 @@ import React from "react";
 export default function Card({ children, className = "", noPadding = false, ...props }) {
   // 基本スタイル：白背景、薄いグレーの枠線、大きめの角丸、控えめな影
   const baseClasses = "bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden transition-all duration-300";
-  
+
   // デフォルトのパディング（noPaddingプロパティでオフにできる）
-  const paddingClass = noPadding ? "" : "p-6 md:p-8";
+  // PC表示最適化: lg で余白を適度に調整
+  const paddingClass = noPadding ? "" : "p-5 md:p-6 lg:p-7";
 
   // クラスの結合
   // className プロパティで渡されたクラスが優先されるように最後に配置します。
