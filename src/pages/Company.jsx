@@ -58,7 +58,7 @@ export default function Company() {
       ======================== */}
       <section className="relative overflow-hidden bg-white border-b border-slate-200">
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
-        <div className="relative layout-container py-12 md:py-16 text-center">
+        <div className="relative layout-container py-10 md:py-12 lg:py-14 text-center">
           <p className="text-sm font-bold tracking-widest text-emerald-600 mb-2">COMPANY</p>
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
             会社概要
@@ -73,7 +73,7 @@ export default function Company() {
       {/* =======================
           Main Content
       ======================== */}
-      <div className="layout-container py-12 grid gap-8 lg:grid-cols-[2fr_1fr] items-start">
+      <div className="layout-container py-10 md:py-12 grid gap-6 lg:gap-8 lg:grid-cols-[2fr_1fr] items-start">
         
         {/* Main Column */}
         <section className="space-y-8">

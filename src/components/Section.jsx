@@ -15,7 +15,7 @@ export default function Section({
     <>
       {/* Header Area */}
       {(title || description || eyebrow || actions) && (
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-8">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5 md:mb-6 lg:mb-7">
           
           {/* Titles */}
           <div className="flex-1">
@@ -57,11 +57,11 @@ export default function Section({
   return (
     <section
       id={id}
-      className={`py-6 md:py-10 ${className}`.trim()}
+      className={`py-6 md:py-8 lg:py-10 ${className}`.trim()}
     >
       {withContainer ? (
-        // layout-container の代わりに max-w 等を直接指定して安全性を確保（プロジェクト設定に依存しないよう）
-        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${containerClassName}`.trim()}>
+        // PC表示最適化: max-w-6xl (1152px) でコンテンツ幅を適切に制限
+        <div className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${containerClassName}`.trim()}>
           {content}
         </div>
       ) : (
