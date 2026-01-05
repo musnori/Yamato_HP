@@ -4,7 +4,7 @@ export const SITE_URL = "https://yamato-chemi.co.jp";
 
 export const COMPANY_INFO = {
   name: "大和薬品株式会社",
-  nameEn: "Yamato Pharmaceutical Co., Ltd.",
+  nameEn: "Yamato Chemical Co., Ltd.",
   logo: "/company-logo.png",
   postalCode: "〒670-0935",
   address: "兵庫県姫路市北条口1丁目59番地",
