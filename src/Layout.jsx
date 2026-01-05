@@ -286,10 +286,8 @@ export default function Layout() {
               <li><Link className="hover:underline" to="/products">製品</Link></li>
               <li><Link className="hover:underline" to="/services">サービス</Link></li>
               <li><Link className="hover:underline" to="/company">会社概要</Link></li>
-              <li><Link className="hover:underline" to="/community">地域活動</Link></li>
               <li><Link className="hover:underline" to="/access">アクセス</Link></li>
               <li><Link className="hover:underline" to="/contact">お問い合わせ</Link></li>
-              {/* 社長ブログなどは Community 内に移動しましたが、フッターには残してもOKです */}
             </ul>
           </div>
           <div className="space-y-3">
