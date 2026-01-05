@@ -34,40 +34,67 @@ export default function Home() {
   const heroImages = ["/morninng.jpg", "/yugata.jpg", "/night.jpg"];
   const [heroIndex, setHeroIndex] = useState(0);
 
-  // 地域活動のデータ (Community.jsxから移動)
-  const communityItems = [
+  // ナビゲーションボタンのデータ
+  const navigationButtons = [
     {
-      title: "社長ブログ",
-      description: "代表メッセージや日々の気づき、業界への想いをブログ形式で発信しています。",
+      title: "ブログ",
+      description: "代表メッセージや日々の気づき、業界への想いを発信",
       to: "https://yamato-chemi-blog.hatenablog.com/",
-      tag: "BLOG",
-      tagColor: "bg-emerald-100 text-emerald-700",
-      date: "随時更新",
-      bg: "/images/president-blog-bg.png",
       icon: BookOpenText,
       external: true,
+      bgColor: "bg-gradient-to-br from-emerald-50 to-emerald-100",
+      hoverColor: "hover:from-emerald-100 hover:to-emerald-200",
+      iconColor: "text-emerald-600",
     },
     {
-      title: "西兵庫化学薬品協同組合",
-      description: "地域の化学薬品供給を支える連携ネットワーク。組合の活動内容をご紹介します。",
-      to: "https://nishihyogo-chemical-coop.com/",
-      tag: "ASSOCIATION",
-      tagColor: "bg-blue-100 text-blue-700",
-      date: "地域連携",
-      bg: "/images/coop-bg.png",
-      icon: Building2,
-      external: true,
-    },
-    {
-      title: "懐かしコレクション",
-      description: "昭和レトロな看板や道具など、創業当時からの貴重なコレクションを公開中。",
+      title: "コレクション",
+      description: "昭和レトロな看板や道具など、貴重なコレクションを公開",
       to: "/collection",
-      tag: "ARCHIVE",
-      tagColor: "bg-amber-100 text-amber-700",
-      date: "文化活動",
-      bg: "/images/banner.jpg",
       icon: Camera,
       external: false,
+      bgColor: "bg-gradient-to-br from-amber-50 to-amber-100",
+      hoverColor: "hover:from-amber-100 hover:to-amber-200",
+      iconColor: "text-amber-600",
+    },
+  ];
+
+  // 関連リンク・バナーのデータ
+  const partnerLinks = [
+    {
+      name: "四国化成工業株式会社",
+      url: "https://kagaku.shikoku.co.jp/products/pool/neochlor/",
+      image: "https://jyujyodai-pool.jp/wp/images/kirigaoka-scaled.jpg",
+      isLogo: false,
+    },
+    {
+      name: "ナカライテスク株式会社",
+      url: "https://www.nacalai.co.jp/",
+      image: "https://www.nacalai.co.jp/images/common/logo.svg",
+      isLogo: true,
+    },
+    {
+      name: "林純薬工業株式会社",
+      url: "https://www.hpc-j.co.jp/",
+      image: "https://www.hpc-j.co.jp/global/img/ci.svg",
+      isLogo: true,
+    },
+    {
+      name: "西播磨化学薬品",
+      url: null,
+      image: null,
+      isLogo: false,
+    },
+    {
+      name: "姫路西ロータリークラブ",
+      url: "https://www.himeji-west-rc.jp/",
+      image: "https://www.himeji-west-rc.jp/wp/wp-content/themes/westrc/images/common/logo-rc.png",
+      isLogo: true,
+    },
+    {
+      name: "姫路青年会議所",
+      url: "https://www.himejijc.or.jp/",
+      image: "https://www.himejijc.or.jp/wp-content/uploads/2025/10/02.png",
+      isLogo: true,
     },
   ];
 
@@ -107,12 +134,12 @@ export default function Home() {
         
         <div className="relative z-20 layout-container py-6 md:py-8">
           <p className="text-xs font-bold tracking-[0.3em] text-emerald-800 mb-1.5 animate-fade-in-up drop-shadow-sm">
-            Yamato Pharmaceutical
+            Yamato Chemical
           </p>
 
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-balance leading-tight tracking-tight text-slate-900 drop-shadow-sm">
-            化学薬品・試薬・工業薬品の<br />
-            見積・相談を<span className="text-emerald-700">最短</span>で。
+            化学工業薬品、試薬、水処理薬品、<br />
+            不要な薬品廃棄の見積・相談を<span className="text-emerald-700">最短</span>で。
           </h1>
 
           <p className="mt-2 max-w-2xl text-slate-900 text-sm leading-relaxed font-semibold drop-shadow-sm opacity-90">
@@ -346,77 +373,94 @@ export default function Home() {
       </Section>
 
       {/* =======================
-          COMMUNITY (Home.jsxに統合)
+          ACTIVITY (地域活動・関連コンテンツ)
       ======================== */}
       <Section
         eyebrow="ACTIVITY"
         title="地域活動・関連コンテンツ"
-        description="それぞれのカードをクリックすると詳細ページへ移動します。"
         className="bg-slate-50 border-t border-slate-100"
       >
-        <div className="grid gap-4 md:grid-cols-3">
-          {communityItems.map((item) => {
-            // カードの中身
-            const CardContent = (
-              <div className="group h-full flex flex-col bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-                {/* 画像エリア */}
-                <div className="relative h-28 md:h-32 overflow-hidden bg-slate-100">
-                  {item.bg ? (
-                    <img
-                      src={item.bg}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
-                  ) : null}
-                  <div className={`absolute inset-0 flex items-center justify-center bg-slate-100 text-slate-300 ${item.bg ? 'hidden' : 'flex'}`}>
-                    <item.icon size={32} />
-                  </div>
-                  
-                  {/* タグ */}
-                  <div className="absolute top-3 left-3">
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wide shadow-sm ${item.tagColor}`}>
-                      {item.tag}
-                    </span>
-                  </div>
+        {/* A. ナビゲーションボタン（上段） */}
+        <div className="grid gap-4 md:grid-cols-2 mb-8">
+          {navigationButtons.map((button) => {
+            const ButtonContent = (
+              <div className={`group h-full ${button.bgColor} ${button.hoverColor} rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center gap-4`}>
+                <div className={`shrink-0 w-14 h-14 flex items-center justify-center rounded-xl bg-white shadow-sm ${button.iconColor}`}>
+                  <button.icon size={28} strokeWidth={2} />
                 </div>
-
-                {/* テキストエリア */}
-                <div className="flex-1 p-4 flex flex-col">
-                  <div className="flex items-start justify-between mb-2">
-                    <h2 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors flex items-center gap-1.5">
-                      <item.icon size={16} className="text-slate-400 group-hover:text-emerald-500" />
-                      {item.title}
-                    </h2>
-                    {item.external && <ExternalLink size={14} className="text-slate-300 group-hover:text-emerald-500" />}
-                  </div>
-                  
-                  <p className="text-xs text-slate-600 leading-relaxed mb-4">
-                    {item.description}
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
+                    {button.title}
+                    {button.external && <ExternalLink size={16} className="text-slate-400 group-hover:text-slate-600" />}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {button.description}
                   </p>
-                  
-                  <div className="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between text-[10px]">
-                    <span className="text-slate-400 font-mono">{item.date}</span>
-                    <span className="font-bold text-emerald-600 flex items-center gap-1 group-hover:gap-2 transition-all">
-                      VIEW MORE <ArrowRight size={12} />
-                    </span>
-                  </div>
                 </div>
+                <ArrowRight className={`text-slate-400 group-hover:text-slate-700 transition-colors ${button.iconColor}`} size={24} />
               </div>
             );
 
-            // リンクの出し分け
-            return item.external ? (
-              <a key={item.title} href={item.to} target="_blank" rel="noopener noreferrer" className="block h-full">{CardContent}</a>
+            return button.external ? (
+              <a key={button.title} href={button.to} target="_blank" rel="noopener noreferrer" className="block h-full">
+                {ButtonContent}
+              </a>
             ) : (
-              <Link key={item.title} to={item.to} className="block h-full">{CardContent}</Link>
+              <Link key={button.title} to={button.to} className="block h-full">
+                {ButtonContent}
+              </Link>
             );
           })}
+        </div>
+
+        {/* B. 関連リンク・バナーグリッド（下段） */}
+        <div>
+          <h3 className="text-sm font-bold text-slate-700 mb-3 flex items-center gap-2">
+            <Building2 size={16} className="text-slate-400" />
+            関連リンク
+          </h3>
+          <div className="grid gap-4 md:grid-cols-2">
+            {partnerLinks.map((partner) => {
+              const BannerContent = (
+                <div className="group h-full bg-white rounded-lg border-2 border-slate-200 hover:border-emerald-300 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                  <div className="aspect-[16/9] flex items-center justify-center p-4 bg-white relative">
+                    {partner.image ? (
+                      <img
+                        src={partner.image}
+                        alt={partner.name}
+                        className={`max-w-full max-h-full ${
+                          partner.isLogo ? 'object-contain' : 'object-cover w-full h-full'
+                        } transition-transform duration-300 group-hover:scale-105`}
+                        loading="lazy"
+                        decoding="async"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.parentElement.classList.add('bg-slate-50');
+                        }}
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center text-center px-4 bg-slate-50 w-full h-full">
+                        <span className="text-sm font-bold text-slate-700">{partner.name}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="px-3 py-2 bg-slate-50 border-t border-slate-100">
+                    <p className="text-xs font-medium text-slate-700 line-clamp-1">{partner.name}</p>
+                  </div>
+                </div>
+              );
+
+              return partner.url ? (
+                <a key={partner.name} href={partner.url} target="_blank" rel="noopener noreferrer" className="block h-full">
+                  {BannerContent}
+                </a>
+              ) : (
+                <div key={partner.name} className="block h-full cursor-default">
+                  {BannerContent}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </Section>
 
