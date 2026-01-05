@@ -65,7 +65,7 @@ export default function Company() {
           </h1>
           <p className="mt-4 text-slate-500 max-w-2xl mx-auto leading-relaxed">
             創業90年を超える歴史と信頼。<br className="hidden md:inline" />
-            地域に根ざした化学品供給のプロフェッショナルとして、お客様の事業を支えます。
+            兵庫県姫路市に根ざした化学薬品・工業薬品供給のプロフェッショナルとして、関西エリアのお客様の事業を支えます。
           </p>
         </div>
       </section>
@@ -124,7 +124,7 @@ export default function Company() {
                 <p className="text-xs font-bold text-emerald-600 tracking-wider mb-1">QUALITY & SAFETY</p>
                 <h2 className="text-xl font-bold text-slate-900 mb-3">品質・安全への取り組み</h2>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  化学薬品を取り扱う企業として、法令順守を徹底しています。保管・輸送・提供の各工程において厳格な安全管理を実施し、SDS（安全データシート）の提供や取り扱い説明を通じて、お客様の安全な使用をサポートします。
+                  化学薬品・工業薬品を取り扱う企業として、法令順守を徹底しています。兵庫県姫路市の自社倉庫では保管・輸送・提供の各工程において厳格な安全管理を実施し、SDS（安全データシート）の提供や取り扱い説明を通じて、関西エリアのお客様の安全な使用をサポートします。
                 </p>
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function Company() {
               <Briefcase className="text-emerald-600" size={20} />
               <div className="flex flex-col md:flex-row md:items-baseline md:gap-4">
                 <h2 className="text-lg font-bold text-slate-900">事業内容</h2>
-                <p className="text-xs text-slate-500">化学薬品・医薬品の販売、環境関連薬品の供給、不動産賃貸業 他</p>
+                <p className="text-xs text-slate-500">化学薬品・工業薬品・試薬の販売、環境関連薬品の供給、不動産賃貸業 他</p>
               </div>
             </div>
             <div className="p-6">

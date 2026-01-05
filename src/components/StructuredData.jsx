@@ -44,7 +44,7 @@ export function LocalBusinessSchema() {
           closes: "17:00"
         }
       ],
-      description: "1933年創業、兵庫県姫路市を拠点とする化学薬品専門商社。試薬・化学工業薬品・医薬品関連など、学校・工場・研究機関などへ迅速な納品と丁寧な提案を提供します。"
+      description: "1933年創業、兵庫県姫路市を拠点とする化学薬品・工業薬品専門商社。試薬・化学薬品・有機溶剤など、兵庫県内および関西エリアの学校・工場・研究機関・水処理施設などへ迅速な納品と丁寧な提案を提供します。"
     };
 
     let script = document.getElementById("schema-local-business");
@@ -140,6 +140,46 @@ export function OrganizationSchema() {
     }
     script.textContent = JSON.stringify(schema, null, 2);
   }, []);
+
+  return null;
+}
+
+/**
+ * FAQPage構造化データ
+ */
+export function FAQPageSchema({ faqs }) {
+  useEffect(() => {
+    if (!faqs || faqs.length === 0) return;
+
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.q,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.a,
+        },
+      })),
+    };
+
+    let script = document.getElementById("schema-faq");
+    if (!script) {
+      script = document.createElement("script");
+      script.id = "schema-faq";
+      script.type = "application/ld+json";
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(schema, null, 2);
+
+    return () => {
+      const existing = document.getElementById("schema-faq");
+      if (existing) {
+        existing.remove();
+      }
+    };
+  }, [faqs]);
 
   return null;
 }
