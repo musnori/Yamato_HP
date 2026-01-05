@@ -91,7 +91,7 @@ export default function Home() {
     {
       name: "姫路青年会議所",
       url: "https://www.himejijc.or.jp/",
-      image: "https://www.himejijc.or.jp/wp-content/uploads/2025/10/02.png",
+      image: "/images/jci-himeji-logo.png",
       isLogo: true,
     },
   ];
@@ -384,7 +384,7 @@ export default function Home() {
         <div className="grid gap-4 md:grid-cols-2 mb-8">
           {navigationButtons.map((button) => {
             const ButtonContent = (
-              <div className="group h-full relative rounded-xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <div className="group h-full min-h-[120px] md:min-h-[140px] relative rounded-xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                 {/* 背景画像 */}
                 <div className="absolute inset-0">
                   <img
