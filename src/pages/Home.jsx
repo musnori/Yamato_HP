@@ -91,7 +91,7 @@ export default function Home() {
     {
       name: "姫路青年会議所",
       url: "https://www.himejijc.or.jp/",
-      image: "/images/jci-himeji-logo.png",
+      image: "/images/IMG_2269.jpeg",
       isLogo: true,
     },
   ];
@@ -384,34 +384,21 @@ export default function Home() {
         <div className="grid gap-4 md:grid-cols-2 mb-8">
           {navigationButtons.map((button) => {
             const ButtonContent = (
-              <div className="group h-full min-h-[120px] md:min-h-[140px] relative rounded-xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                {/* 背景画像 */}
-                <div className="absolute inset-0">
+              <div className="group h-full bg-white rounded-lg border-2 border-slate-200 hover:border-emerald-300 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                <div className="aspect-[16/9] flex items-center justify-center p-4 bg-white relative">
                   <img
                     src={button.bgImage}
                     alt={button.title}
-                    className="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
+                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/70"></div>
                 </div>
-
-                {/* コンテンツ */}
-                <div className="relative z-10 p-6 flex items-center gap-4">
-                  <div className={`shrink-0 w-14 h-14 flex items-center justify-center rounded-xl bg-white shadow-sm ${button.iconColor}`}>
-                    <button.icon size={28} strokeWidth={2} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
-                      {button.title}
-                      {button.external && <ExternalLink size={16} className="text-slate-400 group-hover:text-slate-600" />}
-                    </h3>
-                    <p className="text-xs text-slate-700 leading-relaxed font-medium">
-                      {button.description}
-                    </p>
-                  </div>
-                  <ArrowRight className={`text-slate-400 group-hover:text-slate-700 transition-colors ${button.iconColor}`} size={24} />
+                <div className="px-3 py-2 bg-slate-50 border-t border-slate-100">
+                  <p className="text-xs font-medium text-slate-700 line-clamp-1 flex items-center gap-1">
+                    {button.title}
+                    {button.external && <ExternalLink size={12} className="text-slate-400" />}
+                  </p>
                 </div>
               </div>
             );
