@@ -42,8 +42,7 @@ export default function Home() {
       to: "https://yamato-chemi-blog.hatenablog.com/",
       icon: BookOpenText,
       external: true,
-      bgColor: "bg-gradient-to-br from-emerald-50 to-emerald-100",
-      hoverColor: "hover:from-emerald-100 hover:to-emerald-200",
+      bgImage: "/images/president-blog-bg.png",
       iconColor: "text-emerald-600",
     },
     {
@@ -52,8 +51,7 @@ export default function Home() {
       to: "/collection",
       icon: Camera,
       external: false,
-      bgColor: "bg-gradient-to-br from-amber-50 to-amber-100",
-      hoverColor: "hover:from-amber-100 hover:to-amber-200",
+      bgImage: "/images/banner.jpg",
       iconColor: "text-amber-600",
     },
   ];
@@ -79,10 +77,10 @@ export default function Home() {
       isLogo: true,
     },
     {
-      name: "西播磨化学薬品",
-      url: null,
-      image: null,
-      isLogo: false,
+      name: "西兵庫化学薬品協同組合",
+      url: "https://nishihyogo-chemical-coop.com/summary",
+      image: "/images/coop-bg.png",
+      isLogo: true,
     },
     {
       name: "姫路西ロータリークラブ",
@@ -138,8 +136,10 @@ export default function Home() {
           </p>
 
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-balance leading-tight tracking-tight text-slate-900 drop-shadow-sm">
-            化学工業薬品、試薬、水処理薬品、<br />
-            不要な薬品廃棄の見積・相談を<span className="text-emerald-700">最短</span>で。
+            化学工業薬品、試薬、<br className="md:hidden" />
+            水処理薬品、<br />
+            不要な薬品廃棄の<br className="md:hidden" />
+            見積・相談を<span className="text-emerald-700">最短</span>で。
           </h1>
 
           <p className="mt-2 max-w-2xl text-slate-900 text-sm leading-relaxed font-semibold drop-shadow-sm opacity-90">
@@ -384,20 +384,35 @@ export default function Home() {
         <div className="grid gap-4 md:grid-cols-2 mb-8">
           {navigationButtons.map((button) => {
             const ButtonContent = (
-              <div className={`group h-full ${button.bgColor} ${button.hoverColor} rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center gap-4`}>
-                <div className={`shrink-0 w-14 h-14 flex items-center justify-center rounded-xl bg-white shadow-sm ${button.iconColor}`}>
-                  <button.icon size={28} strokeWidth={2} />
+              <div className="group h-full relative rounded-xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                {/* 背景画像 */}
+                <div className="absolute inset-0">
+                  <img
+                    src={button.bgImage}
+                    alt={button.title}
+                    className="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/70"></div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
-                    {button.title}
-                    {button.external && <ExternalLink size={16} className="text-slate-400 group-hover:text-slate-600" />}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {button.description}
-                  </p>
+
+                {/* コンテンツ */}
+                <div className="relative z-10 p-6 flex items-center gap-4">
+                  <div className={`shrink-0 w-14 h-14 flex items-center justify-center rounded-xl bg-white shadow-sm ${button.iconColor}`}>
+                    <button.icon size={28} strokeWidth={2} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
+                      {button.title}
+                      {button.external && <ExternalLink size={16} className="text-slate-400 group-hover:text-slate-600" />}
+                    </h3>
+                    <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                      {button.description}
+                    </p>
+                  </div>
+                  <ArrowRight className={`text-slate-400 group-hover:text-slate-700 transition-colors ${button.iconColor}`} size={24} />
                 </div>
-                <ArrowRight className={`text-slate-400 group-hover:text-slate-700 transition-colors ${button.iconColor}`} size={24} />
               </div>
             );
 
