@@ -212,6 +212,38 @@ export default function Collection() {
       src: "/Collection/collection50.jpg",
       comment: "『巨人の星』お弁当箱。人気野球漫画とタイアップした学校ランチの定番。",
     },
+    {
+      src: "/Collection/IMG_2487.jpeg",
+      comment: "舞台装置のように背景が広がる、凝ったつくりの「おはなでんわ」。小さなブランコや装飾から、当時の"夢のあるおもちゃ"らしさが伝わってきます。",
+    },
+    {
+      src: "/Collection/IMG_2488.jpeg",
+      comment: "イラストとコピーに時代の空気が残る、オリジナルパッケージ。遊び方まで丁寧に伝えようとする、昭和らしいやさしさを感じます。",
+    },
+    {
+      src: "/Collection/IMG_2489.jpeg",
+      comment: "コカ・コーラとファンタ、それぞれのカラーが楽しい限定ヨーヨー。手に取るだけで、当時のブームと高揚感がよみがえります。",
+    },
+    {
+      src: "/Collection/IMG_2490.jpeg",
+      comment: "ずっしりとした質感が魅力の、ブリキ製クラシックカー。経年の風合いも含めて味わいたい一台です。",
+    },
+    {
+      src: "/Collection/IMG_2491.jpeg",
+      comment: "独特のキーボード配列が懐かしい、往年のワープロ。仕事道具にも個性があった時代を感じさせます。",
+    },
+    {
+      src: "/Collection/IMG_2492.jpeg",
+      comment: "凛とした佇まいが印象的な、壁掛けの鹿の剥製。空間の雰囲気を一変させる存在感があります。",
+    },
+    {
+      src: "/Collection/IMG_2493.jpeg",
+      comment: "木の質感が懐かしい、昔ながらの学習机と椅子。ランドセルまで含めて、当時の風景が目に浮かびます。",
+    },
+    {
+      src: "/Collection/IMG_2494.jpeg",
+      comment: "学校の一角を切り取ったような、懐かしさあふれる佇まい。何気ない日常が、今では貴重な風景です。",
+    },
   ];
 
   const [open, setOpen] = useState(false);
