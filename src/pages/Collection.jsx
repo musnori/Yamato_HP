@@ -214,7 +214,7 @@ export default function Collection() {
     },
     {
       src: "/Collection/IMG_2487.jpeg",
-      comment: "舞台装置のように背景が広がる、凝ったつくりの「おはなでんわ」。小さなブランコや装飾から、当時の"夢のあるおもちゃ"らしさが伝わってきます。",
+      comment: "舞台装置のように背景が広がる、凝ったつくりの「おはなでんわ」。小さなブランコや装飾から、当時の「夢のあるおもちゃ」らしさが伝わってきます。",
     },
     {
       src: "/Collection/IMG_2488.jpeg",
