@@ -214,19 +214,19 @@ export default function Collection() {
     },
     {
       src: "/Collection/IMG_2487.jpeg",
-      comment: "マーガレットのおはなし電話で、小さな子供がレコードと話をするおもちゃです。",
-    },
-    {
-      src: "/Collection/IMG_2488.jpeg",
       comment: "キャンディ・キャンディーのお遊びセットで、金持ちの子供しか持っていなかった記憶があります。",
     },
     {
+      src: "/Collection/IMG_2488.jpeg",
+      comment: "マーガレットのおはなし電話で、小さな子供がレコードと話をするおもちゃです。",
+    },
+    {
       src: "/Collection/IMG_2489.jpeg",
-      comment: "1977年頃に流行したヨーヨーで、コカ・コーラやファンタの景品がかっこよかったです。",
+      comment: "室内用のバッティングマシーンで、屋外では球が軽くて機能しませんでした。",
     },
     {
       src: "/Collection/IMG_2490.jpeg",
-      comment: "室内用のバッティングマシーンで、屋外では球が軽くて機能しませんでした。",
+      comment: "1977年頃に流行したヨーヨーで、コカ・コーラやファンタの景品がかっこよかったです。",
     },
     {
       src: "/Collection/IMG_2491.jpeg",
