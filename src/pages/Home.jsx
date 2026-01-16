@@ -114,7 +114,7 @@ export default function Home() {
       {/* =======================
           Hero Section
       ======================== */}
-      <section className="relative overflow-hidden bg-slate-900 text-white h-[280px] md:h-[350px] lg:h-[380px] flex items-center">
+      <section className="relative overflow-hidden bg-slate-900 text-white h-[320px] md:h-[400px] lg:h-[450px] flex items-center">
         <div className="absolute inset-0 z-0">
           {heroImages.map((src, i) => (
             <div
@@ -129,20 +129,20 @@ export default function Home() {
 
         {/* 背景オーバーレイ */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent z-10" />
-        
-        <div className="relative z-20 layout-container py-6 md:py-8">
-          <p className="text-xs font-bold tracking-[0.3em] text-emerald-800 mb-1.5 animate-fade-in-up drop-shadow-sm">
+
+        <div className="relative z-20 layout-container py-8 md:py-10">
+          <p className="text-sm md:text-base font-bold tracking-[0.3em] text-emerald-800 mb-2 animate-fade-in-up drop-shadow-sm">
             Yamato Chemical
           </p>
 
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-balance leading-tight tracking-tight text-slate-900 drop-shadow-sm">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-balance leading-tight tracking-tight text-slate-900 drop-shadow-sm">
             化学工業薬品、試薬、<br className="md:hidden" />
             水処理薬品、<br />
             不要な薬品廃棄の<br className="md:hidden" />
             見積・相談を<span className="text-emerald-700">最短</span>で。
           </h1>
 
-          <p className="mt-2 max-w-2xl text-slate-900 text-sm leading-relaxed font-semibold drop-shadow-sm opacity-90">
+          <p className="mt-3 max-w-2xl text-slate-900 text-base md:text-lg leading-relaxed font-semibold drop-shadow-sm opacity-90">
             大和薬品株式会社は、学校・工場・研究機関などの<br className="hidden md:block"/>
             多様な現場ニーズに合わせて最適な薬品をご提案します。
           </p>
