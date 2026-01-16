@@ -17,6 +17,13 @@ import Services from "./pages/Services";
 import Hyogo from "./pages/Hyogo";
 // Blog は削除済みならインポート不要
 
+// 薬品の基礎知識ページ
+import KnowledgeIndex from "./pages/knowledge/KnowledgeIndex";
+import SodiumHypochloriteStorage from "./pages/knowledge/SodiumHypochloriteStorage";
+import SodiumHypochloriteDecomposition from "./pages/knowledge/SodiumHypochloriteDecomposition";
+import CalciumChlorideHygroscopic from "./pages/knowledge/CalciumChlorideHygroscopic";
+import SmallLotManufacturing from "./pages/knowledge/SmallLotManufacturing";
+
 function App() {
   return (
     <Router>
@@ -36,6 +43,13 @@ function App() {
           <Route path="sustainability" element={<Sustainability />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="hyogo" element={<Hyogo />} />
+
+          {/* 薬品の基礎知識カテゴリ */}
+          <Route path="knowledge" element={<KnowledgeIndex />} />
+          <Route path="knowledge/sodium-hypochlorite-storage" element={<SodiumHypochloriteStorage />} />
+          <Route path="knowledge/sodium-hypochlorite-decomposition" element={<SodiumHypochloriteDecomposition />} />
+          <Route path="knowledge/calcium-chloride-hygroscopic" element={<CalciumChlorideHygroscopic />} />
+          <Route path="knowledge/small-lot-manufacturing" element={<SmallLotManufacturing />} />
 
           {/* ▼▼▼ ここに追加！古いURL (.html) 対策 ▼▼▼ */}
           {/* これを書くと、Google検索から来た人が正しいページに転送されます */}

@@ -110,6 +110,37 @@ export const PAGE_SEO = {
     description: "兵庫県姫路市を拠点に、化学薬品・工業薬品・試薬・溶剤を関西エリアへ供給。小ロット対応、納期相談、安全データシート（SDS/MSDS）提供など、お客様のニーズに柔軟に対応します。",
     ogImage: `${SITE_URL}/company-logo.png`,
     keywords: "兵庫,姫路,化学薬品,工業薬品,試薬,溶剤,関西,小ロット,SDS,MSDS,納期,供給"
+  },
+  // 薬品の基礎知識カテゴリ
+  knowledgeIndex: {
+    title: "薬品の基礎知識｜化学薬品の保存・取扱いガイド｜大和薬品株式会社",
+    description: "化学薬品・試薬・水処理薬品の保存方法、性質、取り扱い上の注意点を実務視点で解説。現場担当者に役立つ基礎知識をお届けします。",
+    ogImage: `${SITE_URL}/company-logo.png`,
+    keywords: "薬品,基礎知識,保存方法,取扱い,化学薬品,試薬,水処理"
+  },
+  knowledgeSodiumHypochloriteStorage: {
+    title: "次亜塩素酸ナトリウムの保存方法｜正しい保管で有効塩素を維持｜大和薬品株式会社",
+    description: "次亜塩素酸ナトリウム（次亜塩素酸ソーダ）の正しい保存方法を解説。温度管理、遮光、容器選びなど有効塩素濃度を維持するポイントと、現場でよくある失敗例を紹介します。",
+    ogImage: `${SITE_URL}/company-logo.png`,
+    keywords: "次亜塩素酸ナトリウム,保存方法,次亜塩素酸ソーダ,有効塩素,保管,温度管理"
+  },
+  knowledgeSodiumHypochloriteDecomposition: {
+    title: "次亜塩素酸ナトリウムの分解条件｜濃度低下を防ぐ管理方法｜大和薬品株式会社",
+    description: "次亜塩素酸ナトリウムが分解する条件（温度・光・pH・金属イオン）を詳しく解説。有効塩素濃度の低下を防ぎ、効果を維持するための実務的な対策をまとめました。",
+    ogImage: `${SITE_URL}/company-logo.png`,
+    keywords: "次亜塩素酸ナトリウム,分解,条件,濃度低下,有効塩素,化学反応"
+  },
+  knowledgeCalciumChlorideHygroscopic: {
+    title: "塩化カルシウムの吸湿性の原因｜なぜ湿気を吸うのか｜大和薬品株式会社",
+    description: "塩化カルシウムがなぜ強い吸湿性を持つのか、化学的な原理から解説。融雪剤・乾燥剤としての活用法と、保管時の注意点、固結を防ぐコツを紹介します。",
+    ogImage: `${SITE_URL}/company-logo.png`,
+    keywords: "塩化カルシウム,吸湿性,原因,乾燥剤,融雪剤,保管方法"
+  },
+  knowledgeSmallLotManufacturing: {
+    title: "化学品の小ロット製造における注意点｜品質管理と安全対策｜大和薬品株式会社",
+    description: "化学品を小ロットで製造・調合する際の注意点を解説。少量生産特有のリスク、品質管理のポイント、安全対策など現場で役立つ実務知識をまとめました。",
+    ogImage: `${SITE_URL}/company-logo.png`,
+    keywords: "化学品,小ロット,製造,注意点,品質管理,安全対策,調合"
   }
 };
 
