@@ -23,6 +23,11 @@ import SodiumHypochloriteStorage from "./pages/knowledge/SodiumHypochloriteStora
 import SodiumHypochloriteDecomposition from "./pages/knowledge/SodiumHypochloriteDecomposition";
 import CalciumChlorideHygroscopic from "./pages/knowledge/CalciumChlorideHygroscopic";
 import SmallLotManufacturing from "./pages/knowledge/SmallLotManufacturing";
+import HydrogenPeroxideHandling from "./pages/knowledge/HydrogenPeroxideHandling";
+import CitricAcidUsage from "./pages/knowledge/CitricAcidUsage";
+import EthanolProperties from "./pages/knowledge/EthanolProperties";
+import HydrochloricAcidSafety from "./pages/knowledge/HydrochloricAcidSafety";
+import PacCoagulant from "./pages/knowledge/PacCoagulant";
 
 function App() {
   return (
@@ -50,6 +55,11 @@ function App() {
           <Route path="knowledge/sodium-hypochlorite-decomposition" element={<SodiumHypochloriteDecomposition />} />
           <Route path="knowledge/calcium-chloride-hygroscopic" element={<CalciumChlorideHygroscopic />} />
           <Route path="knowledge/small-lot-manufacturing" element={<SmallLotManufacturing />} />
+          <Route path="knowledge/hydrogen-peroxide-handling" element={<HydrogenPeroxideHandling />} />
+          <Route path="knowledge/citric-acid-usage" element={<CitricAcidUsage />} />
+          <Route path="knowledge/ethanol-properties" element={<EthanolProperties />} />
+          <Route path="knowledge/hydrochloric-acid-safety" element={<HydrochloricAcidSafety />} />
+          <Route path="knowledge/pac-coagulant" element={<PacCoagulant />} />
 
           {/* ▼▼▼ ここに追加！古いURL (.html) 対策 ▼▼▼ */}
           {/* これを書くと、Google検索から来た人が正しいページに転送されます */}
