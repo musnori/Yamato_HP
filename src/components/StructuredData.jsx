@@ -145,6 +145,72 @@ export function OrganizationSchema() {
 }
 
 /**
+ * 製品カタログ構造化データ（ItemList + OfferCatalog）
+ * 個別製品名をGoogleにインデックスさせ、「姫路 メタノール」等の検索に対応
+ */
+export function ProductCatalogSchema({ items }) {
+  useEffect(() => {
+    if (!items || items.length === 0) return;
+
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "OfferCatalog",
+      name: "大和薬品株式会社 取扱製品カタログ",
+      description: "兵庫県姫路市の化学薬品専門商社・大和薬品株式会社の取扱製品一覧。工業薬品、有機溶剤、試薬、水処理薬品など。",
+      numberOfItems: items.length,
+      provider: {
+        "@type": "LocalBusiness",
+        "@id": `${SITE_URL}/#organization`,
+        name: COMPANY_INFO.name,
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "JP",
+          addressRegion: COMPANY_INFO.addressRegion,
+          addressLocality: COMPANY_INFO.addressLocality,
+        },
+      },
+      itemListElement: items.map((name, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Product",
+          name,
+          description: `${name} - 兵庫県姫路市の大和薬品が取り扱う化学薬品。関西エリアへ迅速に供給。`,
+          offers: {
+            "@type": "Offer",
+            availability: "https://schema.org/InStock",
+            areaServed: COMPANY_INFO.areaServed.map(area => ({
+              "@type": "Place",
+              name: area,
+            })),
+            seller: {
+              "@type": "Organization",
+              name: COMPANY_INFO.name,
+            },
+          },
+        },
+      })),
+    };
+
+    let script = document.getElementById("schema-product-catalog");
+    if (!script) {
+      script = document.createElement("script");
+      script.id = "schema-product-catalog";
+      script.type = "application/ld+json";
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(schema, null, 2);
+
+    return () => {
+      const existing = document.getElementById("schema-product-catalog");
+      if (existing) existing.remove();
+    };
+  }, [items]);
+
+  return null;
+}
+
+/**
  * FAQPage構造化データ
  */
 export function FAQPageSchema({ faqs }) {
