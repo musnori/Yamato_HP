@@ -141,68 +141,6 @@ export const PAGE_SEO = {
     description: "化学品を小ロットで製造・調合する際の注意点を解説。少量生産特有のリスク、品質管理のポイント、安全対策など現場で役立つ実務知識をまとめました。",
     ogImage: `${SITE_URL}/company-logo.png`,
     keywords: "化学品,小ロット,製造,注意点,品質管理,安全対策,調合"
-  },
-
-  // 商品個別ページ
-  productMethanol: {
-    title: "メタノール｜姫路の化学薬品商社 大和薬品株式会社",
-    description: "姫路・播磨・兵庫県へメタノール（木精・メチルアルコール）を供給。有機合成・洗浄・燃料用途に。工業用・試薬用対応。大和薬品株式会社へお問い合わせください。",
-    ogImage: `${SITE_URL}/company-logo.png`,
-    keywords: "メタノール,木精,メチルアルコール,有機溶剤,姫路,播磨,兵庫,化学薬品"
-  },
-  productToluene: {
-    title: "トルエン｜姫路の化学薬品商社 大和薬品株式会社",
-    description: "姫路・播磨・兵庫県へトルエンを供給。塗料・接着剤・有機合成の溶媒として幅広く使用。工業用・試薬用対応。大和薬品株式会社へお問い合わせください。",
-    ogImage: `${SITE_URL}/company-logo.png`,
-    keywords: "トルエン,有機溶剤,塗料溶剤,接着剤,姫路,播磨,兵庫,化学薬品"
-  },
-  productAcetone: {
-    title: "アセトン｜姫路の化学薬品商社 大和薬品株式会社",
-    description: "姫路・播磨・兵庫県へアセトンを供給。樹脂・塗料の溶剤、電子部品洗浄に最適。工業用・試薬用対応。大和薬品株式会社へお問い合わせください。",
-    ogImage: `${SITE_URL}/company-logo.png`,
-    keywords: "アセトン,ジメチルケトン,有機溶剤,洗浄剤,姫路,播磨,兵庫,化学薬品"
-  },
-  productSodiumHydroxide: {
-    title: "苛性ソーダ（水酸化ナトリウム）｜姫路の化学薬品商社 大和薬品株式会社",
-    description: "姫路・播磨・兵庫県へ苛性ソーダ（水酸化ナトリウム）を供給。水処理・pH調整・化学工業に不可欠。フレーク・液体対応。大和薬品株式会社へお問い合わせください。",
-    ogImage: `${SITE_URL}/company-logo.png`,
-    keywords: "苛性ソーダ,水酸化ナトリウム,NaOH,アルカリ,水処理,pH調整,姫路,播磨,兵庫"
-  },
-  productHydrochloricAcid: {
-    title: "塩酸｜姫路の化学薬品商社 大和薬品株式会社",
-    description: "姫路・播磨・兵庫県へ塩酸35%を供給。金属酸洗い・pH調整・めっき前処理に。工業用・試薬用対応。大和薬品株式会社へお問い合わせください。",
-    ogImage: `${SITE_URL}/company-logo.png`,
-    keywords: "塩酸,塩化水素酸,HCl,無機酸,金属酸洗い,pH調整,姫路,播磨,兵庫"
-  },
-  productSulfuricAcid: {
-    title: "硫酸｜姫路の化学薬品商社 大和薬品株式会社",
-    description: "姫路・播磨・兵庫県へ硫酸（濃硫酸98%・希硫酸62.5%）を供給。金属処理・排水中和・化学合成に。大和薬品株式会社へお問い合わせください。",
-    ogImage: `${SITE_URL}/company-logo.png`,
-    keywords: "硫酸,濃硫酸,希硫酸,H2SO4,無機酸,金属処理,pH調整,姫路,播磨,兵庫"
-  },
-  productIsopropylAlcohol: {
-    title: "イソプロピルアルコール（IPA）｜姫路の化学薬品商社 大和薬品株式会社",
-    description: "姫路・播磨・兵庫県へIPA（イソプロパノール）を供給。電子部品洗浄・消毒・溶剤用途に。工業用・試薬用対応。大和薬品株式会社へお問い合わせください。",
-    ogImage: `${SITE_URL}/company-logo.png`,
-    keywords: "イソプロピルアルコール,IPA,イソプロパノール,2-プロパノール,洗浄剤,消毒,姫路,播磨,兵庫"
-  },
-  productEthanol: {
-    title: "エタノール｜姫路の化学薬品商社 大和薬品株式会社",
-    description: "姫路・播磨・兵庫県へエタノール（無水・工業用アルコール）を供給。消毒・溶剤・食品工業に。大和薬品株式会社へお問い合わせください。",
-    ogImage: `${SITE_URL}/company-logo.png`,
-    keywords: "エタノール,エチルアルコール,無水エタノール,工業用アルコール,消毒,溶剤,姫路,播磨,兵庫"
-  },
-  productSodiumHypochlorite: {
-    title: "次亜塩素酸ナトリウム｜姫路の化学薬品商社 大和薬品株式会社",
-    description: "姫路・播磨・兵庫県へ次亜塩素酸ソーダ（6%・12%）を供給。水道水処理・殺菌・漂白に。常時在庫。大和薬品株式会社へお問い合わせください。",
-    ogImage: `${SITE_URL}/company-logo.png`,
-    keywords: "次亜塩素酸ナトリウム,次亜塩素酸ソーダ,NaClO,殺菌,漂白,水処理,姫路,播磨,兵庫"
-  },
-  productHydrogenPeroxide: {
-    title: "過酸化水素｜姫路の化学薬品商社 大和薬品株式会社",
-    description: "姫路・播磨・兵庫県へ過酸化水素水35%を供給。漂白・殺菌・電子部品洗浄・排水処理に。工業用・試薬用対応。大和薬品株式会社へお問い合わせください。",
-    ogImage: `${SITE_URL}/company-logo.png`,
-    keywords: "過酸化水素,過水,H2O2,酸化剤,漂白剤,殺菌,姫路,播磨,兵庫"
   }
 };
 
