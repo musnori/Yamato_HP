@@ -1,5 +1,5 @@
 // src/pages/Products.jsx
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { Disclosure } from "@headlessui/react";
 import * as wanakana from "wanakana";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
@@ -7,7 +7,7 @@ import { PRODUCTS, PRODUCT_CATEGORIES, PRODUCT_FORMS, PRODUCT_USES } from "../da
 import PrimaryCTA from "../components/PrimaryCTA";
 import Section from "../components/Section";
 import SEOHead from "../components/SEOHead";
-import { BreadcrumbSchema } from "../components/StructuredData";
+import { BreadcrumbSchema, ProductCatalogSchema } from "../components/StructuredData";
 
 // アイコン (lucide-react)
 import { 
@@ -89,10 +89,11 @@ const prefixMap = {
 
 function headKana(item) {
   const hira = wanakana.toHiragana(item);
-  for (const ch of hira) if (wanakana.isHiragana(ch)) return ch;
+  // prefixMap を先にチェック（漢字始まりの薬品名を正しく分類するため）
   for (const [key, kana] of Object.entries(prefixMap)) {
     if (item.startsWith(key) || hira.startsWith(wanakana.toHiragana(key))) return kana[0];
   }
+  for (const ch of hira) if (wanakana.isHiragana(ch)) return ch;
   const m = hira.match(/[ぁ-ん]/);
   return m ? m[0] : null;
 }
@@ -135,6 +136,13 @@ const STOCK_ID_MAP = {
   "消石灰": "cao",
 };
 
+/* 全品目リスト（サジェスト・検索用） */
+const allCatalogItems = [...new Set([
+  ...inorganicItems,
+  ...organicItems,
+  ...PRODUCTS.map((p) => p.name),
+])];
+
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [openDetail, setOpenDetail] = useState(null);
@@ -144,6 +152,8 @@ export default function Products() {
   const [useCase, setUseCase] = useState(searchParams.get("use") || "all");
   const [form, setForm] = useState(searchParams.get("form") || "all");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchRef = useRef(null);
 
   useEffect(() => {
     setQuery(searchParams.get("q") || "");
@@ -151,6 +161,32 @@ export default function Products() {
     setUseCase(searchParams.get("use") || "all");
     setForm(searchParams.get("form") || "all");
   }, [searchParams]);
+
+  /* サジェスト候補（部分一致） */
+  const suggestions = useMemo(() => {
+    const q = query.trim();
+    if (q.length === 0) return [];
+    const lower = q.toLowerCase();
+    const hiraQ = wanakana.toHiragana(q);
+    return allCatalogItems
+      .filter((item) => {
+        const itemLower = item.toLowerCase();
+        const itemHira = wanakana.toHiragana(item);
+        return itemLower.includes(lower) || itemHira.includes(hiraQ);
+      })
+      .slice(0, 10);
+  }, [query]);
+
+  /* 検索欄の外クリックでサジェスト閉じる */
+  useEffect(() => {
+    const handler = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   const groupsInorganic = useGrouped(inorganicItems, query);
   const groupsOrganic = useGrouped(organicItems, query);
@@ -170,16 +206,19 @@ export default function Products() {
     useCase !== "all" ||
     form !== "all";
 
+  /* 注目製品（詳細付き）のフィルタ */
   const filteredProducts = useMemo(() => {
     if (!hasCriteria) return [];
 
     const q = query.trim().toLowerCase();
+    const hiraQ = wanakana.toHiragana(query.trim());
     return PRODUCTS.filter((product) => {
       const matchesQuery =
         q === ""
           ? true
           : product.name.toLowerCase().includes(q) ||
-            product.description.toLowerCase().includes(q);
+            product.description.toLowerCase().includes(q) ||
+            wanakana.toHiragana(product.name).includes(hiraQ);
 
       const matchesCategory = category === "all" ? true : product.category === category;
       const matchesUse = useCase === "all" ? true : product.uses.includes(useCase);
@@ -188,6 +227,21 @@ export default function Products() {
       return matchesQuery && matchesCategory && matchesUse && matchesForm;
     });
   }, [query, category, useCase, form, hasCriteria]);
+
+  /* 全品目から検索にマッチしたもの（注目製品と重複しないもの） */
+  const matchedCatalogItems = useMemo(() => {
+    const q = query.trim();
+    if (q.length === 0) return [];
+    const lower = q.toLowerCase();
+    const hiraQ = wanakana.toHiragana(q);
+    const featuredNames = new Set(PRODUCTS.map((p) => p.name));
+    return allCatalogItems.filter((item) => {
+      if (featuredNames.has(item)) return false;
+      const itemLower = item.toLowerCase();
+      const itemHira = wanakana.toHiragana(item);
+      return itemLower.includes(lower) || itemHira.includes(hiraQ);
+    });
+  }, [query]);
 
   const updateFilters = (next) => {
     setSearchParams((prev) => {
@@ -199,6 +253,16 @@ export default function Products() {
           params.set(key, value);
         }
       });
+      return params;
+    });
+  };
+
+  const selectSuggestion = (item) => {
+    setQuery(item);
+    setShowSuggestions(false);
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
+      params.set("q", item);
       return params;
     });
   };
@@ -239,6 +303,7 @@ export default function Products() {
     <>
       <SEOHead pageKey="products" />
       <BreadcrumbSchema items={[{ name: "ホーム", url: "/" }, { name: "取扱製品" }]} />
+      <ProductCatalogSchema items={allCatalogItems} />
 
       <div className="bg-slate-50 min-h-screen">
       {/* =======================
@@ -255,6 +320,9 @@ export default function Products() {
             兵庫県姫路市から関西エリアへ、化学薬品・工業薬品・試薬・有機溶剤を供給。<br className="hidden md:inline" />
             薬品名、用途、形状から最適な製品をお探しいただけます。見つからない場合も、お気軽にお問い合わせください。
           </p>
+          <p className="mt-3 text-xs text-slate-400 max-w-3xl mx-auto">
+            主な取扱品目：メタノール / トルエン / エタノール / アセトン / キシレン / 塩酸 / 苛性ソーダ / 次亜塩素酸ソーダ / PAC / 硫酸 / 過酸化水素 ほか160品目以上
+          </p>
         </div>
       </section>
 
@@ -264,19 +332,50 @@ export default function Products() {
       <div className="layout-container -mt-8 relative z-10 pb-12">
         <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden p-6 md:p-8">
           
-          {/* キーワード検索 */}
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+          {/* キーワード検索（サジェスト付き） */}
+          <div className="relative" ref={searchRef}>
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 z-10" size={20} />
             <input
               type="text"
-              placeholder="キーワードで検索 (例：エタノール / 洗浄 / 工業用)"
+              placeholder="薬品名で検索（例：メタノール / エタノール / 塩酸）"
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value);
+                setShowSuggestions(true);
                 updateFilters({ q: e.target.value });
               }}
+              onFocus={() => query.trim().length > 0 && setShowSuggestions(true)}
               className="w-full h-12 pl-12 pr-4 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all outline-none text-slate-800 placeholder:text-slate-400"
             />
+            {/* サジェストドロップダウン */}
+            {showSuggestions && suggestions.length > 0 && (
+              <ul className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg z-50 max-h-64 overflow-y-auto">
+                {suggestions.map((item) => {
+                  const q = query.trim();
+                  const idx = item.toLowerCase().indexOf(q.toLowerCase());
+                  return (
+                    <li key={item}>
+                      <button
+                        type="button"
+                        className="w-full text-left px-4 py-3 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors flex items-center gap-2 border-b border-slate-50 last:border-0"
+                        onMouseDown={(e) => { e.preventDefault(); selectSuggestion(item); }}
+                      >
+                        <Search size={14} className="text-slate-300 shrink-0" />
+                        {idx >= 0 ? (
+                          <span>
+                            {item.slice(0, idx)}
+                            <span className="font-bold text-emerald-600">{item.slice(idx, idx + q.length)}</span>
+                            {item.slice(idx + q.length)}
+                          </span>
+                        ) : (
+                          <span>{item}</span>
+                        )}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
 
           {/* デスクトップ：フィルター列 */}
@@ -397,11 +496,11 @@ export default function Products() {
         id="search"
         eyebrow="RESULTS"
         title={hasCriteria ? "検索結果" : "おすすめ製品"}
-        description={hasCriteria ? `${filteredProducts.length}件が見つかりました` : "よくお問い合わせいただく製品です"}
+        description={hasCriteria ? `${filteredProducts.length + matchedCatalogItems.length}件が見つかりました` : "よくお問い合わせいただく製品です"}
         className="bg-slate-50 pt-0"
       >
         {/* 結果ゼロの場合 */}
-        {hasCriteria && filteredProducts.length === 0 && (
+        {hasCriteria && filteredProducts.length === 0 && matchedCatalogItems.length === 0 && (
           <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 shadow-sm border-dashed">
             <FlaskConical className="mx-auto text-slate-300 mb-4" size={48} />
             <p className="text-slate-800 font-bold text-lg">該当する製品が見つかりませんでした。</p>
@@ -410,8 +509,8 @@ export default function Products() {
               リストにない製品も取り扱っております。
             </p>
             <div className="flex justify-center gap-4">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={clearFilters}
                 className="px-6 py-2.5 rounded-lg border border-slate-300 text-slate-700 font-bold text-sm hover:bg-slate-50"
               >
@@ -508,6 +607,42 @@ export default function Products() {
             </div>
           ))}
         </div>
+
+        {/* 全品目からの検索結果 */}
+        {hasCriteria && matchedCatalogItems.length > 0 && (
+          <div className="mt-8">
+            <h3 className="text-sm font-bold text-slate-500 mb-4 flex items-center gap-2">
+              <FlaskConical size={16} />
+              取扱品目からの検索結果（{matchedCatalogItems.length}件）
+            </h3>
+            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {matchedCatalogItems.map((item) => {
+                  const sid = STOCK_ID_MAP[item];
+                  return (
+                    <div key={item} className="flex items-center justify-between gap-2 py-2 px-3 rounded-lg bg-slate-50 border border-slate-100">
+                      <span className="text-sm text-slate-700">{item}</span>
+                      <div className="flex items-center gap-2 shrink-0">
+                        {sid && (
+                          <Link to={`/stock#${sid}`} className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-0.5">
+                            在庫 <ArrowRight size={10} />
+                          </Link>
+                        )}
+                        <button
+                          type="button"
+                          className="text-[10px] font-bold text-slate-500 hover:text-emerald-600 transition-colors"
+                          onClick={() => ask(item)}
+                        >
+                          見積依頼
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
       </Section>
 
       {/* =======================
