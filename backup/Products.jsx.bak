@@ -770,38 +770,6 @@ export default function Products() {
           </Disclosure>
         </div>
       </Section>
-      {/* 注目商品 個別ページ */}
-      <Section
-        eyebrow="FEATURED PRODUCTS"
-        title="注目商品 詳細ページ"
-        description="よくご注文いただく商品の詳細情報・規格・保管方法をご確認いただけます"
-        className="bg-white"
-      >
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-          {[
-            { label: "メタノール", path: "/products/methanol", cat: "有機溶剤" },
-            { label: "トルエン", path: "/products/toluene", cat: "有機溶剤" },
-            { label: "アセトン", path: "/products/acetone", cat: "有機溶剤" },
-            { label: "苛性ソーダ", path: "/products/sodium-hydroxide", cat: "無機薬品" },
-            { label: "塩酸", path: "/products/hydrochloric-acid", cat: "無機薬品" },
-            { label: "硫酸", path: "/products/sulfuric-acid", cat: "無機薬品" },
-            { label: "IPA", path: "/products/isopropyl-alcohol", cat: "有機溶剤" },
-            { label: "エタノール", path: "/products/ethanol", cat: "有機溶剤" },
-            { label: "次亜塩素酸ソーダ", path: "/products/sodium-hypochlorite", cat: "水処理薬品" },
-            { label: "過酸化水素", path: "/products/hydrogen-peroxide", cat: "酸化剤" },
-          ].map((p) => (
-            <Link
-              key={p.path}
-              to={p.path}
-              className="flex flex-col items-center gap-1 rounded-xl border border-green-100 bg-green-50 px-3 py-4 text-center hover:bg-green-100 hover:shadow transition group"
-            >
-              <span className="text-[10px] text-green-600 font-semibold tracking-wide">{p.cat}</span>
-              <span className="text-sm font-bold text-slate-800 group-hover:text-green-800">{p.label}</span>
-              <span className="text-[10px] text-green-700 mt-1">詳細 →</span>
-            </Link>
-          ))}
-        </div>
-      </Section>
     </div>
     </>
   );

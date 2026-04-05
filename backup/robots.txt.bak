@@ -1,0 +1,10 @@
+# https://yamato-chemi.co.jp/robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://yamato-chemi.co.jp/sitemap.xml
+
+# Disallow admin or internal paths (if any)
+# Disallow: /admin/

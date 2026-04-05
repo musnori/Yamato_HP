@@ -19,18 +19,6 @@ import Hyogo from "./pages/Hyogo";
 
 // 薬品の基礎知識ページ
 import KnowledgeIndex from "./pages/knowledge/KnowledgeIndex";
-
-// 商品個別ページ
-import Methanol from "./pages/products/Methanol";
-import Toluene from "./pages/products/Toluene";
-import Acetone from "./pages/products/Acetone";
-import SodiumHydroxide from "./pages/products/SodiumHydroxide";
-import HydrochloricAcid from "./pages/products/HydrochloricAcid";
-import SulfuricAcid from "./pages/products/SulfuricAcid";
-import IsopropylAlcohol from "./pages/products/IsopropylAlcohol";
-import Ethanol from "./pages/products/Ethanol";
-import SodiumHypochlorite from "./pages/products/SodiumHypochlorite";
-import HydrogenPeroxide from "./pages/products/HydrogenPeroxide";
 import SodiumHypochloriteStorage from "./pages/knowledge/SodiumHypochloriteStorage";
 import SodiumHypochloriteDecomposition from "./pages/knowledge/SodiumHypochloriteDecomposition";
 import CalciumChlorideHygroscopic from "./pages/knowledge/CalciumChlorideHygroscopic";
@@ -72,18 +60,6 @@ function App() {
           <Route path="knowledge/ethanol-properties" element={<EthanolProperties />} />
           <Route path="knowledge/hydrochloric-acid-safety" element={<HydrochloricAcidSafety />} />
           <Route path="knowledge/pac-coagulant" element={<PacCoagulant />} />
-
-          {/* 商品個別ページ */}
-          <Route path="products/methanol" element={<Methanol />} />
-          <Route path="products/toluene" element={<Toluene />} />
-          <Route path="products/acetone" element={<Acetone />} />
-          <Route path="products/sodium-hydroxide" element={<SodiumHydroxide />} />
-          <Route path="products/hydrochloric-acid" element={<HydrochloricAcid />} />
-          <Route path="products/sulfuric-acid" element={<SulfuricAcid />} />
-          <Route path="products/isopropyl-alcohol" element={<IsopropylAlcohol />} />
-          <Route path="products/ethanol" element={<Ethanol />} />
-          <Route path="products/sodium-hypochlorite" element={<SodiumHypochlorite />} />
-          <Route path="products/hydrogen-peroxide" element={<HydrogenPeroxide />} />
 
           {/* ▼▼▼ ここに追加！古いURL (.html) 対策 ▼▼▼ */}
           {/* これを書くと、Google検索から来た人が正しいページに転送されます */}
