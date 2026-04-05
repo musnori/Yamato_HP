@@ -134,6 +134,11 @@ const STOCK_ID_MAP = {
   "精製濃硫酸": "h2so4",
   "塩化カルシウム": "cacl2",
   "消石灰": "cao",
+  "メタノール": "methanol",
+  "トルエン": "toluene",
+  "アセトン": "acetone",
+  "キシレン": "xylene",
+  "イソプロピルアルコール": "ipa",
 };
 
 /* 全品目リスト（サジェスト・検索用） */
@@ -188,8 +193,8 @@ export default function Products() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const groupsInorganic = useGrouped(inorganicItems, query);
-  const groupsOrganic = useGrouped(organicItems, query);
+  const groupsInorganic = useGrouped(inorganicItems, "");
+  const groupsOrganic = useGrouped(organicItems, "");
   const order = ["あ行","か行","さ行","た行","な行","は行","ま行","や行","ら行","わ行","その他"];
   const rowsIn  = Object.keys(groupsInorganic).sort((a,b)=>order.indexOf(a)-order.indexOf(b));
   const rowsOrg = Object.keys(groupsOrganic).sort((a,b)=>order.indexOf(a)-order.indexOf(b));
@@ -621,12 +626,35 @@ export default function Products() {
                   const sid = STOCK_ID_MAP[item];
                   return (
                     <div key={item} className="flex items-center justify-between gap-2 py-2 px-3 rounded-lg bg-slate-50 border border-slate-100">
-                      <span className="text-sm text-slate-700">{item}</span>
+                      {sid ? (
+                        <Link
+                          to={`/stock#${sid}`}
+                          className="text-sm text-slate-700 hover:text-emerald-600 font-medium flex-1 min-w-0 truncate"
+                        >
+                          {item}
+                        </Link>
+                      ) : (
+                        <span className="text-sm text-slate-700 flex-1 min-w-0 truncate">{item}</span>
+                      )}
                       <div className="flex items-center gap-2 shrink-0">
-                        {sid && (
-                          <Link to={`/stock#${sid}`} className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-0.5">
-                            在庫 <ArrowRight size={10} />
+                        {sid ? (
+                          <Link
+                            to={`/stock#${sid}`}
+                            className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-0.5"
+                          >
+                            詳細 <ArrowRight size={10} />
                           </Link>
+                        ) : (
+                          <button
+                            type="button"
+                            className="text-[10px] font-bold text-slate-400 hover:text-slate-600 transition-colors"
+                            onClick={() => {
+                              const qs = new URLSearchParams({ subject: `薬品のご相談：${item}`, category: "chemicals" }).toString();
+                              navigate(`/contact?${qs}`);
+                            }}
+                          >
+                            詳細
+                          </button>
                         )}
                         <button
                           type="button"
