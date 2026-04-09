@@ -103,6 +103,32 @@ export function BreadcrumbSchema({ items }) {
 }
 
 /**
+ * WebSite構造化データ（Google検索結果のサイト名表示用）
+ */
+export function WebSiteSchema() {
+  useEffect(() => {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: COMPANY_INFO.name,
+      alternateName: COMPANY_INFO.nameEn,
+      url: SITE_URL,
+    };
+
+    let script = document.getElementById("schema-website");
+    if (!script) {
+      script = document.createElement("script");
+      script.id = "schema-website";
+      script.type = "application/ld+json";
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(schema, null, 2);
+  }, []);
+
+  return null;
+}
+
+/**
  * Organization構造化データ（トップページ用）
  */
 export function OrganizationSchema() {

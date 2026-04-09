@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import PrimaryCTA from "../components/PrimaryCTA";
 import Section from "../components/Section";
 import SEOHead from "../components/SEOHead";
-import { LocalBusinessSchema, BreadcrumbSchema } from "../components/StructuredData";
+import { LocalBusinessSchema, BreadcrumbSchema, WebSiteSchema } from "../components/StructuredData";
 
 // アイコン (Communityで使用していたものも含めて一括インポート)
 import { 
@@ -107,6 +107,7 @@ export default function Home() {
     <>
       <SEOHead pageKey="home" />
       <LocalBusinessSchema />
+      <WebSiteSchema />
       <BreadcrumbSchema items={[{ name: "ホーム" }]} />
 
       <div className="bg-slate-50 text-slate-800 font-sans">
