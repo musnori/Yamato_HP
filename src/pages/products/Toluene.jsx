@@ -101,12 +101,12 @@ export default function Toluene() {
                     <td className="py-2">99.5%以上（工業用）/ 99.5%以上（試薬用）</td>
                   </tr>
                   <tr className="border-b border-slate-100">
-                    <td className="py-2 pr-4 font-semibold text-slate-600">容量</td>
-                    <td className="py-2">18L缶・ドラム（200L）・ローリー</td>
+                    <td className="py-2 pr-4 font-semibold text-slate-600">荷姿</td>
+                    <td className="py-2">14kg 1斗缶 / 170kg ドラム / ローリー</td>
                   </tr>
                   <tr>
-                    <td className="py-2 pr-4 font-semibold text-slate-600">危険物分類</td>
-                    <td className="py-2">第4類 第一石油類（引火点 4℃）</td>
+                    <td className="py-2 pr-4 font-semibold text-slate-600">法規制</td>
+                    <td className="py-2">劇物（毒物及び劇物取締法）／ 危険物第4類 第一石油類（引火点 4℃）</td>
                   </tr>
                 </tbody>
               </table>
