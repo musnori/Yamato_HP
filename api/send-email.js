@@ -19,6 +19,18 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // SMTP環境変数チェック
+  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    console.error('SMTP設定が不足しています:', {
+      SMTP_HOST: process.env.SMTP_HOST ? '設定済み' : '未設定',
+      SMTP_USER: process.env.SMTP_USER ? '設定済み' : '未設定',
+      SMTP_PASS: process.env.SMTP_PASS ? '設定済み' : '未設定',
+    });
+    return res.status(500).json({
+      error: 'サーバーのメール設定が完了していません。管理者にお問い合わせください。',
+    });
+  }
+
   try {
     const { company, name, email, tel, topic, message, productName, productUse, quantity, timeline } = req.body;
 
@@ -83,7 +95,7 @@ ${productName || productUse || quantity || timeline ? `
     });
 
   } catch (error) {
-    console.error('メール送信エラー:', error);
+    console.error('メール送信エラー:', error.message, error.code || '');
     return res.status(500).json({
       error: 'メール送信に失敗しました',
       details: process.env.NODE_ENV === 'development' ? error.message : undefined

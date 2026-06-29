@@ -42,7 +42,7 @@
     { "source": "/stock.html", "destination": "/stock", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "trailingSlash": false
 }
