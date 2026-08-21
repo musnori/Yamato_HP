@@ -185,19 +185,17 @@ export default function Home() {
           GREETING
       ======================== */}
       <Section eyebrow="GREETING" title="ごあいさつ" className="bg-slate-50">
-        <div className="grid gap-4 lg:grid-cols-2 items-center">
+        <div className="grid gap-6 lg:gap-8 lg:grid-cols-2 items-center">
           <div className="order-2 lg:order-1">
-             <div className="bg-white p-5 md:p-7 rounded-xl border border-slate-200/70">
-                <div className="space-y-2 text-xs md:text-sm leading-relaxed text-slate-700 font-medium">
+             <div className="bg-white p-6 md:p-8 rounded-xl border border-slate-200/70">
+                <div className="space-y-4 text-[15px] leading-[1.95] text-slate-700">
                   {greetingText.map((text, i) => (
                     <p key={i}>{text}</p>
                   ))}
                 </div>
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <div>
-                    <p className="text-[10px] text-slate-400 mb-0.5">REPRESENTATIVE</p>
-                    <p className="text-sm font-bold text-slate-800">代表取締役社長　田路 裕之</p>
-                  </div>
+                <div className="mt-6 pt-5 border-t border-slate-100">
+                  <p className="text-[11px] tracking-[0.2em] text-slate-400 mb-1">REPRESENTATIVE</p>
+                  <p className="text-[15px] font-bold text-slate-900">代表取締役社長　田路 裕之</p>
                 </div>
              </div>
           </div>
@@ -248,10 +246,10 @@ export default function Home() {
                   <item.icon size={20} strokeWidth={1.75} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
+                  <h3 className="text-base font-bold text-slate-900 mb-1.5 flex items-center gap-2">
                     {item.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-[13.5px] text-slate-600 leading-[1.85]">
                     {item.text}
                   </p>
                 </div>
@@ -260,39 +258,37 @@ export default function Home() {
           </div>
 
           {/* 右側：FLOW */}
-          <div className="bg-slate-50/70 rounded-xl p-6 md:p-7 border border-slate-200/70 relative">
-            <h3 className="text-base font-bold text-slate-900 mb-5">取引の流れ</h3>
-            
-            <div className="relative pl-2">
-              <div className="absolute left-[11px] top-2 bottom-8 w-0.5 bg-slate-200"></div>
-              <div className="space-y-4">
-                {[
-                  "用途・製品の相談",
-                  "見積・提案",
-                  "受注・手配",
-                  "納品・アフターサポート",
-                ].map((step, index) => (
-                  <div key={step} className="relative flex items-center gap-3">
-                    <div className="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white border-2 border-emerald-500 text-emerald-600 font-bold text-xs shadow-sm">
-                      {index + 1}
-                    </div>
-                    <div className="text-slate-700 font-medium text-xs md:text-sm">
-                      {step}
-                    </div>
-                    {index < 3 && (
-                      <div className="absolute left-[10px] top-6 text-slate-300">
-                        <ArrowRight size={10} className="rotate-90" />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="mt-4 bg-emerald-50/80 border border-emerald-100 rounded-lg p-3 flex items-start gap-3">
-              <Lightbulb className="text-emerald-500 shrink-0 mt-0.5" size={16} />
+          <div className="bg-slate-50/70 rounded-xl p-6 md:p-8 border border-slate-200/70">
+            <h3 className="text-lg font-bold text-slate-900 mb-6">取引の流れ</h3>
+
+            <ol className="relative">
+              {/* 縦の連結ライン（ノードの中心を通す） */}
+              <div className="absolute left-4 top-4 bottom-4 w-px bg-slate-200" aria-hidden />
+              {[
+                "用途・製品の相談",
+                "見積・提案",
+                "受注・手配",
+                "納品・アフターサポート",
+              ].map((step, index, arr) => (
+                <li
+                  key={step}
+                  className={`relative flex items-center gap-4 ${index < arr.length - 1 ? "pb-6" : ""}`}
+                >
+                  <span className="relative z-10 flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-emerald-700 text-white text-sm font-bold">
+                    {index + 1}
+                  </span>
+                  <span className="text-[15px] font-medium text-slate-800">
+                    {step}
+                  </span>
+                </li>
+              ))}
+            </ol>
+
+            <div className="mt-6 bg-white border border-emerald-100 rounded-lg p-4 flex items-start gap-3">
+              <Lightbulb className="text-emerald-600 shrink-0 mt-0.5" size={18} strokeWidth={1.75} />
               <div>
-                <p className="font-bold text-emerald-800 text-xs">用途が不明でもOK</p>
-                <p className="mt-0.5 text-[10px] md:text-xs text-emerald-700/80 leading-relaxed">
+                <p className="font-bold text-emerald-800 text-sm">用途が不明でもOK</p>
+                <p className="mt-1 text-[13px] text-slate-600 leading-relaxed">
                   「何に使うか」だけ教えていただければ、最適な製品をご提案します。
                 </p>
               </div>
@@ -305,7 +301,7 @@ export default function Home() {
           NEEDS
       ======================== */}
       <Section eyebrow="NEEDS" title="よくあるご相談" className="bg-slate-50">
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4 items-stretch">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 items-stretch">
           {[
             {
               title: "急ぎで必要",
@@ -333,10 +329,10 @@ export default function Home() {
                 <div className="flex items-center justify-between mb-3">
                   <CheckCircle2 size={18} className="text-emerald-600/70 group-hover:text-emerald-600 transition-colors" strokeWidth={1.75} />
                 </div>
-                <h3 className="text-sm font-bold text-slate-900">{item.title}</h3>
-                <p className="mt-1.5 text-xs text-slate-500 leading-relaxed">{item.desc}</p>
-                <div className="mt-auto pt-4 text-[11px] font-semibold text-emerald-700 flex items-center gap-1 group-hover:gap-2 transition-all">
-                  相談する <ArrowRight size={12} />
+                <h3 className="text-[15px] font-bold text-slate-900">{item.title}</h3>
+                <p className="mt-2 text-[13px] text-slate-500 leading-relaxed">{item.desc}</p>
+                <div className="mt-auto pt-4 text-xs font-semibold text-emerald-700 flex items-center gap-1 group-hover:gap-2 transition-all">
+                  相談する <ArrowRight size={13} />
                 </div>
               </Card>
             </Link>
@@ -362,8 +358,8 @@ export default function Home() {
           ].map((c) => (
             <Link key={c.title} to={c.to} className="group">
               <div className="h-full bg-white rounded-xl p-5 md:p-6 hover:bg-emerald-50/50 transition-colors duration-200 border border-slate-200/70 hover:border-emerald-200">
-                <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-900 transition-colors">{c.title}</h3>
-                <p className="mt-1.5 text-xs text-slate-500 leading-relaxed">{c.desc}</p>
+                <h3 className="text-[15px] font-bold text-slate-900 group-hover:text-emerald-900 transition-colors">{c.title}</h3>
+                <p className="mt-2 text-[13px] text-slate-500 leading-relaxed">{c.desc}</p>
               </div>
             </Link>
           ))}
@@ -473,23 +469,23 @@ export default function Home() {
         className="bg-white"
         actions={<PrimaryCTA to="/news" label="一覧" variant="outline" size="sm" className="text-xs px-3 py-1.5" />}
       >
-        <div className="bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
+        <div className="border-t border-slate-200">
           {[
              { date: "2025.12.30", cat: "お知らせ", title: "Webサイトをリニューアルいたしました。" },
              { date: "2025.12.15", cat: "営業日", title: "年末年始の営業についてのお知らせ" },
              { date: "2025.11.20", cat: "製品情報", title: "水処理用凝集剤の新規在庫が入荷しました" },
           ].map((news, i) => (
-            <Link key={i} to="/news" className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 p-3 md:p-4 hover:bg-white transition-colors group border-b border-slate-200 last:border-0">
-               <div className="flex items-center gap-2 shrink-0">
-                 <span className="text-xs font-mono text-slate-500">{news.date}</span>
-                 <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-600 group-hover:bg-emerald-100 group-hover:text-emerald-700 transition-colors">
+            <Link key={i} to="/news" className="flex flex-col md:flex-row md:items-center gap-2 md:gap-5 py-4 md:py-5 hover:bg-slate-50/70 transition-colors group border-b border-slate-200 px-1 md:px-2">
+               <div className="flex items-center gap-3 shrink-0">
+                 <span className="text-[13px] tabular-nums text-slate-500">{news.date}</span>
+                 <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700">
                    {news.cat}
                  </span>
                </div>
-               <p className="text-xs md:text-sm font-medium text-slate-800 group-hover:text-emerald-800 transition-colors line-clamp-1">
+               <p className="text-[15px] text-slate-800 group-hover:text-emerald-800 transition-colors line-clamp-1">
                  {news.title}
                </p>
-               <ArrowRight className="ml-auto text-slate-300 group-hover:text-emerald-500 opacity-0 group-hover:opacity-100 transition-all" size={14} />
+               <ArrowRight className="hidden md:block ml-auto text-slate-300 group-hover:text-emerald-600 transition-colors shrink-0" size={16} />
             </Link>
           ))}
         </div>
