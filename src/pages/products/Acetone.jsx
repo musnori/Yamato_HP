@@ -57,9 +57,9 @@ export default function Acetone() {
 
       <div className="layout-container py-8 md:py-12">
         <nav aria-label="パンくずリスト" className="mb-6 text-sm text-slate-500 flex flex-wrap gap-1 items-center">
-          <Link to="/" className="hover:text-green-700 hover:underline">ホーム</Link>
+          <Link to="/" className="hover:text-emerald-700 hover:underline">ホーム</Link>
           <span aria-hidden="true">›</span>
-          <Link to="/products" className="hover:text-green-700 hover:underline">取扱商品</Link>
+          <Link to="/products" className="hover:text-emerald-700 hover:underline">取扱商品</Link>
           <span aria-hidden="true">›</span>
           <span className="text-slate-700 font-medium">アセトン</span>
         </nav>
@@ -124,8 +124,8 @@ export default function Acetone() {
             </ul>
           </div>
 
-          <div className="bg-green-50 border border-green-200 rounded-2xl p-6 mb-8">
-            <h2 className="text-lg font-bold text-green-800 mb-2">姫路・播磨地域のお客様へ</h2>
+          <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 mb-8">
+            <h2 className="text-lg font-bold text-emerald-800 mb-2">姫路・播磨地域のお客様へ</h2>
             <p className="text-slate-700 text-sm leading-relaxed">
               大和薬品株式会社は兵庫県姫路市を拠点に、播磨地域・兵庫県全域へアセトンをはじめとする有機溶剤・化学薬品を迅速に供給しています。
               小ロットから大口まで対応可能。SDS（安全データシート）のご提供も承ります。
@@ -134,7 +134,7 @@ export default function Acetone() {
 
           <div className="card p-6 text-center">
             <p className="text-slate-700 mb-4 font-semibold">お見積り・ご相談はお気軽にどうぞ</p>
-            <p className="text-2xl font-bold text-green-700 mb-1">
+            <p className="text-2xl font-bold text-emerald-700 mb-1">
               <a href="tel:0792810671" className="hover:underline">TEL：079-281-0671</a>
             </p>
             <p className="text-sm text-slate-500 mb-4">受付時間 9:00〜17:00（土日祝休）</p>

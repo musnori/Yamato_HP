@@ -316,7 +316,7 @@ export default function Collection() {
               <div className="text-right mt-4">
                 <button
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center px-4 py-2 rounded-md bg-green-700 text-white hover:bg-green-800 transition"
+                  className="inline-flex items-center px-4 py-2 rounded-md bg-emerald-700 text-white hover:bg-emerald-800 transition"
                 >
                   閉じる
                 </button>

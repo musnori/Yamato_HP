@@ -115,64 +115,58 @@ export default function Home() {
       {/* =======================
           Hero Section
       ======================== */}
-      <section className="relative overflow-hidden bg-slate-900 text-white h-[320px] md:h-[400px] lg:h-[450px] flex items-center">
+      <section className="relative overflow-hidden bg-slate-950 text-white h-[440px] md:h-[500px] lg:h-[560px] flex items-center">
         <div className="absolute inset-0 z-0">
           {heroImages.map((src, i) => (
             <div
               key={src}
-              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-                i === heroIndex ? "opacity-50" : "opacity-0"
+              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms] ${
+                i === heroIndex ? "opacity-100 scale-105" : "opacity-0 scale-100"
               }`}
-              style={{ backgroundImage: `url(${src})` }}
+              style={{ backgroundImage: `url(${src})`, transition: "opacity 1200ms ease, transform 7000ms ease" }}
             />
           ))}
         </div>
 
-        {/* 背景オーバーレイ */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent z-10" />
+        {/* 背景オーバーレイ：濃いスクリムで写真の文字を沈め、白文字を確実に読ませる */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-slate-900/30" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/20" />
 
-        <div className="relative z-20 layout-container py-8 md:py-10">
-          <p className="text-[11px] md:text-xs font-medium tracking-[0.3em] text-emerald-800/80 mb-4 animate-fade-in-up">
+        <div className="relative z-20 layout-container py-10 md:py-12">
+          <p className="text-[11px] md:text-xs font-semibold tracking-[0.3em] text-emerald-300 mb-5 animate-fade-in-up">
             YAMATO CHEMICAL — SINCE 1933
           </p>
 
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-balance leading-[1.2] tracking-tight text-slate-900">
+          <h1 className="text-3xl md:text-[2.75rem] lg:text-5xl font-bold text-balance leading-[1.28] tracking-tight text-white">
             化学工業薬品、試薬、<br className="md:hidden" />
             水処理薬品、<br />
             不要な薬品廃棄の<br className="md:hidden" />
-            見積・相談を<span className="text-emerald-700">最短</span>で。
+            見積・相談を<span className="text-emerald-400">最短</span>で。
           </h1>
 
-          <p className="mt-4 max-w-2xl text-slate-700 text-base md:text-lg leading-relaxed font-normal">
+          <p className="mt-5 max-w-2xl text-slate-200 text-base md:text-lg leading-[1.85]">
             大和薬品株式会社は、学校・工場・研究機関などの<br className="hidden md:block"/>
             多様な現場ニーズに合わせて最適な薬品をご提案します。
           </p>
-          
-          <div className="mt-4 flex flex-wrap gap-2">
-            <PrimaryCTA
-              to="/products"
-              label="製品を探す"
-              variant="outline"
-              size="sm"
-              className="border-slate-800 text-slate-900 hover:bg-slate-800 hover:text-white"
-            />
+
+          <div className="mt-7 flex flex-wrap gap-3">
+            <PrimaryCTA to="/products" label="製品を探す" size="md" />
             <PrimaryCTA
               to="/contact?subject=見積依頼"
               label="見積依頼"
-              variant="outline"
-              size="sm"
-              className="border-slate-800 text-slate-900 hover:bg-slate-800 hover:text-white"
+              variant="outlineLight"
+              size="md"
             />
           </div>
 
-          <div className="absolute bottom-4 right-4 md:right-auto md:left-8 flex gap-2">
+          <div className="absolute bottom-5 left-4 md:left-8 flex gap-2">
             {heroImages.map((_, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => setHeroIndex(i)}
-                className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
-                  i === heroIndex ? "bg-slate-900 w-6" : "bg-slate-500/50 hover:bg-slate-700"
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === heroIndex ? "bg-emerald-400 w-7" : "bg-white/40 w-1.5 hover:bg-white/70"
                 }`}
                 aria-label={`スライド${i + 1}`}
               />

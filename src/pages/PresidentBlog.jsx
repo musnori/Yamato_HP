@@ -42,7 +42,7 @@ export default function PresidentBlog() {
           <div className="space-y-4">
             {posts.map((post) => (
               <article key={post.title} className="card p-6">
-                <p className="text-sm text-green-700 font-semibold">{post.date}</p>
+                <p className="text-sm text-emerald-700 font-semibold">{post.date}</p>
                 <h2 className="mt-2 text-xl font-bold text-slate-900">{post.title}</h2>
                 <p className="mt-3 text-sm text-slate-600">{post.summary}</p>
               </article>
@@ -57,14 +57,14 @@ export default function PresidentBlog() {
                 体制づくりを続けています。日々の気づきや取り組みをブログとして発信してまいります。
               </p>
             </div>
-            <div className="card p-6 bg-green-50 border border-green-100">
-              <p className="text-sm font-semibold text-green-700">最新情報のご案内</p>
+            <div className="card p-6 bg-emerald-50 border border-emerald-100">
+              <p className="text-sm font-semibold text-emerald-700">最新情報のご案内</p>
               <p className="mt-2 text-sm text-slate-700">
                 製品情報や会社からのお知らせはお問い合わせフォームからもご相談ください。
               </p>
               <a
                 href="tel:0792810671"
-                className="mt-4 block text-2xl font-extrabold text-green-700"
+                className="mt-4 block text-2xl font-extrabold text-emerald-700"
               >
                 079-281-0671
               </a>

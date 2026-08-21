@@ -40,8 +40,8 @@ function PageTopButton() {
       className={[
         "fixed right-4 bottom-24 md:bottom-5 z-50 transition-all duration-300",
         visible ? "opacity-100 translate-y-0" : "opacity-0 pointer-events-none translate-y-3",
-        "flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white",
-        "shadow-lg shadow-green-900/20 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-white/60"
+        "flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-700 text-white",
+        "shadow-lg shadow-emerald-900/20 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-white/60"
       ].join(" ")}
     >
       <span className="text-base leading-none">↑</span>
@@ -86,12 +86,12 @@ export default function Layout() {
 
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-slate-200">
-        <div className="hidden md:block bg-green-900 text-white text-xs">
+        <div className="hidden md:block bg-emerald-900 text-white text-xs">
           <div className="layout-container py-2 flex items-center justify-between">
             <p className="tracking-wide">化学薬品・試薬・工業薬品の調達を支える</p>
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">
-                <span className="inline-block w-2 h-2 rounded-full bg-green-300" />
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-300" />
                 受付時間 9:00〜17:00
               </span>
               <a href="tel:0792810671" className="font-semibold hover:underline">
@@ -104,7 +104,7 @@ export default function Layout() {
           {/* ロゴ */}
           <Link to="/" className="flex items-center gap-2">
             <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto" />
-            <span className="text-green-800 font-bold text-2xl font-kaisho">
+            <span className="text-emerald-800 font-bold text-2xl font-kaisho">
               大和薬品株式会社
             </span>
           </Link>
@@ -118,9 +118,9 @@ export default function Layout() {
                 className={({ isActive }) =>
                   [
                     "text-sm font-semibold text-slate-700 tracking-wide",
-                    "hover:text-green-800 hover:underline underline-offset-4 decoration-2",
-                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600/30 rounded",
-                    isActive ? "text-green-800 underline decoration-2 underline-offset-4" : ""
+                    "hover:text-emerald-800 hover:underline underline-offset-4 decoration-2",
+                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600/30 rounded",
+                    isActive ? "text-emerald-800 underline decoration-2 underline-offset-4" : ""
                   ].join(" ")
                 }
               >
@@ -153,7 +153,7 @@ export default function Layout() {
             aria-label={open ? "メニューを閉じる" : "メニューを開く"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-green-700 text-green-800 hover:bg-green-50 transition"
+            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-emerald-700 text-emerald-800 hover:bg-emerald-50 transition"
           >
             {/* 3本線 → X にアニメーション */}
             <div className="relative w-5 h-5">
@@ -192,7 +192,7 @@ export default function Layout() {
         aria-modal="true"
       >
         <div className="px-5 py-4 border-b flex items-center justify-between">
-          <span className="font-bold text-green-800">メニュー</span>
+          <span className="font-bold text-emerald-800">メニュー</span>
           <button
             onClick={() => setOpen(false)}
             className="p-2 rounded-md hover:bg-gray-100"
@@ -212,8 +212,8 @@ export default function Layout() {
                   "block w-full text-left px-4 py-3 rounded-lg font-medium",
                   "border transition hover:shadow",
                   isActive
-                    ? "bg-green-600 text-white border-green-700"
-                    : "bg-white text-green-800 border-green-700 hover:bg-green-50",
+                    ? "bg-emerald-600 text-white border-emerald-700"
+                    : "bg-white text-emerald-800 border-emerald-700 hover:bg-emerald-50",
                 ].join(" ")
               }
             >
@@ -224,14 +224,14 @@ export default function Layout() {
             <Link
               to="/contact?subject=見積依頼"
               onClick={() => setOpen(false)}
-              className="block w-full text-center px-4 py-3 rounded-lg font-semibold bg-green-700 text-white hover:bg-green-800"
+              className="block w-full text-center px-4 py-3 rounded-lg font-semibold bg-emerald-700 text-white hover:bg-emerald-800"
             >
               見積依頼
             </Link>
             <Link
               to="/contact?subject=相談したい"
               onClick={() => setOpen(false)}
-              className="block w-full text-center px-4 py-3 rounded-lg font-semibold border border-green-700 text-green-800 hover:bg-green-50"
+              className="block w-full text-center px-4 py-3 rounded-lg font-semibold border border-emerald-700 text-emerald-800 hover:bg-emerald-50"
             >
               相談する
             </Link>
@@ -320,7 +320,7 @@ export default function Layout() {
           <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold text-green-700">製品検索</p>
+                <p className="text-sm font-semibold text-emerald-700">製品検索</p>
                 <h2 className="text-xl font-bold text-slate-900">キーワードで探す</h2>
               </div>
               <button

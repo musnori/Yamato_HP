@@ -793,11 +793,11 @@ export default function Products() {
             <Link
               key={p.path}
               to={p.path}
-              className="flex flex-col items-center gap-1 rounded-xl border border-green-100 bg-green-50 px-3 py-4 text-center hover:bg-green-100 hover:shadow transition group"
+              className="flex flex-col items-center gap-1 rounded-xl border border-emerald-100 bg-emerald-50 px-3 py-4 text-center hover:bg-emerald-100 hover:shadow transition group"
             >
-              <span className="text-[10px] text-green-600 font-semibold tracking-wide">{p.cat}</span>
-              <span className="text-sm font-bold text-slate-800 group-hover:text-green-800">{p.label}</span>
-              <span className="text-[10px] text-green-700 mt-1">詳細 →</span>
+              <span className="text-[10px] text-emerald-600 font-semibold tracking-wide">{p.cat}</span>
+              <span className="text-sm font-bold text-slate-800 group-hover:text-emerald-800">{p.label}</span>
+              <span className="text-[10px] text-emerald-700 mt-1">詳細 →</span>
             </Link>
           ))}
         </div>

@@ -18,7 +18,7 @@ export default function ContactThanks() {
           <p className="text-sm text-slate-600">
             緊急の場合はお電話でも承っております。
           </p>
-          <a href="tel:0792810671" className="mt-3 block text-2xl font-extrabold text-green-700">
+          <a href="tel:0792810671" className="mt-3 block text-2xl font-extrabold text-emerald-700">
             079-281-0671
           </a>
           <div className="mt-6 flex flex-wrap gap-3">

@@ -87,12 +87,12 @@ export default function Association() {
             </div>
           </div>
 
-          <div className="card p-6 bg-green-50 border border-green-100">
-            <p className="text-sm text-green-700 font-semibold">お問い合わせ</p>
+          <div className="card p-6 bg-emerald-50 border border-emerald-100">
+            <p className="text-sm text-emerald-700 font-semibold">お問い合わせ</p>
             <p className="mt-2 text-sm text-slate-700">
               組合活動に関するご相談は、大和薬品株式会社までご連絡ください。
             </p>
-            <p className="mt-4 text-2xl font-extrabold text-green-700">079-281-0671</p>
+            <p className="mt-4 text-2xl font-extrabold text-emerald-700">079-281-0671</p>
           </div>
         </aside>
       </div>
