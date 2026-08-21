@@ -4,7 +4,7 @@ const Section = ({ title, eyebrow, children, id }) => (
   <section id={id} className="max-w-7xl mx-auto px-4 py-12 space-y-6">
     <div className="space-y-2">
       {eyebrow && (
-        <p className="text-xs font-semibold tracking-[0.3em] text-green-700">
+        <p className="text-[11px] font-medium tracking-[0.25em] text-slate-400 uppercase">
           {eyebrow}
         </p>
       )}

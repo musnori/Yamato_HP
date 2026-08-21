@@ -26,6 +26,17 @@
 
   body {
     @apply bg-[color:var(--color-bg)] text-slate-900 font-sans antialiased;
+    /* 日本語向け：本文は少し大きめ・行間広め・わずかに字間を開けて可読性を上げる */
+    font-size: 16px;
+    line-height: 1.85;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: 0.005em;
+    line-height: 1.35;
   }
 
   h1 {
@@ -41,7 +52,8 @@
   }
 
   p {
-    @apply leading-relaxed text-slate-700;
+    @apply text-slate-700;
+    line-height: 1.85;
   }
 
   a {
@@ -112,7 +124,7 @@
   }
 
   .section-title {
-    @apply text-sm font-semibold tracking-[0.3em] text-green-700;
+    @apply text-[11px] font-medium tracking-[0.25em] text-slate-400 uppercase;
   }
 }
 

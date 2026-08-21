@@ -23,7 +23,7 @@ export default function Services() {
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
         
         <div className="relative layout-container py-12 md:py-20 text-center">
-          <p className="text-sm font-bold tracking-widest text-emerald-600 mb-2">SERVICES</p>
+          <p className="text-[11px] font-medium tracking-[0.25em] text-slate-400 uppercase mb-3">SERVICES</p>
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
             サービス案内
           </h1>

@@ -317,7 +317,7 @@ export default function Products() {
       <section className="relative overflow-hidden bg-white border-b border-slate-200">
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
         <div className="relative layout-container py-10 md:py-12 lg:py-14 text-center">
-          <p className="text-sm font-bold tracking-widest text-emerald-600 mb-2">PRODUCT SEARCH</p>
+          <p className="text-[11px] font-medium tracking-[0.25em] text-slate-400 uppercase mb-3">PRODUCT SEARCH</p>
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
             取扱製品｜化学薬品・工業薬品・試薬
           </h1>
@@ -335,7 +335,7 @@ export default function Products() {
           FILTER CONTROL PANEL
       ======================== */}
       <div className="layout-container -mt-8 relative z-10 pb-12">
-        <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden p-6 md:p-8">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden p-6 md:p-8">
           
           {/* キーワード検索（サジェスト付き） */}
           <div className="relative" ref={searchRef}>

@@ -4,14 +4,14 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 
 // バリエーションごとのスタイル定義
 const variants = {
-  // メイン：エメラルドグリーンの背景＋影
-  primary: "bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-900/10 hover:shadow-lg hover:shadow-emerald-900/20 border-transparent",
-  
+  // メイン：エメラルドグリーンの背景（影は持たせずフラットに）
+  primary: "bg-emerald-700 text-white hover:bg-emerald-800 border-transparent",
+
   // アウトライン：白背景＋枠線（デフォルトのボタン）
-  secondary: "bg-white text-slate-700 border-slate-200 hover:border-emerald-300 hover:text-emerald-700 hover:bg-emerald-50 shadow-sm",
-  
+  secondary: "bg-white text-slate-700 border-slate-200 hover:border-emerald-300 hover:text-emerald-700 hover:bg-emerald-50",
+
   // アウトライン（強調）：エメラルドの枠線
-  outline: "bg-transparent text-emerald-600 border-emerald-600 hover:bg-emerald-50",
+  outline: "bg-transparent text-emerald-700 border-emerald-600/60 hover:bg-emerald-50",
   
   // 白抜き：暗い背景用（ヒーローエリアなど）
   outlineLight: "bg-white/10 text-white border-white/40 hover:bg-white/20 backdrop-blur-sm",
@@ -39,7 +39,7 @@ export default function PrimaryCTA({
   ...props
 }) {
   // ベースのスタイル
-  const baseStyles = "inline-flex items-center justify-center gap-2 rounded-xl font-bold transition-all duration-200 border active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 disabled:opacity-50 disabled:pointer-events-none";
+  const baseStyles = "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors duration-200 border focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-1 disabled:opacity-50 disabled:pointer-events-none";
   
   // スタイルの結合
   const variantClasses = variants[variant] || variants.primary;
