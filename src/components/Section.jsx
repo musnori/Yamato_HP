@@ -15,17 +15,17 @@ export default function Section({
     <>
       {/* Header Area */}
       {(title || description || eyebrow || actions) && (
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5 md:mb-6 lg:mb-7">
-          
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8 md:mb-10 lg:mb-12">
+
           {/* Titles */}
           <div className="flex-1">
             {eyebrow && (
-              <p className="text-xs md:text-sm font-bold tracking-[0.2em] text-emerald-600 mb-2 uppercase">
+              <p className="mb-3 text-[11px] font-medium tracking-[0.25em] text-slate-400 uppercase">
                 {eyebrow}
               </p>
             )}
             {title && (
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-[2rem] font-bold text-slate-900 tracking-tight leading-[1.25]">
                 {title}
               </h2>
             )}
@@ -57,7 +57,7 @@ export default function Section({
   return (
     <section
       id={id}
-      className={`py-6 md:py-8 lg:py-10 ${className}`.trim()}
+      className={`py-12 md:py-16 lg:py-20 ${className}`.trim()}
     >
       {withContainer ? (
         // PC表示最適化: max-w-6xl (1152px) でコンテンツ幅を適切に制限
