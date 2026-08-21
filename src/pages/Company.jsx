@@ -121,7 +121,7 @@ export default function Company() {
                 <ShieldCheck size={28} />
               </div>
               <div>
-                <p className="text-xs font-bold text-emerald-600 tracking-wider mb-1">QUALITY & SAFETY</p>
+                <p className="text-[11px] font-medium text-slate-400 tracking-[0.2em] uppercase mb-1">QUALITY & SAFETY</p>
                 <h2 className="text-xl font-bold text-slate-900 mb-3">品質・安全への取り組み</h2>
                 <p className="text-sm text-slate-600 leading-relaxed">
                   化学薬品・工業薬品を取り扱う企業として、法令順守を徹底しています。兵庫県姫路市の自社倉庫では保管・輸送・提供の各工程において厳格な安全管理を実施し、SDS（安全データシート）の提供や取り扱い説明を通じて、関西エリアのお客様の安全な使用をサポートします。

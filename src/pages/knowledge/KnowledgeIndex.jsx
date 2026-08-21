@@ -201,7 +201,7 @@ export default function KnowledgeIndex() {
                   to={article.path}
                   className="group block"
                 >
-                  <Card className="h-full p-6 hover:border-emerald-200 hover:shadow-lg transition-all duration-300">
+                  <Card className="h-full p-6 hover:border-emerald-200 hover:shadow-sm transition-all duration-300">
                     <div className="flex items-start gap-4">
                       {/* アイコン */}
                       <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">

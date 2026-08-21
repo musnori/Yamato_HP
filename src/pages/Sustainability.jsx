@@ -17,7 +17,7 @@ const Section = ({ title, eyebrow, children, id }) => (
 );
 
 const Card = ({ title, desc, icon, badge }) => (
-  <div className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-lg transition">
+  <div className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-sm transition">
     <div className="flex items-start gap-4">
       <div className="h-14 w-14 rounded-2xl bg-emerald-50 border border-emerald-100 grid place-items-center text-emerald-700">
         {icon}

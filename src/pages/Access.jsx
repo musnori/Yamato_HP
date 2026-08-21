@@ -187,10 +187,10 @@ export default function Access() {
 
                 <div className="mt-8 grid grid-cols-2 gap-4">
                   <div className="rounded-xl overflow-hidden shadow-sm border border-slate-100">
-                    <img src="/warehouses/abo1.jpg" alt="阿保倉庫外観1" className="w-full h-32 object-cover hover:scale-110 transition-transform duration-500" />
+                    <img src="/warehouses/abo1.jpg" alt="阿保倉庫外観1" className="w-full h-32 object-cover transition-transform duration-500" />
                   </div>
                   <div className="rounded-xl overflow-hidden shadow-sm border border-slate-100">
-                    <img src="/warehouses/abo2.jpg" alt="阿保倉庫外観2" className="w-full h-32 object-cover hover:scale-110 transition-transform duration-500" />
+                    <img src="/warehouses/abo2.jpg" alt="阿保倉庫外観2" className="w-full h-32 object-cover transition-transform duration-500" />
                   </div>
                 </div>
               </div>

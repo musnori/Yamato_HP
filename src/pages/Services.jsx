@@ -67,7 +67,7 @@ export default function Services() {
                     <img
                       src="/images/haiki1.jpg"
                       alt="薬品回収の様子"
-                      className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700"
+                      className="w-full aspect-[3/4] object-cover transition-transform duration-700"
                       loading="lazy"
                     />
                   </div>
@@ -77,7 +77,7 @@ export default function Services() {
                     <img
                       src="/images/haiki2.jpg"
                       alt="混在した薬品"
-                      className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700"
+                      className="w-full aspect-[3/4] object-cover transition-transform duration-700"
                       loading="lazy"
                     />
                   </div>
@@ -172,7 +172,7 @@ export default function Services() {
                 </div>
               )}
               
-              <Card className="h-full p-6 border-slate-100 hover:border-emerald-200 hover:shadow-lg transition-all duration-300">
+              <Card className="h-full p-6 border-slate-100 hover:border-emerald-200 hover:shadow-sm transition-all duration-300">
                 <div className="flex items-center justify-between mb-4">
                   {/* ▼▼▼ 修正: 文字色を text-slate-100 から text-emerald-200 に変更して視認性を向上 ▼▼▼ */}
                   <span className="text-4xl font-black text-emerald-200 group-hover:text-emerald-600 transition-colors">

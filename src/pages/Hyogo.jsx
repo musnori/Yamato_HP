@@ -105,7 +105,7 @@ export default function Hyogo() {
                     <MapPin size={24} />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-emerald-600 tracking-wider mb-1">SERVICE AREA</p>
+                    <p className="text-[11px] font-medium text-slate-400 tracking-[0.2em] uppercase mb-1">SERVICE AREA</p>
                     <h2 className="text-2xl font-bold text-slate-900">対応エリア</h2>
                   </div>
                 </div>
@@ -129,7 +129,7 @@ export default function Hyogo() {
                     <Building2 size={24} />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-emerald-600 tracking-wider mb-1">STRENGTH</p>
+                    <p className="text-[11px] font-medium text-slate-400 tracking-[0.2em] uppercase mb-1">STRENGTH</p>
                     <h2 className="text-2xl font-bold text-slate-900">大和薬品の供給体制</h2>
                   </div>
                 </div>
@@ -155,7 +155,7 @@ export default function Hyogo() {
                     <Beaker size={24} />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-emerald-600 tracking-wider mb-1">FAQ</p>
+                    <p className="text-[11px] font-medium text-slate-400 tracking-[0.2em] uppercase mb-1">FAQ</p>
                     <h2 className="text-2xl font-bold text-slate-900">よくある相談</h2>
                   </div>
                 </div>

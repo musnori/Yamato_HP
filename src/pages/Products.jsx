@@ -534,7 +534,7 @@ export default function Products() {
               className={`bg-white rounded-2xl p-6 border transition-all duration-300 flex flex-col ${
                 openDetail === product.id 
                   ? "border-emerald-500 shadow-md ring-1 ring-emerald-500/20" 
-                  : "border-slate-100 shadow-sm hover:shadow-lg hover:border-emerald-200 hover:-translate-y-1"
+                  : "border-slate-100 shadow-sm hover:shadow-sm hover:border-emerald-200"
               }`}
             >
               {/* ヘッダータグ */}

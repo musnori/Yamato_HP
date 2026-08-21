@@ -174,7 +174,7 @@ export default function Contact() {
         {/* =======================
             Main Form
         ======================== */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm shadow-slate-200/50 overflow-hidden">
           {/* Form Header */}
           <div className="bg-slate-50 border-b border-slate-200 px-6 py-4 flex items-center gap-3">
             <Mail className="text-emerald-600" size={20} />
@@ -337,7 +337,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full md:w-auto min-w-[240px] mx-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-lg shadow-emerald-900/20 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 text-lg"
+                  className="w-full md:w-auto min-w-[240px] mx-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-lg shadow-emerald-900/20 hover:shadow-sm transition-all flex items-center justify-center gap-2 text-lg"
                 >
                   {isSubmitting ? (
                     <>

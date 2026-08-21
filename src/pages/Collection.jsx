@@ -276,7 +276,7 @@ export default function Collection() {
               <button
                 key={index}
                 onClick={() => openModal(item)}
-                className="text-left bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden border"
+                className="text-left bg-white rounded-xl shadow hover:shadow-sm transition overflow-hidden border"
               >
                 <div className="aspect-[4/3] bg-gray-100">
                   <img
@@ -301,7 +301,7 @@ export default function Collection() {
           onClick={() => setOpen(false)}
         >
           <div
-            className="bg-white rounded-xl overflow-hidden max-w-4xl w-full shadow-2xl"
+            className="bg-white rounded-xl overflow-hidden max-w-4xl w-full shadow-md"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="bg-black">
