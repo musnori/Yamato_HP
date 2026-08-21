@@ -59,7 +59,7 @@ export default function Company() {
       <section className="relative overflow-hidden bg-white border-b border-slate-200">
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
         <div className="relative layout-container py-10 md:py-12 lg:py-14 text-center">
-          <p className="text-sm font-bold tracking-widest text-emerald-600 mb-2">COMPANY</p>
+          <p className="text-[11px] font-medium tracking-[0.25em] text-slate-400 uppercase mb-3">COMPANY</p>
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
             会社概要
           </h1>

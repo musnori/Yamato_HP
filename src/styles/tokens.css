@@ -124,7 +124,7 @@
   }
 
   .section-title {
-    @apply text-sm font-semibold tracking-[0.3em] text-green-700;
+    @apply text-[11px] font-medium tracking-[0.25em] text-slate-400 uppercase;
   }
 }
 
