@@ -182,7 +182,7 @@ export default function Home() {
         <div className="grid gap-6 lg:gap-8 lg:grid-cols-2 items-center">
           <div className="order-2 lg:order-1">
              <div className="bg-white p-6 md:p-8 rounded-xl border border-slate-200/70">
-                <div className="space-y-4 text-[15px] leading-[1.95] text-slate-700">
+                <div className="space-y-3.5 text-[15px] leading-[1.8] text-slate-700">
                   {greetingText.map((text, i) => (
                     <p key={i}>{text}</p>
                   ))}
@@ -409,17 +409,17 @@ export default function Home() {
             <Building2 size={16} className="text-slate-400" />
             関連リンク
           </h3>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-3 grid-cols-2 md:grid-cols-3">
             {partnerLinks.map((partner) => {
               const BannerContent = (
                 <div className="group h-full bg-white rounded-xl border border-slate-200/70 hover:border-emerald-300 transition-colors duration-200 overflow-hidden">
-                  <div className="aspect-[16/9] flex items-center justify-center p-4 bg-white relative">
+                  <div className="h-20 md:h-24 flex items-center justify-center p-3 bg-white relative">
                     {partner.image ? (
                       <img
                         src={partner.image}
                         alt={partner.name}
                         className={`max-w-full max-h-full ${
-                          partner.isLogo ? 'object-contain' : 'object-cover w-full h-full'
+                          partner.isLogo ? 'object-contain' : 'object-cover w-full h-full rounded'
                         }`}
                         loading="lazy"
                         decoding="async"
@@ -429,13 +429,13 @@ export default function Home() {
                         }}
                       />
                     ) : (
-                      <div className="flex items-center justify-center text-center px-4 bg-slate-50 w-full h-full">
-                        <span className="text-sm font-bold text-slate-700">{partner.name}</span>
+                      <div className="flex items-center justify-center text-center px-2 bg-slate-50 w-full h-full">
+                        <span className="text-xs font-bold text-slate-700">{partner.name}</span>
                       </div>
                     )}
                   </div>
                   <div className="px-3 py-2 bg-slate-50 border-t border-slate-100">
-                    <p className="text-xs font-medium text-slate-700 line-clamp-1">{partner.name}</p>
+                    <p className="text-[11px] md:text-xs font-medium text-slate-600 line-clamp-1">{partner.name}</p>
                   </div>
                 </div>
               );
