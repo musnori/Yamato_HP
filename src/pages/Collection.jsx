@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import PageHeader from "../components/PageHeader";
+import SEOHead from "../components/SEOHead";
 
 export default function Collection() {
   useEffect(() => {
@@ -255,68 +257,60 @@ export default function Collection() {
   };
 
   return (
-    <div className="bg-slate-50">
-      <section className="relative overflow-hidden border-b bg-white">
-        <div className="absolute inset-0 bg-[url('/morninng.jpg')] bg-cover bg-center opacity-10" />
-        <div className="relative layout-container py-14">
-          <p className="section-title">ARCHIVE</p>
-          <h1 className="mt-3 text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
-            懐かしコレクション
-          </h1>
-          <p className="text-gray-600 mt-3 max-w-2xl">
-            昭和レトロからレアアイテムまで。個人のコレクションの一部をご紹介します（※一部AIを使って紹介しています）。
-          </p>
-        </div>
-      </section>
+    <>
+      <SEOHead pageKey="collection" />
+      <PageHeader
+        title="懐かしコレクション"
+        lead="昭和レトロからレアアイテムまで。個人のコレクションの一部をご紹介します（※一部AIを使って紹介しています）。"
+      />
 
-      <section className="section">
-        <div className="layout-container">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
+          <ul className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
             {items.map((item, index) => (
-              <button
-                key={index}
-                onClick={() => openModal(item)}
-                className="text-left bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden border"
-              >
-                <div className="aspect-[4/3] bg-gray-100">
-                  <img
-                    src={item.src}
-                    alt=""
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-4">
-                  <p className="text-sm text-gray-600">{item.comment}</p>
-                </div>
-              </button>
+              <li key={index}>
+                <button
+                  type="button"
+                  onClick={() => openModal(item)}
+                  className="group block w-full text-left border border-slate-200 bg-white hover:border-brand/60 transition-colors"
+                >
+                  <span className="block aspect-[4/3] overflow-hidden bg-slate-100">
+                    <img
+                      src={item.src}
+                      alt=""
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
+                  </span>
+                  <span className="block px-2.5 py-2 md:px-3 md:py-2.5 text-xs md:text-sm leading-relaxed text-slate-700 line-clamp-3">
+                    {item.comment}
+                  </span>
+                </button>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-      </section>
+      </div>
 
       {open && active && (
         <div
-          className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/70 z-[60] flex items-center justify-center p-4"
           onClick={() => setOpen(false)}
         >
           <div
-            className="bg-white rounded-xl overflow-hidden max-w-4xl w-full shadow-2xl"
+            className="bg-white overflow-hidden max-w-4xl w-full"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="bg-black">
-              <img
-                src={active.src}
-                alt=""
-                className="w-full h-full object-contain max-h-[70vh] mx-auto"
-              />
+              <img src={active.src} alt="" className="w-full h-full object-contain max-h-[70vh] mx-auto" />
             </div>
-            <div className="p-5">
-              <p className="text-sm text-gray-600">{active.comment}</p>
+            <div className="p-4 md:p-5">
+              <p className="text-sm leading-relaxed text-slate-700">{active.comment}</p>
               <div className="text-right mt-4">
                 <button
+                  type="button"
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center px-4 py-2 rounded-md bg-green-700 text-white hover:bg-green-800 transition"
+                  className="inline-flex items-center px-5 py-2 rounded bg-brand text-white text-sm font-bold hover:bg-brand-dark"
                 >
                   閉じる
                 </button>
@@ -325,6 +319,6 @@ export default function Collection() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

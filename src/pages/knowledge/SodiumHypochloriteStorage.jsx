@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Section from "../../components/Section";
-import Card from "../../components/Card";
-import PrimaryCTA from "../../components/PrimaryCTA";
+import PageHeader from "../../components/PageHeader";
+import ContactBand from "../../components/ContactBand";
 import SEOHead from "../../components/SEOHead";
 import {
   Thermometer,
@@ -19,37 +19,17 @@ export default function SodiumHypochloriteStorage() {
     <>
       <SEOHead pageKey="knowledgeSodiumHypochloriteStorage" />
 
-      <div className="bg-slate-50 min-h-screen">
-        {/* パンくずリスト */}
-        <div className="bg-white border-b border-slate-200">
-          <div className="layout-container py-3">
-            <nav className="flex items-center gap-2 text-sm text-slate-500">
-              <Link to="/" className="hover:text-emerald-600">ホーム</Link>
-              <span>/</span>
-              <Link to="/knowledge" className="hover:text-emerald-600">薬品の基礎知識</Link>
-              <span>/</span>
-              <span className="text-slate-900">次亜塩素酸ナトリウムの保存方法</span>
-            </nav>
+      <div className="bg-white">
+        <PageHeader
+          title="次亜塩素酸ナトリウムの保存方法"
+          crumbs={[{ name: "薬品の基礎知識", to: "/knowledge" }, { name: "次亜塩素酸ナトリウムの保存方法" }]}
+          lead="有効塩素濃度を維持するための正しい保管方法を解説します。温度管理、遮光、容器の選び方から、現場でよくある失敗例まで、実務に役立つポイントをまとめました。"
+        >
+          <div className="mt-3 flex items-center gap-2">
+          <span className="border border-slate-400 bg-white px-1.5 py-px text-[11px] font-bold text-slate-700">水処理薬品</span>
+          <span className="text-xs text-slate-600">保存・管理</span>
           </div>
-        </div>
-
-        {/* 記事ヘッダー */}
-        <section className="bg-white border-b border-slate-200">
-          <div className="layout-container py-8 md:py-12">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="inline-block px-2 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-800">
-                水処理薬品
-              </span>
-              <span className="text-sm text-slate-400">保存・管理</span>
-            </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mb-4">
-              次亜塩素酸ナトリウムの保存方法
-            </h1>
-            <p className="text-slate-500 max-w-2xl leading-relaxed">
-              有効塩素濃度を維持するための正しい保管方法を解説します。温度管理、遮光、容器の選び方から、現場でよくある失敗例まで、実務に役立つポイントをまとめました。
-            </p>
-          </div>
-        </section>
+        </PageHeader>
 
         {/* 記事本文 */}
         <article className="layout-container py-8 md:py-12">
@@ -64,23 +44,18 @@ export default function SodiumHypochloriteStorage() {
 
             {/* 温度管理 */}
             <section className="mb-10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center">
-                  <Thermometer size={20} />
-                </div>
-                <h2 className="text-xl font-bold text-slate-900">温度管理が最も重要</h2>
-              </div>
-              <Card className="p-6 border-slate-200">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />温度管理が最も重要</h2>
+              <div>
                 <p className="text-slate-600 leading-relaxed mb-4">
                   次亜塩素酸ナトリウムは温度が高いほど分解が進みます。保存温度の目安は以下のとおりです。
                 </p>
                 <ul className="space-y-2 mb-4">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700"><strong>理想：15℃以下</strong>の冷暗所で保管</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700"><strong>許容範囲：25℃以下</strong>であれば大きな問題なし</span>
                   </li>
                   <li className="flex items-start gap-2">
@@ -91,47 +66,37 @@ export default function SodiumHypochloriteStorage() {
                 <p className="text-sm text-slate-500">
                   夏場は特に注意が必要です。直射日光が当たる場所や、空調のない倉庫では温度が40℃を超えることもあります。
                 </p>
-              </Card>
+              </div>
             </section>
 
             {/* 遮光 */}
             <section className="mb-10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
-                  <Sun size={20} />
-                </div>
-                <h2 className="text-xl font-bold text-slate-900">光を遮ることが必須</h2>
-              </div>
-              <Card className="p-6 border-slate-200">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />光を遮ることが必須</h2>
+              <div>
                 <p className="text-slate-600 leading-relaxed mb-4">
                   紫外線は次亜塩素酸ナトリウムの分解を促進します。保管場所・容器の両面で遮光対策が必要です。
                 </p>
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700">窓のない倉庫や暗所で保管する</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700">遮光性のある容器（黒・茶色など）を使用する</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700">透明容器の場合は遮光カバーで覆う</span>
                   </li>
                 </ul>
-              </Card>
+              </div>
             </section>
 
             {/* 容器選び */}
             <section className="mb-10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
-                  <Container size={20} />
-                </div>
-                <h2 className="text-xl font-bold text-slate-900">適切な容器を選ぶ</h2>
-              </div>
-              <Card className="p-6 border-slate-200">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />適切な容器を選ぶ</h2>
+              <div>
                 <p className="text-slate-600 leading-relaxed mb-4">
                   容器の材質や状態も保存期間に影響します。
                 </p>
@@ -139,15 +104,15 @@ export default function SodiumHypochloriteStorage() {
                 <h3 className="font-bold text-slate-800 mb-2">推奨される容器</h3>
                 <ul className="space-y-2 mb-4">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700">ポリエチレン（PE）製の容器</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700">ポリプロピレン（PP）製の容器</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700">FRP（繊維強化プラスチック）製タンク</span>
                   </li>
                 </ul>
@@ -163,18 +128,13 @@ export default function SodiumHypochloriteStorage() {
                     <span className="text-slate-700">汚れた容器・異物が混入した容器</span>
                   </li>
                 </ul>
-              </Card>
+              </div>
             </section>
 
             {/* よくある失敗例 */}
             <section className="mb-10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center">
-                  <AlertTriangle size={20} />
-                </div>
-                <h2 className="text-xl font-bold text-slate-900">現場でよくある失敗例</h2>
-              </div>
-              <Card className="p-6 border-red-100 bg-red-50/50">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />現場でよくある失敗例</h2>
+              <div className="border-l-4 border-red-500 bg-red-50 px-4 py-4 md:px-5">
                 <ul className="space-y-4">
                   <li>
                     <p className="font-bold text-slate-800 mb-1">屋外に放置してしまった</p>
@@ -195,71 +155,68 @@ export default function SodiumHypochloriteStorage() {
                     </p>
                   </li>
                 </ul>
-              </Card>
+              </div>
             </section>
 
             {/* まとめ */}
             <section className="mb-10">
-              <h2 className="text-xl font-bold text-slate-900 mb-4">まとめ</h2>
-              <Card className="p-6 border-emerald-200 bg-emerald-50/50">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />まとめ</h2>
+              <div className="border-l-4 border-brand bg-brand-light px-4 py-4 md:px-5">
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-600 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700">保存温度は<strong>15〜25℃以下</strong>を維持</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-600 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700"><strong>遮光</strong>できる場所・容器で保管</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-600 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700"><strong>PE・PP製</strong>の清潔な容器を使用</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-600 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700"><strong>先入れ先出し</strong>で在庫を管理</span>
                   </li>
                 </ul>
-              </Card>
+              </div>
             </section>
 
             {/* 関連記事 */}
             <section className="mb-10">
-              <h2 className="text-xl font-bold text-slate-900 mb-4">関連記事</h2>
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />関連記事</h2>
               <Link
                 to="/knowledge/sodium-hypochlorite-decomposition"
                 className="block group"
               >
-                <Card className="p-4 hover:border-emerald-200 hover:shadow-md transition-all">
+                <div className="border border-slate-200 px-4 py-3 hover:border-brand/60 transition-colors">
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-xs text-slate-400">次に読む</span>
-                      <p className="font-bold text-slate-800 group-hover:text-emerald-700">
+                      <p className="font-bold text-slate-800 group-hover:text-brand">
                         次亜塩素酸ナトリウムの分解条件
                       </p>
                     </div>
-                    <span className="text-slate-300 group-hover:text-emerald-600">→</span>
+                    <span className="text-slate-300 group-hover:text-brand">→</span>
                   </div>
-                </Card>
+                </div>
               </Link>
             </section>
 
             {/* 戻るリンク・お問い合わせ */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200">
+            <div className="pt-5 border-t border-slate-200">
               <Link
                 to="/knowledge"
-                className="flex items-center gap-2 text-sm text-slate-500 hover:text-emerald-600"
+                className="flex items-center gap-2 text-sm text-slate-500 hover:text-brand"
               >
                 <ArrowLeft size={16} />
                 薬品の基礎知識一覧に戻る
               </Link>
-              <div className="flex items-center gap-3">
-                <span className="text-sm text-slate-400">ご不明点があれば</span>
-                <PrimaryCTA to="/contact" label="お問い合わせ" variant="outline" size="sm" />
-              </div>
             </div>
           </div>
         </article>
+        <ContactBand title="薬品の取り扱いについてのご相談" text="記事の内容や、薬品の選定・保管方法についてもお気軽にお問い合わせください。" />
       </div>
     </>
   );

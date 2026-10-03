@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FileText, Phone, ArrowUp } from "lucide-react";
 
 // スマホ下部の固定バー。ファーストビューでは出さず、少しスクロールしてから表示する。
 // PAGE TOP もこのバーの中に置き、本文に重ならないようにしている。
 export default function StickyMobileCTA() {
   const [visible, setVisible] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 320);
@@ -13,6 +14,9 @@ export default function StickyMobileCTA() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // フォームページでは同じページへのボタンになるため出さない
+  if (pathname.startsWith("/contact")) return null;
 
   return (
     <div

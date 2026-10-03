@@ -2,6 +2,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SEOHead from "../../components/SEOHead";
+import PageHeader from "../../components/PageHeader";
+import ContactBand from "../../components/ContactBand";
+import { ChevronLeft } from "lucide-react";
 import { BreadcrumbSchema } from "../../components/StructuredData";
 import { SITE_URL, COMPANY_INFO } from "../../config/seo";
 
@@ -38,24 +41,22 @@ export default function Ethanol() {
       <BreadcrumbSchema items={breadcrumbs} />
       <ProductSchema name="エタノール" description="姫路・播磨・兵庫県の化学薬品専門商社 大和薬品株式会社が取り扱うエタノール（工業用・試薬用・無水）。消毒・溶剤・食品工業など幅広く使用。" url="/products/ethanol" />
 
-      <div className="layout-container py-8 md:py-12">
-        <nav aria-label="パンくずリスト" className="mb-6 text-sm text-slate-500 flex flex-wrap gap-1 items-center">
-          <Link to="/" className="hover:text-green-700 hover:underline">ホーム</Link>
-          <span aria-hidden="true">›</span>
-          <Link to="/products" className="hover:text-green-700 hover:underline">取扱商品</Link>
-          <span aria-hidden="true">›</span>
-          <span className="text-slate-700 font-medium">エタノール</span>
-        </nav>
+      <PageHeader
+        title="エタノール"
+        crumbs={[{ name: "取扱製品", to: "/products" }, { name: "エタノール" }]}
+        lead="姫路市・播磨地域・兵庫県全域へ供給。大和薬品株式会社が取り扱うエタノール（工業用アルコール・無水エタノール・エタノール製剤）のご案内です。"
+      >
+        <p className="mt-3">
+          <span className="border border-slate-400 bg-white px-1.5 py-px text-[11px] font-bold text-slate-700">有機溶剤・アルコール類</span>
+        </p>
+      </PageHeader>
 
+      <div className="bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="max-w-3xl">
-          <p className="tag mb-3">有機溶剤・アルコール類</p>
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">エタノール</h1>
-          <p className="text-slate-600 text-lg mb-8">
-            姫路市・播磨地域・兵庫県全域へ供給。大和薬品株式会社が取り扱うエタノール（工業用アルコール・無水エタノール・エタノール製剤）のご案内です。
-          </p>
 
-          <div className="card p-6 mb-6">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">用途・特徴</h2>
+          <section className="mb-8">
+            <h2 className="mb-3 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />用途・特徴</h2>
             <ul className="space-y-2 text-slate-700">
               <li>・ 医療・食品工場・施設での消毒・殺菌（70〜80%水溶液）</li>
               <li>・ 化粧品・医薬品の溶媒・基材</li>
@@ -64,25 +65,25 @@ export default function Ethanol() {
               <li>・ 分析・試験用試薬（無水エタノール）</li>
               <li>・ 洗浄・脱脂剤（電子部品・精密機器）</li>
             </ul>
-          </div>
+          </section>
 
-          <div className="card p-6 mb-6">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">一般的な規格・仕様</h2>
+          <section className="mb-8">
+            <h2 className="mb-3 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />一般的な規格・仕様</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-slate-700 border-collapse">
                 <tbody>
-                  <tr className="border-b border-slate-100"><td className="py-2 pr-4 font-semibold text-slate-600 w-1/3">CAS番号</td><td className="py-2">64-17-5</td></tr>
-                  <tr className="border-b border-slate-100"><td className="py-2 pr-4 font-semibold text-slate-600">別名</td><td className="py-2">エチルアルコール、酒精</td></tr>
-                  <tr className="border-b border-slate-100"><td className="py-2 pr-4 font-semibold text-slate-600">種別・純度</td><td className="py-2">無水エタノール（99.5%以上）・工業用アルコール・エタノール製剤（各種濃度）</td></tr>
-                  <tr className="border-b border-slate-100"><td className="py-2 pr-4 font-semibold text-slate-600">容量</td><td className="py-2">18L缶・ドラム（200L）・ローリー</td></tr>
+                  <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-semibold text-slate-600 w-1/3">CAS番号</td><td className="py-2">64-17-5</td></tr>
+                  <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-semibold text-slate-600">別名</td><td className="py-2">エチルアルコール、酒精</td></tr>
+                  <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-semibold text-slate-600">種別・純度</td><td className="py-2">無水エタノール（99.5%以上）・工業用アルコール・エタノール製剤（各種濃度）</td></tr>
+                  <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-semibold text-slate-600">容量</td><td className="py-2">18L缶・ドラム（200L）・ローリー</td></tr>
                   <tr><td className="py-2 pr-4 font-semibold text-slate-600">危険物分類</td><td className="py-2">第4類 アルコール類（引火点 13℃）</td></tr>
                 </tbody>
               </table>
             </div>
-          </div>
+          </section>
 
-          <div className="card p-6 mb-8 border-l-4 border-amber-400">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">保管・取扱い上の注意</h2>
+          <section className="mb-8 border-l-4 border-amber-400 bg-amber-50 px-4 py-4 md:px-5">
+            <h2 className="mb-3 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />保管・取扱い上の注意</h2>
             <ul className="space-y-2 text-slate-700">
               <li>・ 引火性があります。火気・電気機器・静電気から遠ざけてください。</li>
               <li>・ 高濃度蒸気の吸入は頭痛・眩暈を引き起こします。換気を十分に行ってください。</li>
@@ -90,26 +91,23 @@ export default function Ethanol() {
               <li>・ 密閉容器に入れ、直射日光・高温を避けた冷暗所に保管してください。</li>
               <li>・ 酸化剤・強酸・強塩基とは離して保管してください。</li>
             </ul>
-          </div>
+          </section>
 
-          <div className="bg-green-50 border border-green-200 rounded-2xl p-6 mb-8">
-            <h2 className="text-lg font-bold text-green-800 mb-2">姫路・播磨地域のお客様へ</h2>
+          <section className="mb-8 border border-slate-200 bg-slate-50 px-4 py-4 md:px-5">
+            <h2 className="mb-2 text-base font-bold text-slate-900 tracking-normal">姫路・播磨地域のお客様へ</h2>
             <p className="text-slate-700 text-sm leading-relaxed">
               大和薬品株式会社は兵庫県姫路市を拠点に、播磨地域・兵庫県全域へエタノール（工業用アルコール・無水エタノール）を迅速に供給しています。
               食品・医療・製造業など多様な業種のお客様にご利用いただいています。SDS（安全データシート）のご提供も承ります。
             </p>
-          </div>
+          </section>
 
-          <div className="card p-6 text-center">
-            <p className="text-slate-700 mb-4 font-semibold">お見積り・ご相談はお気軽にどうぞ</p>
-            <p className="text-2xl font-bold text-green-700 mb-1"><a href="tel:0792810671" className="hover:underline">TEL：079-281-0671</a></p>
-            <p className="text-sm text-slate-500 mb-4">受付時間 9:00〜17:00（土日祝休）</p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Link to="/contact?subject=見積依頼" className="btn-primary">見積依頼フォームへ</Link>
-              <Link to="/products" className="btn-outline">取扱商品一覧へ戻る</Link>
-            </div>
-          </div>
+          <Link to="/products" className="inline-flex items-center gap-1 text-sm font-bold text-brand hover:underline underline-offset-4">
+            <ChevronLeft size={15} />
+            取扱製品一覧へ戻る
+          </Link>
         </div>
+      </div>
+      <ContactBand />
       </div>
     </>
   );
