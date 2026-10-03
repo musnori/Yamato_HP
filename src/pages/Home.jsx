@@ -83,13 +83,44 @@ const contents = [
   },
 ];
 
+// 関連リンクは元サイトと同じくバナー画像で表示（isLogo: ロゴは余白を取って全体表示、写真は枠いっぱいに表示）
 const partnerLinks = [
-  { name: "四国化成工業株式会社", url: "https://kagaku.shikoku.co.jp/products/pool/neochlor/" },
-  { name: "ナカライテスク株式会社", url: "https://www.nacalai.co.jp/" },
-  { name: "林純薬工業株式会社", url: "https://www.hpc-j.co.jp/" },
-  { name: "西兵庫化学薬品協同組合", url: "https://nishihyogo-chemical-coop.com/summary" },
-  { name: "姫路西ロータリークラブ", url: "https://www.himeji-west-rc.jp/" },
-  { name: "姫路青年会議所", url: "https://www.himejijc.or.jp/" },
+  {
+    name: "四国化成工業株式会社",
+    url: "https://kagaku.shikoku.co.jp/products/pool/neochlor/",
+    image: "https://jyujyodai-pool.jp/wp/images/kirigaoka-scaled.jpg",
+    isLogo: false,
+  },
+  {
+    name: "ナカライテスク株式会社",
+    url: "https://www.nacalai.co.jp/",
+    image: "https://www.nacalai.co.jp/images/common/logo.svg",
+    isLogo: true,
+  },
+  {
+    name: "林純薬工業株式会社",
+    url: "https://www.hpc-j.co.jp/",
+    image: "https://www.hpc-j.co.jp/global/img/ci.svg",
+    isLogo: true,
+  },
+  {
+    name: "西兵庫化学薬品協同組合",
+    url: "https://nishihyogo-chemical-coop.com/summary",
+    image: "/images/coop-bg.png",
+    isLogo: true,
+  },
+  {
+    name: "姫路西ロータリークラブ",
+    url: "https://www.himeji-west-rc.jp/",
+    image: "https://www.himeji-west-rc.jp/wp/wp-content/themes/westrc/images/common/logo-rc.png",
+    isLogo: true,
+  },
+  {
+    name: "姫路青年会議所",
+    url: "https://www.himejijc.or.jp/",
+    image: "/images/IMG_2269.jpeg",
+    isLogo: true,
+  },
 ];
 
 const news = [
@@ -313,23 +344,28 @@ export default function Home() {
             {contents.map((c) => {
               const inner = (
                 <>
-                  <img
-                    src={c.image}
-                    alt=""
-                    className="w-28 sm:w-40 aspect-[4/3] object-cover shrink-0"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <span className="py-1">
-                    <span className="flex items-center gap-1 text-[15px] font-bold text-slate-900 group-hover:text-brand">
-                      {c.title}
-                      {c.external && <ExternalLink size={13} className="text-slate-400" />}
+                  <span className="block aspect-[16/9] overflow-hidden bg-slate-100">
+                    <img
+                      src={c.image}
+                      alt={c.title}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </span>
+                  <span className="flex items-center justify-between gap-2 px-4 py-3 border-t border-slate-200">
+                    <span>
+                      <span className="flex items-center gap-1 text-[15px] font-bold text-slate-900 group-hover:text-brand">
+                        {c.title}
+                        {c.external && <ExternalLink size={13} className="text-slate-400" />}
+                      </span>
+                      <span className="block mt-0.5 text-[13px] leading-relaxed text-slate-600">{c.desc}</span>
                     </span>
-                    <span className="block mt-1 text-[13px] leading-relaxed text-slate-600">{c.desc}</span>
+                    <ChevronRight size={18} className="text-slate-400 group-hover:text-brand shrink-0" />
                   </span>
                 </>
               );
-              const cls = "group flex gap-4 bg-white border border-slate-200 p-3 hover:border-brand/50 transition-colors";
+              const cls = "group block bg-white border border-slate-200 overflow-hidden hover:border-brand/60 transition-colors";
               return c.external ? (
                 <a key={c.title} href={c.to} target="_blank" rel="noopener noreferrer" className={cls}>
                   {inner}
@@ -342,18 +378,39 @@ export default function Home() {
             })}
           </div>
 
-          <h3 className="mt-8 mb-2 text-sm font-bold text-slate-700 tracking-normal">関連リンク</h3>
-          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 border-t border-slate-200">
+          <h3 className="mt-8 mb-3 text-[15px] font-bold text-slate-900 tracking-normal">関連リンク</h3>
+          <ul className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             {partnerLinks.map((p) => (
-              <li key={p.name} className="border-b border-slate-200">
+              <li key={p.name}>
                 <a
                   href={p.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between gap-2 py-2.5 text-sm text-slate-700 hover:text-brand"
+                  className="group block h-full bg-white border border-slate-200 overflow-hidden hover:border-brand/60 transition-colors"
                 >
-                  {p.name}
-                  <ExternalLink size={13} className="text-slate-400 shrink-0" />
+                  <span className={`flex aspect-[16/9] items-center justify-center overflow-hidden after:content-[attr(data-fallback)] after:px-3 after:text-center after:text-sm after:font-bold after:text-slate-500 ${p.isLogo ? "p-4" : ""}`}>
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className={
+                        p.isLogo
+                          ? "max-h-full max-w-full object-contain"
+                          : "h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      }
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => {
+                        // 画像が読めない場合は社名の文字だけを表示する
+                        e.currentTarget.style.display = "none";
+                        e.currentTarget.parentElement.classList.add("bg-slate-50");
+                        e.currentTarget.parentElement.dataset.fallback = p.name;
+                      }}
+                    />
+                  </span>
+                  <span className="flex items-center justify-between gap-1 px-3 py-2 border-t border-slate-200 text-xs md:text-[13px] font-medium text-slate-700 group-hover:text-brand">
+                    <span className="line-clamp-1">{p.name}</span>
+                    <ExternalLink size={12} className="text-slate-400 shrink-0" />
+                  </span>
                 </a>
               </li>
             ))}
