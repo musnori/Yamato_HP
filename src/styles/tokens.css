@@ -4,14 +4,18 @@
     --color-primary-dark: #0a5d38;
     --color-secondary: #065f46;
     --color-accent: #f59e0b;
+    /* ブランド：ロゴの深緑と、フッター等の濃紺 */
+    --color-brand: #1d5b3c;
+    --color-brand-dark: #154530;
+    --color-navy: #1f2a37;
     --color-text: #0f172a;
     --color-muted: #475569;
     --color-border: #e2e8f0;
     --color-bg: #f8fafc;
     --color-surface: #ffffff;
-    --radius-sm: 10px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
     --shadow-soft: 0 12px 28px -24px rgba(15, 23, 42, 0.35);
     --shadow-card: 0 18px 40px -28px rgba(15, 23, 42, 0.35);
     --space-1: 4px;
@@ -67,15 +71,15 @@
   }
 
   .section {
-    @apply py-12 md:py-16;
+    @apply py-10 md:py-14;
   }
 
   .card {
-    @apply rounded-2xl border border-[color:var(--color-border)] bg-white shadow-sm;
+    @apply rounded-md border border-[color:var(--color-border)] bg-white;
   }
 
   .card-elevated {
-    @apply rounded-2xl border border-[color:var(--color-border)] bg-white shadow-[var(--shadow-card)];
+    @apply rounded-md border border-[color:var(--color-border)] bg-white shadow-sm;
   }
 
   .tag {

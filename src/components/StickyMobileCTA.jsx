@@ -1,56 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// アイコン (lucide-react)
-import { 
-  FileText, 
-  MessageCircle, 
-  Phone 
-} from "lucide-react";
+import { FileText, Phone, ArrowUp } from "lucide-react";
 
+// スマホ下部の固定バー。ファーストビューでは出さず、少しスクロールしてから表示する。
+// PAGE TOP もこのバーの中に置き、本文に重ならないようにしている。
 export default function StickyMobileCTA() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 320);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    // 背景に透過とぼかし(backdrop-blur)を入れてモダンなフロート感を演出
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-slate-200/80 bg-white/90 backdrop-blur-lg md:hidden shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] transition-all duration-300">
-      <nav className="layout-container py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
-        <ul className="grid grid-cols-3 gap-3">
-          
-          {/* 1. 見積依頼 (Primary Action) */}
-          <li>
-            <Link
-              to="/contact?subject=見積依頼"
-              className="group flex flex-col items-center justify-center h-full w-full rounded-xl bg-emerald-600 text-white shadow-lg shadow-emerald-900/20 active:scale-95 transition-all py-2"
-              aria-label="見積を依頼する"
-            >
-              <FileText size={20} className="mb-0.5" />
-              <span className="text-[10px] font-bold leading-none">見積依頼</span>
-            </Link>
-          </li>
-
-          {/* 2. 相談する (Secondary Action) */}
-          <li>
-            <Link
-              to="/contact?subject=相談したい"
-              className="group flex flex-col items-center justify-center h-full w-full rounded-xl bg-emerald-50 text-emerald-700 active:bg-emerald-100 active:scale-95 transition-all py-2 border border-emerald-100"
-              aria-label="相談する"
-            >
-              <MessageCircle size={20} className="mb-0.5" />
-              <span className="text-[10px] font-bold leading-none">相談する</span>
-            </Link>
-          </li>
-
-          {/* 3. 電話 (Tertiary Action) */}
-          <li>
-            <a
-              href="tel:0792810671"
-              className="group flex flex-col items-center justify-center h-full w-full rounded-xl bg-white border border-slate-200 text-slate-600 active:bg-slate-50 active:scale-95 transition-all py-2"
-              aria-label="電話で問い合わせる"
-            >
-              <Phone size={20} className="mb-0.5" />
-              <span className="text-[10px] font-bold leading-none">電話</span>
-            </a>
-          </li>
-
-        </ul>
+    <div
+      className={[
+        "fixed bottom-0 inset-x-0 z-40 md:hidden bg-white border-t border-slate-300 transition-transform duration-200",
+        "pb-[env(safe-area-inset-bottom)]",
+        visible ? "translate-y-0" : "translate-y-full",
+      ].join(" ")}
+      aria-hidden={!visible}
+    >
+      <nav className="flex h-12 items-stretch text-[13px] font-bold">
+        <a
+          href="tel:0792810671"
+          className="flex flex-1 items-center justify-center gap-1.5 text-brand border-r border-slate-200 active:bg-slate-50"
+          tabIndex={visible ? 0 : -1}
+        >
+          <Phone size={16} />
+          電話する
+        </a>
+        <Link
+          to="/contact?subject=見積依頼"
+          className="flex flex-1 items-center justify-center gap-1.5 bg-brand text-white active:bg-brand-dark"
+          tabIndex={visible ? 0 : -1}
+        >
+          <FileText size={16} />
+          見積・お問い合わせ
+        </Link>
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="flex w-12 items-center justify-center text-slate-600 active:bg-slate-50"
+          aria-label="ページの先頭に戻る"
+          tabIndex={visible ? 0 : -1}
+        >
+          <ArrowUp size={18} />
+        </button>
       </nav>
     </div>
   );

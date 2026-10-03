@@ -1,13 +1,8 @@
 import React from "react";
 
-const Section = ({ title, eyebrow, children, id }) => (
+const Section = ({ title, children, id }) => (
   <section id={id} className="max-w-7xl mx-auto px-4 py-12 space-y-6">
     <div className="space-y-2">
-      {eyebrow && (
-        <p className="text-[11px] font-medium tracking-[0.25em] text-slate-400 uppercase">
-          {eyebrow}
-        </p>
-      )}
       <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900">
         {title}
       </h2>

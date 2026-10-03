@@ -18,7 +18,17 @@ export default {
           'Meiryo',
           'sans-serif',
         ],
+        // 見出し用の明朝体（老舗らしい落ち着きを出すため、h1・セクション見出しのみに使用）
+        serif: ['"Noto Serif JP"', '"Hiragino Mincho ProN"', '"Yu Mincho"', 'serif'],
         kaisho: ['"Yuji Syuku"', 'serif'], // ← 楷書風(Google Fonts)を使うなら追加
+      },
+      colors: {
+        brand: {
+          DEFAULT: "#1d5b3c",
+          dark: "#154530",
+          light: "#eef4f0",
+        },
+        navy: "#1f2a37",
       },
     },
   },
