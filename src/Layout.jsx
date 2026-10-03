@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, NavLink, useNavigate } from "react-router-dom";
 import PrimaryCTA from "./components/PrimaryCTA";
 import StickyMobileCTA from "./components/StickyMobileCTA";
+import { ArrowUp, ChevronRight, Phone } from "lucide-react";
 
 function ScrollToTopOnRouteChange() {
   const { pathname, hash } = useLocation();
@@ -38,14 +39,13 @@ function PageTopButton() {
       onClick={toTop}
       aria-label="ページの先頭に戻る"
       className={[
-        "fixed right-4 bottom-24 md:bottom-5 z-50 transition-all duration-300",
-        visible ? "opacity-100 translate-y-0" : "opacity-0 pointer-events-none translate-y-3",
-        "flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white",
-        "shadow-lg shadow-green-900/20 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-white/60"
+        "hidden md:flex fixed right-5 bottom-5 z-40 w-10 h-10 items-center justify-center transition-opacity duration-200",
+        visible ? "opacity-100" : "opacity-0 pointer-events-none",
+        "rounded bg-white/95 border border-slate-300 text-slate-600 hover:text-brand hover:border-brand",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40"
       ].join(" ")}
     >
-      <span className="text-base leading-none">↑</span>
-      <span className="text-sm leading-none tracking-wide">PAGE TOP</span>
+      <ArrowUp size={18} />
     </button>
   );
 }
@@ -85,13 +85,12 @@ export default function Layout() {
       <ScrollToTopOnRouteChange />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-slate-200">
-        <div className="hidden md:block bg-green-900 text-white text-xs">
+      <header className="sticky top-0 z-50 bg-white border-b border-slate-200">
+        <div className="hidden md:block bg-brand text-white text-xs">
           <div className="layout-container py-2 flex items-center justify-between">
-            <p className="tracking-wide">化学薬品・試薬・工業薬品の調達を支える</p>
+            <p className="text-white/90 tracking-wide">昭和8年創業{"\u3000"}姫路市の化学薬品・工業薬品・試薬の専門商社</p>
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">
-                <span className="inline-block w-2 h-2 rounded-full bg-green-300" />
                 受付時間 9:00〜17:00
               </span>
               <a href="tel:0792810671" className="font-semibold hover:underline">
@@ -100,17 +99,17 @@ export default function Layout() {
             </div>
           </div>
         </div>
-        <nav className="layout-container py-4 flex items-center justify-between gap-4">
+        <nav className="layout-container py-2.5 md:py-3 flex items-center justify-between gap-4">
           {/* ロゴ */}
           <Link to="/" className="flex items-center gap-2">
-            <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto" />
-            <span className="text-green-800 font-bold text-2xl font-kaisho">
+            <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 md:h-9 w-auto" />
+            <span className="text-brand font-bold text-[1.4rem] md:text-2xl font-kaisho">
               大和薬品株式会社
             </span>
           </Link>
 
           {/* デスクトップ用ナビ（枠なし・ホバーで下線） */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6">
             {nav.map((item) => (
               <NavLink
                 key={item.path}
@@ -118,9 +117,9 @@ export default function Layout() {
                 className={({ isActive }) =>
                   [
                     "text-sm font-semibold text-slate-700 tracking-wide",
-                    "hover:text-green-800 hover:underline underline-offset-4 decoration-2",
+                    "hover:text-brand hover:underline underline-offset-[6px] decoration-2",
                     "focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600/30 rounded",
-                    isActive ? "text-green-800 underline decoration-2 underline-offset-4" : ""
+                    isActive ? "text-brand underline decoration-2 underline-offset-[6px]" : ""
                   ].join(" ")
                 }
               >
@@ -133,17 +132,14 @@ export default function Layout() {
                 setSearchValue("");
                 setSearchOpen(true);
               }}
-              className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white w-10 h-10 text-slate-600 hover:bg-slate-50 transition"
+              className="inline-flex items-center justify-center rounded border border-slate-200 bg-white w-9 h-9 text-slate-600 hover:text-brand hover:border-brand transition"
               aria-label="製品を検索"
             >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                 <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
               </svg>
             </button>
-            <div className="flex items-center gap-2">
-              <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" />
-              <PrimaryCTA to="/contact?subject=相談したい" label="相談する" variant="outline" />
-            </div>
+            <PrimaryCTA to="/contact?subject=見積依頼" label="見積依頼" size="sm" className="px-5 py-2.5" />
           </div>
 
 
@@ -153,26 +149,26 @@ export default function Layout() {
             aria-label={open ? "メニューを閉じる" : "メニューを開く"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-green-700 text-green-800 hover:bg-green-50 transition"
+            className="lg:hidden -mr-1 inline-flex flex-col items-center justify-center w-12 h-11 text-brand"
           >
-            {/* 3本線 → X にアニメーション */}
-            <div className="relative w-5 h-5">
+            <div className="relative w-6 h-5">
               <span
-                className={`absolute left-0 top-1 block h-[2px] w-5 bg-current transition-transform ${
-                  open ? "translate-y-2 rotate-45" : ""
+                className={`absolute left-0 top-0.5 block h-[2px] w-6 bg-current transition-transform ${
+                  open ? "translate-y-[7px] rotate-45" : ""
                 }`}
               />
               <span
-                className={`absolute left-0 top-2.5 block h-[2px] w-5 bg-current transition-opacity ${
+                className={`absolute left-0 top-[9px] block h-[2px] w-6 bg-current transition-opacity ${
                   open ? "opacity-0" : "opacity-100"
                 }`}
               />
               <span
-                className={`absolute left-0 top-4 block h-[2px] w-5 bg-current transition-transform ${
-                  open ? "-translate-y-2 -rotate-45" : ""
+                className={`absolute left-0 top-[17px] block h-[2px] w-6 bg-current transition-transform ${
+                  open ? "-translate-y-[8px] -rotate-45" : ""
                 }`}
               />
             </div>
+            <span className="mt-1 text-[10px] font-bold leading-none tracking-wider">{open ? "閉じる" : "メニュー"}</span>
           </button>
         </nav>
       </header>
@@ -182,17 +178,17 @@ export default function Layout() {
         <button
           aria-label="閉じる"
           onClick={() => setOpen(false)}
-          className="fixed inset-0 z-40 bg-black/40 md:hidden"
+          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
         />
       )}
       <aside
-        className={`fixed right-0 top-0 z-50 h-full w-72 bg-white shadow-2xl border-l md:hidden
+        className={`fixed right-0 top-0 z-50 h-full w-[80vw] max-w-xs bg-white shadow-xl border-l overflow-y-auto lg:hidden
                     transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"}`}
         role="dialog"
         aria-modal="true"
       >
         <div className="px-5 py-4 border-b flex items-center justify-between">
-          <span className="font-bold text-green-800">メニュー</span>
+          <span className="font-bold text-brand">メニュー</span>
           <button
             onClick={() => setOpen(false)}
             className="p-2 rounded-md hover:bg-gray-100"
@@ -201,57 +197,57 @@ export default function Layout() {
             ✕
           </button>
         </div>
-        <nav className="p-4 space-y-2">
-          {nav.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              onClick={() => setOpen(false)}
-              className={({ isActive }) =>
-                [
-                  "block w-full text-left px-4 py-3 rounded-lg font-medium",
-                  "border transition hover:shadow",
-                  isActive
-                    ? "bg-green-600 text-white border-green-700"
-                    : "bg-white text-green-800 border-green-700 hover:bg-green-50",
-                ].join(" ")
-              }
+        <nav>
+          <ul className="border-b border-slate-200">
+            {[{ label: "トップ", path: "/" }, ...nav].map((item) => (
+              <li key={item.path} className="border-t border-slate-200 first:border-t-0">
+                <NavLink
+                  to={item.path}
+                  end={item.path === "/"}
+                  onClick={() => setOpen(false)}
+                  className={({ isActive }) =>
+                    [
+                      "flex items-center justify-between px-5 py-3.5 font-medium",
+                      isActive ? "text-brand bg-brand-light" : "text-slate-800 hover:bg-slate-50",
+                    ].join(" ")
+                  }
+                >
+                  {item.label}
+                  <ChevronRight size={16} className="text-slate-400" />
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+          <div className="p-5 space-y-2">
+            <button
+              type="button"
+              onClick={() => {
+                setSearchValue("");
+                setSearchOpen(true);
+                setOpen(false);
+              }}
+              className="w-full text-center px-4 py-3 rounded font-semibold border border-slate-300 text-slate-700 hover:bg-slate-50"
             >
-              {item.label}
-            </NavLink>
-          ))}
-          <div className="mt-3 grid gap-2">
+              製品を検索
+            </button>
             <Link
               to="/contact?subject=見積依頼"
               onClick={() => setOpen(false)}
-              className="block w-full text-center px-4 py-3 rounded-lg font-semibold bg-green-700 text-white hover:bg-green-800"
+              className="block w-full text-center px-4 py-3 rounded font-semibold bg-brand text-white hover:bg-brand-dark"
             >
-              見積依頼
+              見積依頼・お問い合わせ
             </Link>
-            <Link
-              to="/contact?subject=相談したい"
-              onClick={() => setOpen(false)}
-              className="block w-full text-center px-4 py-3 rounded-lg font-semibold border border-green-700 text-green-800 hover:bg-green-50"
-            >
-              相談する
-            </Link>
+            <a href="tel:0792810671" className="flex items-center justify-center gap-2 pt-2 text-brand font-bold">
+              <Phone size={16} />
+              079-281-0671
+            </a>
+            <p className="text-center text-xs text-slate-500">受付時間 9:00〜17:00</p>
           </div>
-          <button
-            type="button"
-            onClick={() => {
-              setSearchValue("");
-              setSearchOpen(true);
-              setOpen(false);
-            }}
-            className="w-full text-center px-4 py-3 rounded-lg font-semibold border border-slate-200 text-slate-700 hover:bg-slate-50"
-          >
-            製品を検索
-          </button>
         </nav>
       </aside>
 
       {/* ページ内容 */}
-      <main className="flex-1 pb-24 md:pb-0">
+      <main className="flex-1">
         <Outlet />
       </main>
 
@@ -259,51 +255,52 @@ export default function Layout() {
       <PageTopButton />
 
       {/* フッター */}
-      <footer className="bg-slate-900 text-slate-200 text-sm mt-8">
-        <div className="layout-container py-8 grid gap-6 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto" />
-              <span className="font-semibold text-white">大和薬品株式会社</span>
-            </div>
-            <p className="text-slate-300 text-sm">
+      <footer className="bg-navy text-slate-300 text-sm pb-12 md:pb-0">
+        <div className="layout-container py-8 md:py-10 grid gap-8 md:grid-cols-[1.4fr_1fr_1.1fr]">
+          <div>
+            <Link to="/" className="inline-flex items-center gap-2">
+              <img src="/company-logo.png" alt="大和薬品株式会社 ロゴ" className="h-8 w-auto bg-white rounded-sm p-0.5" />
+              <span className="font-kaisho text-xl text-white">大和薬品株式会社</span>
+            </Link>
+            <p className="mt-3 text-slate-300 text-sm leading-relaxed">
               〒670-0935 兵庫県姫路市北条口1丁目59番地<br />
-              TEL：<a href="tel:0792810671" className="hover:underline">079-281-0671</a><br />
+              TEL <a href="tel:0792810671" className="hover:underline">079-281-0671</a>{"\u3000"}FAX 079-224-1870<br />
               受付時間 9:00〜17:00
             </p>
           </div>
           <div>
-            <p className="text-white font-semibold mb-3">製品カテゴリ</p>
-            <ul className="space-y-2 text-sm">
-              <li><Link className="hover:underline" to="/products?cat=water">水処理用薬品</Link></li>
-              <li><Link className="hover:underline" to="/products?cat=reagents">試薬・研究用</Link></li>
-              <li><Link className="hover:underline" to="/products?cat=industrial">工業用・医薬品関連</Link></li>
-              <li><Link className="hover:underline" to="/products?cat=cleaning">クリーニング関係</Link></li>
+            <p className="text-white font-bold mb-2">サイトマップ</p>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
+              <li><Link className="hover:text-white hover:underline" to="/products">取扱製品</Link></li>
+              <li><Link className="hover:text-white hover:underline" to="/services">サービス</Link></li>
+              <li><Link className="hover:text-white hover:underline" to="/knowledge">薬品の基礎知識</Link></li>
+              <li><Link className="hover:text-white hover:underline" to="/company">会社概要</Link></li>
+              <li><Link className="hover:text-white hover:underline" to="/access">アクセス</Link></li>
+              <li><Link className="hover:text-white hover:underline" to="/contact">お問い合わせ</Link></li>
+              <li className="col-span-2"><Link className="hover:text-white hover:underline" to="/privacy">プライバシーポリシー</Link></li>
             </ul>
           </div>
           <div>
-            <p className="text-white font-semibold mb-3">サイトマップ</p>
-            <ul className="space-y-2 text-sm">
-              <li><Link className="hover:underline" to="/products">製品</Link></li>
-              <li><Link className="hover:underline" to="/services">サービス</Link></li>
-              <li><Link className="hover:underline" to="/knowledge">薬品の基礎知識</Link></li>
-              <li><Link className="hover:underline" to="/company">会社概要</Link></li>
-              <li><Link className="hover:underline" to="/access">アクセス</Link></li>
-              <li><Link className="hover:underline" to="/contact">お問い合わせ</Link></li>
-            </ul>
-          </div>
-          <div className="space-y-3">
-            <p className="text-white font-semibold">お問い合わせ</p>
-            <p className="text-slate-300 text-sm">見積・相談はフォームから承っています。</p>
-            <div className="flex flex-wrap gap-2">
-              <Link to="/contact?subject=見積依頼" className="btn-primary w-fit">見積依頼</Link>
-              <Link to="/contact?subject=相談したい" className="btn-outline w-fit">相談する</Link>
+            <p className="text-white font-bold mb-2">お問い合わせ</p>
+            <p className="hidden md:block text-slate-300 text-sm">お見積り・ご相談はフォームまたはお電話で承ります。</p>
+            <div className="md:mt-3 grid grid-cols-2 gap-2">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center rounded px-3 py-2.5 text-sm font-bold bg-white text-navy hover:bg-slate-100"
+              >
+                お問い合わせ
+              </Link>
+              <Link
+                to="/contact?subject=見積依頼"
+                className="inline-flex items-center justify-center rounded px-3 py-2.5 text-sm font-bold bg-brand text-white hover:bg-brand-dark"
+              >
+                見積依頼
+              </Link>
             </div>
-            <Link to="/privacy" className="block text-sm text-slate-300 hover:underline">プライバシーポリシー</Link>
           </div>
         </div>
-        <div className="border-t border-slate-800 py-3 text-center text-xs text-slate-400">
-          © 大和薬品株式会社. All Rights Reserved.
+        <div className="border-t border-white/10 py-3 text-center text-xs text-slate-400">
+          © 大和薬品株式会社
         </div>
       </footer>
 

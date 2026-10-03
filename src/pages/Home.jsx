@@ -1,108 +1,110 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import Card from "../components/Card";
-import PrimaryCTA from "../components/PrimaryCTA";
 import Section from "../components/Section";
 import SEOHead from "../components/SEOHead";
 import { LocalBusinessSchema, BreadcrumbSchema, WebSiteSchema } from "../components/StructuredData";
 
-// アイコン (Communityで使用していたものも含めて一括インポート)
-import { 
-  MapPin, 
-  Truck, 
-  Users, 
-  Lightbulb, 
-  ArrowRight, 
-  CheckCircle2,
-  BookOpenText, // 追加
-  Building2,    // 追加
-  Camera,       // 追加
-  ExternalLink  // 追加
+import {
+  MapPin,
+  Truck,
+  Users,
+  Clock,
+  FlaskConical,
+  ShieldCheck,
+  Recycle,
+  Package,
+  FileText,
+  Mail,
+  Phone,
+  ChevronRight,
+  ExternalLink,
 } from "lucide-react";
 
+// --- データ定義 ---
+const aboutText = [
+  "昭和8年（1933年）創業以来、兵庫県姫路市を拠点に、化学薬品・工業薬品・試薬の供給を専門とする商社として歩んでまいりました。",
+  "兵庫県内はもちろん、大阪・岡山・京都など関西エリアの学校・工場・研究機関・水処理施設といった、さまざまな現場のニーズに対応しています。",
+  "在庫を活かした迅速な対応と、丁寧な提案・安定供給により、これからも安心してお取引いただけるパートナーを目指します。",
+];
+
+const strengths = [
+  {
+    icon: MapPin,
+    title: "対応エリア",
+    text: "姫路市を拠点に、兵庫県内・大阪・岡山・京都など関西エリアに対応しています。",
+  },
+  {
+    icon: Truck,
+    title: "納品体制",
+    text: "自社在庫からの即応に加え、自社便とメーカー直送を使い分けて納品します。",
+  },
+  {
+    icon: Users,
+    title: "専門スタッフ",
+    text: "「何を使えばいいかわからない」というご相談にも、用途に合わせて製品をご提案します。",
+  },
+];
+
+const flow = [
+  { title: "用途・製品の相談", text: "ご希望の用途や現場の条件をお聞かせください。" },
+  { title: "見積・提案", text: "最適な製品をご提案し、お見積りをご提示します。" },
+  { title: "受注・手配", text: "ご発注後、在庫・納期を確認して手配します。" },
+  { title: "納品・アフターサポート", text: "ご指定の場所へ納品し、納品後もご相談に応じます。" },
+];
+
+const consultations = [
+  { icon: Clock, title: "急ぎで必要", desc: "納期や在庫状況をすぐに確認します。", to: "/contact?subject=急ぎで薬品が必要" },
+  { icon: FlaskConical, title: "製品選びの相談", desc: "用途や条件だけでもご相談ください。", to: "/contact?subject=用途が未定の相談" },
+  { icon: ShieldCheck, title: "安全・取扱いの相談", desc: "法令や保管方法も含めてご案内します。", to: "/contact?subject=安全・取扱いの相談" },
+  { icon: Recycle, title: "回収・処分", desc: "不要になった薬品の回収・処分に対応します。", to: "/services" },
+];
+
+const categories = [
+  { title: "水処理用薬品", desc: "浄水・排水・プール管理", to: "/products?cat=water" },
+  { title: "試薬・研究用", desc: "研究・検査・教育現場", to: "/products?cat=reagents" },
+  { title: "工業用・医薬品関連", desc: "製造現場の薬品供給", to: "/products?cat=industrial" },
+  { title: "クリーニング関係", desc: "洗浄・除菌・漂白用途", to: "/products?cat=cleaning" },
+];
+
+const contents = [
+  {
+    title: "社長ブログ",
+    desc: "代表メッセージや日々の気づき、業界への想いを発信しています。",
+    to: "https://yamato-chemi-blog.hatenablog.com/",
+    image: "/images/president-blog-bg.png",
+    external: true,
+  },
+  {
+    title: "コレクション",
+    desc: "昭和レトロな看板や道具など、貴重なコレクションを公開しています。",
+    to: "/collection",
+    image: "/images/banner.jpg",
+    external: false,
+  },
+];
+
+const partnerLinks = [
+  { name: "四国化成工業株式会社", url: "https://kagaku.shikoku.co.jp/products/pool/neochlor/" },
+  { name: "ナカライテスク株式会社", url: "https://www.nacalai.co.jp/" },
+  { name: "林純薬工業株式会社", url: "https://www.hpc-j.co.jp/" },
+  { name: "西兵庫化学薬品協同組合", url: "https://nishihyogo-chemical-coop.com/summary" },
+  { name: "姫路西ロータリークラブ", url: "https://www.himeji-west-rc.jp/" },
+  { name: "姫路青年会議所", url: "https://www.himejijc.or.jp/" },
+];
+
+const news = [
+  { date: "2025.12.30", cat: "お知らせ", title: "Webサイトをリニューアルいたしました。" },
+  { date: "2025.12.15", cat: "営業日", title: "年末年始の営業についてのお知らせ" },
+  { date: "2025.11.20", cat: "製品情報", title: "水処理用凝集剤の新規在庫が入荷しました" },
+];
+
+const heroButtons = [
+  { label: "取扱製品", to: "/products", icon: Package, primary: true },
+  { label: "見積依頼", to: "/contact?subject=見積依頼", icon: FileText },
+  { label: "お問い合わせ", to: "/contact", icon: Mail },
+];
+
 export default function Home() {
-  // --- データ定義 ---
-  const greetingText = [
-    "昭和8年（1933年）創業以来、兵庫県姫路市を拠点に、化学薬品・工業薬品・試薬の供給を専門とする商社として歩んでまいりました。",
-    "兵庫県内はもちろん、大阪・岡山・京都など関西エリアの学校・工場・研究機関・水処理施設といった多様な現場に対応しています。",
-    "在庫を活かした即応体制に加え、自社便・メーカー直送を組み合わせることで迅速な納品を実現します。",
-    "これからも安心してお取引いただけるよう、丁寧な提案と安定供給に努めてまいります。",
-  ];
-
-  const greetingImage = "/images/souko1.jpg";
-
-  const heroImages = ["/morninng.jpg", "/yugata.jpg", "/night.jpg"];
-  const [heroIndex, setHeroIndex] = useState(0);
-
-  // ナビゲーションボタンのデータ
-  const navigationButtons = [
-    {
-      title: "ブログ",
-      description: "代表メッセージや日々の気づき、業界への想いを発信",
-      to: "https://yamato-chemi-blog.hatenablog.com/",
-      icon: BookOpenText,
-      external: true,
-      bgImage: "/images/president-blog-bg.png",
-      iconColor: "text-emerald-600",
-    },
-    {
-      title: "コレクション",
-      description: "昭和レトロな看板や道具など、貴重なコレクションを公開",
-      to: "/collection",
-      icon: Camera,
-      external: false,
-      bgImage: "/images/banner.jpg",
-      iconColor: "text-amber-600",
-    },
-  ];
-
-  // 関連リンク・バナーのデータ
-  const partnerLinks = [
-    {
-      name: "四国化成工業株式会社",
-      url: "https://kagaku.shikoku.co.jp/products/pool/neochlor/",
-      image: "https://jyujyodai-pool.jp/wp/images/kirigaoka-scaled.jpg",
-      isLogo: false,
-    },
-    {
-      name: "ナカライテスク株式会社",
-      url: "https://www.nacalai.co.jp/",
-      image: "https://www.nacalai.co.jp/images/common/logo.svg",
-      isLogo: true,
-    },
-    {
-      name: "林純薬工業株式会社",
-      url: "https://www.hpc-j.co.jp/",
-      image: "https://www.hpc-j.co.jp/global/img/ci.svg",
-      isLogo: true,
-    },
-    {
-      name: "西兵庫化学薬品協同組合",
-      url: "https://nishihyogo-chemical-coop.com/summary",
-      image: "/images/coop-bg.png",
-      isLogo: true,
-    },
-    {
-      name: "姫路西ロータリークラブ",
-      url: "https://www.himeji-west-rc.jp/",
-      image: "https://www.himeji-west-rc.jp/wp/wp-content/themes/westrc/images/common/logo-rc.png",
-      isLogo: true,
-    },
-    {
-      name: "姫路青年会議所",
-      url: "https://www.himejijc.or.jp/",
-      image: "/images/IMG_2269.jpeg",
-      isLogo: true,
-    },
-  ];
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setHeroIndex((i) => (i + 1) % heroImages.length);
-    }, 6000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <>
       <SEOHead pageKey="home" />
@@ -110,405 +112,287 @@ export default function Home() {
       <WebSiteSchema />
       <BreadcrumbSchema items={[{ name: "ホーム" }]} />
 
-      <div className="bg-slate-50 text-slate-800 font-sans">
-      
-      {/* =======================
-          Hero Section
-      ======================== */}
-      <section className="relative overflow-hidden bg-slate-900 text-white h-[320px] md:h-[400px] lg:h-[450px] flex items-center">
-        <div className="absolute inset-0 z-0">
-          {heroImages.map((src, i) => (
+      <div className="bg-white text-slate-800">
+        {/* ===== ファーストビュー ===== */}
+        <section className="relative bg-white">
+          {/* 写真：スマホでは上に帯状に、PCでは右側に大きく敷く */}
+          <div className="relative h-52 sm:h-64 md:absolute md:inset-y-0 md:right-0 md:left-[50%] lg:left-[40%] md:h-auto">
+            <img
+              src="/c.jpg"
+              alt="大和薬品株式会社 本社倉庫の外観（姫路市北条口）"
+              className="h-full w-full object-cover object-[60%_45%]"
+              fetchpriority="high"
+            />
             <div
-              key={src}
-              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-                i === heroIndex ? "opacity-50" : "opacity-0"
-              }`}
-              style={{ backgroundImage: `url(${src})` }}
-            />
-          ))}
-        </div>
-
-        {/* 背景オーバーレイ */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent z-10" />
-
-        <div className="relative z-20 layout-container py-8 md:py-10">
-          <p className="text-[11px] md:text-xs font-medium tracking-[0.3em] text-emerald-800/80 mb-4 animate-fade-in-up">
-            YAMATO CHEMICAL — SINCE 1933
-          </p>
-
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-balance leading-[1.2] tracking-tight text-slate-900">
-            化学工業薬品、試薬、<br className="md:hidden" />
-            水処理薬品、<br />
-            不要な薬品廃棄の<br className="md:hidden" />
-            見積・相談を<span className="text-emerald-700">最短</span>で。
-          </h1>
-
-          <p className="mt-4 max-w-2xl text-slate-700 text-base md:text-lg leading-relaxed font-normal">
-            大和薬品株式会社は、学校・工場・研究機関などの<br className="hidden md:block"/>
-            多様な現場ニーズに合わせて最適な薬品をご提案します。
-          </p>
-          
-          <div className="mt-4 flex flex-wrap gap-2">
-            <PrimaryCTA
-              to="/products"
-              label="製品を探す"
-              variant="outline"
-              size="sm"
-              className="border-slate-800 text-slate-900 hover:bg-slate-800 hover:text-white"
-            />
-            <PrimaryCTA
-              to="/contact?subject=見積依頼"
-              label="見積依頼"
-              variant="outline"
-              size="sm"
-              className="border-slate-800 text-slate-900 hover:bg-slate-800 hover:text-white"
+              aria-hidden
+              className="hidden md:block absolute inset-0"
+              style={{ backgroundImage: "linear-gradient(90deg, #fff 0%, rgba(255,255,255,0) 22%)" }}
             />
           </div>
 
-          <div className="absolute bottom-4 right-4 md:right-auto md:left-8 flex gap-2">
-            {heroImages.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setHeroIndex(i)}
-                className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
-                  i === heroIndex ? "bg-slate-900 w-6" : "bg-slate-500/50 hover:bg-slate-700"
-                }`}
-                aria-label={`スライド${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8 md:py-20 lg:py-24">
+            <div className="max-w-xl md:max-w-[48%] lg:max-w-xl">
+              <h1 className="font-serif text-[1.65rem] leading-[1.45] sm:text-3xl md:text-[1.7rem] lg:text-[2.4rem] md:leading-[1.4] font-bold text-slate-900 tracking-normal">
+                <span className="whitespace-nowrap">化学工業薬品・試薬・</span>
+                <br />
+                <span className="whitespace-nowrap">水処理薬品・不要薬品回収</span>
+                <br />
+                <span className="text-brand">に対応</span>
+              </h1>
+              <span aria-hidden className="block w-12 h-[3px] bg-brand mt-4 mb-4" />
+              <p className="text-[15px] md:text-base leading-relaxed text-slate-700">
+                1933年の創業以来、兵庫県姫路市を拠点に、
+                <br className="hidden sm:inline" />
+                学校・工場・研究機関などの多様な現場に
+                <br className="hidden sm:inline" />
+                最適な薬品をご提案しています。
+              </p>
 
-      {/* =======================
-          GREETING
-      ======================== */}
-      <Section eyebrow="GREETING" title="ごあいさつ" className="bg-slate-50">
-        <div className="grid gap-6 lg:gap-8 lg:grid-cols-2 items-center">
-          <div className="order-2 lg:order-1">
-             <div className="bg-white p-6 md:p-8 rounded-xl border border-slate-200/70">
-                <div className="space-y-4 text-[15px] leading-[1.95] text-slate-700">
-                  {greetingText.map((text, i) => (
-                    <p key={i}>{text}</p>
-                  ))}
-                </div>
-                <div className="mt-6 pt-5 border-t border-slate-100">
-                  <p className="text-[11px] tracking-[0.2em] text-slate-400 mb-1">REPRESENTATIVE</p>
-                  <p className="text-[15px] font-bold text-slate-900">代表取締役社長　田路 裕之</p>
-                </div>
-             </div>
+              <div className="mt-6 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+                {heroButtons.map(({ label, to, icon, primary }) => {
+                  const Icon = icon;
+                  return (
+                  <Link
+                    key={label}
+                    to={to}
+                    className={[
+                      "inline-flex items-center justify-center gap-1.5 rounded px-3 sm:px-5 py-3 text-sm font-bold border transition-colors",
+                      primary ? "col-span-2 sm:col-auto" : "",
+                      primary
+                        ? "bg-brand border-brand text-white hover:bg-brand-dark"
+                        : "bg-white border-slate-300 text-slate-800 hover:border-brand hover:text-brand",
+                    ].join(" ")}
+                  >
+                    <Icon size={17} strokeWidth={1.75} className="shrink-0" />
+                    {label}
+                    <ChevronRight size={15} className="hidden sm:block opacity-70" />
+                  </Link>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-          <div className="order-1 lg:order-2 h-full min-h-[180px] md:min-h-[200px] lg:max-h-[320px]">
-            <div className="relative h-full rounded-xl overflow-hidden">
+        </section>
+
+        {/* ===== 大和薬品株式会社について ===== */}
+        <Section title="大和薬品株式会社について" className="border-t border-slate-200">
+          <div className="grid gap-6 md:grid-cols-[1fr_minmax(0,420px)] md:gap-10 items-start">
+            <div className="space-y-3 text-[15px] leading-[1.9] text-slate-700">
+              {aboutText.map((t) => (
+                <p key={t}>{t}</p>
+              ))}
+              <p className="pt-2 text-sm text-slate-600">
+                代表取締役社長{"\u3000"}<span className="font-bold text-slate-900">田路 裕之</span>
+              </p>
+              <Link
+                to="/company"
+                className="inline-flex items-center gap-1 text-sm font-bold text-brand hover:underline underline-offset-4"
+              >
+                会社概要を見る
+                <ChevronRight size={15} />
+              </Link>
+            </div>
+            <figure>
               <img
-                src={greetingImage}
-                alt="大和薬品株式会社の倉庫"
-                className="h-full w-full object-cover"
+                src="/warehouses/abo1.jpg"
+                alt="阿保倉庫の内部（薬品の保管庫とフォークリフト）"
+                className="w-full aspect-[16/9] md:aspect-[4/3] object-cover rounded-sm"
                 loading="lazy"
                 decoding="async"
               />
-            </div>
+              <figcaption className="mt-2 text-xs text-slate-500">阿保倉庫</figcaption>
+            </figure>
           </div>
-        </div>
-      </Section>
+        </Section>
 
-      {/* =======================
-          TRUST & FLOW
-      ======================== */}
-      <Section eyebrow="TRUST & FLOW" title="安心して相談できる理由" className="bg-white">
-        <div className="grid gap-6 lg:grid-cols-2 items-start">
-          
-          {/* 左側：TRUST */}
-          <div className="flex flex-col gap-3">
-            {[
-              {
-                icon: MapPin,
-                title: "対応エリア",
-                text: "兵庫県姫路市を拠点に、兵庫県内・大阪・岡山・京都など関西エリアへ柔軟に対応。地域密着ならではの細やかなサポートを提供します。"
-              },
-              { 
-                icon: Truck, 
-                title: "納品フロー", 
-                text: "相談 → 提案 → 手配 → 納品を最短ルートで。自社便とメーカー直送便を使い分けます。" 
-              },
-              { 
-                icon: Users, 
-                title: "専門スタッフ", 
-                text: "「何を使えばいいかわからない」等の疑問に、経験豊富なスタッフが用途に合わせた選定を支援します。" 
-              },
-            ].map((item, idx) => (
+        {/* ===== 大和薬品の強み ===== */}
+        <Section title="大和薬品の強み" className="bg-brand-light">
+          <div className="grid md:grid-cols-3 md:divide-x divide-slate-300/70">
+            {strengths.map(({ icon, title, text }, i) => {
+              const Icon = icon;
+              return (
               <div
-                key={idx}
-                className="group relative bg-white rounded-xl p-5 md:p-6 border border-slate-200/70 flex items-start gap-4"
+                key={title}
+                className={[
+                  "flex gap-4 py-4 md:py-1 md:px-7 md:first:pl-0 md:last:pr-0",
+                  i > 0 ? "border-t border-slate-300/70 md:border-t-0" : "",
+                ].join(" ")}
               >
-                <div className="shrink-0 flex items-center justify-center w-9 h-9 text-emerald-700">
-                  <item.icon size={20} strokeWidth={1.75} />
-                </div>
+                <Icon size={30} strokeWidth={1.5} className="text-brand shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="text-base font-bold text-slate-900 mb-1.5 flex items-center gap-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-[13.5px] text-slate-600 leading-[1.85]">
-                    {item.text}
-                  </p>
+                  <h3 className="text-base md:text-[17px] font-bold text-slate-900 tracking-normal">{title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-700">{text}</p>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* 右側：FLOW */}
-          <div className="bg-slate-50/70 rounded-xl p-6 md:p-8 border border-slate-200/70">
-            <h3 className="text-lg font-bold text-slate-900 mb-6">取引の流れ</h3>
-
-            <ol className="relative">
-              {/* 縦の連結ライン（ノードの中心を通す） */}
-              <div className="absolute left-4 top-4 bottom-4 w-px bg-slate-200" aria-hidden />
-              {[
-                "用途・製品の相談",
-                "見積・提案",
-                "受注・手配",
-                "納品・アフターサポート",
-              ].map((step, index, arr) => (
-                <li
-                  key={step}
-                  className={`relative flex items-center gap-4 ${index < arr.length - 1 ? "pb-6" : ""}`}
-                >
-                  <span className="relative z-10 flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-emerald-700 text-white text-sm font-bold">
-                    {index + 1}
-                  </span>
-                  <span className="text-[15px] font-medium text-slate-800">
-                    {step}
-                  </span>
-                </li>
-              ))}
-            </ol>
-
-            <div className="mt-6 bg-white border border-emerald-100 rounded-lg p-4 flex items-start gap-3">
-              <Lightbulb className="text-emerald-600 shrink-0 mt-0.5" size={18} strokeWidth={1.75} />
-              <div>
-                <p className="font-bold text-emerald-800 text-sm">用途が不明でもOK</p>
-                <p className="mt-1 text-[13px] text-slate-600 leading-relaxed">
-                  「何に使うか」だけ教えていただければ、最適な製品をご提案します。
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* =======================
-          NEEDS
-      ======================== */}
-      <Section eyebrow="NEEDS" title="よくあるご相談" className="bg-slate-50">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 items-stretch">
-          {[
-            {
-              title: "急ぎで必要",
-              desc: "納期や在庫状況を最短で確認します。",
-              to: "/contact?subject=急ぎで薬品が必要",
-            },
-            {
-              title: "製品選びの相談",
-              desc: "用途や現場条件だけでも相談OK。",
-              to: "/contact?subject=用途が未定の相談",
-            },
-            {
-              title: "安全・取扱いの相談",
-              desc: "法令や保管方法も含めてご案内します。",
-              to: "/contact?subject=安全・取扱いの相談",
-            },
-            {
-              title: "回収・処分",
-              desc: "不要な薬品の回収・処分の相談に対応。",
-              to: "/services",
-            },
-          ].map((item) => (
-            <Link key={item.title} to={item.to} className="h-full group">
-              <Card className="p-5 h-full flex flex-col hover:border-emerald-300 transition-colors duration-200">
-                <div className="flex items-center justify-between mb-3">
-                  <CheckCircle2 size={18} className="text-emerald-600/70 group-hover:text-emerald-600 transition-colors" strokeWidth={1.75} />
-                </div>
-                <h3 className="text-[15px] font-bold text-slate-900">{item.title}</h3>
-                <p className="mt-2 text-[13px] text-slate-500 leading-relaxed">{item.desc}</p>
-                <div className="mt-auto pt-4 text-xs font-semibold text-emerald-700 flex items-center gap-1 group-hover:gap-2 transition-all">
-                  相談する <ArrowRight size={13} />
-                </div>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      </Section>
-
-      {/* =======================
-          CATEGORY
-      ======================== */}
-      <Section
-        eyebrow="PRODUCT CATEGORY"
-        title="取扱カテゴリ"
-        className="bg-white"
-        actions={<PrimaryCTA to="/products" label="すべての製品を見る" variant="outline" size="sm" className="text-xs px-3 py-1.5" />}
-      >
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-          {[
-            { title: "水処理用薬品", desc: "浄水・排水・プール管理", to: "/products?cat=water" },
-            { title: "試薬・研究用", desc: "研究・検査・教育現場", to: "/products?cat=reagents" },
-            { title: "工業用・医薬品関連", desc: "製造現場の薬品供給", to: "/products?cat=industrial" },
-            { title: "クリーニング関係", desc: "洗浄・除菌・漂白用途", to: "/products?cat=cleaning" },
-          ].map((c) => (
-            <Link key={c.title} to={c.to} className="group">
-              <div className="h-full bg-white rounded-xl p-5 md:p-6 hover:bg-emerald-50/50 transition-colors duration-200 border border-slate-200/70 hover:border-emerald-200">
-                <h3 className="text-[15px] font-bold text-slate-900 group-hover:text-emerald-900 transition-colors">{c.title}</h3>
-                <p className="mt-2 text-[13px] text-slate-500 leading-relaxed">{c.desc}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </Section>
-
-      {/* =======================
-          ACTIVITY (地域活動・関連コンテンツ)
-      ======================== */}
-      <Section
-        eyebrow="ACTIVITY"
-        title="地域活動・関連コンテンツ"
-        className="bg-slate-50 border-t border-slate-100"
-      >
-        {/* A. ナビゲーションボタン（上段） */}
-        <div className="grid gap-4 md:grid-cols-2 mb-8">
-          {navigationButtons.map((button) => {
-            const ButtonContent = (
-              <div className="group h-full bg-white rounded-xl border border-slate-200/70 hover:border-emerald-300 transition-colors duration-200 overflow-hidden">
-                <div className="aspect-[16/9] flex items-center justify-center p-4 bg-white relative">
-                  <img
-                    src={button.bgImage}
-                    alt={button.title}
-                    className="object-cover w-full h-full"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div className="px-3 py-2 bg-slate-50 border-t border-slate-100">
-                  <p className="text-xs font-medium text-slate-700 line-clamp-1 flex items-center gap-1">
-                    {button.title}
-                    {button.external && <ExternalLink size={12} className="text-slate-400" />}
-                  </p>
-                </div>
-              </div>
-            );
-
-            return button.external ? (
-              <a key={button.title} href={button.to} target="_blank" rel="noopener noreferrer" className="block h-full">
-                {ButtonContent}
-              </a>
-            ) : (
-              <Link key={button.title} to={button.to} className="block h-full">
-                {ButtonContent}
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* B. 関連リンク・バナーグリッド（下段） */}
-        <div>
-          <h3 className="text-sm font-bold text-slate-700 mb-3 flex items-center gap-2">
-            <Building2 size={16} className="text-slate-400" />
-            関連リンク
-          </h3>
-          <div className="grid gap-4 md:grid-cols-2">
-            {partnerLinks.map((partner) => {
-              const BannerContent = (
-                <div className="group h-full bg-white rounded-xl border border-slate-200/70 hover:border-emerald-300 transition-colors duration-200 overflow-hidden">
-                  <div className="aspect-[16/9] flex items-center justify-center p-4 bg-white relative">
-                    {partner.image ? (
-                      <img
-                        src={partner.image}
-                        alt={partner.name}
-                        className={`max-w-full max-h-full ${
-                          partner.isLogo ? 'object-contain' : 'object-cover w-full h-full'
-                        }`}
-                        loading="lazy"
-                        decoding="async"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          e.target.parentElement.classList.add('bg-slate-50');
-                        }}
-                      />
-                    ) : (
-                      <div className="flex items-center justify-center text-center px-4 bg-slate-50 w-full h-full">
-                        <span className="text-sm font-bold text-slate-700">{partner.name}</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="px-3 py-2 bg-slate-50 border-t border-slate-100">
-                    <p className="text-xs font-medium text-slate-700 line-clamp-1">{partner.name}</p>
-                  </div>
-                </div>
-              );
-
-              return partner.url ? (
-                <a key={partner.name} href={partner.url} target="_blank" rel="noopener noreferrer" className="block h-full">
-                  {BannerContent}
-                </a>
-              ) : (
-                <div key={partner.name} className="block h-full cursor-default">
-                  {BannerContent}
-                </div>
               );
             })}
           </div>
-        </div>
-      </Section>
+        </Section>
 
-      {/* =======================
-          NEWS (お知らせ)
-      ======================== */}
-      <Section
-        eyebrow="NEWS"
-        title="お知らせ"
-        className="bg-white"
-        actions={<PrimaryCTA to="/news" label="一覧" variant="outline" size="sm" className="text-xs px-3 py-1.5" />}
-      >
-        <div className="border-t border-slate-200">
-          {[
-             { date: "2025.12.30", cat: "お知らせ", title: "Webサイトをリニューアルいたしました。" },
-             { date: "2025.12.15", cat: "営業日", title: "年末年始の営業についてのお知らせ" },
-             { date: "2025.11.20", cat: "製品情報", title: "水処理用凝集剤の新規在庫が入荷しました" },
-          ].map((news, i) => (
-            <Link key={i} to="/news" className="flex flex-col md:flex-row md:items-center gap-2 md:gap-5 py-4 md:py-5 hover:bg-slate-50/70 transition-colors group border-b border-slate-200 px-1 md:px-2">
-               <div className="flex items-center gap-3 shrink-0">
-                 <span className="text-[13px] tabular-nums text-slate-500">{news.date}</span>
-                 <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700">
-                   {news.cat}
-                 </span>
-               </div>
-               <p className="text-[15px] text-slate-800 group-hover:text-emerald-800 transition-colors line-clamp-1">
-                 {news.title}
-               </p>
-               <ArrowRight className="hidden md:block ml-auto text-slate-300 group-hover:text-emerald-600 transition-colors shrink-0" size={16} />
+        {/* ===== 取引の流れ ===== */}
+        <Section title="取引の流れ">
+          <ol className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 md:gap-0">
+            {flow.map((step, i) => (
+              <li key={step.title} className="relative md:px-5 md:first:pl-0 md:border-l md:first:border-l-0 border-slate-200">
+                <div className="flex items-start gap-2">
+                  <span className="flex items-center justify-center w-7 h-7 rounded-full bg-brand text-white text-sm font-bold shrink-0">
+                    {i + 1}
+                  </span>
+                  <h3 className="pt-0.5 text-[15px] font-bold text-slate-900 leading-snug tracking-normal">{step.title}</h3>
+                </div>
+                <p className="mt-2 text-[13px] leading-relaxed text-slate-600">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </Section>
+
+        {/* ===== よくあるご相談 ===== */}
+        <Section title="よくあるご相談" className="bg-slate-50 border-y border-slate-200">
+          <ul className="grid md:grid-cols-2 gap-px bg-slate-200 border border-slate-200">
+            {consultations.map(({ icon, title, desc, to }) => {
+              const Icon = icon;
+              return (
+              <li key={title} className="bg-white">
+                <Link to={to} className="group flex items-center gap-4 px-4 py-3.5 md:px-5 md:py-4 hover:bg-brand-light transition-colors">
+                  <Icon size={24} strokeWidth={1.5} className="text-brand shrink-0" />
+                  <span className="flex-1 min-w-0">
+                    <span className="block text-[15px] font-bold text-slate-900">{title}</span>
+                    <span className="block text-[13px] text-slate-600 leading-snug mt-0.5">{desc}</span>
+                  </span>
+                  <ChevronRight size={18} className="text-slate-400 group-hover:text-brand shrink-0" />
+                </Link>
+              </li>
+              );
+            })}
+          </ul>
+        </Section>
+
+        {/* ===== 取扱カテゴリ ===== */}
+        <Section
+          title="取扱カテゴリ"
+          actions={
+            <Link to="/products" className="inline-flex items-center gap-1 text-sm font-bold text-brand hover:underline underline-offset-4">
+              すべての製品を見る
+              <ChevronRight size={15} />
             </Link>
-          ))}
-        </div>
-      </Section>
+          }
+        >
+          <ul className="grid grid-cols-2 md:grid-cols-4 border-t border-l border-slate-200">
+            {categories.map((c) => (
+              <li key={c.title} className="border-r border-b border-slate-200">
+                <Link to={c.to} className="group block h-full px-4 py-3.5 hover:bg-brand-light transition-colors">
+                  <span className="flex items-center justify-between gap-2 text-sm md:text-[15px] font-bold text-slate-900 group-hover:text-brand">
+                    {c.title}
+                    <ChevronRight size={15} className="hidden md:block text-slate-400 group-hover:text-brand shrink-0" />
+                  </span>
+                  <span className="block mt-0.5 text-xs text-slate-500">{c.desc}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
 
-      {/* Footer CTA */}
-      <section className="py-16 md:py-20 lg:py-24 bg-emerald-950 text-white text-center">
-        <div className="layout-container max-w-3xl mx-auto">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 tracking-tight">薬品の調達でお困りですか？</h2>
-          <p className="text-emerald-100/80 text-sm lg:text-base mb-8 leading-relaxed">
-            「すぐに欲しい」「どれが良いかわからない」など、<br className="hidden md:inline" />
-            お客様の課題に合わせて柔軟に対応いたします。
-          </p>
-          <div className="flex justify-center">
-            <PrimaryCTA
-              to="/contact"
-              label="問い合わせる"
-              className="bg-white !text-emerald-900 hover:bg-emerald-50 px-7 py-3 text-sm border-transparent"
-            />
+        {/* ===== お知らせ ===== */}
+        <Section title="お知らせ" className="pt-0 md:pt-0">
+          <ul className="border-t border-slate-200">
+            {news.map((n) => (
+              <li key={n.title} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-5 py-3 border-b border-slate-200">
+                <span className="flex items-center gap-3 shrink-0">
+                  <span className="text-[13px] tabular-nums text-slate-500">{n.date}</span>
+                  <span className="w-[4.5rem] text-center border border-slate-300 text-[11px] text-slate-600 py-px">{n.cat}</span>
+                </span>
+                <span className="text-[15px] text-slate-800">{n.title}</span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        {/* ===== 関連コンテンツ・関連リンク ===== */}
+        <Section title="関連コンテンツ" className="bg-slate-50 border-t border-slate-200">
+          <div className="grid gap-4 md:grid-cols-2">
+            {contents.map((c) => {
+              const inner = (
+                <>
+                  <img
+                    src={c.image}
+                    alt=""
+                    className="w-28 sm:w-40 aspect-[4/3] object-cover shrink-0"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span className="py-1">
+                    <span className="flex items-center gap-1 text-[15px] font-bold text-slate-900 group-hover:text-brand">
+                      {c.title}
+                      {c.external && <ExternalLink size={13} className="text-slate-400" />}
+                    </span>
+                    <span className="block mt-1 text-[13px] leading-relaxed text-slate-600">{c.desc}</span>
+                  </span>
+                </>
+              );
+              const cls = "group flex gap-4 bg-white border border-slate-200 p-3 hover:border-brand/50 transition-colors";
+              return c.external ? (
+                <a key={c.title} href={c.to} target="_blank" rel="noopener noreferrer" className={cls}>
+                  {inner}
+                </a>
+              ) : (
+                <Link key={c.title} to={c.to} className={cls}>
+                  {inner}
+                </Link>
+              );
+            })}
           </div>
-        </div>
-      </section>
-    </div>
+
+          <h3 className="mt-8 mb-2 text-sm font-bold text-slate-700 tracking-normal">関連リンク</h3>
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 border-t border-slate-200">
+            {partnerLinks.map((p) => (
+              <li key={p.name} className="border-b border-slate-200">
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-2 py-2.5 text-sm text-slate-700 hover:text-brand"
+                >
+                  {p.name}
+                  <ExternalLink size={13} className="text-slate-400 shrink-0" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        {/* ===== お問い合わせ ===== */}
+        <section className="bg-brand text-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 md:flex md:items-center md:justify-between gap-8">
+            <div>
+              <h2 className="font-serif text-xl md:text-2xl font-bold tracking-normal">お見積り・ご相談はお気軽に</h2>
+              <p className="mt-2 text-sm text-white/85">
+                「どの薬品を選べばよいか分からない」といった段階からご相談いただけます。
+              </p>
+              <a href="tel:0792810671" className="mt-4 inline-flex items-baseline gap-2 text-white">
+                <Phone size={18} className="self-center" />
+                <span className="text-2xl md:text-[1.7rem] font-bold tabular-nums tracking-wide">079-281-0671</span>
+                <span className="text-xs text-white/80">受付時間 9:00〜17:00</span>
+              </a>
+            </div>
+            <div className="mt-5 md:mt-0 grid grid-cols-2 gap-2 md:w-[22rem] shrink-0">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-1.5 rounded px-3 py-3 text-sm font-bold bg-white text-brand hover:bg-brand-light"
+              >
+                <Mail size={17} strokeWidth={1.75} />
+                お問い合わせ
+              </Link>
+              <Link
+                to="/contact?subject=見積依頼"
+                className="inline-flex items-center justify-center gap-1.5 rounded px-3 py-3 text-sm font-bold border border-white/70 text-white hover:bg-white/10"
+              >
+                <FileText size={17} strokeWidth={1.75} />
+                見積依頼
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
     </>
   );
 }

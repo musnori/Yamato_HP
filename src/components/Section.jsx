@@ -1,8 +1,11 @@
 import React from "react";
 
+// 見出しの左に短い罫線を置くだけの、落ち着いたセクション見出し。
+// eyebrow（英字の小見出し）は装飾目的だったため表示しない（既存ページの呼び出し互換のため prop は受け取る）。
 export default function Section({
   title,
   description,
+  // eslint-disable-next-line no-unused-vars
   eyebrow,
   actions,
   className = "",
@@ -13,54 +16,32 @@ export default function Section({
 }) {
   const content = (
     <>
-      {/* Header Area */}
-      {(title || description || eyebrow || actions) && (
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8 md:mb-10 lg:mb-12">
-
-          {/* Titles */}
+      {(title || description || actions) && (
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5 md:mb-7">
           <div className="flex-1">
-            {eyebrow && (
-              <p className="mb-3 text-[11px] font-medium tracking-[0.25em] text-slate-400 uppercase">
-                {eyebrow}
-              </p>
-            )}
             {title && (
-              <h2 className="text-2xl md:text-3xl lg:text-[2rem] font-bold text-slate-900 tracking-tight leading-[1.25]">
+              <h2 className="flex items-center gap-3 font-serif text-xl md:text-2xl font-bold text-slate-900 leading-snug tracking-normal">
+                <span aria-hidden className="block w-6 h-[2px] bg-brand shrink-0" />
                 {title}
               </h2>
             )}
             {description && (
-              <p className="mt-4 max-w-3xl text-sm md:text-base text-slate-500 leading-relaxed">
+              <p className="mt-2 max-w-3xl text-sm md:text-[15px] text-slate-600 leading-relaxed">
                 {description}
               </p>
             )}
           </div>
-
-          {/* Action Buttons (Right aligned on Desktop) */}
-          {actions && (
-            <div className="flex-shrink-0 flex flex-wrap gap-3">
-              {actions}
-            </div>
-          )}
+          {actions && <div className="flex-shrink-0 flex flex-wrap gap-2">{actions}</div>}
         </div>
       )}
 
-      {/* Main Content */}
-      {children && (
-        <div className="animate-fade-in-up">
-          {children}
-        </div>
-      )}
+      {children}
     </>
   );
 
   return (
-    <section
-      id={id}
-      className={`py-12 md:py-16 lg:py-20 ${className}`.trim()}
-    >
+    <section id={id} className={`py-9 md:py-14 ${className}`.trim()}>
       {withContainer ? (
-        // PC表示最適化: max-w-6xl (1152px) でコンテンツ幅を適切に制限
         <div className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${containerClassName}`.trim()}>
           {content}
         </div>

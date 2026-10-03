@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Card({ children, className = "", noPadding = false, ...props }) {
   // 基本スタイル：白背景、細い枠線、控えめな角丸。影はデフォルトで持たせず、フラットに。
-  const baseClasses = "bg-white border border-slate-200/70 rounded-xl overflow-hidden transition-colors duration-200";
+  const baseClasses = "bg-white border border-slate-200/70 rounded-md overflow-hidden transition-colors duration-200";
 
   // デフォルトのパディング（noPaddingプロパティでオフにできる）
   // PC表示最適化: lg で余白を適度に調整
