@@ -1,17 +1,10 @@
 import React, { useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 // アイコン (lucide-react)
-import { 
-  FlaskConical, 
-  Package, 
-  Droplets, 
-  Info, 
-  ArrowRight, 
-  CheckCircle2,
-  ChevronRight,
-  ShoppingCart
-} from "lucide-react";
-import PrimaryCTA from "../components/PrimaryCTA";
+import { ChevronRight } from "lucide-react";
+import PageHeader from "../components/PageHeader";
+import SEOHead from "../components/SEOHead";
+import ContactBand from "../components/ContactBand";
 
 /** ========= データ ========= */
 const SECTIONS = [
@@ -298,226 +291,145 @@ export default function Stock() {
     navigate(`/contact?subject=在庫品問い合わせ：${productName}`);
   };
 
+  const jumpTo = (e, id) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.pageYOffset - 90;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
   return (
-    <div className="bg-slate-50 min-h-screen">
-      {/* =======================
-          Header Section
-      ======================== */}
-      <section className="relative overflow-hidden bg-white border-b border-slate-200">
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
-        <div className="relative layout-container py-10 md:py-12 lg:py-14 text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-            主要在庫品紹介
-          </h1>
-          <p className="mt-4 text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            当社倉庫にて常備在庫している主要な化学薬品です。<br className="hidden md:inline" />
-            急なご入用や、小ロットでの配送もお気軽にご相談ください。
-          </p>
-          <div className="mt-6">
-            <Link to="/products" className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-emerald-600 transition-colors">
-              <ChevronRight size={14} className="rotate-180" /> 製品検索へ戻る
+    <>
+      <SEOHead pageKey="stock" />
+      <PageHeader
+        title="主要在庫品"
+        crumbs={[{ name: "取扱製品", to: "/products" }, { name: "主要在庫品" }]}
+        lead="当社倉庫に常備している主な化学薬品です。急なご入用や、小ロットでの配送もお気軽にご相談ください。"
+      />
+
+      <div className="bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 grid gap-6 lg:gap-10 lg:grid-cols-[14rem_1fr] items-start">
+
+        {/* 目次（PC） */}
+        <aside className="sticky top-24 hidden lg:block text-sm">
+          <p className="font-bold text-slate-900 border-b-2 border-brand pb-2">目次</p>
+          <nav>
+            {SECTIONS.map((sec) => (
+              <div key={sec.id}>
+                <p className="pt-3 pb-1 text-xs font-bold text-slate-500">{sec.label}</p>
+                {CHEMS.filter((c) => c.section === sec.id).map((c) => (
+                  <a
+                    key={c.id}
+                    href={`#${c.id}`}
+                    className="block border-b border-slate-200 py-2 text-slate-700 hover:text-brand"
+                    onClick={(e) => jumpTo(e, c.id)}
+                  >
+                    {c.title}
+                  </a>
+                ))}
+              </div>
+            ))}
+          </nav>
+          <div className="mt-5 bg-slate-50 border border-slate-200 p-4">
+            <p className="text-xs font-bold text-slate-900">リストにない製品は？</p>
+            <p className="mt-1 text-xs leading-relaxed text-slate-600">お取り寄せ可能です。製品検索をご利用いただくか、お問い合わせください。</p>
+            <Link to="/contact" className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-brand hover:underline">
+              お問い合わせ <ChevronRight size={13} />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      <div className="layout-container py-10 grid gap-8 lg:grid-cols-[250px_1fr] items-start">
-        
-        {/* =======================
-            Sidebar (TOC)
-        ======================== */}
-        <aside className="sticky top-6 hidden lg:block space-y-6">
-          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
-            <h3 className="text-sm font-bold text-slate-400 mb-4 uppercase tracking-wider">目次</h3>
-            <nav className="space-y-1">
-              {SECTIONS.map((sec) => (
-                <div key={sec.id}>
-                  <p className="px-3 pt-3 pb-1 text-[10px] font-extrabold tracking-widest text-slate-400 uppercase">
-                    {sec.label}
-                  </p>
-                  {CHEMS.filter((c) => c.section === sec.id).map((c) => (
-                    <a
-                      key={c.id}
-                      href={`#${c.id}`}
-                      className="block px-3 py-2 text-sm font-medium text-slate-600 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        const el = document.getElementById(c.id);
-                        const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
-                        window.scrollTo({ top: y, behavior: "smooth" });
-                      }}
-                    >
-                      {c.title}
-                    </a>
-                  ))}
-                </div>
-              ))}
-            </nav>
-          </div>
-
-          <div className="bg-emerald-50 rounded-2xl p-5 border border-emerald-100 text-center">
-            <p className="text-xs font-bold text-emerald-800 mb-2">リストにない製品は？</p>
-            <p className="text-xs text-emerald-700/80 mb-4">
-              お取り寄せ可能です。製品検索をご利用いただくか、直接お問い合わせください。
-            </p>
-            <PrimaryCTA to="/contact" label="問い合わせる" className="w-full justify-center text-xs py-2" />
           </div>
         </aside>
 
-        {/* Mobile Nav (Horizontal) */}
-        <div className="lg:hidden -mx-4 px-4 overflow-x-auto pb-4 scrollbar-hide space-y-2">
+        {/* 目次（スマホ） */}
+        <nav className="lg:hidden border border-slate-200">
           {SECTIONS.map((sec) => (
-            <div key={sec.id} className="flex items-center gap-2">
-              <span className="flex-shrink-0 text-[10px] font-extrabold tracking-widest text-slate-400 uppercase whitespace-nowrap">
-                {sec.label}
-              </span>
-              {CHEMS.filter((c) => c.section === sec.id).map((c) => (
-                <a
-                  key={c.id}
-                  href={`#${c.id}`}
-                  className="flex-shrink-0 px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-bold text-slate-600 shadow-sm whitespace-nowrap active:bg-emerald-50 active:text-emerald-700 active:border-emerald-200"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const el = document.getElementById(c.id);
-                    const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
-                    window.scrollTo({ top: y, behavior: "smooth" });
-                  }}
-                >
-                  {c.title}
-                </a>
-              ))}
+            <div key={sec.id} className="border-b border-slate-200 last:border-b-0 px-3 py-2.5">
+              <p className="text-xs font-bold text-slate-500 mb-1.5">{sec.label}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {CHEMS.filter((c) => c.section === sec.id).map((c) => (
+                  <a
+                    key={c.id}
+                    href={`#${c.id}`}
+                    className="px-2.5 py-1 border border-slate-300 rounded-sm text-[13px] text-slate-700 active:bg-brand-light"
+                    onClick={(e) => jumpTo(e, c.id)}
+                  >
+                    {c.title}
+                  </a>
+                ))}
+              </div>
             </div>
           ))}
-        </div>
+        </nav>
 
-        {/* =======================
-            Main List
-        ======================== */}
-        <div className="space-y-16">
+        {/* 一覧 */}
+        <div className="space-y-10 md:space-y-12 min-w-0">
           {SECTIONS.map((sec) => {
             const items = CHEMS.filter((c) => c.section === sec.id);
             if (items.length === 0) return null;
             return (
-              <div key={sec.id} className="space-y-10">
-                {/* セクションヘッダー */}
-                <div className="flex items-center gap-4">
-                  <div className={`h-8 w-1.5 rounded-full ${sec.id === "organic" ? "bg-amber-400" : "bg-emerald-500"}`} />
-                  <div>
-                    <h2 className="text-xl font-extrabold text-slate-900">{sec.label}</h2>
-                    {sec.id === "organic" && (
-                      <p className="text-sm text-slate-500 mt-0.5">
-                        メタノール・トルエンなど有機溶剤を常備在庫しています。お気軽にお問い合わせください。
-                      </p>
-                    )}
-                  </div>
-                </div>
+              <div key={sec.id}>
+                <h2 className="flex items-center gap-3 font-serif text-xl md:text-2xl font-bold text-slate-900 tracking-normal">
+                  <span aria-hidden className="block w-6 h-[2px] bg-brand shrink-0" />
+                  {sec.label}
+                </h2>
+                {sec.id === "organic" && (
+                  <p className="mt-2 text-sm text-slate-600">
+                    メタノール・トルエンなど有機溶剤を常備在庫しています。お気軽にお問い合わせください。
+                  </p>
+                )}
 
-                {items.map((chem) => (
-                  <section
-                    key={chem.id}
-                    id={chem.id}
-                    className="scroll-mt-28 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden"
-                  >
-                    {/* Header */}
-                    <div className="border-b border-slate-100 px-6 py-5 md:px-8 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50">
-                      <div className="flex items-center gap-4">
-                        <div className={`shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm ${
-                          chem.type === 'solid' ? 'bg-amber-100 text-amber-600' :
-                          chem.type === 'powder' ? 'bg-slate-200 text-slate-600' :
-                          sec.id === 'organic' ? 'bg-amber-50 text-amber-600' :
-                          'bg-blue-100 text-blue-600'
-                        }`}>
-                          {chem.type === 'solid' ? <Package size={24} /> :
-                           chem.type === 'powder' ? <Package size={24} /> :
-                           <Droplets size={24} />}
-                        </div>
-                        <div>
-                          <h3 className="text-xl md:text-2xl font-bold text-slate-900">{chem.title}</h3>
-                          <div className="flex items-center gap-2 mt-1">
-                            <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-500 uppercase">
-                              Stock Item
-                            </span>
-                          </div>
-                        </div>
+                <div className="mt-5 space-y-8">
+                  {items.map((chem) => (
+                    <section key={chem.id} id={chem.id} className="scroll-mt-24 border-t-2 border-slate-800">
+                      <div className="flex flex-wrap items-center justify-between gap-3 py-3">
+                        <h3 className="text-lg md:text-xl font-bold text-slate-900 tracking-normal">{chem.title}</h3>
+                        <button
+                          type="button"
+                          onClick={() => askProduct(chem.title)}
+                          className="inline-flex items-center gap-1 rounded border border-brand/50 px-3 py-1.5 text-[13px] font-bold text-brand hover:bg-brand-light"
+                        >
+                          見積・相談する
+                          <ChevronRight size={14} />
+                        </button>
                       </div>
 
-                      <button
-                        onClick={() => askProduct(chem.title)}
-                        className="hidden md:flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-4 py-2 rounded-lg transition-colors"
-                      >
-                        <ShoppingCart size={16} />
-                        見積・相談する
-                      </button>
-                    </div>
+                      {chem.summary && <p className="mb-4 text-[15px] leading-relaxed text-slate-700">{chem.summary}</p>}
 
-                    {/* Body */}
-                    <div className="p-6 md:p-8 space-y-8">
-                      {/* Summary */}
-                      {chem.summary && (
-                        <p className="text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100 flex gap-3">
-                          <Info className="shrink-0 text-slate-400 mt-0.5" size={18} />
-                          {chem.summary}
-                        </p>
-                      )}
-
-                      {/* Manufacturers Cards */}
-                      <div className="grid gap-6">
+                      <div className="space-y-4">
                         {chem.manufacturers.map((m, i) => (
-                          <div
-                            key={m.vendor + i}
-                            className="rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow duration-300"
-                          >
-                            <div className="bg-slate-50 px-5 py-3 border-b border-slate-100 flex items-center justify-between">
-                              <span className="font-bold text-slate-700 flex items-center gap-2">
-                                <FlaskConical size={16} className="text-slate-400" />
-                                {m.vendor}
-                              </span>
+                          <div key={m.vendor + i} className="border border-slate-200">
+                            <div className="flex flex-wrap items-center gap-2 bg-slate-50 border-b border-slate-200 px-3 md:px-4 py-2">
+                              <span className="font-bold text-slate-900 text-sm md:text-[15px]">{m.vendor}</span>
+                              {m.badges?.map((b) => (
+                                <Badge key={b} warning={b === "劇物" || b === "危険物"}>
+                                  {b}
+                                </Badge>
+                              ))}
                             </div>
-
-                            <div className="p-5 md:p-6">
-                              {/* バッジ列 */}
-                              {m.badges?.length > 0 && (
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                  {m.badges.map((b) => (
-                                    <Badge key={b} warning={b === "劇物" || b === "危険物"}>{b}</Badge>
-                                  ))}
-                                </div>
-                              )}
-
-                              {/* スペック表 */}
-                              {m.spec?.length > 0 && (
-                                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm">
-                                  {m.spec.map(([k, v]) => (
-                                    <div key={k + v} className="flex flex-col border-b border-slate-100 pb-2 last:border-0 sm:last:border-b">
-                                      <dt className="text-xs font-bold text-slate-400 mb-1">{k}</dt>
-                                      <dd className="text-slate-800 font-medium">{v}</dd>
-                                    </div>
-                                  ))}
-                                </dl>
-                              )}
-                            </div>
+                            {m.spec?.length > 0 && (
+                              <dl className="text-sm">
+                                {m.spec.map(([k, v]) => (
+                                  <div key={k + v} className="grid grid-cols-[6.5rem_1fr] md:grid-cols-[9rem_1fr] border-b border-slate-100 last:border-b-0">
+                                    <dt className="px-3 md:px-4 py-2 text-xs md:text-sm font-bold text-slate-600">{k}</dt>
+                                    <dd className="px-3 md:px-4 py-2 text-slate-800">{v}</dd>
+                                  </div>
+                                ))}
+                              </dl>
+                            )}
                           </div>
                         ))}
                       </div>
-
-                      {/* Mobile Action Button */}
-                      <div className="md:hidden pt-2">
-                        <button
-                          onClick={() => askProduct(chem.title)}
-                          className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-900/10 active:scale-95 transition-all"
-                        >
-                          この製品について相談する <ArrowRight size={16} />
-                        </button>
-                      </div>
-                    </div>
-                  </section>
-                ))}
+                    </section>
+                  ))}
+                </div>
               </div>
             );
           })}
         </div>
       </div>
-    </div>
+      <ContactBand text="リストにない薬品もお取り寄せできます。在庫や納期はお気軽にお問い合わせください。" />
+      </div>
+    </>
   );
 }
 
@@ -525,14 +437,13 @@ export default function Stock() {
 function Badge({ children, warning = false }) {
   if (warning) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-md border border-red-200 bg-red-50 px-2.5 py-1 text-xs font-bold text-red-600 shadow-sm">
+      <span className="inline-flex items-center px-1.5 py-px text-[11px] font-bold text-white bg-red-600">
         {children}
       </span>
     );
   }
   return (
-    <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2.5 py-1 text-xs font-bold text-slate-600 shadow-sm">
-      <CheckCircle2 size={10} className="text-emerald-500" />
+    <span className="inline-flex items-center px-1.5 py-px text-[11px] font-bold text-slate-600 border border-slate-300 bg-white">
       {children}
     </span>
   );

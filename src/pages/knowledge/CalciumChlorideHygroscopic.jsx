@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Section from "../../components/Section";
-import Card from "../../components/Card";
-import PrimaryCTA from "../../components/PrimaryCTA";
+import PageHeader from "../../components/PageHeader";
+import ContactBand from "../../components/ContactBand";
 import SEOHead from "../../components/SEOHead";
 import {
   Droplets,
@@ -20,37 +20,17 @@ export default function CalciumChlorideHygroscopic() {
     <>
       <SEOHead pageKey="knowledgeCalciumChlorideHygroscopic" />
 
-      <div className="bg-slate-50 min-h-screen">
-        {/* パンくずリスト */}
-        <div className="bg-white border-b border-slate-200">
-          <div className="layout-container py-3">
-            <nav className="flex items-center gap-2 text-sm text-slate-500">
-              <Link to="/" className="hover:text-emerald-600">ホーム</Link>
-              <span>/</span>
-              <Link to="/knowledge" className="hover:text-emerald-600">薬品の基礎知識</Link>
-              <span>/</span>
-              <span className="text-slate-900">塩化カルシウムの吸湿性の原因</span>
-            </nav>
+      <div className="bg-white">
+        <PageHeader
+          title="塩化カルシウムの吸湿性の原因"
+          crumbs={[{ name: "薬品の基礎知識", to: "/knowledge" }, { name: "塩化カルシウムの吸湿性の原因" }]}
+          lead="塩化カルシウムはなぜ強い吸湿性を持つのか。化学的な原理から、融雪剤・乾燥剤としての活用法、保管時の固結を防ぐコツまで、実務に役立つ情報を解説します。"
+        >
+          <div className="mt-3 flex items-center gap-2">
+          <span className="border border-slate-400 bg-white px-1.5 py-px text-[11px] font-bold text-slate-700">工業用薬品</span>
+          <span className="text-xs text-slate-600">化学的性質</span>
           </div>
-        </div>
-
-        {/* 記事ヘッダー */}
-        <section className="bg-white border-b border-slate-200">
-          <div className="layout-container py-8 md:py-12">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="inline-block px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">
-                工業用薬品
-              </span>
-              <span className="text-sm text-slate-400">化学的性質</span>
-            </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mb-4">
-              塩化カルシウムの吸湿性の原因
-            </h1>
-            <p className="text-slate-500 max-w-2xl leading-relaxed">
-              塩化カルシウムはなぜ強い吸湿性を持つのか。化学的な原理から、融雪剤・乾燥剤としての活用法、保管時の固結を防ぐコツまで、実務に役立つ情報を解説します。
-            </p>
-          </div>
-        </section>
+        </PageHeader>
 
         {/* 記事本文 */}
         <article className="layout-container py-8 md:py-12">
@@ -65,13 +45,8 @@ export default function CalciumChlorideHygroscopic() {
 
             {/* 吸湿性の化学的原理 */}
             <section className="mb-10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
-                  <Atom size={20} />
-                </div>
-                <h2 className="text-xl font-bold text-slate-900">吸湿性の化学的原理</h2>
-              </div>
-              <Card className="p-6 border-slate-200">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />吸湿性の化学的原理</h2>
+              <div>
                 <p className="text-slate-600 leading-relaxed mb-4">
                   塩化カルシウムの吸湿性は、主に以下の化学的特性によるものです。
                 </p>
@@ -81,7 +56,7 @@ export default function CalciumChlorideHygroscopic() {
                   塩化カルシウムはCa²⁺（カルシウムイオン）とCl⁻（塩化物イオン）からなるイオン性結晶です。これらのイオンは水分子と強く結合（水和）する性質があります。
                 </p>
 
-                <div className="bg-slate-50 p-4 rounded-lg mb-4 font-mono text-sm text-slate-700">
+                <div className="bg-slate-50 p-4 rounded-sm mb-4 font-mono text-sm text-slate-700">
                   CaCl₂ + 6H₂O → CaCl₂・6H₂O<br />
                   <span className="text-slate-500">（無水物が水を吸収して六水和物に変化）</span>
                 </div>
@@ -95,18 +70,13 @@ export default function CalciumChlorideHygroscopic() {
                 <p className="text-slate-600 leading-relaxed">
                   水と反応する際に熱を発生します（溶解熱）。この発熱も融雪剤として効果的な理由の一つです。
                 </p>
-              </Card>
+              </div>
             </section>
 
             {/* 用途と活用法 */}
             <section className="mb-10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center">
-                  <Snowflake size={20} />
-                </div>
-                <h2 className="text-xl font-bold text-slate-900">吸湿性を活かした用途</h2>
-              </div>
-              <Card className="p-6 border-slate-200">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />吸湿性を活かした用途</h2>
+              <div>
                 <div className="grid gap-6 md:grid-cols-2">
                   <div>
                     <div className="flex items-center gap-2 mb-2">
@@ -145,24 +115,19 @@ export default function CalciumChlorideHygroscopic() {
                     </p>
                   </div>
                 </div>
-              </Card>
+              </div>
             </section>
 
             {/* 保管方法 */}
             <section className="mb-10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
-                  <Package size={20} />
-                </div>
-                <h2 className="text-xl font-bold text-slate-900">正しい保管方法</h2>
-              </div>
-              <Card className="p-6 border-slate-200">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />正しい保管方法</h2>
+              <div>
                 <p className="text-slate-600 leading-relaxed mb-4">
                   塩化カルシウムの強い吸湿性は、裏を返せば保管が難しいことを意味します。固結や潮解を防ぐには、以下の点に注意してください。
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <div>
                       <span className="font-medium text-slate-700">密封容器で保管する</span>
                       <p className="text-sm text-slate-500 mt-0.5">
@@ -171,7 +136,7 @@ export default function CalciumChlorideHygroscopic() {
                     </div>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <div>
                       <span className="font-medium text-slate-700">湿度の低い場所で保管する</span>
                       <p className="text-sm text-slate-500 mt-0.5">
@@ -180,7 +145,7 @@ export default function CalciumChlorideHygroscopic() {
                     </div>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <div>
                       <span className="font-medium text-slate-700">使用直前まで開封しない</span>
                       <p className="text-sm text-slate-500 mt-0.5">
@@ -189,7 +154,7 @@ export default function CalciumChlorideHygroscopic() {
                     </div>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-500 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <div>
                       <span className="font-medium text-slate-700">直接床に置かない</span>
                       <p className="text-sm text-slate-500 mt-0.5">
@@ -198,18 +163,13 @@ export default function CalciumChlorideHygroscopic() {
                     </div>
                   </li>
                 </ul>
-              </Card>
+              </div>
             </section>
 
             {/* よくある失敗例 */}
             <section className="mb-10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center">
-                  <AlertTriangle size={20} />
-                </div>
-                <h2 className="text-xl font-bold text-slate-900">よくある失敗例</h2>
-              </div>
-              <Card className="p-6 border-red-100 bg-red-50/50">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />よくある失敗例</h2>
+              <div className="border-l-4 border-red-500 bg-red-50 px-4 py-4 md:px-5">
                 <ul className="space-y-4">
                   <li>
                     <p className="font-bold text-slate-800 mb-1">開封後にそのまま放置した</p>
@@ -230,13 +190,13 @@ export default function CalciumChlorideHygroscopic() {
                     </p>
                   </li>
                 </ul>
-              </Card>
+              </div>
             </section>
 
             {/* 取り扱い上の注意 */}
             <section className="mb-10">
-              <h2 className="text-xl font-bold text-slate-900 mb-4">取り扱い上の注意</h2>
-              <Card className="p-6 border-amber-200 bg-amber-50/50">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />取り扱い上の注意</h2>
+              <div className="border-l-4 border-amber-400 bg-amber-50 px-4 py-4 md:px-5">
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2">
                     <AlertTriangle className="text-amber-600 shrink-0 mt-0.5" size={18} />
@@ -251,71 +211,68 @@ export default function CalciumChlorideHygroscopic() {
                     <span className="text-slate-700"><strong>環境への配慮</strong>：大量散布は植物や水系に影響を与える可能性があります。必要量を守りましょう。</span>
                   </li>
                 </ul>
-              </Card>
+              </div>
             </section>
 
             {/* まとめ */}
             <section className="mb-10">
-              <h2 className="text-xl font-bold text-slate-900 mb-4">まとめ</h2>
-              <Card className="p-6 border-emerald-200 bg-emerald-50/50">
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />まとめ</h2>
+              <div className="border-l-4 border-brand bg-brand-light px-4 py-4 md:px-5">
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-600 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700">塩化カルシウムの吸湿性は<strong>イオンの水和反応</strong>と<strong>潮解性</strong>による</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-600 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700">融雪剤・乾燥剤・防塵剤など、<strong>吸湿性を活かした用途</strong>が多数</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-600 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700">保管は<strong>密封・低湿度</strong>が鉄則</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-emerald-600 shrink-0 mt-0.5" size={18} />
+                    <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
                     <span className="text-slate-700"><strong>金属製容器は避け</strong>、プラスチック製の密閉容器を使用</span>
                   </li>
                 </ul>
-              </Card>
+              </div>
             </section>
 
             {/* 関連記事 */}
             <section className="mb-10">
-              <h2 className="text-xl font-bold text-slate-900 mb-4">関連記事</h2>
+              <h2 className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />関連記事</h2>
               <Link
                 to="/knowledge/small-lot-manufacturing"
                 className="block group"
               >
-                <Card className="p-4 hover:border-emerald-200 hover:shadow-md transition-all">
+                <div className="border border-slate-200 px-4 py-3 hover:border-brand/60 transition-colors">
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-xs text-slate-400">次に読む</span>
-                      <p className="font-bold text-slate-800 group-hover:text-emerald-700">
+                      <p className="font-bold text-slate-800 group-hover:text-brand">
                         化学品の小ロット製造における注意点
                       </p>
                     </div>
-                    <span className="text-slate-300 group-hover:text-emerald-600">→</span>
+                    <span className="text-slate-300 group-hover:text-brand">→</span>
                   </div>
-                </Card>
+                </div>
               </Link>
             </section>
 
             {/* 戻るリンク・お問い合わせ */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200">
+            <div className="pt-5 border-t border-slate-200">
               <Link
                 to="/knowledge"
-                className="flex items-center gap-2 text-sm text-slate-500 hover:text-emerald-600"
+                className="flex items-center gap-2 text-sm text-slate-500 hover:text-brand"
               >
                 <ArrowLeft size={16} />
                 薬品の基礎知識一覧に戻る
               </Link>
-              <div className="flex items-center gap-3">
-                <span className="text-sm text-slate-400">ご不明点があれば</span>
-                <PrimaryCTA to="/contact" label="お問い合わせ" variant="outline" size="sm" />
-              </div>
             </div>
           </div>
         </article>
+        <ContactBand title="薬品の取り扱いについてのご相談" text="記事の内容や、薬品の選定・保管方法についてもお気軽にお問い合わせください。" />
       </div>
     </>
   );

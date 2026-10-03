@@ -1,17 +1,10 @@
 import React, { useState, useMemo } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import PageHeader from "../components/PageHeader";
 import SEOHead from "../components/SEOHead";
 import { BreadcrumbSchema } from "../components/StructuredData";
 // アイコン (lucide-react)
-import { 
-  Phone, 
-  Mail, 
-  MessageSquare, 
-  CheckCircle2, 
-  AlertTriangle,
-  Send,
-  HelpCircle
-} from "lucide-react";
+import { Phone, Mail, Check, AlertTriangle, Send } from "lucide-react";
 
 const TOPICS = ["お見積りについて", "取扱製品について", "回収・処分について", "その他"];
 
@@ -103,85 +96,57 @@ export default function Contact() {
       <SEOHead pageKey="contact" />
       <BreadcrumbSchema items={[{ name: "ホーム", url: "/" }, { name: "お問い合わせ" }]} />
 
-      <div className="bg-slate-50 min-h-screen font-sans text-slate-800">
-       {/* =======================
-           Header Section
-       ======================== */}
-      <section className="bg-white border-b border-slate-200">
-        <div className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
-          <div className="relative max-w-4xl mx-auto px-4 py-10 md:py-12 lg:py-14 text-center">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
-              見積・相談フォーム
-            </h1>
-            <p className="text-slate-500 max-w-2xl mx-auto leading-relaxed">
-              製品の在庫確認、お見積り、技術的なご相談など、お気軽にお問い合わせください。<br className="hidden md:inline" />
-              専門スタッフが迅速に対応いたします。
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        title="見積・相談フォーム"
+        lead="製品の在庫確認、お見積り、取り扱いのご相談など、お気軽にお問い合わせください。内容を確認のうえ、担当者よりご連絡いたします。"
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid gap-8 lg:grid-cols-[1fr_2.5fr] items-start">
-        
-        {/* =======================
-            Sidebar (Contact Info)
-        ======================== */}
-        <aside className="space-y-6">
-          {/* 電話番号カード */}
-          <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 opacity-10">
-              <Phone size={64} className="text-emerald-900" />
-            </div>
-            <h2 className="text-sm font-bold text-slate-400 mb-1 flex items-center gap-2">
-              <Phone size={16} /> お電話でのお問い合わせ
-            </h2>
-            <p className="text-xs text-slate-500 mb-4">平日 9:00〜17:00</p>
-            <a href="tel:0792810671" className="block text-2xl font-extrabold text-emerald-700 hover:text-emerald-800 transition-colors tracking-tight">
+      <div className="bg-white text-slate-800">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 grid gap-8 lg:grid-cols-[17rem_1fr] items-start">
+
+        {/* お電話・ご案内 */}
+        <aside className="space-y-5 text-sm lg:sticky lg:top-24">
+          <div className="border-t-2 border-brand pt-3">
+            <h2 className="text-base font-bold text-slate-900 tracking-normal">お電話でのお問い合わせ</h2>
+            <a href="tel:0792810671" className="mt-1 inline-flex items-center gap-2 text-2xl font-bold text-brand tabular-nums hover:underline">
+              <Phone size={20} />
               079-281-0671
             </a>
-            <p className="mt-2 text-xs text-slate-400 font-mono">FAX：079-224-1870</p>
+            <p className="mt-1 text-xs text-slate-600">受付時間 平日 9:00〜17:00 ／ FAX 079-224-1870</p>
           </div>
 
-          {/* ご相談例カード */}
-          <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-            <h2 className="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <HelpCircle size={18} className="text-emerald-500" /> よくあるご相談
-            </h2>
-            <ul className="space-y-3">
+          <div className="hidden lg:block border-t border-slate-200 pt-3">
+            <h2 className="text-base font-bold text-slate-900 tracking-normal">よくあるご相談</h2>
+            <ul className="mt-2 space-y-1.5 text-slate-700">
               {[
                 "取扱製品の在庫・納期確認",
                 "用途に合った薬品の選定相談",
                 "不要薬品の回収・処分見積",
-                "SDS（安全データシート）の依頼"
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
-                  <CheckCircle2 size={16} className="text-emerald-400 mt-0.5 shrink-0" />
+                "SDS（安全データシート）の依頼",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <Check size={15} className="text-brand mt-0.5 shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-          
-          {/* 注意書き */}
-          <div className="bg-amber-50 rounded-2xl p-5 border border-amber-100 text-amber-900/80 text-xs leading-relaxed flex gap-3">
-             <AlertTriangle size={20} className="shrink-0 text-amber-500" />
-             <p>毒物・劇物の一般の方への販売は法律で禁止されています。法人様のみへの販売となりますのでご了承ください。</p>
-          </div>
+
+          <p className="flex gap-2 border-l-4 border-amber-400 bg-amber-50 px-3 py-2.5 text-xs leading-relaxed text-amber-900">
+            <AlertTriangle size={16} className="shrink-0 text-amber-500 mt-0.5" />
+            毒物・劇物の一般の方への販売は法律で禁止されています。法人様のみへの販売となりますのでご了承ください。
+          </p>
         </aside>
 
-        {/* =======================
-            Main Form
-        ======================== */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50 overflow-hidden">
-          {/* Form Header */}
-          <div className="bg-slate-50 border-b border-slate-200 px-6 py-4 flex items-center gap-3">
-            <Mail className="text-emerald-600" size={20} />
-            <h2 className="font-bold text-slate-800">お問い合わせ入力</h2>
+        {/* フォーム */}
+        <div className="border border-slate-300">
+          <div className="bg-slate-50 border-b border-slate-300 px-4 md:px-6 py-3 flex items-center gap-2">
+            <Mail className="text-brand" size={18} />
+            <h2 className="text-base font-bold text-slate-900 tracking-normal">お問い合わせ内容の入力</h2>
           </div>
 
           <form onSubmit={handleSubmit}>
-            <div className="divide-y divide-slate-100">
+            <div className="divide-y divide-slate-200">
               
               {/* 基本情報エリア */}
               <div className="bg-white">
@@ -267,31 +232,30 @@ export default function Contact() {
               </div>
 
               {/* 製品詳細（任意エリア） */}
-              <div className="bg-slate-50/50">
-                <div className="px-6 py-4 border-b border-slate-100">
-                  <p className="text-sm font-bold text-slate-700 flex items-center gap-2">
-                    <MessageSquare size={16} className="text-slate-400" />
+              <div className="bg-slate-50">
+                <div className="px-4 md:px-6 py-3 border-b border-slate-200">
+                  <p className="text-sm font-bold text-slate-900">
                     具体的な製品のご相談（任意）
                   </p>
                   <p className="text-xs text-slate-500 mt-1">
                     すでにご希望の製品がある場合は、詳細をご記入いただくとスムーズです。
                   </p>
                 </div>
-                <div className="p-6 grid gap-4 md:grid-cols-2">
+                <div className="px-4 py-4 md:p-6 grid gap-4 md:grid-cols-2">
                    <div>
-                     <label className="text-xs font-bold text-slate-500 mb-1 block">製品名・物質名</label>
+                     <label className="text-xs font-bold text-slate-700 mb-1 block">製品名・物質名</label>
                      <Input name="productName" value={form.productName} onChange={onChange} placeholder="例：塩酸、次亜塩素酸ソーダ" />
                    </div>
                    <div>
-                     <label className="text-xs font-bold text-slate-500 mb-1 block">使用用途</label>
+                     <label className="text-xs font-bold text-slate-700 mb-1 block">使用用途</label>
                      <Input name="productUse" value={form.productUse} onChange={onChange} placeholder="例：工場の排水処理" />
                    </div>
                    <div>
-                     <label className="text-xs font-bold text-slate-500 mb-1 block">希望数量</label>
+                     <label className="text-xs font-bold text-slate-700 mb-1 block">希望数量</label>
                      <Input name="quantity" value={form.quantity} onChange={onChange} placeholder="例：20kg × 5缶" />
                    </div>
                    <div>
-                     <label className="text-xs font-bold text-slate-500 mb-1 block">希望納期</label>
+                     <label className="text-xs font-bold text-slate-700 mb-1 block">希望納期</label>
                      <Input name="timeline" value={form.timeline} onChange={onChange} placeholder="例：来週中、特になし" />
                    </div>
                 </div>
@@ -299,8 +263,8 @@ export default function Contact() {
             </div>
 
             {/* 送信エリア */}
-            <div className="px-6 py-8 bg-white border-t border-slate-200">
-              <div className="max-w-xl mx-auto space-y-6 text-center">
+            <div className="px-4 md:px-6 py-6 md:py-8 bg-white border-t border-slate-200">
+              <div className="max-w-xl mx-auto space-y-5 text-center">
                 <label className="flex items-start justify-center gap-3 text-sm text-slate-600 cursor-pointer group">
                   <div className="relative flex items-center">
                     <input
@@ -309,23 +273,23 @@ export default function Contact() {
                       checked={form.consent}
                       onChange={onChange}
                       onBlur={() => setTouched({ ...touched, consent: true })}
-                      className="peer h-5 w-5 cursor-pointer appearance-none rounded border border-slate-300 shadow-sm checked:border-emerald-500 checked:bg-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all"
+                      className="peer h-5 w-5 cursor-pointer appearance-none rounded-sm border border-slate-400 checked:border-brand checked:bg-brand focus:ring-2 focus:ring-brand/30"
                     />
-                    <CheckCircle2 className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100" size={14} />
+                    <Check className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100" size={14} />
                   </div>
                   <span className="group-hover:text-slate-900 transition-colors pt-0.5">
-                    入力内容を確認しました
+                    入力内容を確認しました（<Link to="/privacy" className="text-brand underline underline-offset-2">プライバシーポリシー</Link>に同意のうえ送信します）
                   </span>
                 </label>
                 
                 {touched.consent && errors.consent && (
-                  <p className="text-sm font-bold text-red-500 bg-red-50 py-2 px-4 rounded-lg inline-block">
+                  <p className="text-sm font-bold text-red-600 bg-red-50 py-2 px-4 inline-block">
                     {errors.consent}
                   </p>
                 )}
 
                 {submitError && (
-                  <div className="text-sm font-bold text-red-600 bg-red-50 py-3 px-4 rounded-lg border border-red-200">
+                  <div className="text-sm font-bold text-red-600 bg-red-50 py-3 px-4 border border-red-200">
                     <div className="flex items-center gap-2">
                       <AlertTriangle size={16} />
                       <span>{submitError}</span>
@@ -336,7 +300,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full md:w-auto min-w-[240px] mx-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-lg shadow-emerald-900/20 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 text-lg"
+                  className="w-full md:w-auto min-w-[240px] mx-auto px-8 py-3.5 bg-brand hover:bg-brand-dark disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-bold rounded transition-colors flex items-center justify-center gap-2 text-base"
                 >
                   {isSubmitting ? (
                     <>
@@ -350,7 +314,7 @@ export default function Contact() {
                     </>
                   )}
                 </button>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500">
                   お客様の情報はプライバシーポリシーに基づき厳重に管理いたします。
                 </p>
               </div>
@@ -368,26 +332,26 @@ export default function Contact() {
 ========================================= */
 
 // 表形式の行コンポーネント（レスポンシブ対応）
-function Row({ label, subLabel, input, required = false }) {
+function Row({ label, input, required = false }) {
   return (
-    <div className="group grid grid-cols-1 md:grid-cols-[200px_1fr] border-b border-slate-100 last:border-0 hover:bg-slate-50 transition-colors">
-      <div className="px-6 py-4 md:py-6 flex md:flex-col items-center md:items-start justify-between md:justify-start gap-2">
-        <label className="text-sm font-bold text-slate-700 group-hover:text-emerald-800 transition-colors">
+    <div className="grid grid-cols-1 md:grid-cols-[13rem_1fr] border-b border-slate-200 last:border-0">
+      <div className="px-4 md:px-6 pt-4 pb-2 md:py-5 md:bg-slate-50 flex items-center md:items-start justify-start gap-2">
+        <label className="text-sm font-bold text-slate-900">
           {label}
         </label>
         <div className="flex items-center gap-2">
           {required ? (
-            <span className="inline-block px-2 py-0.5 text-[10px] font-bold bg-red-100 text-red-600 rounded">
+            <span className="inline-block px-1.5 py-px text-[10px] font-bold bg-red-600 text-white">
               必須
             </span>
           ) : (
-             <span className="inline-block px-2 py-0.5 text-[10px] font-bold bg-slate-100 text-slate-500 rounded">
+             <span className="inline-block px-1.5 py-px text-[10px] font-bold border border-slate-300 text-slate-500">
                任意
              </span>
           )}
         </div>
       </div>
-      <div className="px-6 pb-6 pt-0 md:py-6">
+      <div className="px-4 md:px-6 pb-4 pt-0 md:py-5">
         {input}
       </div>
     </div>
@@ -399,10 +363,10 @@ function Input({ className = "", error, ...props }) {
   return (
     <input
       {...props}
-      className={`w-full rounded-lg border bg-white px-4 py-3 text-sm outline-none transition-all placeholder:text-slate-300
+      className={`w-full rounded border bg-white px-3 py-2.5 text-[15px] outline-none transition-colors placeholder:text-slate-400
         ${error 
-          ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-4 focus:ring-red-100" 
-          : "border-slate-300 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 hover:border-emerald-300"
+          ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-100" 
+          : "border-slate-300 focus:border-brand focus:ring-2 focus:ring-brand/20"
         } ${className}`}
     />
   );
@@ -413,10 +377,10 @@ function Textarea({ className = "", error, ...props }) {
   return (
     <textarea
       {...props}
-      className={`w-full rounded-lg border bg-white px-4 py-3 text-sm outline-none transition-all placeholder:text-slate-300 resize-y
+      className={`w-full rounded border bg-white px-3 py-2.5 text-[15px] outline-none transition-colors placeholder:text-slate-400 resize-y
         ${error 
-          ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-4 focus:ring-red-100" 
-          : "border-slate-300 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 hover:border-emerald-300"
+          ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-100" 
+          : "border-slate-300 focus:border-brand focus:ring-2 focus:ring-brand/20"
         } ${className}`}
     />
   );
@@ -428,7 +392,7 @@ function Select({ options, className = "", ...props }) {
     <div className="relative">
       <select
         {...props}
-        className={`w-full appearance-none rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition-all focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 hover:border-emerald-300 cursor-pointer ${className}`}
+        className={`w-full appearance-none rounded border border-slate-300 bg-white px-3 py-2.5 text-[15px] outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 cursor-pointer ${className}`}
       >
         {options.map((opt) => (
           <option key={opt} value={opt}>
@@ -448,7 +412,7 @@ function Select({ options, className = "", ...props }) {
 // Error Message
 function ErrorText({ children }) {
   return (
-    <p className="mt-2 text-xs font-bold text-red-600 flex items-center gap-1 animate-pulse">
+    <p className="mt-2 text-xs font-bold text-red-600 flex items-center gap-1">
       <AlertTriangle size={12} />
       {children}
     </p>

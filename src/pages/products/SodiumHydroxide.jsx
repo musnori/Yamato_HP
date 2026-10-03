@@ -2,6 +2,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SEOHead from "../../components/SEOHead";
+import PageHeader from "../../components/PageHeader";
+import ContactBand from "../../components/ContactBand";
+import { ChevronLeft } from "lucide-react";
 import { BreadcrumbSchema } from "../../components/StructuredData";
 import { SITE_URL, COMPANY_INFO } from "../../config/seo";
 
@@ -55,24 +58,22 @@ export default function SodiumHydroxide() {
         url="/products/sodium-hydroxide"
       />
 
-      <div className="layout-container py-8 md:py-12">
-        <nav aria-label="パンくずリスト" className="mb-6 text-sm text-slate-500 flex flex-wrap gap-1 items-center">
-          <Link to="/" className="hover:text-green-700 hover:underline">ホーム</Link>
-          <span aria-hidden="true">›</span>
-          <Link to="/products" className="hover:text-green-700 hover:underline">取扱商品</Link>
-          <span aria-hidden="true">›</span>
-          <span className="text-slate-700 font-medium">苛性ソーダ（水酸化ナトリウム）</span>
-        </nav>
+      <PageHeader
+        title="苛性ソーダ（水酸化ナトリウム）"
+        crumbs={[{ name: "取扱製品", to: "/products" }, { name: "苛性ソーダ（水酸化ナトリウム）" }]}
+        lead="姫路市・播磨地域・兵庫県全域へ供給。大和薬品株式会社が取り扱う苛性ソーダのご案内です。"
+      >
+        <p className="mt-3">
+          <span className="border border-slate-400 bg-white px-1.5 py-px text-[11px] font-bold text-slate-700">無機薬品・アルカリ剤</span>
+        </p>
+      </PageHeader>
 
+      <div className="bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="max-w-3xl">
-          <p className="tag mb-3">無機薬品・アルカリ剤</p>
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">苛性ソーダ（水酸化ナトリウム）</h1>
-          <p className="text-slate-600 text-lg mb-8">
-            姫路市・播磨地域・兵庫県全域へ供給。大和薬品株式会社が取り扱う苛性ソーダのご案内です。
-          </p>
 
-          <div className="card p-6 mb-6">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">用途・特徴</h2>
+          <section className="mb-8">
+            <h2 className="mb-3 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />用途・特徴</h2>
             <ul className="space-y-2 text-slate-700">
               <li>・ 排水・廃水のpH調整（中和処理）</li>
               <li>・ 水処理施設でのpHアップ剤</li>
@@ -81,26 +82,26 @@ export default function SodiumHydroxide() {
               <li>・ 食品工業でのアルカリ処理（こんにゃく・そばなど）</li>
               <li>・ めっき・電気分解工程のアルカリ剤</li>
             </ul>
-          </div>
+          </section>
 
-          <div className="card p-6 mb-6">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">一般的な規格・仕様</h2>
+          <section className="mb-8">
+            <h2 className="mb-3 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />一般的な規格・仕様</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-slate-700 border-collapse">
                 <tbody>
-                  <tr className="border-b border-slate-100">
+                  <tr className="border-b border-slate-200">
                     <td className="py-2 pr-4 font-semibold text-slate-600 w-1/3">CAS番号</td>
                     <td className="py-2">1310-73-2</td>
                   </tr>
-                  <tr className="border-b border-slate-100">
+                  <tr className="border-b border-slate-200">
                     <td className="py-2 pr-4 font-semibold text-slate-600">別名</td>
                     <td className="py-2">水酸化ナトリウム、苛性ソーダ、NaOH</td>
                   </tr>
-                  <tr className="border-b border-slate-100">
+                  <tr className="border-b border-slate-200">
                     <td className="py-2 pr-4 font-semibold text-slate-600">形状・濃度</td>
                     <td className="py-2">フレーク（固体）・粒状・液体（24%・48%）</td>
                   </tr>
-                  <tr className="border-b border-slate-100">
+                  <tr className="border-b border-slate-200">
                     <td className="py-2 pr-4 font-semibold text-slate-600">容量</td>
                     <td className="py-2">25kgバッグ・フレコン・ドラム・ローリー</td>
                   </tr>
@@ -111,10 +112,10 @@ export default function SodiumHydroxide() {
                 </tbody>
               </table>
             </div>
-          </div>
+          </section>
 
-          <div className="card p-6 mb-8 border-l-4 border-amber-400">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">保管・取扱い上の注意</h2>
+          <section className="mb-8 border-l-4 border-amber-400 bg-amber-50 px-4 py-4 md:px-5">
+            <h2 className="mb-3 flex items-center gap-3 border-b border-slate-200 pb-2 font-serif text-lg md:text-xl font-bold text-slate-900 tracking-normal"><span aria-hidden className="block w-5 h-[2px] bg-brand shrink-0" />保管・取扱い上の注意</h2>
             <ul className="space-y-2 text-slate-700">
               <li>・ 強アルカリ性のため、皮膚・眼への接触は重篤な化学熱傷を引き起こします。必ず保護眼鏡・耐アルカリ性手袋を着用してください。</li>
               <li>・ 水と接触すると発熱します。液体を希釈する際は必ず水に薬品を少量ずつ加えてください（逆は厳禁）。</li>
@@ -122,28 +123,23 @@ export default function SodiumHydroxide() {
               <li>・ アルミニウム・亜鉛などの金属と反応し水素ガスを発生します。金属容器の使用は避けてください。</li>
               <li>・ 劇物のため、取り扱いには毒物劇物取扱責任者の管理が必要です。</li>
             </ul>
-          </div>
+          </section>
 
-          <div className="bg-green-50 border border-green-200 rounded-2xl p-6 mb-8">
-            <h2 className="text-lg font-bold text-green-800 mb-2">姫路・播磨地域のお客様へ</h2>
+          <section className="mb-8 border border-slate-200 bg-slate-50 px-4 py-4 md:px-5">
+            <h2 className="mb-2 text-base font-bold text-slate-900 tracking-normal">姫路・播磨地域のお客様へ</h2>
             <p className="text-slate-700 text-sm leading-relaxed">
               大和薬品株式会社は兵庫県姫路市を拠点に、播磨地域・兵庫県全域へ苛性ソーダ（水酸化ナトリウム）をはじめとする無機薬品・水処理薬品を迅速に供給しています。
               フレーク・液体など各種形状に対応。SDS（安全データシート）のご提供も承ります。
             </p>
-          </div>
+          </section>
 
-          <div className="card p-6 text-center">
-            <p className="text-slate-700 mb-4 font-semibold">お見積り・ご相談はお気軽にどうぞ</p>
-            <p className="text-2xl font-bold text-green-700 mb-1">
-              <a href="tel:0792810671" className="hover:underline">TEL：079-281-0671</a>
-            </p>
-            <p className="text-sm text-slate-500 mb-4">受付時間 9:00〜17:00（土日祝休）</p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Link to="/contact?subject=見積依頼" className="btn-primary">見積依頼フォームへ</Link>
-              <Link to="/products" className="btn-outline">取扱商品一覧へ戻る</Link>
-            </div>
-          </div>
+          <Link to="/products" className="inline-flex items-center gap-1 text-sm font-bold text-brand hover:underline underline-offset-4">
+            <ChevronLeft size={15} />
+            取扱製品一覧へ戻る
+          </Link>
         </div>
+      </div>
+      <ContactBand />
       </div>
     </>
   );

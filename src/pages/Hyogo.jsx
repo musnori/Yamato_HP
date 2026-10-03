@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Card from "../components/Card";
-import PrimaryCTA from "../components/PrimaryCTA";
+import PageHeader from "../components/PageHeader";
+import ContactBand from "../components/ContactBand";
 import Section from "../components/Section";
 import SEOHead from "../components/SEOHead";
 import { BreadcrumbSchema, FAQPageSchema } from "../components/StructuredData";
 import {
+  ChevronRight,
   MapPin,
   Truck,
   FileText,
@@ -74,158 +75,76 @@ export default function Hyogo() {
       <BreadcrumbSchema items={[{ name: "ホーム", url: "/" }, { name: "兵庫・姫路の化学薬品供給" }]} />
       <FAQPageSchema faqs={faqs} />
 
-      <div className="bg-slate-50 min-h-screen">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden bg-white border-b border-slate-200">
-          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
-          <div className="relative layout-container py-10 md:py-12 lg:py-14 text-center">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              兵庫県姫路市を拠点とした<br className="md:hidden" />
-              化学薬品・工業薬品の供給体制
-            </h1>
-            <p className="mt-4 text-slate-500 max-w-2xl mx-auto leading-relaxed">
-              創業90年以上の実績。兵庫県姫路市から関西エリアへ、<br className="hidden md:inline" />
-              化学薬品・工業薬品・試薬・溶剤を安定供給しています。
-            </p>
+      <PageHeader
+        title="兵庫・姫路の化学薬品供給"
+        lead="創業90年以上の実績をもとに、兵庫県姫路市から関西エリアへ、化学薬品・工業薬品・試薬・溶剤を安定供給しています。"
+      />
+
+      <div className="bg-white">
+        <Section title="対応エリア">
+          <p className="max-w-3xl text-[15px] leading-[1.9] text-slate-700">
+            兵庫県姫路市を拠点に、兵庫県内全域、大阪府、岡山県、京都府、滋賀県、奈良県、和歌山県など関西エリアへ化学薬品・工業薬品を供給しています。
+          </p>
+          <ul className="mt-4 grid grid-cols-2 md:grid-cols-4 border-t border-l border-slate-200 text-sm text-slate-800">
+            {["兵庫県", "大阪府", "岡山県", "京都府", "滋賀県", "奈良県", "和歌山県", "その他地域（要相談）"].map((area) => (
+              <li key={area} className="border-r border-b border-slate-200 px-3 py-2.5">
+                {area}
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section title="大和薬品の供給体制" className="bg-brand-light">
+          <div className="grid md:grid-cols-2 md:gap-x-10">
+            {strengths.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className="flex gap-4 border-b border-slate-300/70 py-4">
+                  <Icon size={26} strokeWidth={1.5} className="text-brand shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-base font-bold text-slate-900 tracking-normal">{item.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-slate-700">{item.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </section>
+        </Section>
 
-        {/* Main Content */}
-        <div className="layout-container py-12">
-          <div className="grid gap-8 lg:grid-cols-[2fr_1fr] items-start">
-
-            {/* Left Column */}
-            <div className="space-y-8">
-
-              {/* 対応エリア */}
-              <Card className="p-6 md:p-8 border-slate-200 shadow-sm">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="shrink-0 p-3 bg-emerald-100 text-emerald-600 rounded-xl">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-emerald-600 tracking-wider mb-1">SERVICE AREA</p>
-                    <h2 className="text-2xl font-bold text-slate-900">対応エリア</h2>
-                  </div>
-                </div>
-                <p className="text-sm text-slate-600 leading-relaxed mb-4">
-                  兵庫県姫路市を拠点に、兵庫県内全域、大阪府、岡山県、京都府、滋賀県、奈良県、和歌山県など関西エリアへ化学薬品・工業薬品を供給しています。
-                </p>
-                <div className="grid md:grid-cols-2 gap-3">
-                  {["兵庫県", "大阪府", "岡山県", "京都府", "滋賀県", "奈良県", "和歌山県", "その他地域（要相談）"].map((area) => (
-                    <div key={area} className="flex items-center gap-2 text-sm text-slate-700 bg-slate-50 px-3 py-2 rounded-lg border border-slate-100">
-                      <CheckCircle2 size={16} className="text-emerald-500" />
-                      {area}
-                    </div>
-                  ))}
-                </div>
-              </Card>
-
-              {/* 強み */}
-              <Card className="p-6 md:p-8 border-slate-200 shadow-sm">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="shrink-0 p-3 bg-emerald-100 text-emerald-600 rounded-xl">
-                    <Building2 size={24} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-emerald-600 tracking-wider mb-1">STRENGTH</p>
-                    <h2 className="text-2xl font-bold text-slate-900">大和薬品の供給体制</h2>
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {strengths.map((item) => (
-                    <div key={item.title} className="flex items-start gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="shrink-0 p-2 bg-white text-emerald-600 rounded-lg border border-emerald-100">
-                        <item.icon size={20} />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-bold text-slate-800 mb-1">{item.title}</h3>
-                        <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-
-              {/* よくある相談（FAQ） */}
-              <Card className="p-6 md:p-8 border-slate-200 shadow-sm">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="shrink-0 p-3 bg-emerald-100 text-emerald-600 rounded-xl">
-                    <Beaker size={24} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-emerald-600 tracking-wider mb-1">FAQ</p>
-                    <h2 className="text-2xl font-bold text-slate-900">よくある相談</h2>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  {faqs.map((faq, i) => (
-                    <div key={i} className="border-b border-slate-100 last:border-0 pb-4 last:pb-0">
-                      <h3 className="text-sm font-bold text-slate-800 mb-2 flex items-start gap-2">
-                        <span className="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">Q</span>
-                        {faq.q}
-                      </h3>
-                      <p className="text-sm text-slate-600 leading-relaxed pl-7">{faq.a}</p>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-
-            </div>
-
-            {/* Right Sidebar */}
-            <aside className="space-y-6 lg:sticky lg:top-8">
-
-              {/* CTAカード */}
-              <div className="bg-gradient-to-br from-emerald-900 to-emerald-700 rounded-2xl p-6 text-white shadow-lg">
-                <h3 className="text-lg font-bold mb-2">化学薬品のご相談・お見積り</h3>
-                <p className="text-sm text-emerald-100 mb-4 leading-relaxed">
-                  小ロット対応・納期相談・SDS提供など、お気軽にお問い合わせください。
-                </p>
-                <PrimaryCTA
-                  to="/contact?subject=兵庫エリアからの相談"
-                  label="お問い合わせフォーム"
-                  className="w-full justify-center bg-white !text-emerald-900 hover:bg-emerald-50 border-transparent mb-3"
-                />
-                <div className="pt-3 border-t border-emerald-600">
-                  <p className="text-xs text-emerald-100 mb-2">お電話でのお問い合わせ</p>
-                  <a href="tel:0792810671" className="block text-center text-2xl font-extrabold hover:underline">
-                    079-281-0671
-                  </a>
-                  <div className="flex items-center justify-center gap-1 mt-2 text-xs text-emerald-200">
-                    <Clock size={14} />
-                    受付時間 9:00〜17:00
-                  </div>
-                </div>
+        <Section title="よくあるご相談">
+          <dl className="border-t border-slate-200">
+            {faqs.map((faq) => (
+              <div key={faq.q} className="border-b border-slate-200 py-4">
+                <dt className="flex items-start gap-2 text-[15px] font-bold text-slate-900">
+                  <span className="shrink-0 font-serif text-brand">Q.</span>
+                  {faq.q}
+                </dt>
+                <dd className="mt-1.5 flex items-start gap-2 text-sm leading-relaxed text-slate-700">
+                  <span className="shrink-0 font-serif font-bold text-slate-500">A.</span>
+                  {faq.a}
+                </dd>
               </div>
+            ))}
+          </dl>
+          <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold">
+            {[
+              ["取扱製品一覧", "/products"],
+              ["主要在庫品", "/stock"],
+              ["サービス案内", "/services"],
+              ["会社概要", "/company"],
+              ["アクセス", "/access"],
+            ].map(([label, to]) => (
+              <li key={to}>
+                <Link to={to} className="inline-flex items-center gap-1 text-brand hover:underline underline-offset-4">
+                  {label}
+                  <ChevronRight size={15} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
 
-              {/* 関連リンク */}
-              <Card className="p-6 border-slate-200 shadow-sm">
-                <h3 className="text-sm font-bold text-slate-900 mb-4">関連ページ</h3>
-                <div className="space-y-2">
-                  <Link to="/products" className="block text-sm text-emerald-600 hover:text-emerald-700 hover:underline">
-                    → 取扱製品一覧を見る
-                  </Link>
-                  <Link to="/stock" className="block text-sm text-emerald-600 hover:text-emerald-700 hover:underline">
-                    → 主要在庫品を見る
-                  </Link>
-                  <Link to="/services" className="block text-sm text-emerald-600 hover:text-emerald-700 hover:underline">
-                    → サービス内容を見る
-                  </Link>
-                  <Link to="/company" className="block text-sm text-emerald-600 hover:text-emerald-700 hover:underline">
-                    → 会社概要を見る
-                  </Link>
-                  <Link to="/access" className="block text-sm text-emerald-600 hover:text-emerald-700 hover:underline">
-                    → アクセス情報を見る
-                  </Link>
-                </div>
-              </Card>
-
-            </aside>
-
-          </div>
-        </div>
-
+        <ContactBand subject="兵庫エリアからの相談" text="小ロット対応・納期のご相談・SDSの提供など、お気軽にお問い合わせください。" />
       </div>
     </>
   );

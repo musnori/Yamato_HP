@@ -1,11 +1,13 @@
 // src/pages/Products.jsx
-import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { Disclosure } from "@headlessui/react";
 import * as wanakana from "wanakana";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { PRODUCTS, PRODUCT_CATEGORIES, PRODUCT_FORMS, PRODUCT_USES } from "../data/products";
 import PrimaryCTA from "../components/PrimaryCTA";
 import Section from "../components/Section";
+import PageHeader from "../components/PageHeader";
+import ContactBand from "../components/ContactBand";
 import SEOHead from "../components/SEOHead";
 import { BreadcrumbSchema, ProductCatalogSchema } from "../components/StructuredData";
 
@@ -19,7 +21,7 @@ import {
   FlaskConical, 
   ArrowRight, 
   Info,
-  Beaker
+  ChevronRight
 } from "lucide-react";
 
 /* =========================
@@ -310,31 +312,21 @@ export default function Products() {
       <BreadcrumbSchema items={[{ name: "ホーム", url: "/" }, { name: "取扱製品" }]} />
       <ProductCatalogSchema items={allCatalogItems} />
 
-      <div className="bg-slate-50 min-h-screen">
-      {/* =======================
-          HERO
-      ======================== */}
-      <section className="relative overflow-hidden bg-white border-b border-slate-200">
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
-        <div className="relative layout-container py-10 md:py-12 lg:py-14 text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-            取扱製品｜化学薬品・工業薬品・試薬
-          </h1>
-          <p className="mt-4 text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            兵庫県姫路市から関西エリアへ、化学薬品・工業薬品・試薬・有機溶剤を供給。<br className="hidden md:inline" />
-            薬品名、用途、形状から最適な製品をお探しいただけます。見つからない場合も、お気軽にお問い合わせください。
-          </p>
-          <p className="mt-3 text-xs text-slate-400 max-w-3xl mx-auto">
-            主な取扱品目：メタノール / トルエン / エタノール / アセトン / キシレン / 塩酸 / 苛性ソーダ / 次亜塩素酸ソーダ / PAC / 硫酸 / 過酸化水素 ほか160品目以上
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        title="取扱製品"
+        lead="化学薬品・工業薬品・試薬・有機溶剤を、姫路市から関西エリアへお届けしています。薬品名・用途・形状から製品をお探しいただけます。見つからない場合もお気軽にお問い合わせください。"
+      >
+        <p className="mt-2 text-xs leading-relaxed text-slate-600 max-w-3xl">
+          主な取扱品目：メタノール / トルエン / エタノール / アセトン / キシレン / 塩酸 / 苛性ソーダ / 次亜塩素酸ソーダ / PAC / 硫酸 / 過酸化水素 ほか160品目以上
+        </p>
+      </PageHeader>
 
+      <div className="bg-white min-h-screen">
       {/* =======================
           FILTER CONTROL PANEL
       ======================== */}
-      <div className="layout-container -mt-8 relative z-10 pb-12">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden p-6 md:p-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 md:pt-8 pb-2">
+        <div className="border border-slate-300 bg-slate-50 p-4 md:p-6">
           
           {/* キーワード検索（サジェスト付き） */}
           <div className="relative" ref={searchRef}>
@@ -349,11 +341,11 @@ export default function Products() {
                 updateFilters({ q: e.target.value });
               }}
               onFocus={() => query.trim().length > 0 && setShowSuggestions(true)}
-              className="w-full h-12 pl-12 pr-4 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all outline-none text-slate-800 placeholder:text-slate-400"
+              className="w-full h-12 pl-12 pr-4 bg-white border border-slate-300 rounded focus:border-brand focus:ring-2 focus:ring-brand/20 transition-colors outline-none text-[15px] text-slate-800 placeholder:text-slate-400"
             />
             {/* サジェストドロップダウン */}
             {showSuggestions && suggestions.length > 0 && (
-              <ul className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg z-50 max-h-64 overflow-y-auto">
+              <ul className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-300 rounded shadow-md z-50 max-h-64 overflow-y-auto">
                 {suggestions.map((item) => {
                   const q = query.trim();
                   const idx = item.toLowerCase().indexOf(q.toLowerCase());
@@ -361,14 +353,14 @@ export default function Products() {
                     <li key={item}>
                       <button
                         type="button"
-                        className="w-full text-left px-4 py-3 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors flex items-center gap-2 border-b border-slate-50 last:border-0"
+                        className="w-full text-left px-4 py-3 text-sm text-slate-700 hover:bg-brand-light hover:text-brand transition-colors flex items-center gap-2 border-b border-slate-100 last:border-0"
                         onMouseDown={(e) => { e.preventDefault(); selectSuggestion(item); }}
                       >
                         <Search size={14} className="text-slate-300 shrink-0" />
                         {idx >= 0 ? (
                           <span>
                             {item.slice(0, idx)}
-                            <span className="font-bold text-emerald-600">{item.slice(idx, idx + q.length)}</span>
+                            <span className="font-bold text-brand">{item.slice(idx, idx + q.length)}</span>
                             {item.slice(idx + q.length)}
                           </span>
                         ) : (
@@ -383,17 +375,17 @@ export default function Products() {
           </div>
 
           {/* デスクトップ：フィルター列 */}
-          <div className="hidden lg:grid grid-cols-4 gap-4 mt-6 items-end">
+          <div className="hidden lg:grid grid-cols-4 gap-4 mt-4 items-end">
             {[
               { label: "カテゴリ", val: category, set: setCategory, key: "cat", opts: PRODUCT_CATEGORIES },
               { label: "用途", val: useCase, set: setUseCase, key: "use", opts: PRODUCT_USES },
               { label: "形状", val: form, set: setForm, key: "form", opts: PRODUCT_FORMS },
             ].map((f) => (
               <div key={f.key}>
-                <label className="text-xs font-bold text-slate-500 ml-1 mb-1 block">{f.label}</label>
+                <label className="text-xs font-bold text-slate-700 mb-1 block">{f.label}</label>
                 <div className="relative">
                   <select
-                    className="w-full h-11 pl-3 pr-8 bg-white border border-slate-200 rounded-lg text-sm text-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none appearance-none cursor-pointer hover:bg-slate-50 transition-colors"
+                    className="w-full h-11 pl-3 pr-8 bg-white border border-slate-300 rounded text-sm text-slate-700 focus:border-brand focus:ring-1 focus:ring-brand outline-none appearance-none cursor-pointer"
                     value={f.val}
                     onChange={(e) => {
                       f.set(e.target.value);
@@ -413,7 +405,7 @@ export default function Products() {
             <button 
               type="button" 
               onClick={clearFilters} 
-              className="h-11 flex items-center justify-center gap-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-red-500 transition-colors"
+              className="h-11 flex items-center justify-center gap-2 border border-slate-300 bg-white rounded text-sm font-semibold text-slate-600 hover:text-red-600 transition-colors"
             >
               <X size={16} /> 条件クリア
             </button>
@@ -423,7 +415,7 @@ export default function Products() {
           <div className="lg:hidden mt-4">
             <button
               type="button"
-              className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors"
+              className="flex w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white px-4 py-3 text-sm font-bold text-slate-700"
               onClick={() => setFiltersOpen((prev) => !prev)}
             >
               <Filter size={16} />
@@ -432,17 +424,17 @@ export default function Products() {
             </button>
 
             {filtersOpen && (
-              <div className="mt-4 space-y-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="mt-3 space-y-4 p-4 bg-white border border-slate-300">
                 {[
                   { label: "カテゴリ", val: category, set: setCategory, key: "cat", opts: PRODUCT_CATEGORIES },
                   { label: "用途", val: useCase, set: setUseCase, key: "use", opts: PRODUCT_USES },
                   { label: "形状", val: form, set: setForm, key: "form", opts: PRODUCT_FORMS },
                 ].map((f) => (
                   <div key={f.key}>
-                    <label className="text-xs font-bold text-slate-500 mb-1 block">{f.label}</label>
+                    <label className="text-xs font-bold text-slate-700 mb-1 block">{f.label}</label>
                     <div className="relative">
                       <select
-                        className="w-full p-2 pr-8 bg-white border border-slate-200 rounded-lg text-sm"
+                        className="w-full p-2.5 pr-8 bg-white border border-slate-300 rounded text-sm"
                         value={f.val}
                         onChange={(e) => {
                           f.set(e.target.value);
@@ -460,7 +452,7 @@ export default function Products() {
                 <button 
                   type="button" 
                   onClick={clearFilters} 
-                  className="w-full py-2 border border-slate-300 rounded-lg text-sm bg-white text-slate-600"
+                  className="w-full py-2.5 border border-slate-300 rounded text-sm bg-white text-slate-600"
                 >
                   条件をリセット
                 </button>
@@ -469,23 +461,21 @@ export default function Products() {
           </div>
 
           {/* アクティブフィルタータグ */}
-          <div className="mt-6 flex flex-wrap items-center gap-2 min-h-[32px]">
+          <div className="mt-4 flex flex-wrap items-center gap-2 min-h-[28px]">
             {activeFilters.length > 0 ? (
               activeFilters.map((filter) => (
                 <button
                   key={filter.key}
                   type="button"
                   onClick={() => removeFilter(filter.key)}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 pl-3 pr-2 py-1 text-xs font-bold text-emerald-700 hover:bg-emerald-100 transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-sm border border-brand/40 bg-white pl-3 pr-2 py-1 text-xs font-bold text-brand hover:bg-brand-light transition-colors"
                 >
                   {filter.label}
-                  <div className="bg-emerald-200 rounded-full p-0.5 text-emerald-800">
-                    <X size={10} />
-                  </div>
+                  <X size={12} />
                 </button>
               ))
             ) : (
-              <span className="text-xs text-slate-400 flex items-center gap-1">
+              <span className="text-xs text-slate-500 flex items-center gap-1">
                 <Info size={14} /> 条件を指定すると検索結果が表示されます
               </span>
             )}
@@ -498,14 +488,13 @@ export default function Products() {
       ======================== */}
       <Section
         id="search"
-        eyebrow="RESULTS"
         title={hasCriteria ? "検索結果" : "おすすめ製品"}
         description={hasCriteria ? `${filteredProducts.length + matchedCatalogItems.length}件が見つかりました` : "よくお問い合わせいただく製品です"}
-        className="bg-slate-50 pt-0"
+        className="pt-6 md:pt-8"
       >
         {/* 結果ゼロの場合 */}
         {hasCriteria && filteredProducts.length === 0 && matchedCatalogItems.length === 0 && (
-          <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 shadow-sm border-dashed">
+          <div className="text-center py-10 px-4 bg-slate-50 border border-slate-300">
             <FlaskConical className="mx-auto text-slate-300 mb-4" size={48} />
             <p className="text-slate-800 font-bold text-lg">該当する製品が見つかりませんでした。</p>
             <p className="mt-2 text-slate-500 mb-6">
@@ -516,7 +505,7 @@ export default function Products() {
               <button
                 type="button"
                 onClick={clearFilters}
-                className="px-6 py-2.5 rounded-lg border border-slate-300 text-slate-700 font-bold text-sm hover:bg-slate-50"
+                className="px-6 py-2.5 rounded border border-slate-300 bg-white text-slate-700 font-bold text-sm hover:bg-slate-50"
               >
                 条件をクリア
               </button>
@@ -526,57 +515,43 @@ export default function Products() {
         )}
 
         {/* 製品カードグリッド (検索結果 or おすすめ) */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-px bg-slate-200 border border-slate-200 md:grid-cols-2 lg:grid-cols-3">
           {(hasCriteria ? filteredProducts : recommendedProducts).map((product) => (
             <div 
               key={product.id} 
-              className={`bg-white rounded-2xl p-6 border transition-all duration-300 flex flex-col ${
-                openDetail === product.id 
-                  ? "border-emerald-500 shadow-md ring-1 ring-emerald-500/20" 
-                  : "border-slate-100 shadow-sm hover:shadow-lg hover:border-emerald-200 hover:-translate-y-1"
-              }`}
+              className={`p-4 md:p-5 flex flex-col ${openDetail === product.id ? "bg-brand-light" : "bg-white"}`}
             >
               {/* ヘッダータグ */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2.5 py-1 rounded bg-slate-100 text-slate-600 text-[10px] font-bold tracking-wide border border-slate-200">
+              <div className="flex flex-wrap gap-1.5 mb-3">
+                <span className="px-2 py-0.5 bg-brand text-white text-[11px] font-bold">
                   {PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.label}
                 </span>
                 {product.tags.map((tag) => (
-                  <span key={tag} className="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-500 text-[10px]">
+                  <span key={tag} className="px-2 py-0.5 border border-slate-300 text-slate-600 text-[11px]">
                     {tag}
                   </span>
                 ))}
               </div>
 
               {/* タイトル & 説明 */}
-              <div className="flex items-start gap-3 mb-2">
-                <div className="shrink-0 w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                  <Beaker size={20} />
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 leading-tight pt-1">
-                  {product.name}
-                </h3>
-              </div>
-              
-              <p className="text-sm text-slate-600 leading-relaxed mb-6 pl-[52px]">
+              <h3 className="text-[17px] font-bold text-slate-900 leading-snug tracking-normal">
+                {product.name}
+              </h3>
+              <p className="mt-1 text-sm text-slate-600 leading-relaxed mb-4">
                 {product.description}
               </p>
 
-              <div className="mt-auto pl-[52px] flex gap-3">
+              <div className="mt-auto flex gap-2">
                 <button
                   type="button"
                   onClick={() => setOpenDetail(openDetail === product.id ? null : product.id)}
-                  className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors border ${
-                     openDetail === product.id 
-                       ? "bg-slate-100 text-slate-700 border-slate-200"
-                       : "bg-white text-emerald-600 border-emerald-200 hover:bg-emerald-50"
-                  }`}
+                  className="flex-1 py-2.5 text-[13px] font-bold rounded transition-colors border bg-white text-brand border-brand/50 hover:bg-brand-light"
                 >
                   {openDetail === product.id ? "閉じる" : "詳細を見る"}
                 </button>
                 <button 
                   type="button" 
-                  className="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg shadow-sm shadow-emerald-900/10 transition-colors"
+                  className="flex-1 py-2.5 bg-brand hover:bg-brand-dark text-white text-[13px] font-bold rounded transition-colors"
                   onClick={() => ask(product.name)}
                 >
                   見積依頼
@@ -585,19 +560,19 @@ export default function Products() {
 
               {/* 詳細パネル（展開時） */}
               {openDetail === product.id && (
-                <div className="mt-6 pt-5 border-t border-slate-100 text-sm animate-fade-in-down">
+                <div className="mt-4 pt-4 border-t border-slate-300 text-sm">
                   <div className="space-y-4">
                     <div>
-                      <span className="text-xs font-bold text-slate-400 block mb-1">概要</span>
+                      <span className="text-xs font-bold text-slate-900 block mb-1">概要</span>
                       <p className="text-slate-700">{product.detail.overview}</p>
                     </div>
                     <div>
-                      <span className="text-xs font-bold text-slate-400 block mb-1">主な用途</span>
+                      <span className="text-xs font-bold text-slate-900 block mb-1">主な用途</span>
                       <ul className="list-disc list-outside ml-4 text-slate-700 space-y-0.5">
                         {product.detail.uses.map((u) => <li key={u}>{u}</li>)}
                       </ul>
                     </div>
-                    <div className="bg-slate-50 rounded-lg p-3 text-xs border border-slate-100">
+                    <div className="bg-white p-3 text-xs border border-slate-200">
                       {product.detail.specs.map(([l, v]) => (
                         <div key={l} className="flex justify-between py-1 border-b border-slate-200/50 last:border-0">
                           <span className="text-slate-500">{l}</span>
@@ -615,20 +590,20 @@ export default function Products() {
         {/* 全品目からの検索結果 */}
         {hasCriteria && matchedCatalogItems.length > 0 && (
           <div className="mt-8">
-            <h3 className="text-sm font-bold text-slate-500 mb-4 flex items-center gap-2">
+            <h3 className="text-[15px] font-bold text-slate-900 mb-3 flex items-center gap-2 tracking-normal">
               <FlaskConical size={16} />
               取扱品目からの検索結果（{matchedCatalogItems.length}件）
             </h3>
-            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-slate-200 sm:gap-x-6">
                 {matchedCatalogItems.map((item) => {
                   const sid = STOCK_ID_MAP[item];
                   return (
-                    <div key={item} className="flex items-center justify-between gap-2 py-2 px-3 rounded-lg bg-slate-50 border border-slate-100">
+                    <div key={item} className="flex items-center justify-between gap-2 py-2.5 border-b border-slate-200">
                       {sid ? (
                         <Link
                           to={`/stock#${sid}`}
-                          className="text-sm text-slate-700 hover:text-emerald-600 font-medium flex-1 min-w-0 truncate"
+                          className="text-sm text-slate-800 hover:text-brand font-medium flex-1 min-w-0 truncate"
                         >
                           {item}
                         </Link>
@@ -639,14 +614,14 @@ export default function Products() {
                         {sid ? (
                           <Link
                             to={`/stock#${sid}`}
-                            className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-0.5"
+                            className="text-xs font-bold text-brand hover:underline flex items-center gap-0.5"
                           >
                             詳細 <ArrowRight size={10} />
                           </Link>
                         ) : (
                           <button
                             type="button"
-                            className="text-[10px] font-bold text-slate-400 hover:text-slate-600 transition-colors"
+                            className="text-xs font-bold text-slate-500 hover:text-slate-700 transition-colors"
                             onClick={() => {
                               const qs = new URLSearchParams({ subject: `薬品のご相談：${item}`, category: "chemicals" }).toString();
                               navigate(`/contact?${qs}`);
@@ -657,7 +632,7 @@ export default function Products() {
                         )}
                         <button
                           type="button"
-                          className="text-[10px] font-bold text-slate-500 hover:text-emerald-600 transition-colors"
+                          className="text-xs font-bold text-slate-600 hover:text-brand transition-colors"
                           onClick={() => ask(item)}
                         >
                           見積依頼
@@ -675,47 +650,46 @@ export default function Products() {
       {/* =======================
           五十音リスト (Disclosure)
       ======================== */}
-      <Section eyebrow="INDEX" title="全品目一覧（五十音順）" className="bg-white">
-        <div className="max-w-4xl mx-auto">
+      <Section title="全品目一覧（五十音順）" className="bg-slate-50 border-y border-slate-200">
+        <div>
           <Disclosure>
             {({ open }) => (
-              <div className={`border rounded-2xl transition-all duration-300 ${open ? "border-slate-200 bg-white" : "border-slate-200 hover:border-emerald-300"}`}>
-                <Disclosure.Button className="flex w-full items-center justify-between px-6 py-5 text-left text-slate-800 font-bold text-lg hover:bg-slate-50 rounded-2xl transition-colors">
+              <div className={`border bg-white ${open ? "border-slate-300" : "border-slate-300 hover:border-brand/60"}`}>
+                <Disclosure.Button className="flex w-full items-center justify-between px-4 md:px-6 py-4 text-left text-slate-900 font-bold text-base">
                   <span>全品目リストを開く</span>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 transition-transform duration-300 ${open ? "rotate-180 bg-emerald-100 text-emerald-600" : ""}`}>
+                  <div className={`flex items-center justify-center text-brand transition-transform ${open ? "rotate-180" : ""}`}>
                     <ChevronDown size={20} />
                   </div>
                 </Disclosure.Button>
 
-                <Disclosure.Panel className="px-6 pb-8 animate-fade-in">
-                  <div className="grid gap-12 lg:grid-cols-2 mt-4 border-t border-slate-100 pt-8">
+                <Disclosure.Panel className="px-4 md:px-6 pb-6">
+                  <div className="grid gap-8 lg:grid-cols-2 border-t border-slate-200 pt-5">
                     
                     {/* 無機薬品カラム */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-2 mb-2 pb-2 border-b border-emerald-100">
-                        <span className="w-2 h-6 bg-emerald-500 rounded-sm"></span>
-                        <h3 className="text-lg font-bold text-slate-900">無機薬品</h3>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1 pb-2 border-b-2 border-brand">
+                        <h3 className="text-base font-bold text-slate-900 tracking-normal">無機薬品</h3>
                       </div>
                       
                       {rowsIn.map((row) => (
                         <Disclosure key={`in-${row}`}>
                           {({ open: rowOpen }) => (
-                            <div className="border-b border-slate-100 last:border-0">
-                              <Disclosure.Button className="flex w-full items-center justify-between py-3 text-left text-slate-700 hover:text-emerald-700 group">
+                            <div className="border-b border-slate-200">
+                              <Disclosure.Button className="flex w-full items-center justify-between py-3 text-left text-slate-800 hover:text-brand group">
                                 <span className="font-bold text-sm">{row}</span>
-                                <ChevronDown size={16} className={`text-slate-300 group-hover:text-emerald-500 transition-transform ${rowOpen ? "rotate-180" : ""}`} />
+                                <ChevronDown size={16} className={`text-slate-400 group-hover:text-brand transition-transform ${rowOpen ? "rotate-180" : ""}`} />
                               </Disclosure.Button>
                               <Disclosure.Panel className="pb-4">
                                 <div className="grid grid-cols-2 gap-2">
                                   {groupsInorganic[row].map((item) => {
                                     const sid = STOCK_ID_MAP[item];
                                     return sid ? (
-                                      <Link key={item} to={`/stock#${sid}`} className="text-xs py-1 px-2 rounded bg-emerald-50 text-emerald-700 hover:bg-emerald-100 hover:underline flex items-center justify-between group/link">
+                                      <Link key={item} to={`/stock#${sid}`} className="text-[13px] py-1.5 px-2 bg-brand-light text-brand hover:underline flex items-center justify-between group/link">
                                         <span className="truncate">{item}</span>
                                         <ArrowRight size={10} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
                                       </Link>
                                     ) : (
-                                      <span key={item} className="text-xs py-1 px-2 text-slate-600">{item}</span>
+                                      <span key={item} className="text-[13px] py-1.5 px-2 text-slate-700">{item}</span>
                                     );
                                   })}
                                 </div>
@@ -727,31 +701,30 @@ export default function Products() {
                     </div>
 
                     {/* 有機薬品カラム */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-2 mb-2 pb-2 border-b border-emerald-100">
-                        <span className="w-2 h-6 bg-emerald-500 rounded-sm"></span>
-                        <h3 className="text-lg font-bold text-slate-900">有機薬品</h3>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1 pb-2 border-b-2 border-brand">
+                        <h3 className="text-base font-bold text-slate-900 tracking-normal">有機薬品</h3>
                       </div>
 
                       {rowsOrg.map((row) => (
                         <Disclosure key={`org-${row}`}>
                           {({ open: rowOpen }) => (
-                            <div className="border-b border-slate-100 last:border-0">
-                              <Disclosure.Button className="flex w-full items-center justify-between py-3 text-left text-slate-700 hover:text-emerald-700 group">
+                            <div className="border-b border-slate-200">
+                              <Disclosure.Button className="flex w-full items-center justify-between py-3 text-left text-slate-800 hover:text-brand group">
                                 <span className="font-bold text-sm">{row}</span>
-                                <ChevronDown size={16} className={`text-slate-300 group-hover:text-emerald-500 transition-transform ${rowOpen ? "rotate-180" : ""}`} />
+                                <ChevronDown size={16} className={`text-slate-400 group-hover:text-brand transition-transform ${rowOpen ? "rotate-180" : ""}`} />
                               </Disclosure.Button>
                               <Disclosure.Panel className="pb-4">
                                 <div className="grid grid-cols-2 gap-2">
                                   {groupsOrganic[row].map((item) => {
                                     const sid = STOCK_ID_MAP[item];
                                     return sid ? (
-                                      <Link key={item} to={`/stock#${sid}`} className="text-xs py-1 px-2 rounded bg-emerald-50 text-emerald-700 hover:bg-emerald-100 hover:underline flex items-center justify-between group/link">
+                                      <Link key={item} to={`/stock#${sid}`} className="text-[13px] py-1.5 px-2 bg-brand-light text-brand hover:underline flex items-center justify-between group/link">
                                         <span className="truncate">{item}</span>
                                         <ArrowRight size={10} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
                                       </Link>
                                     ) : (
-                                      <span key={item} className="text-xs py-1 px-2 text-slate-600">{item}</span>
+                                      <span key={item} className="text-[13px] py-1.5 px-2 text-slate-700">{item}</span>
                                     );
                                   })}
                                 </div>
@@ -771,12 +744,11 @@ export default function Products() {
       </Section>
       {/* 注目商品 個別ページ */}
       <Section
-        eyebrow="FEATURED PRODUCTS"
-        title="注目商品 詳細ページ"
+        title="主な製品の詳細"
         description="よくご注文いただく商品の詳細情報・規格・保管方法をご確認いただけます"
         className="bg-white"
       >
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 border-t border-l border-slate-200">
           {[
             { label: "メタノール", path: "/products/methanol", cat: "有機溶剤" },
             { label: "トルエン", path: "/products/toluene", cat: "有機溶剤" },
@@ -792,15 +764,15 @@ export default function Products() {
             <Link
               key={p.path}
               to={p.path}
-              className="flex flex-col items-center gap-1 rounded-xl border border-green-100 bg-green-50 px-3 py-4 text-center hover:bg-green-100 hover:shadow transition group"
+              className="flex flex-col gap-0.5 border-r border-b border-slate-200 px-3 py-3 hover:bg-brand-light transition-colors group"
             >
-              <span className="text-[10px] text-green-600 font-semibold tracking-wide">{p.cat}</span>
-              <span className="text-sm font-bold text-slate-800 group-hover:text-green-800">{p.label}</span>
-              <span className="text-[10px] text-green-700 mt-1">詳細 →</span>
+              <span className="text-[11px] text-slate-500">{p.cat}</span>
+              <span className="flex items-center justify-between text-sm font-bold text-slate-900 group-hover:text-brand">{p.label}<ChevronRight size={14} className="text-slate-400 group-hover:text-brand" /></span>
             </Link>
           ))}
         </div>
       </Section>
+      <ContactBand text="一覧にない薬品や、用途に合う製品が分からない場合もお気軽にご相談ください。" />
     </div>
     </>
   );
