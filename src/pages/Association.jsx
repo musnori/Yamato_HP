@@ -70,6 +70,9 @@ export default function Association() {
               <Phone size={20} />
               079-281-0671
             </a>
+            <p className="mt-1 text-xs text-slate-600">
+              上記が繋がらない場合 <a href="tel:09045631701" className="font-semibold text-brand tabular-nums hover:underline">090-4563-1701</a>
+            </p>
           </div>
         </Section>
       </div>

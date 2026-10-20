@@ -13,7 +13,7 @@ const locations = [
     name: "本社",
     rows: [
       { label: "住所", value: "〒670-0935\n兵庫県姫路市北条口1丁目59番地" },
-      { label: "電話", value: "079-281-0671", tel: "0792810671" },
+      { label: "電話", value: "079-281-0671", tel: "0792810671", sub: { label: "上記が繋がらない場合", value: "090-4563-1701", tel: "09045631701" } },
       { label: "FAX", value: "079-224-1870" },
       { label: "営業時間", value: "8:30〜16:30（土日祝除く）" },
       { label: "交通", value: "JR「姫路駅」より徒歩約6分" },
@@ -96,6 +96,14 @@ export default function Access() {
                           </a>
                         ) : (
                           r.value
+                        )}
+                        {r.sub && (
+                          <span className="block text-xs text-slate-600">
+                            {r.sub.label}{" "}
+                            <a href={`tel:${r.sub.tel}`} className="font-semibold text-brand tabular-nums hover:underline">
+                              {r.sub.value}
+                            </a>
+                          </span>
                         )}
                       </dd>
                     </div>

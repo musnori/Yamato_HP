@@ -20,6 +20,9 @@ export default function ContactBand({
             <span className="text-2xl md:text-[1.7rem] font-bold tabular-nums tracking-wide">079-281-0671</span>
             <span className="text-xs text-white/80">受付時間 8:30〜16:30</span>
           </a>
+          <p className="mt-1 text-xs text-white/80">
+            繋がらない場合 <a href="tel:09045631701" className="tabular-nums hover:underline">090-4563-1701</a>
+          </p>
         </div>
         <div className="mt-5 md:mt-0 grid grid-cols-2 gap-2 md:w-[22rem] shrink-0">
           <Link
