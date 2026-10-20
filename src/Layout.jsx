@@ -87,15 +87,21 @@ export default function Layout() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-slate-200">
         <div className="hidden md:block bg-brand text-white text-xs">
-          <div className="layout-container py-2 flex items-center justify-between">
-            <p className="text-white/90 tracking-wide">昭和8年創業{"\u3000"}姫路市の化学薬品・工業薬品・試薬の専門商社</p>
+          <div className="layout-container py-2 flex items-center justify-end lg:justify-between">
+            <p className="hidden lg:block text-white/90 tracking-wide">昭和8年創業{"\u3000"}姫路市の化学薬品・工業薬品・試薬の専門商社</p>
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">
-                受付時間 9:00〜17:00
+                受付時間 8:30〜16:30
               </span>
-              <a href="tel:0792810671" className="font-semibold hover:underline">
+              <a href="tel:0792810671" className="text-base font-bold tabular-nums hover:underline">
                 TEL 079-281-0671
               </a>
+              <span className="text-white/90">
+                左記番号が繋がらない場合{" "}
+                <a href="tel:09045631701" className="font-semibold tabular-nums text-white hover:underline">
+                  090-4563-1701
+                </a>
+              </span>
             </div>
           </div>
         </div>
@@ -241,7 +247,7 @@ export default function Layout() {
               <Phone size={16} />
               079-281-0671
             </a>
-            <p className="text-center text-xs text-slate-500">受付時間 9:00〜17:00</p>
+            <p className="text-center text-xs text-slate-500">受付時間 8:30〜16:30</p>
           </div>
         </nav>
       </aside>
@@ -265,7 +271,7 @@ export default function Layout() {
             <p className="mt-3 text-slate-300 text-sm leading-relaxed">
               〒670-0935 兵庫県姫路市北条口1丁目59番地<br />
               TEL <a href="tel:0792810671" className="hover:underline">079-281-0671</a>{"\u3000"}FAX 079-224-1870<br />
-              受付時間 9:00〜17:00
+              受付時間 8:30〜16:30
             </p>
           </div>
           <div>

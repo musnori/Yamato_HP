@@ -18,7 +18,7 @@ export default function ContactBand({
           <a href="tel:0792810671" className="mt-4 inline-flex flex-wrap items-baseline gap-x-2 text-white">
             <Phone size={18} className="self-center" />
             <span className="text-2xl md:text-[1.7rem] font-bold tabular-nums tracking-wide">079-281-0671</span>
-            <span className="text-xs text-white/80">受付時間 9:00〜17:00</span>
+            <span className="text-xs text-white/80">受付時間 8:30〜16:30</span>
           </a>
         </div>
         <div className="mt-5 md:mt-0 grid grid-cols-2 gap-2 md:w-[22rem] shrink-0">

@@ -15,7 +15,7 @@ const locations = [
       { label: "住所", value: "〒670-0935\n兵庫県姫路市北条口1丁目59番地" },
       { label: "電話", value: "079-281-0671", tel: "0792810671" },
       { label: "FAX", value: "079-224-1870" },
-      { label: "営業時間", value: "9:00〜17:00（土日祝除く）" },
+      { label: "営業時間", value: "8:30〜16:30（土日祝除く）" },
       { label: "交通", value: "JR「姫路駅」より徒歩約6分" },
     ],
     map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7891.642052379018!2d134.694193800397!3d34.831643363447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3554e00c018022b1%3A0xfc3278ab139d6de1!2z5aSn5ZKM6Jas5ZOB5qCq5byP5Lya56S-!5e1!3m2!1sja!2sjp!4v1767060545045!5m2!1sja!2sjp",
