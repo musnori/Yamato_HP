@@ -247,6 +247,10 @@ export default function Layout() {
               <Phone size={16} />
               079-281-0671
             </a>
+            <p className="text-center text-xs text-slate-500">
+              上記が繋がらない場合{" "}
+              <a href="tel:09045631701" className="font-semibold text-brand tabular-nums hover:underline">090-4563-1701</a>
+            </p>
             <p className="text-center text-xs text-slate-500">受付時間 8:30〜16:30</p>
           </div>
         </nav>
@@ -271,6 +275,7 @@ export default function Layout() {
             <p className="mt-3 text-slate-300 text-sm leading-relaxed">
               〒670-0935 兵庫県姫路市北条口1丁目59番地<br />
               TEL <a href="tel:0792810671" className="hover:underline">079-281-0671</a>{"\u3000"}FAX 079-224-1870<br />
+              繋がらない場合 <a href="tel:09045631701" className="tabular-nums hover:underline">090-4563-1701</a><br />
               受付時間 8:30〜16:30
             </p>
           </div>

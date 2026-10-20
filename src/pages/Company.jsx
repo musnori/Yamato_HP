@@ -40,7 +40,7 @@ export default function Company() {
     { label: "会社名", value: "大和薬品株式会社" },
     { label: "代表者", value: "代表取締役社長　田路 裕之\n代表取締役会長　田路 享三" },
     { label: "所在地", value: "〒670-0935 兵庫県姫路市北条口1丁目59番地" },
-    { label: "連絡先", value: "TEL 079-281-0671　FAX 079-224-1870" },
+    { label: "連絡先", value: "TEL 079-281-0671　FAX 079-224-1870\n（TELが繋がらない場合 090-4563-1701）" },
     { label: "創業", value: "1933年（昭和8年）4月10日" },
     { label: "資本金", value: "1,000万円" },
     { label: "従業員", value: "11名（男子7名・女子4名）" },
@@ -126,6 +126,7 @@ export default function Company() {
                 兵庫県姫路市北条口1丁目59番地
               </p>
               <p className="mt-2 text-sm">TEL 079-281-0671 ／ FAX 079-224-1870</p>
+              <p className="mt-0.5 text-xs text-slate-600">TELが繋がらない場合 <a href="tel:09045631701" className="tabular-nums hover:underline">090-4563-1701</a></p>
             </div>
             <div className="aspect-[16/10] w-full overflow-hidden border border-slate-200 bg-slate-100 relative">
               <iframe

@@ -21,7 +21,10 @@ export default function ContactThanks() {
               <Phone size={20} />
               079-281-0671
             </a>
-            <p className="mt-1 text-xs text-slate-600">受付時間 8:30〜16:30</p>
+            <p className="mt-1 text-xs text-slate-600">
+              上記が繋がらない場合 <a href="tel:09045631701" className="font-semibold text-brand tabular-nums hover:underline">090-4563-1701</a>
+            </p>
+            <p className="mt-0.5 text-xs text-slate-600">受付時間 8:30〜16:30</p>
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
               <Link to="/" className="inline-flex items-center gap-1 text-sm font-bold text-brand hover:underline underline-offset-4">
                 トップへ戻る <ChevronRight size={15} />

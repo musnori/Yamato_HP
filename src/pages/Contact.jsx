@@ -112,7 +112,10 @@ export default function Contact() {
               <Phone size={20} />
               079-281-0671
             </a>
-            <p className="mt-1 text-xs text-slate-600">受付時間 平日 8:30〜16:30 ／ FAX 079-224-1870</p>
+            <p className="mt-1 text-xs text-slate-600">
+              上記が繋がらない場合 <a href="tel:09045631701" className="font-semibold text-brand tabular-nums hover:underline">090-4563-1701</a>
+            </p>
+            <p className="mt-0.5 text-xs text-slate-600">受付時間 平日 8:30〜16:30 ／ FAX 079-224-1870</p>
           </div>
 
           <div className="hidden lg:block border-t border-slate-200 pt-3">
