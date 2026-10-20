@@ -40,8 +40,8 @@ export function LocalBusinessSchema() {
         {
           "@type": "OpeningHoursSpecification",
           dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "09:00",
-          closes: "17:00"
+          opens: "08:30",
+          closes: "16:30"
         }
       ],
       description: "1933年創業、兵庫県姫路市を拠点とする化学薬品・工業薬品専門商社。試薬・化学薬品・有機溶剤など、兵庫県内および関西エリアの学校・工場・研究機関・水処理施設などへ迅速な納品と丁寧な提案を提供します。"
